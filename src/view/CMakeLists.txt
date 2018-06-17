@@ -8,8 +8,14 @@ set (CMAKE_POSITION_INDEPENDENT_CODE ON)
 find_package (SDL REQUIRED)
 
 set (SOURCES
-  OgameView.cpp
+  OgameAbstractView.cpp
+  SdlEventListener.cpp
   ViewException.cpp
+  EventException.cpp
+  Drawable.cpp
+  Area.cpp
+  Vector2d.cpp
+  ComparisonUtils.cpp
   )
 
 add_library (ogamelike_lib_view SHARED
