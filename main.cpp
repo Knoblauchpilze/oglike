@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
   parser.addOption(std::string("demo"), false, false);
 
   try {
-    parser.parseArguments();
+    parser.parseArguments();d
 
     const unsigned galaxiesCount = std::stoi(parser.getOptionValue("--galaxy"));
     const unsigned systemsCount = std::stoi(parser.getOptionValue("--system"));
