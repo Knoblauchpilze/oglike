@@ -9,10 +9,19 @@ find_package (SDL REQUIRED)
 
 set (SOURCES
   OgameView.cpp
+  ViewException.cpp
   )
 
 add_library (ogamelike_lib_view SHARED
   ${SOURCES}
+  ${SDL_INCLUDE_DIRS}
+  )
+
+add_library (SDL IMPORTED SHARED GLOBAL)
+
+target_link_libraries(ogamelike_lib_view
+  ${SDL_LIBRARY}
+  ogamelike_lib_core
   )
 
 target_include_directories (ogamelike_lib_view PUBLIC

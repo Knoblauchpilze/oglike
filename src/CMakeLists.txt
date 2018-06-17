@@ -4,3 +4,4 @@ set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
 
 add_subdirectory(core)
 add_subdirectory(view)
+add_subdirectory(app)

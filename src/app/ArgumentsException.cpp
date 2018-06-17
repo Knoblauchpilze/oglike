@@ -1,7 +1,8 @@
+
 #include "ArgumentsException.h"
 
-namespace app {
-  namespace arguments {
+namespace ogame {
+  namespace app {
 
     ArgumentsException::ArgumentsException(const std::string& cause):
     std::exception(),

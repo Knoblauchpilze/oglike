@@ -6,8 +6,8 @@
 #include <unordered_map>
 #include <ostream>
 
-namespace app {
-  namespace arguments{
+namespace ogame {
+  namespace app{
 
     class ArgumentsParser
     {

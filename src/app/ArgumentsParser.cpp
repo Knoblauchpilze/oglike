@@ -4,8 +4,8 @@
 #include "ArgumentsParser.h"
 #include "ArgumentsException.h"
 
-namespace app {
-  namespace arguments {
+namespace ogame {
+  namespace app {
 
     ArgumentsParser::ArgumentsParser(const std::string& appName, const int& argumentsCount, char* arguments[]):
       m_appName(appName),
