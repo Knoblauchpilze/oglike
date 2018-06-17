@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
     std::cout << "[G] " << galaxiesCount << ", s=" << systemsCount << ", p=" << planetsCount << std::endl;
 
     ogame::core::UniverseShPtr universe = std::make_shared<ogame::core::Universe>(1u, galaxiesCount);
-    (*universe)[1];
+    (*universe)[2];
 
   }
   catch (const ogame::core::PlanetException& e) {
