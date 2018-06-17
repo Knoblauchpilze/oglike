@@ -1,6 +1,6 @@
 
 #include "OgameView.h"
-#include "ViewException.h"
+//#include "ViewException.h"
 
 namespace ogame {
   namespace view {
@@ -15,13 +15,17 @@ namespace ogame {
       // Nothing to do.
     }
 
+    void OgameView::launch() {
+      
+    }
+
     void OgameView::createScreen(const unsigned& width, const unsigned& height) {
       m_screen = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
-      
+
       if (m_screen == nullptr) {
         const std::string errorMessage = std::string("Could not create screen with dimensions ") +
           std::to_string(width) + "x" + std::to_string(height);
-        throw ViewException(errorMessage);
+        //throw ViewException(errorMessage);
       }
     }
 

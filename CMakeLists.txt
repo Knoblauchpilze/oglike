@@ -17,17 +17,14 @@ set (SOURCES
 
 add_executable(ogamelike
   ${SOURCES}
-  ${CORE_INCLUDE_DIR}
   )
 
-set (CORE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/core")
-
-target_include_directories(ogamelike PRIVATE
-  ${CORE_INCLUDE_DIR}
+target_include_directories (ogamelike PRIVATE
+  ${SDL_INCLUDE_DIRS}
   )
 
-target_link_libraries(
-  ogamelike
+target_link_libraries(ogamelike
   ogamelike_lib_core
+  ogamelike_lib_app
   ogamelike_lib_view
   )

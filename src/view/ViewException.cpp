@@ -2,7 +2,7 @@
 #include "ViewException.h"
 
 namespace ogame {
-  namespace core {
+  namespace view {
 
     ViewException::ViewException(const std::string& cause):
       OgameException(cause)

@@ -4,8 +4,8 @@
 #include <stdexcept>
 #include <string>
 
-namespace app {
-  namespace arguments {
+namespace ogame {
+  namespace app {
 
     class ArgumentsException: public std::exception
     {
