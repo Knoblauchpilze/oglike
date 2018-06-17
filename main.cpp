@@ -7,7 +7,7 @@
 
 #include "Universe.h"
 
-#include "OgameView.h"
+#include "OgameAbstractView.h"
 #include "ViewException.h"
 
 int main(int argc, char* argv[])
@@ -16,7 +16,9 @@ int main(int argc, char* argv[])
   ogame::app::ArgumentsParser parser(std::string("OGameServer"), argc, argv);
   parser.addOption(std::string("galaxy"), true, true);
   parser.addOption(std::string("system"), true, true);
-  parser.addOption(std::string("planet"), false, true);
+  parser.addOption(std::string("planet"), true, true);
+  parser.addOption(std::string("width"), true, true);
+  parser.addOption(std::string("height"), true, true);
 
   try {
     parser.parseArguments();
@@ -37,9 +39,24 @@ int main(int argc, char* argv[])
   ogame::core::UniverseShPtr universe = std::make_shared<ogame::core::Universe>(1u, galaxiesCount);
 
   // Instantiate the main view.
+  const unsigned screenWidth = std::stoi(parser.getOptionValue("--width"));
+  const unsigned screenHeight = std::stoi(parser.getOptionValue("--height"));
   ogame::view::OgameViewShPtr view;
   try {
-    view  = std::make_shared<ogame::view::OgameView>(640u, 480u);
+    view  = std::make_shared<ogame::view::OgameView>("OGame Viewer", "65px-Stop_hand.svg[1].BMP", screenWidth, screenHeight);
+  }
+  catch (const ogame::view::ViewException& e) {
+    std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
+    return 1;
+  }
+  catch (const ogame::core::OgameException& e) {
+    std::cerr << "[MAIN] Caught internal exception:" << std::endl << e.what() << std::endl;
+    return 1;
+  }
+
+  // Run the application.
+  try {
+    view->run();
   }
   catch (const ogame::view::ViewException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
@@ -47,9 +64,6 @@ int main(int argc, char* argv[])
   catch (const ogame::core::OgameException& e) {
     std::cerr << "[MAIN] Caught internal exception:" << std::endl << e.what() << std::endl;
   }
-
-  
-
 
   return 0;
 }
