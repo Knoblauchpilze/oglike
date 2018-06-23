@@ -1,5 +1,5 @@
-#ifndef OGAMEVIEW_H
-#define OGAMEVIEW_H
+#ifndef OGAMEABSTRACTVIEW_H
+#define OGAMEABSTRACTVIEW_H
 
 #include <memory>
 #include <vector>
@@ -10,13 +10,13 @@
 namespace ogame {
   namespace view {
 
-    class OgameView
+    class OgameAbstractView
     {
       public:
 
-        OgameView(const std::string& title, const std::string& icon, const unsigned& width, const unsigned& height);
+        OgameAbstractView(const std::string& title, const std::string& icon, const unsigned& width, const unsigned& height);
         
-        virtual ~OgameView();
+        virtual ~OgameAbstractView();
 
         void addListener(SdlEventListener* listener);
 
@@ -67,8 +67,10 @@ namespace ogame {
 
     };
 
-    using OgameViewShPtr = std::shared_ptr<OgameView>;
+    using OgameAbstractViewShPtr = std::shared_ptr<OgameAbstractView>;
   }
 }
 
-#endif // OGAMEVIEW_H
+#include "OgameAbstractView.hxx"
+
+#endif // OGAMEABSTRACTVIEW_H

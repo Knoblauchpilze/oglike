@@ -1,7 +1,6 @@
 #ifndef SDLEVENTLISTENER_H
 #define SDLEVENTLISTENER_H
 
-#include <iostream>
 #include <SDL/SDL.h>
 
 namespace ogame {

@@ -32,8 +32,8 @@ namespace ogame {
       // Apply the computed dimensions to each item handled by the layout.
       for (int indexItem = 0 ; indexItem < m_items.size() ; ++indexItem) {
         // Compute the position of the component.
-        const float x = m_margin + (m_direction == Direction::Horizontal ? (indexItem - 1) * (cw + m_componentMargin) : 0.0f);
-        const float y = m_margin + (m_direction == Direction::Vertical   ? (indexItem - 1) * (ch + m_componentMargin) : 0.0f);
+        const float x = m_margin + (m_direction == Direction::Horizontal ? indexItem * (cw + m_componentMargin) : 0.0f);
+        const float y = m_margin + (m_direction == Direction::Vertical   ? indexItem * (ch + m_componentMargin) : 0.0f);
 
         // Apply the final rendering area.
         m_items[indexItem]->setRenderingArea(utils::Area(x, y, cw, ch));
@@ -41,13 +41,13 @@ namespace ogame {
     }
 
     void LinearLayout::handleHorizontalLayout(const utils::Area& totalArea, float& cw, float& ch) const {
-      cw = (totalArea.w() - 2.0f * m_margin - (m_items.size() * m_componentMargin)) / (1.0f * m_items.size());
+      cw = (totalArea.w() - 2.0f * m_margin - ((m_items.size() - 1) * m_componentMargin)) / (1.0f * m_items.size());
       ch = totalArea.h() - 2.0f * m_margin;
     }
 
     void LinearLayout::handleVerticalLayout(const utils::Area& totalArea, float& cw, float& ch) const {
       cw = totalArea.w() - 2.0f * m_margin;
-      ch = (totalArea.h() - 2.0f * m_margin - (m_items.size() * m_componentMargin)) / (1.0f * m_items.size());
+      ch = (totalArea.h() - 2.0f * m_margin - ((m_items.size() - 1) * m_componentMargin)) / (1.0f * m_items.size());
     }
 
   }

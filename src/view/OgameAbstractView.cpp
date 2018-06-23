@@ -6,7 +6,7 @@
 namespace ogame {
   namespace view {
 
-    OgameView::OgameView(const std::string& title, const std::string& icon, const unsigned& width, const unsigned& height):
+    OgameAbstractView::OgameAbstractView(const std::string& title, const std::string& icon, const unsigned& width, const unsigned& height):
       m_title(title),
       m_icon(icon),
       m_framerate(60.0),
@@ -20,19 +20,11 @@ namespace ogame {
       createWindow(width, height);
     }
 
-    OgameView::~OgameView() {
+    OgameAbstractView::~OgameAbstractView() {
       // Do not destroy the main screen as it is the main sdl window.
     }
-    
-    void OgameView::addListener(SdlEventListener* listener) {
-      m_listeners.push_back(listener);
-    }
 
-    void OgameView::run() {
-      performRendering();
-    }
-
-    void OgameView::createWindow(const unsigned& width, const unsigned& height) {
+    void OgameAbstractView::createWindow(const unsigned& width, const unsigned& height) {
       int initializationStatus(SDL_Init(SDL_INIT_VIDEO));
       if (initializationStatus != 0) {
         throw ogame::view::ViewException("Could not properly initialize sdl rendering context, window not created.");
@@ -49,7 +41,7 @@ namespace ogame {
       SDL_WM_SetCaption(m_title.c_str(), nullptr);
     }
 
-    void OgameView::performRendering() {
+    void OgameAbstractView::performRendering() {
       m_processing = true;
       do {
         events();
@@ -58,7 +50,7 @@ namespace ogame {
       while (m_processing);
     }
 
-    void OgameView::events() {
+    void OgameAbstractView::events() {
       bool stillEventsInQueue(true);
       while (stillEventsInQueue) {
         // Retrieve a single event
@@ -74,13 +66,13 @@ namespace ogame {
             processSingleEvent(currentEvent);
           }
           catch (ogame::view::EventException& e) {
-            std::cerr << "[VIEW] Caught exception while processing event: " << e.what() << std::endl;
+            std::cerr << "[VIEW] Caught exception while processing event: " << std::endl << e.what() << std::endl;
           }
         }
       }
     }
 
-    void OgameView::processSingleEvent(const SDL_Event& event) {
+    void OgameAbstractView::processSingleEvent(const SDL_Event& event) {
       switch (event.type) {
       case SDL_QUIT:
         processExitEvent(event);
@@ -106,7 +98,7 @@ namespace ogame {
       }
     }
 
-    void OgameView::processExitEvent(const SDL_Event& event) {
+    void OgameAbstractView::processExitEvent(const SDL_Event& event) {
       std::cout << "[VIEW] Processing exit event and calling " << m_listeners.size() << " listeners" << std::endl;
       m_processing = false;
       for (std::vector<SdlEventListener*>::iterator listenersIterator = m_listeners.begin();
@@ -117,7 +109,7 @@ namespace ogame {
       }
     }
 
-    void OgameView::processKeyPressedEvent(const SDL_Event& event) {
+    void OgameAbstractView::processKeyPressedEvent(const SDL_Event& event) {
       std::cout << "[VIEW] Processing key pressed event and calling " << m_listeners.size() << " listeners" << std::endl;
       for (std::vector<SdlEventListener*>::iterator listenersIterator = m_listeners.begin();
           listenersIterator != m_listeners.end();
@@ -127,7 +119,7 @@ namespace ogame {
       }
     }
 
-    void OgameView::processKeyReleasedEvent(const SDL_Event& event) {
+    void OgameAbstractView::processKeyReleasedEvent(const SDL_Event& event) {
       std::cout << "[VIEW] Processing key released event and calling " << m_listeners.size() << " listeners" << std::endl;
       for (std::vector<SdlEventListener*>::iterator listenersIterator = m_listeners.begin();
           listenersIterator != m_listeners.end();
@@ -137,8 +129,8 @@ namespace ogame {
       }
     }
 
-    void OgameView::processMouseMotionEvent(const SDL_Event& event) {
-      std::cout << "[VIEW] Processing mouse motion event and calling " << m_listeners.size() << " listeners" << std::endl;
+    void OgameAbstractView::processMouseMotionEvent(const SDL_Event& event) {
+      // std::cout << "[VIEW] Processing mouse motion event and calling " << m_listeners.size() << " listeners" << std::endl;
       for (std::vector<SdlEventListener*>::iterator listenersIterator = m_listeners.begin();
           listenersIterator != m_listeners.end();
           ++listenersIterator)
@@ -147,7 +139,7 @@ namespace ogame {
       }
     }
 
-    void OgameView::processMouseButtonPressedEvent(const SDL_Event& event) {
+    void OgameAbstractView::processMouseButtonPressedEvent(const SDL_Event& event) {
       // Check for wheel event.
       if (event.button.button == SDL_BUTTON_WHEELDOWN ||
           event.button.button == SDL_BUTTON_WHEELUP)
@@ -165,7 +157,7 @@ namespace ogame {
       }
     }
 
-    void OgameView::processMouseButtonReleasedEvent(const SDL_Event& event) {
+    void OgameAbstractView::processMouseButtonReleasedEvent(const SDL_Event& event) {
       std::cout << "[VIEW] Processing mouse button released event and calling " << m_listeners.size() << " listeners" << std::endl;
       for (std::vector<SdlEventListener*>::iterator listenersIterator = m_listeners.begin();
           listenersIterator != m_listeners.end();
@@ -175,7 +167,7 @@ namespace ogame {
       }
     }
 
-    void OgameView::processMouseWheelEvent(const SDL_Event& event) {
+    void OgameAbstractView::processMouseWheelEvent(const SDL_Event& event) {
       std::cout << "[VIEW] Processing mouse wheel " << (event.button.button==SDL_BUTTON_WHEELUP?"up":"down") << " event and calling " << m_listeners.size() << " listeners" << std::endl;
       for (std::vector<SdlEventListener*>::iterator listenersIterator = m_listeners.begin();
           listenersIterator != m_listeners.end();
@@ -185,7 +177,7 @@ namespace ogame {
       }
     }
 
-    void OgameView::render() {
+    void OgameAbstractView::render() {
       const unsigned int startingRenderingTime(SDL_GetTicks());
       renderDrawables();
       SDL_Flip(m_screen);
@@ -201,7 +193,7 @@ namespace ogame {
       }
     }
 
-    void OgameView::renderDrawables() {
+    void OgameAbstractView::renderDrawables() {
       //std::cout << "[APPLICATION] Rendering " << m_drawables.size() << " drawables (" << m_framerate << " fps)" << std::endl;
       for (std::vector<Drawable*>::iterator drawablesIterator = m_drawables.begin() ;
           drawablesIterator != m_drawables.end() ;
@@ -218,12 +210,6 @@ namespace ogame {
         dstArea.w = static_cast<short int>(render.w());
         dstArea.h = static_cast<short int>(render.h());
         drawSurface(picture, nullptr, &dstArea);
-      }
-    }
-
-    void OgameView::drawSurface(SDL_Surface* surface, SDL_Rect* sourceArea, SDL_Rect* destinationArea) {
-      if (surface != nullptr) {
-        SDL_BlitSurface(surface, sourceArea, m_screen, destinationArea);
       }
     }
 
