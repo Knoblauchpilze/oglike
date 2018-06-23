@@ -9,7 +9,7 @@ namespace ogame {
 
     inline
     int Layout::addItem(GraphicContainer* item) {
-      if (getContainerOrNull(item) != nullptr) {
+      if (item != nullptr && getContainerOrNull(item) == nullptr) {
         m_items.push_back(item);
         return m_items.size() - 1;
       }

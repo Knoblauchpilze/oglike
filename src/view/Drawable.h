@@ -22,8 +22,6 @@ namespace ogame {
 
         virtual void setRenderingArea(const utils::Area& area) = 0;
 
-        virtual void setSize(const float& width, const float& height) = 0;
-
         virtual SDL_Surface* draw() = 0;
 
       protected:

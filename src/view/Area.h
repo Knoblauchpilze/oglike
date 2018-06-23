@@ -1,7 +1,6 @@
 #ifndef AREA_H
 #define AREA_H
 
-#include <iostream>
 #include <SDL/SDL.h>
 #include "Vector2f.h"
 
