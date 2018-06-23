@@ -5,7 +5,7 @@ namespace ogame {
   namespace view {
     namespace utils {
 
-      Area::Area(const double& x, const double& y, const double& width, const double& height) :
+      Area::Area(const float& x, const float& y, const float& width, const float& height) :
         m_x(x),
         m_y(y),
         m_w(width),
@@ -57,7 +57,7 @@ namespace ogame {
         return false;
       }
 
-      bool Area::isInside(const Vector2d& point) const {
+      bool Area::isInside(const Vector2f& point) const {
         if (getLeftBound() > point.x() || getRightBound() < point.x()) {
           return false;
         }
@@ -67,21 +67,21 @@ namespace ogame {
         return true;
       }
 
-      Vector2d Area::getNearestPoint(const Vector2d& point) const {
-        const double nearestX(getLeftBound() > point.x() ? getLeftBound() : (getRightBound() < point.x() ? getRightBound() : point.x()));
-        const double nearestY(getBottomBound() > point.y() ? getBottomBound() : (getTopBound() < point.y() ? getTopBound() : point.y()));
-        return Vector2d(nearestX, nearestY);
+      Vector2f Area::getNearestPoint(const Vector2f& point) const {
+        const float nearestX(getLeftBound() > point.x() ? getLeftBound() : (getRightBound() < point.x() ? getRightBound() : point.x()));
+        const float nearestY(getBottomBound() > point.y() ? getBottomBound() : (getTopBound() < point.y() ? getTopBound() : point.y()));
+        return Vector2f(nearestX, nearestY);
       }
 
   //=====================
 
       SDL_Rect createTopLeftBasedRectFromArea(const Area& area) {
-        SDL_Rect outputRect = { static_cast<short int>(area.getX()), static_cast<short int>(area.getY()), static_cast<short unsigned int>(area.getWidth()), static_cast<short unsigned int>(area.getHeight()) };
+        SDL_Rect outputRect = { static_cast<short int>(area.x()), static_cast<short int>(area.y()), static_cast<short unsigned int>(area.w()), static_cast<short unsigned int>(area.h()) };
         return outputRect;
       }
 
       SDL_Rect createCenteredBasedRectFromArea(const Area& area) {
-        SDL_Rect outputRect = { static_cast<short int>(area.getLeftBound()), static_cast<short int>(area.getTopBound()), static_cast<short unsigned int>(area.getWidth()), static_cast<short unsigned int>(area.getHeight()) };
+        SDL_Rect outputRect = { static_cast<short int>(area.getLeftBound()), static_cast<short int>(area.getTopBound()), static_cast<short unsigned int>(area.w()), static_cast<short unsigned int>(area.h()) };
         return outputRect;
       }
 
