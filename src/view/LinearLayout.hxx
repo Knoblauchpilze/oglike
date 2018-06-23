@@ -10,6 +10,14 @@ namespace ogame {
       return m_direction;
     }
 
+    const float& LinearLayout::getMargin() const noexcept {
+      return m_margin;
+    }
+
+    const float& LinearLayout::getComponentMargin() const noexcept {
+      return m_componentMargin;
+    }
+
   }
 }
 

@@ -28,7 +28,28 @@ namespace ogame {
 
     inline
     utils::Area GraphicContainer::getRenderingArea() {
-      return m_area;
+      utils::Area area;
+      lock();
+      area = m_area;
+      unlock();
+      return area;
+    }
+
+    inline
+    void GraphicContainer::setRenderingArea(const utils::Area& area) {
+      lock();
+      m_area = area;
+      makeDirty();
+      unlock();
+    }
+
+    inline
+    void GraphicContainer::setSize(const float& width, const float& height) {
+      lock();
+      m_area.w() = width;
+      m_area.h() = height;
+      makeDirty();
+      unlock();
     }
 
     inline

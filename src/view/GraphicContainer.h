@@ -27,6 +27,10 @@ namespace ogame {
 
         utils::Area getRenderingArea() override;
 
+        void setRenderingArea(const utils::Area& area) override;
+
+        void setSize(const float& width, const float& height) override;
+
         void setLayout(Layout* layout);
 
       protected:

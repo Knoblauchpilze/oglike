@@ -14,7 +14,7 @@ set (SOURCES
   EventException.cpp
   Drawable.cpp
   Area.cpp
-  Vector2d.cpp
+  Vector2f.cpp
   ComparisonUtils.cpp
   GraphicContainer.cpp
   Layout.cpp
