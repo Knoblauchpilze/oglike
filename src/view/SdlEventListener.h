@@ -6,7 +6,7 @@
 
 namespace ogame {
   namespace view {
-    
+
     class SdlEventListener
     {
       public:

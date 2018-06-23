@@ -13,7 +13,7 @@ namespace ogame {
     class OgameView
     {
       public:
-      
+
         OgameView(const std::string& title, const std::string& icon, const unsigned& width, const unsigned& height);
         
         virtual ~OgameView();

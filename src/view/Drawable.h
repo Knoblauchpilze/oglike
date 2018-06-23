@@ -7,7 +7,7 @@
 
 namespace ogame {
   namespace view {
-    
+
     class Drawable
     {
       public:
@@ -18,8 +18,6 @@ namespace ogame {
 
         virtual void unlock();
 
-        virtual bool hasChanged() = 0;
-
         virtual utils::Area getRenderingArea() = 0;
 
         virtual SDL_Surface* draw() = 0;
@@ -29,6 +27,9 @@ namespace ogame {
         Drawable();
 
         virtual ~Drawable();
+
+        //  We assume that the object is already locked upon entering this function.
+        virtual bool hasChanged() const noexcept = 0;
 
       private:
 

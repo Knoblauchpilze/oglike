@@ -208,17 +208,16 @@ namespace ogame {
           ++drawablesIterator)
       {
         Drawable* drawable(*drawablesIterator);
-        if (drawable->hasChanged()) {
-          SDL_Surface* picture = drawable->draw();
-          // Draw the picture
-          utils::Area render = drawable->getRenderingArea();
-          SDL_Rect dstArea;
-          dstArea.x = static_cast<short int>(render.getX());
-          dstArea.y = static_cast<short int>(render.getY());
-          dstArea.w = static_cast<short int>(render.getWidth());
-          dstArea.h = static_cast<short int>(render.getHeight());
-          drawSurface(picture, nullptr, &dstArea);
-        }
+        // Draw this object (caching is handled by the object itself).
+        SDL_Surface* picture = drawable->draw();
+        // Draw the picture
+        utils::Area render = drawable->getRenderingArea();
+        SDL_Rect dstArea;
+        dstArea.x = static_cast<short int>(render.getX());
+        dstArea.y = static_cast<short int>(render.getY());
+        dstArea.w = static_cast<short int>(render.getWidth());
+        dstArea.h = static_cast<short int>(render.getHeight());
+        drawSurface(picture, nullptr, &dstArea);
       }
     }
 

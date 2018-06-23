@@ -16,6 +16,10 @@ set (SOURCES
   Area.cpp
   Vector2d.cpp
   ComparisonUtils.cpp
+  GraphicContainer.cpp
+  Layout.cpp
+  LinearLayout.cpp
+  GridLayout.cpp
   )
 
 add_library (ogamelike_lib_view SHARED
