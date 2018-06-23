@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <SDL/SDL.h>
-#include "Vector2d.h"
+#include "Vector2f.h"
 
 namespace ogame {
   namespace view {
@@ -13,51 +13,43 @@ namespace ogame {
       {
         public:
 
-          Area(const double& x = 0.0, const double& y = 0.0, const double& width = 0.0, const double& height = 0.0);
+          Area(const float& x = 0.0f, const float& y = 0.0f, const float& width = 0.0f, const float& height = 0.0f);
 
-          inline double& getX();
+          inline float& x();
 
-          inline const double& getX() const;
+          inline const float& x() const;
 
-          inline double& getY();
+          inline float& y();
 
-          inline const double& getY() const;
+          inline const float& y() const;
 
-          inline double& getWidth();
+          inline float& w();
 
-          inline const double& getWidth() const;
+          inline const float& w() const;
 
-          inline double& getHeight();
+          inline float& h();
 
-          inline const double& getHeight() const;
+          inline const float& h() const;
 
-          inline double getLeftBound() const;
+          inline float getLeftBound() const;
 
-          inline double getRightBound() const;
+          inline float getRightBound() const;
 
-          inline double getTopBound() const;
+          inline float getTopBound() const;
 
-          inline double getBottomBound() const;
+          inline float getBottomBound() const;
 
-          inline Vector2d getCenter() const;
+          inline Vector2f getCenter() const;
 
-          inline Vector2d getTopLeftCorner() const;
+          inline Vector2f getTopLeftCorner() const;
 
-          inline Vector2d getTopRightCorner() const;
+          inline Vector2f getTopRightCorner() const;
 
-          inline Vector2d getBottomRightCorner() const;
+          inline Vector2f getBottomRightCorner() const;
 
-          inline Vector2d getBottomLeftCorner() const;
+          inline Vector2f getBottomLeftCorner() const;
 
-          inline void setX(const double& x);
-
-          inline void setY(const double& y);
-
-          inline void setWidth(const double& width);
-
-          inline void setHeight(const double& height);
-
-          inline double getSurface() const;
+          inline float getSurface() const;
 
           bool contains(const Area& other) const;
 
@@ -65,16 +57,16 @@ namespace ogame {
 
           bool isInside(const Area& other) const;
 
-          bool isInside(const Vector2d& point) const;
+          bool isInside(const Vector2f& point) const;
 
-          Vector2d getNearestPoint(const Vector2d& point) const;
+          Vector2f getNearestPoint(const Vector2f& point) const;
 
         private:
 
-          double m_x;
-          double m_y;
-          double m_w;
-          double m_h;
+          float m_x;
+          float m_y;
+          float m_w;
+          float m_h;
       };
 
     SDL_Rect createTopLeftBasedRectFromArea(const Area& area);

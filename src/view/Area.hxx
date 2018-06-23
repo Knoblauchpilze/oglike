@@ -7,91 +7,75 @@ namespace ogame {
   namespace view {
     namespace utils {
 
-      inline double& Area::getX() {
+      inline float& Area::x() {
         return m_x;
       }
 
-      inline const double& Area::getX() const {
+      inline const float& Area::x() const {
         return m_x;
       }
 
-      inline double& Area::getY() {
+      inline float& Area::y() {
         return m_y;
       }
 
-      inline const double& Area::getY() const {
+      inline const float& Area::y() const {
         return m_y;
       }
 
-      inline double Area::getLeftBound() const {
-        return m_x - m_w / 2.0;
+      inline float Area::getLeftBound() const {
+        return m_x - m_w / 2.0f;
       }
 
-      inline double Area::getRightBound() const {
-        return m_x + m_w / 2.0;
+      inline float Area::getRightBound() const {
+        return m_x + m_w / 2.0f;
       }
 
-      inline double Area::getTopBound() const {
-        return m_y + m_h / 2.0;
+      inline float Area::getTopBound() const {
+        return m_y + m_h / 2.0f;
       }
 
-      inline double Area::getBottomBound() const {
-        return m_y - m_h / 2.0;
+      inline float Area::getBottomBound() const {
+        return m_y - m_h / 2.0f;
       }
 
-      inline utils::Vector2d Area::getCenter() const {
-          return utils::Vector2d(m_x, m_y);
+      inline utils::Vector2f Area::getCenter() const {
+          return utils::Vector2f(m_x, m_y);
       }
 
-      inline utils::Vector2d Area::getTopLeftCorner() const {
-          return utils::Vector2d(m_x - m_w / 2.0, m_y + m_h / 2.0);
+      inline utils::Vector2f Area::getTopLeftCorner() const {
+          return utils::Vector2f(m_x - m_w / 2.0f, m_y + m_h / 2.0f);
       }
 
-      inline utils::Vector2d Area::getTopRightCorner() const {
-          return utils::Vector2d(m_x + m_w / 2.0, m_y + m_h / 2.0);
+      inline utils::Vector2f Area::getTopRightCorner() const {
+          return utils::Vector2f(m_x + m_w / 2.0f, m_y + m_h / 2.0f);
       }
 
-      inline utils::Vector2d Area::getBottomRightCorner() const {
-          return utils::Vector2d(m_x + m_w / 2.0, m_y - m_h / 2.0);
+      inline utils::Vector2f Area::getBottomRightCorner() const {
+          return utils::Vector2f(m_x + m_w / 2.0f, m_y - m_h / 2.0f);
       }
 
-      inline utils::Vector2d Area::getBottomLeftCorner() const {
-          return utils::Vector2d(m_x - m_w / 2.0, m_y - m_h / 2.0);
+      inline utils::Vector2f Area::getBottomLeftCorner() const {
+          return utils::Vector2f(m_x - m_w / 2.0f, m_y - m_h / 2.0f);
       }
 
-      inline double& Area::getWidth() {
+      inline float& Area::w() {
         return m_w;
       }
 
-      inline const double& Area::getWidth() const {
+      inline const float& Area::w() const {
         return m_w;
       }
 
-      inline double& Area::getHeight() {
+      inline float& Area::h() {
         return m_h;
       }
 
-      inline const double& Area::getHeight() const {
+      inline const float& Area::h() const {
         return m_h;
       }
 
-      inline void Area::setX(const double& x) {
-        m_x = x;
-      }
-
-      inline void Area::setY(const double& y) {
-        m_y = y;
-      }
-
-      inline void Area::setWidth(const double& width) {
-        m_w = width;
-      }
-
-      inline void Area::setHeight(const double& height) {
-        m_h = height;
-      }
-
-      inline double Area::getSurface() const {
+      inline float Area::getSurface() const {
         return m_w * m_h;
       }
 
