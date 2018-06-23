@@ -15,6 +15,10 @@ namespace ogame {
       return m_height;
     }
 
+    const float& GridLayout::getMargin() const noexcept {
+      return m_margin;
+    }
+
   }
 }
 

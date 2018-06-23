@@ -8,10 +8,12 @@ namespace ogame {
   namespace view {
 
     inline
-    void Layout::addItem(GraphicContainer* item) {
+    int Layout::addItem(GraphicContainer* item) {
       if (getContainerOrNull(item) != nullptr) {
         m_items.push_back(item);
+        return m_items.size() - 1;
       }
+      return -1;
     }
 
     inline

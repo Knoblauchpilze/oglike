@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include "Area.h"
 #include "GraphicContainer.h"
 
 namespace ogame {
@@ -19,13 +20,17 @@ namespace ogame {
 
         virtual ~Layout();
 
-        virtual void update() = 0;
+        void update();
 
         void setContainer(GraphicContainer* container);
 
-        void addItem(GraphicContainer* item);
+        virtual int addItem(GraphicContainer* item);
 
-        void removeItem(GraphicContainer* item);
+        virtual void removeItem(GraphicContainer* item);
+
+      protected:
+
+        virtual void updatePrivate(const utils::Area& window) = 0;
 
       private:
 

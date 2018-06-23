@@ -2,6 +2,7 @@
 #define GRIDLAYOUT_H
 
 #include <memory>
+#include <unordered_map>
 #include "Layout.h"
 
 namespace ogame {
@@ -11,20 +12,33 @@ namespace ogame {
     {
       public:
 
-        GridLayout(const unsigned& width, const unsigned& height, GraphicContainer* container = nullptr);
+        GridLayout(const unsigned& width, const unsigned& height, const float& margin = 0.0f, GraphicContainer* container = nullptr);
 
         virtual ~GridLayout();
-
-        void update() override;
 
         const unsigned& getWidth() const noexcept;
 
         const unsigned& getHeight() const noexcept;
 
+        const float& getMargin() const noexcept;
+
+        void addItem(GraphicContainer* container, const unsigned& x, const unsigned& y, const unsigned& w, const unsigned& h);
+
+      protected:
+
+        void updatePrivate(const utils::Area& area) override;
+
       private:
+
+        // Convenience record to hold the position of items in the layout.
+        struct ItemInfo {
+          float x, y, w, h;
+        };
 
         unsigned m_width;
         unsigned m_height;
+        float m_margin;
+        std::unordered_map<int, ItemInfo> m_itemsLocation;
 
     };
 
