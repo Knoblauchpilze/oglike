@@ -13,6 +13,7 @@
 #include "Area.h"
 #include "GraphicContainer.h"
 #include "LinearLayout.h"
+#include "GridLayout.h"
 
 int main(int argc, char* argv[])
 {
@@ -49,7 +50,7 @@ int main(int argc, char* argv[])
   ogame::view::GraphicContainerShPtr panel;
 
   std::vector<ogame::view::GraphicContainerShPtr> containersForLayout;
-  ogame::view::LayoutShPtr layout;
+  ogame::view::GridLayoutShPtr layout;
 
   const float margin = 1.0f;
   const ogame::view::utils::Area panelArea(margin,
@@ -59,10 +60,10 @@ int main(int argc, char* argv[])
   try {
     view  = std::make_shared<ogame::view::OgameAbstractView>("OGame Viewer", "65px-Stop_hand.svg[1].BMP", screenWidth, screenHeight);
 
-    layout = std::make_shared<ogame::view::LinearLayout>(ogame::view::LinearLayout::Direction::Horizontal,
-                                                         1.0f,
-                                                         2.0f,
-                                                         nullptr);
+    layout = std::make_shared<ogame::view::GridLayout>(5,
+                                                       4,
+                                                       10.0f,
+                                                       nullptr);
 
     panel = std::make_shared<ogame::view::GraphicContainer>("Main panel",
                                                             panelArea,
@@ -93,6 +94,16 @@ int main(int argc, char* argv[])
         ogame::view::utils::Area()
       )
     );
+    containersForLayout.push_back(
+      std::make_shared<ogame::view::GraphicContainer>(
+        "Panel 4",
+        ogame::view::utils::Area()
+      )
+    );
+
+    for (int indexPanel = 0 ; indexPanel < containersForLayout.size() ; ++indexPanel) {
+      layout->addItem(containersForLayout[indexPanel].get(), indexPanel, indexPanel, indexPanel + 1, 4 - indexPanel);
+    }
 
     for (int indexPanel = 0 ; indexPanel < containersForLayout.size() ; ++indexPanel) {
       panel->addChild(containersForLayout[indexPanel].get());

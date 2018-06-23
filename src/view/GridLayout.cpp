@@ -30,7 +30,7 @@ namespace ogame {
           m_margin + item->second.x * cw,
           m_margin + item->second.y * ch,
           cw * item->second.w,
-          cw * item->second.h
+          ch * item->second.h
         ));
       }
     }
@@ -40,8 +40,8 @@ namespace ogame {
       m_itemsLocation[containerIndex] = {
         1.0f * std::min(m_width - 1, x),
         1.0f * std::min(m_height - 1, y),
-        1.0f * std::min(m_width, x + w),
-        1.0f * std::min(m_height, y + h)
+        1.0f * std::min(m_width - x, w),
+        1.0f * std::min(m_height - y, h)
       };
     }
 
