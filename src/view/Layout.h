@@ -31,7 +31,7 @@ namespace ogame {
 
         GraphicContainer* getContainerOrNull(GraphicContainer* item, int* index = nullptr) const;
 
-      private:
+      protected:
 
         GraphicContainer* m_container;
         std::vector<GraphicContainer*> m_items;

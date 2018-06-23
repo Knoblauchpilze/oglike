@@ -16,7 +16,7 @@ namespace ogame {
           Vertical
         };
 
-        LinearLayout(const Direction& direction, GraphicContainer* container = nullptr);
+        LinearLayout(const Direction& direction, const float& margin = 1.0f, const float& interMargin = 0.0f, GraphicContainer* container = nullptr);
 
         virtual ~LinearLayout();
 
@@ -24,9 +24,21 @@ namespace ogame {
 
         const Direction& getDirection() const noexcept;
 
+        const float& getMargin() const noexcept;
+
+        const float& getComponentMargin() const noexcept;
+
+      private:
+
+        void handleHorizontalLayout(const utils::Area& totalArea, float& cw, float& ch) const;
+
+        void handleVerticalLayout(const utils::Area& totalArea, float& cw, float& ch) const;
+
       private:
 
         Direction m_direction;
+        float m_margin;
+        float m_componentMargin;
 
     };
 
