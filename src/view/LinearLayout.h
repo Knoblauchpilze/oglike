@@ -20,13 +20,15 @@ namespace ogame {
 
         virtual ~LinearLayout();
 
-        void update() override;
-
         const Direction& getDirection() const noexcept;
 
         const float& getMargin() const noexcept;
 
         const float& getComponentMargin() const noexcept;
+
+      protected:
+
+        void updatePrivate(const utils::Area& window) override;
 
       private:
 

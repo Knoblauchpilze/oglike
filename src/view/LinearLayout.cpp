@@ -16,19 +16,7 @@ namespace ogame {
 
     LinearLayout::~LinearLayout() {}
 
-    void LinearLayout::update() {
-      // Check if a container is assigned to this layout.
-      if (m_container == nullptr) {
-        return;
-      }
-      // And if some items are managed by this layout.
-      if (m_items.empty()) {
-        return;
-      }
-
-      // Retrieve available dimensions.
-      utils::Area window = m_container->getRenderingArea();
-
+    void LinearLayout::updatePrivate(const utils::Area& window) {
       // Split the available space according to the number of elements to space.
       float cw, ch;
       switch(m_direction) {
@@ -42,11 +30,14 @@ namespace ogame {
       }
 
       // Apply the computed dimensions to each item handled by the layout.
-      std::for_each(m_items.begin(), m_items.end(),
-        [cw, ch](GraphicContainer* item) {
-          item->setSize(cw, ch);
-        }
-      );
+      for (int indexItem = 0 ; indexItem < m_items.size() ; ++indexItem) {
+        // Compute the position of the component.
+        const float x = m_margin + (m_direction == Direction::Horizontal ? (indexItem - 1) * (cw + m_componentMargin) : 0.0f);
+        const float y = m_margin + (m_direction == Direction::Vertical   ? (indexItem - 1) * (ch + m_componentMargin) : 0.0f);
+
+        // Apply the final rendering area.
+        m_items[indexItem]->setRenderingArea(utils::Area(x, y, cw, ch));
+      }
     }
 
     void LinearLayout::handleHorizontalLayout(const utils::Area& totalArea, float& cw, float& ch) const {
