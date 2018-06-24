@@ -8,9 +8,9 @@
 #include "GraphicContainer.h"
 
 namespace ogame {
-  namespace view {
+  namespace gui {
 
-    class OgameView: public OgameAbstractView
+    class OgameView: public view::OgameAbstractView
     {
       public:
 
@@ -24,15 +24,13 @@ namespace ogame {
 
       private:
 
-        GraphicContainerShPtr m_panel;
-        std::unordered_map<std::string, GraphicContainerShPtr> m_views;
+        view::GraphicContainerShPtr m_panel;
+        std::unordered_map<std::string, view::GraphicContainerShPtr> m_views;
 
     };
 
     using OgameViewShPtr = std::shared_ptr<OgameView>;
   }
 }
-
-//#include "OgameView.hxx"
 
 #endif // OGAMEVIEW_H

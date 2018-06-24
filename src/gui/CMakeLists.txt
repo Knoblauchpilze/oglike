@@ -9,6 +9,8 @@ find_package (SDL REQUIRED)
 
 set (SOURCES
   OgameView.cpp
+  GuiException.cpp
+  GalaxyView.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED

@@ -8,7 +8,7 @@
 #include "Universe.h"
 
 #include "OgameView.h"
-#include "ViewException.h"
+#include "GuiException.h"
 
 #include "Area.h"
 #include "GraphicContainer.h"
@@ -46,12 +46,12 @@ int main(int argc, char* argv[])
   // Instantiate the main view.
   const unsigned screenWidth = std::stoi(parser.getOptionValue("--width"));
   const unsigned screenHeight = std::stoi(parser.getOptionValue("--height"));
-  ogame::view::OgameViewShPtr view;
+  ogame::gui::OgameViewShPtr view;
 
   try {
-    view  = std::make_shared<ogame::view::OgameView>(screenWidth, screenHeight);
+    view  = std::make_shared<ogame::gui::OgameView>(screenWidth, screenHeight);
   }
-  catch (const ogame::view::ViewException& e) {
+  catch (const ogame::gui::GuiException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
     return 1;
   }
