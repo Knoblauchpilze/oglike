@@ -7,7 +7,7 @@
 
 #include "Universe.h"
 
-#include "OgameAbstractView.h"
+#include "OgameView.h"
 #include "ViewException.h"
 
 #include "Area.h"
@@ -46,68 +46,10 @@ int main(int argc, char* argv[])
   // Instantiate the main view.
   const unsigned screenWidth = std::stoi(parser.getOptionValue("--width"));
   const unsigned screenHeight = std::stoi(parser.getOptionValue("--height"));
-  ogame::view::OgameAbstractViewShPtr view;
-  ogame::view::GraphicContainerShPtr panel;
+  ogame::view::OgameViewShPtr view;
 
-  std::vector<ogame::view::GraphicContainerShPtr> containersForLayout;
-  ogame::view::GridLayoutShPtr layout;
-
-  const float margin = 1.0f;
-  const ogame::view::utils::Area panelArea(margin,
-                                           margin,
-                                           static_cast<float>(screenWidth) - 2.0f * margin,
-                                           static_cast<float>(screenHeight) - 2.0f * margin);
   try {
-    view  = std::make_shared<ogame::view::OgameAbstractView>("OGame Viewer", "65px-Stop_hand.svg[1].BMP", screenWidth, screenHeight);
-
-    layout = std::make_shared<ogame::view::GridLayout>(5,
-                                                       4,
-                                                       10.0f,
-                                                       nullptr);
-
-    panel = std::make_shared<ogame::view::GraphicContainer>("Main panel",
-                                                            panelArea,
-                                                            layout.get());
-    view->addDrawable(panel.get());
-
-    containersForLayout.push_back(
-      std::make_shared<ogame::view::GraphicContainer>(
-        "Panel 0",
-        ogame::view::utils::Area()
-      )
-    );
-    containersForLayout.push_back(
-      std::make_shared<ogame::view::GraphicContainer>(
-        "Panel 1",
-        ogame::view::utils::Area()
-      )
-    );
-    containersForLayout.push_back(
-      std::make_shared<ogame::view::GraphicContainer>(
-        "Panel 2",
-        ogame::view::utils::Area()
-      )
-    );
-    containersForLayout.push_back(
-      std::make_shared<ogame::view::GraphicContainer>(
-        "Panel 3",
-        ogame::view::utils::Area()
-      )
-    );
-    containersForLayout.push_back(
-      std::make_shared<ogame::view::GraphicContainer>(
-        "Panel 4",
-        ogame::view::utils::Area()
-      )
-    );
-
-    for (int indexPanel = 0 ; indexPanel < containersForLayout.size() ; ++indexPanel) {
-      layout->addItem(containersForLayout[indexPanel].get(), indexPanel, indexPanel, indexPanel + 1, 4 - indexPanel);
-    }
-
-    for (int indexPanel = 0 ; indexPanel < containersForLayout.size() ; ++indexPanel) {
-      panel->addChild(containersForLayout[indexPanel].get());
-    }
+    view  = std::make_shared<ogame::view::OgameView>(screenWidth, screenHeight);
   }
   catch (const ogame::view::ViewException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
