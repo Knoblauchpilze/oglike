@@ -2,7 +2,7 @@
 #define GALAXYVIEW_H
 
 #include <memory>
-#include <unordered_map>
+#include <vector>
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
 
@@ -13,11 +13,19 @@ namespace ogame {
     {
       public:
 
-        GalaxyView(const unsigned& width, const unsigned& height);
+        GalaxyView(const unsigned& planetCount);
         
         virtual ~GalaxyView();
 
       private:
+
+        void createView(const unsigned& planetCount);
+
+        view::GraphicContainerShPtr createPlanetPanel(const unsigned& planetIndex) const;
+
+      private:
+
+        std::vector<view::GraphicContainerShPtr> m_planetsPanel;
 
     };
 

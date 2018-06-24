@@ -8,7 +8,7 @@ namespace ogame {
   namespace view {
 
     inline
-    int Layout::addItem(GraphicContainer* item) {
+    int Layout::addItem(std::shared_ptr<GraphicContainer> item) {
       if (item != nullptr && getContainerOrNull(item) == nullptr) {
         m_items.push_back(item);
         return m_items.size() - 1;
@@ -17,7 +17,7 @@ namespace ogame {
     }
 
     inline
-    void Layout::removeItem(GraphicContainer* item) {
+    void Layout::removeItem(std::shared_ptr<GraphicContainer> item) {
       int index = 0;
       getContainerOrNull(item, &index);
       if (index < m_items.size()) {
@@ -26,8 +26,8 @@ namespace ogame {
     }
 
     inline
-    GraphicContainer* Layout::getContainerOrNull(GraphicContainer* item, int* index) const {
-      std::vector<GraphicContainer*>::const_iterator itemToFind = m_items.cbegin();
+    std::shared_ptr<GraphicContainer> Layout::getContainerOrNull(std::shared_ptr<GraphicContainer> item, int* index) const {
+      std::vector<std::shared_ptr<GraphicContainer>>::const_iterator itemToFind = m_items.cbegin();
       int itemId = 0;
       while (itemToFind != m_items.cend() && item != *itemToFind) {
         ++itemToFind;

@@ -120,6 +120,9 @@ namespace ogame {
       {
         (*listenersIterator)->onKeyPressedEvent(event.key);
       }
+      if (event.key.keysym.sym == SDLK_ESCAPE) {
+        m_processing = false;
+      }
     }
 
     void OgameAbstractView::processKeyReleasedEvent(const SDL_Event& event) {

@@ -49,7 +49,11 @@ int main(int argc, char* argv[])
   ogame::gui::OgameViewShPtr view;
 
   try {
-    view  = std::make_shared<ogame::gui::OgameView>(screenWidth, screenHeight);
+    view  = std::make_shared<ogame::gui::OgameView>(
+      screenWidth,
+      screenHeight,
+      planetsCount
+    );
   }
   catch (const ogame::gui::GuiException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;

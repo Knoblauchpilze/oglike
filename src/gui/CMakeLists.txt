@@ -11,6 +11,7 @@ set (SOURCES
   OgameView.cpp
   GuiException.cpp
   GalaxyView.cpp
+  PlanetGalaxyEntry.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED

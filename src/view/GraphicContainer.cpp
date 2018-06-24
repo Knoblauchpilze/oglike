@@ -7,7 +7,7 @@ namespace ogame {
     GraphicContainer::GraphicContainer(const std::string& name,
                                        const utils::Area& area,
                                        const EventListener::Interaction::Mask& mask,
-                                       Layout* layout,
+                                       LayoutShPtr layout,
                                        GraphicContainer* parent):
       Drawable(),
       EventListener(mask),
@@ -36,16 +36,17 @@ namespace ogame {
       destroyContent();
     }
 
-    void GraphicContainer::addChild(GraphicContainer* child) {
+    void GraphicContainer::addChild(GraphicContainerShPtr child) {
       if (child != nullptr) {
         m_children[child->getName()] = child;
+        child->setParent(this);
         if (m_layout != nullptr) {
           m_layout->addItem(child);
         }
       }
     }
 
-    void GraphicContainer::removeChild(GraphicContainer* child) {
+    void GraphicContainer::removeChild(GraphicContainerShPtr child) {
       if (child != nullptr) {
         m_children.erase(child->getName());
         if (m_layout != nullptr) {
@@ -74,7 +75,7 @@ namespace ogame {
         }
 
         // Proceed to update of children containers if any.
-        for (std::unordered_map<std::string, GraphicContainer*>::const_iterator child = m_children.cbegin() ;
+        for (std::unordered_map<std::string, GraphicContainerShPtr>::const_iterator child = m_children.cbegin() ;
              child != m_children.cend() ;
              ++child)
         {
@@ -98,13 +99,13 @@ namespace ogame {
       return rendering;
     }
 
-    void GraphicContainer::setLayout(Layout* layout) {
+    void GraphicContainer::setLayout(LayoutShPtr layout) {
       lock();
       m_layout = layout;
       if (m_layout != nullptr) {
         m_layout->setContainer(this);
         std::for_each(m_children.cbegin(), m_children.cend(),
-          [this](const std::pair<std::string, GraphicContainer*>& child) {
+          [this](const std::pair<std::string, GraphicContainerShPtr>& child) {
             m_layout->addItem(child.second);
           }
         );
