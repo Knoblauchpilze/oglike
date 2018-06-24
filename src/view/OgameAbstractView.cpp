@@ -36,7 +36,10 @@ namespace ogame {
         errorMessage += SDL_GetError();
         throw ogame::view::ViewException(errorMessage);
       }
-      SDL_Surface* iconAsSurface(SDL_LoadBMP(m_icon.c_str()));
+      SDL_Surface* iconAsSurface = SDL_LoadBMP(m_icon.c_str());
+      if (iconAsSurface == nullptr) {
+        std::cerr << "[VIEW] Could not load icon \"" << m_icon << "\", default system icon will be used" << std::endl;
+      }
       SDL_WM_SetIcon(iconAsSurface, nullptr);
       SDL_WM_SetCaption(m_title.c_str(), nullptr);
     }
