@@ -21,7 +21,6 @@ set (SOURCES
   LinearLayout.cpp
   GridLayout.cpp
   GraphicContainerException.cpp
-  OgameView.cpp
   )
 
 add_library (ogamelike_lib_view SHARED
@@ -29,7 +28,7 @@ add_library (ogamelike_lib_view SHARED
   ${SDL_INCLUDE_DIRS}
   )
 
-add_library (SDL IMPORTED SHARED GLOBAL)
+add_library (SDL IMPORTED SHARED)
 
 target_link_libraries(ogamelike_lib_view
   ${SDL_LIBRARY}

@@ -143,22 +143,34 @@ namespace ogame {
 
 
     inline
-    void GraphicContainer::onKeyPressedEventPrivate(const SDL_KeyboardEvent& keyEvent) {}
+    void GraphicContainer::onKeyPressedEventPrivate(const SDL_KeyboardEvent& keyEvent) {
+      std::cout << "[GRAPHIC] Key pressed event" << std::endl;
+    }
 
     inline
-    void GraphicContainer::onKeyReleasedEventPrivate(const SDL_KeyboardEvent& keyEvent) {}
+    void GraphicContainer::onKeyReleasedEventPrivate(const SDL_KeyboardEvent& keyEvent) {
+      std::cout << "[GRAPHIC] Key released event" << std::endl;
+    }
 
     inline
-    void GraphicContainer::onMouseMotionEventPrivate(const SDL_MouseMotionEvent& mouseMotionEvent) {}
+    void GraphicContainer::onMouseMotionEventPrivate(const SDL_MouseMotionEvent& mouseMotionEvent) {
+      std::cout << "[GRAPHIC] Mouse motion event" << std::endl;
+    }
 
     inline
-    void GraphicContainer::onMouseButtonPressedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) {}
+    void GraphicContainer::onMouseButtonPressedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) {
+      std::cout << "[GRAPHIC] Mouse button pressed event" << std::endl;
+    }
 
     inline
-    void GraphicContainer::onMouseButtonReleasedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) {}
+    void GraphicContainer::onMouseButtonReleasedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) {
+      std::cout << "[GRAPHIC] Mouse button released event" << std::endl;
+    }
 
     inline
-    void GraphicContainer::onMouseWheelEventPrivate(bool upWheel) {}
+    void GraphicContainer::onMouseWheelEventPrivate(bool upWheel) {
+      std::cout << "[GRAPHIC] Wheel " << (upWheel ? "up" : "down") << " event" << std::endl;
+    }
 
     inline
     void GraphicContainer::makeDirty() {
