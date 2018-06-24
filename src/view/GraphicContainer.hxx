@@ -37,6 +37,96 @@ namespace ogame {
     }
 
     inline
+    void GraphicContainer::onKeyPressedEvent(const SDL_KeyboardEvent& keyEvent) {
+      // Pass this event to children in case they can handle it.
+      std::for_each(m_children.cbegin(), m_children.cend(),
+        [&keyEvent](const std::pair<std::string, GraphicContainer*>& child) {
+          child.second->onKeyPressedEvent(keyEvent);
+        }
+      );
+
+      // Process the event internally.
+      if (isRelevant(EventListener::Interaction::KeyPressed)) {
+        onKeyPressedEventPrivate(keyEvent);
+      }
+    }
+
+    inline
+    void GraphicContainer::onKeyReleasedEvent(const SDL_KeyboardEvent& keyEvent) {
+      // Pass this event to children in case they can handle it.
+      std::for_each(m_children.cbegin(), m_children.cend(),
+        [&keyEvent](const std::pair<std::string, GraphicContainer*>& child) {
+          child.second->onKeyReleasedEvent(keyEvent);
+        }
+      );
+
+      // Process the event internally.
+      if (isRelevant(EventListener::Interaction::KeyReleased)) {
+        onKeyReleasedEventPrivate(keyEvent);
+      }
+    }
+
+    inline
+    void GraphicContainer::onMouseMotionEvent(const SDL_MouseMotionEvent& mouseMotionEvent) {
+      // Pass this event to children in case they can handle it.
+      std::for_each(m_children.cbegin(), m_children.cend(),
+        [&mouseMotionEvent](const std::pair<std::string, GraphicContainer*>& child) {
+          child.second->onMouseMotionEvent(mouseMotionEvent);
+        }
+      );
+
+      // Process the event internally.
+      if (isRelevant(EventListener::Interaction::MouseMotion)) {
+        onMouseMotionEventPrivate(mouseMotionEvent);
+      }
+    }
+
+    inline
+    void GraphicContainer::onMouseButtonPressedEvent(const SDL_MouseButtonEvent& mouseButtonEvent) {
+      // Pass this event to children in case they can handle it.
+      std::for_each(m_children.cbegin(), m_children.cend(),
+        [&mouseButtonEvent](const std::pair<std::string, GraphicContainer*>& child) {
+          child.second->onMouseButtonPressedEvent(mouseButtonEvent);
+        }
+      );
+
+      // Process the event internally.
+      if (isRelevant(EventListener::Interaction::MouseButtonPressed)) {
+        onMouseButtonPressedEventPrivate(mouseButtonEvent);
+      }
+    }
+
+    inline
+    void GraphicContainer::onMouseButtonReleasedEvent(const SDL_MouseButtonEvent& mouseButtonEvent) {
+      // Pass this event to children in case they can handle it.
+      std::for_each(m_children.cbegin(), m_children.cend(),
+        [&mouseButtonEvent](const std::pair<std::string, GraphicContainer*>& child) {
+          child.second->onMouseButtonReleasedEvent(mouseButtonEvent);
+        }
+      );
+
+      // Process the event internally.
+      if (isRelevant(EventListener::Interaction::MouseButtonReleased)) {
+        onMouseButtonReleasedEventPrivate(mouseButtonEvent);
+      }
+    }
+
+    inline
+    void GraphicContainer::onMouseWheelEvent(bool upWheel) {
+      // Pass this event to children in case they can handle it.
+      std::for_each(m_children.cbegin(), m_children.cend(),
+        [&upWheel](const std::pair<std::string, GraphicContainer*>& child) {
+          child.second->onMouseWheelEvent(upWheel);
+        }
+      );
+
+      // Process the event internally.
+      if (isRelevant(EventListener::Interaction::MouseWheel)) {
+        onMouseWheelEventPrivate(upWheel);
+      }
+    }
+
+    inline
     const GraphicContainer* GraphicContainer::getParent() const noexcept {
       return m_parent;
     }
@@ -50,6 +140,25 @@ namespace ogame {
     bool GraphicContainer::hasInternallyChanged() const noexcept {
       return m_dirty || m_deepDirty;
     }
+
+
+    inline
+    void GraphicContainer::onKeyPressedEventPrivate(const SDL_KeyboardEvent& keyEvent) {}
+
+    inline
+    void GraphicContainer::onKeyReleasedEventPrivate(const SDL_KeyboardEvent& keyEvent) {}
+
+    inline
+    void GraphicContainer::onMouseMotionEventPrivate(const SDL_MouseMotionEvent& mouseMotionEvent) {}
+
+    inline
+    void GraphicContainer::onMouseButtonPressedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) {}
+
+    inline
+    void GraphicContainer::onMouseButtonReleasedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) {}
+
+    inline
+    void GraphicContainer::onMouseWheelEventPrivate(bool upWheel) {}
 
     inline
     void GraphicContainer::makeDirty() {

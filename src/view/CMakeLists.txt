@@ -9,7 +9,7 @@ find_package (SDL REQUIRED)
 
 set (SOURCES
   OgameAbstractView.cpp
-  SdlEventListener.cpp
+  EventListener.cpp
   ViewException.cpp
   EventException.cpp
   Drawable.cpp
@@ -21,6 +21,7 @@ set (SOURCES
   LinearLayout.cpp
   GridLayout.cpp
   GraphicContainerException.cpp
+  OgameView.cpp
   )
 
 add_library (ogamelike_lib_view SHARED

@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 #include <SDL/SDL.h>
-#include "SdlEventListener.h"
+#include "EventListener.h"
 #include "Drawable.h"
 
 namespace ogame {
@@ -18,11 +18,17 @@ namespace ogame {
         
         virtual ~OgameAbstractView();
 
-        void addListener(SdlEventListener* listener);
+        void addListener(EventListener* listener);
 
         void addDrawable(Drawable* drawable);
       
         virtual void run();
+
+      protected:
+
+        const int& getWidth() const noexcept;
+
+        const int& getHeight() const noexcept;
 
       private:
 
@@ -62,7 +68,7 @@ namespace ogame {
         double m_frameDuration;
         SDL_Surface* m_screen;
         bool m_processing;
-        std::vector<SdlEventListener*> m_listeners;
+        std::vector<EventListener*> m_listeners;
         std::vector<Drawable*> m_drawables;
 
     };

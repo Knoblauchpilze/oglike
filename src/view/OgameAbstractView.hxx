@@ -7,7 +7,7 @@ namespace ogame {
   namespace view {
 
     inline
-    void OgameAbstractView::addListener(SdlEventListener* listener) {
+    void OgameAbstractView::addListener(EventListener* listener) {
       m_listeners.push_back(listener);
     }
 
@@ -19,6 +19,16 @@ namespace ogame {
     inline
     void OgameAbstractView::run() {
       performRendering();
+    }
+
+    inline
+    const int& OgameAbstractView::getWidth() const noexcept {
+      return m_screen->w;
+    }
+
+    inline
+    const int& OgameAbstractView::getHeight() const noexcept {
+      return m_screen->h;
     }
 
     inline
