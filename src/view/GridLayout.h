@@ -22,7 +22,7 @@ namespace ogame {
 
         const float& getMargin() const noexcept;
 
-        void addItem(GraphicContainer* container, const unsigned& x, const unsigned& y, const unsigned& w, const unsigned& h);
+        void addItem(std::shared_ptr<GraphicContainer> container, const unsigned& x, const unsigned& y, const unsigned& w, const unsigned& h);
 
       protected:
 

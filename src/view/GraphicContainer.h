@@ -22,9 +22,9 @@ namespace ogame {
         const std::string&
         getName() const noexcept;
 
-        virtual void addChild(GraphicContainer* child);
+        virtual void addChild(std::shared_ptr<GraphicContainer> child);
 
-        virtual void removeChild(GraphicContainer* child);
+        virtual void removeChild(std::shared_ptr<GraphicContainer> child);
 
         utils::Area getRenderingArea() override;
 
@@ -32,7 +32,7 @@ namespace ogame {
 
         SDL_Surface* draw() override;
 
-        void setLayout(Layout* layout);
+        void setLayout(std::shared_ptr<Layout> layout);
 
         void setBackgroundColor(const SDL_Color& color);
 
@@ -51,7 +51,7 @@ namespace ogame {
         GraphicContainer(const std::string& name,
                          const utils::Area& area,
                          const EventListener::Interaction::Mask& mask = EventListener::Interaction::NoInteraction,
-                         Layout* layout = nullptr,
+                         std::shared_ptr<Layout> layout = nullptr,
                          GraphicContainer* parent = nullptr);
 
       protected:
@@ -92,17 +92,17 @@ namespace ogame {
 
         void destroyContent();
 
-        void drawChild(GraphicContainer* child);
+        void drawChild(std::shared_ptr<GraphicContainer> child);
 
       private:
 
         std::string m_name;
         utils::Area m_area;
         GraphicContainer* m_parent;
-        Layout* m_layout;
+        std::shared_ptr<Layout> m_layout;
         bool m_dirty;
         bool m_deepDirty;
-        std::unordered_map<std::string, GraphicContainer*> m_children;
+        std::unordered_map<std::string, std::shared_ptr<GraphicContainer>> m_children;
         SDL_Surface* m_panel;
         SDL_Color m_color;
 

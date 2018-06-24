@@ -32,15 +32,10 @@ namespace ogame {
     }
 
     inline
-    void GraphicContainer::setParent(GraphicContainer* parent) {
-      m_parent = parent;
-    }
-
-    inline
     void GraphicContainer::onKeyPressedEvent(const SDL_KeyboardEvent& keyEvent) {
       // Pass this event to children in case they can handle it.
       std::for_each(m_children.cbegin(), m_children.cend(),
-        [&keyEvent](const std::pair<std::string, GraphicContainer*>& child) {
+        [&keyEvent](const std::pair<std::string, GraphicContainerShPtr>& child) {
           child.second->onKeyPressedEvent(keyEvent);
         }
       );
@@ -55,7 +50,7 @@ namespace ogame {
     void GraphicContainer::onKeyReleasedEvent(const SDL_KeyboardEvent& keyEvent) {
       // Pass this event to children in case they can handle it.
       std::for_each(m_children.cbegin(), m_children.cend(),
-        [&keyEvent](const std::pair<std::string, GraphicContainer*>& child) {
+        [&keyEvent](const std::pair<std::string, GraphicContainerShPtr>& child) {
           child.second->onKeyReleasedEvent(keyEvent);
         }
       );
@@ -70,7 +65,7 @@ namespace ogame {
     void GraphicContainer::onMouseMotionEvent(const SDL_MouseMotionEvent& mouseMotionEvent) {
       // Pass this event to children in case they can handle it.
       std::for_each(m_children.cbegin(), m_children.cend(),
-        [&mouseMotionEvent](const std::pair<std::string, GraphicContainer*>& child) {
+        [&mouseMotionEvent](const std::pair<std::string, GraphicContainerShPtr>& child) {
           child.second->onMouseMotionEvent(mouseMotionEvent);
         }
       );
@@ -85,7 +80,7 @@ namespace ogame {
     void GraphicContainer::onMouseButtonPressedEvent(const SDL_MouseButtonEvent& mouseButtonEvent) {
       // Pass this event to children in case they can handle it.
       std::for_each(m_children.cbegin(), m_children.cend(),
-        [&mouseButtonEvent](const std::pair<std::string, GraphicContainer*>& child) {
+        [&mouseButtonEvent](const std::pair<std::string, GraphicContainerShPtr>& child) {
           child.second->onMouseButtonPressedEvent(mouseButtonEvent);
         }
       );
@@ -100,7 +95,7 @@ namespace ogame {
     void GraphicContainer::onMouseButtonReleasedEvent(const SDL_MouseButtonEvent& mouseButtonEvent) {
       // Pass this event to children in case they can handle it.
       std::for_each(m_children.cbegin(), m_children.cend(),
-        [&mouseButtonEvent](const std::pair<std::string, GraphicContainer*>& child) {
+        [&mouseButtonEvent](const std::pair<std::string, GraphicContainerShPtr>& child) {
           child.second->onMouseButtonReleasedEvent(mouseButtonEvent);
         }
       );
@@ -115,7 +110,7 @@ namespace ogame {
     void GraphicContainer::onMouseWheelEvent(bool upWheel) {
       // Pass this event to children in case they can handle it.
       std::for_each(m_children.cbegin(), m_children.cend(),
-        [&upWheel](const std::pair<std::string, GraphicContainer*>& child) {
+        [&upWheel](const std::pair<std::string, GraphicContainerShPtr>& child) {
           child.second->onMouseWheelEvent(upWheel);
         }
       );
@@ -124,6 +119,11 @@ namespace ogame {
       if (isRelevant(EventListener::Interaction::MouseWheel)) {
         onMouseWheelEventPrivate(upWheel);
       }
+    }
+
+    inline
+    void GraphicContainer::setParent(GraphicContainer* parent) {
+      m_parent = parent;
     }
 
     inline
@@ -184,7 +184,7 @@ namespace ogame {
 
     inline
     bool GraphicContainer::childrenChanged() const noexcept {
-      std::unordered_map<std::string, GraphicContainer*>::const_iterator child = m_children.cbegin();
+      std::unordered_map<std::string, std::shared_ptr<GraphicContainer>>::const_iterator child = m_children.cbegin();
       while (child != m_children.cend()) {
         if (child->second->hasChanged()) {
           return true;
@@ -233,7 +233,7 @@ namespace ogame {
     }
 
     inline
-    void GraphicContainer::drawChild(GraphicContainer* child) {
+    void GraphicContainer::drawChild(GraphicContainerShPtr child) {
       // Draw this object (caching is handled by the object itself).
       SDL_Surface* picture = child->draw();
       // Draw the picture at the corresponding place.

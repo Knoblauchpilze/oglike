@@ -6,6 +6,7 @@
 #include <SDL/SDL.h>
 #include "OgameAbstractView.h"
 #include "GraphicContainer.h"
+#include "LinearLayout.h"
 
 namespace ogame {
   namespace gui {
@@ -14,13 +15,17 @@ namespace ogame {
     {
       public:
 
-        OgameView(const unsigned& width, const unsigned& height);
+        OgameView(const unsigned& width,
+                  const unsigned& height,
+                  const unsigned& planetCount);
         
         virtual ~OgameView();
 
       private:
 
-          void createViews(const float& margin);
+          void createViews(const float& margin, const unsigned& planetCount);
+
+          void createGalaxyView(const unsigned& planetCount);
 
       private:
 

@@ -24,9 +24,9 @@ namespace ogame {
 
         void setContainer(GraphicContainer* container);
 
-        virtual int addItem(GraphicContainer* item);
+        virtual int addItem(std::shared_ptr<GraphicContainer> item);
 
-        virtual void removeItem(GraphicContainer* item);
+        virtual void removeItem(std::shared_ptr<GraphicContainer> item);
 
       protected:
 
@@ -34,12 +34,12 @@ namespace ogame {
 
       private:
 
-        GraphicContainer* getContainerOrNull(GraphicContainer* item, int* index = nullptr) const;
+        std::shared_ptr<GraphicContainer> getContainerOrNull(std::shared_ptr<GraphicContainer> item, int* index = nullptr) const;
 
       protected:
 
         GraphicContainer* m_container;
-        std::vector<GraphicContainer*> m_items;
+        std::vector<std::shared_ptr<GraphicContainer>> m_items;
 
     };
 
