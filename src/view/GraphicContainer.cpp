@@ -4,8 +4,13 @@
 namespace ogame {
   namespace view {
 
-    GraphicContainer::GraphicContainer(const std::string& name, const utils::Area& area, Layout* layout, GraphicContainer* parent):
+    GraphicContainer::GraphicContainer(const std::string& name,
+                                       const utils::Area& area,
+                                       const EventListener::Interaction::Mask& mask,
+                                       Layout* layout,
+                                       GraphicContainer* parent):
       Drawable(),
+      EventListener(mask),
       m_name(name),
       m_area(area),
       m_parent(parent),

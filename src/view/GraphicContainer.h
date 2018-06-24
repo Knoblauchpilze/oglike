@@ -6,13 +6,14 @@
 #include "Drawable.h"
 #include "Area.h"
 #include "Layout.h"
+#include "EventListener.h"
 
 namespace ogame {
   namespace view {
 
     class Layout;
 
-    class GraphicContainer: public Drawable
+    class GraphicContainer: public Drawable, public EventListener
     {
       public:
 
@@ -35,7 +36,23 @@ namespace ogame {
 
         void setBackgroundColor(const SDL_Color& color);
 
-        GraphicContainer(const std::string& name, const utils::Area& area, Layout* layout = nullptr, GraphicContainer* parent = nullptr);
+        void onKeyPressedEvent(const SDL_KeyboardEvent& keyEvent) override;
+
+        void onKeyReleasedEvent(const SDL_KeyboardEvent& keyEvent) override;
+
+        void onMouseMotionEvent(const SDL_MouseMotionEvent& mouseMotionEvent) override;
+
+        void onMouseButtonPressedEvent(const SDL_MouseButtonEvent& mouseButtonEvent) override;
+
+        void onMouseButtonReleasedEvent(const SDL_MouseButtonEvent& mouseButtonEvent) override;
+
+        void onMouseWheelEvent(bool upWheel) override;
+
+        GraphicContainer(const std::string& name,
+                         const utils::Area& area,
+                         const EventListener::Interaction::Mask& mask = EventListener::Interaction::NoInteraction,
+                         Layout* layout = nullptr,
+                         GraphicContainer* parent = nullptr);
 
       protected:
 
@@ -46,6 +63,18 @@ namespace ogame {
         bool hasChanged() const noexcept override;
 
         virtual bool hasInternallyChanged() const noexcept;
+
+        virtual void onKeyPressedEventPrivate(const SDL_KeyboardEvent& keyEvent);
+
+        virtual void onKeyReleasedEventPrivate(const SDL_KeyboardEvent& keyEvent);
+
+        virtual void onMouseMotionEventPrivate(const SDL_MouseMotionEvent& mouseMotionEvent);
+
+        virtual void onMouseButtonPressedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent);
+
+        virtual void onMouseButtonReleasedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent);
+
+        virtual void onMouseWheelEventPrivate(bool upWheel);
 
       private:
 

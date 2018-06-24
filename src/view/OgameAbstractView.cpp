@@ -101,7 +101,7 @@ namespace ogame {
     void OgameAbstractView::processExitEvent(const SDL_Event& event) {
       std::cout << "[VIEW] Processing exit event and calling " << m_listeners.size() << " listeners" << std::endl;
       m_processing = false;
-      for (std::vector<SdlEventListener*>::iterator listenersIterator = m_listeners.begin();
+      for (std::vector<EventListener*>::iterator listenersIterator = m_listeners.begin();
           listenersIterator != m_listeners.end();
           ++listenersIterator)
       {
@@ -111,7 +111,7 @@ namespace ogame {
 
     void OgameAbstractView::processKeyPressedEvent(const SDL_Event& event) {
       std::cout << "[VIEW] Processing key pressed event and calling " << m_listeners.size() << " listeners" << std::endl;
-      for (std::vector<SdlEventListener*>::iterator listenersIterator = m_listeners.begin();
+      for (std::vector<EventListener*>::iterator listenersIterator = m_listeners.begin();
           listenersIterator != m_listeners.end();
           ++listenersIterator)
       {
@@ -121,7 +121,7 @@ namespace ogame {
 
     void OgameAbstractView::processKeyReleasedEvent(const SDL_Event& event) {
       std::cout << "[VIEW] Processing key released event and calling " << m_listeners.size() << " listeners" << std::endl;
-      for (std::vector<SdlEventListener*>::iterator listenersIterator = m_listeners.begin();
+      for (std::vector<EventListener*>::iterator listenersIterator = m_listeners.begin();
           listenersIterator != m_listeners.end();
           ++listenersIterator)
       {
@@ -131,7 +131,7 @@ namespace ogame {
 
     void OgameAbstractView::processMouseMotionEvent(const SDL_Event& event) {
       // std::cout << "[VIEW] Processing mouse motion event and calling " << m_listeners.size() << " listeners" << std::endl;
-      for (std::vector<SdlEventListener*>::iterator listenersIterator = m_listeners.begin();
+      for (std::vector<EventListener*>::iterator listenersIterator = m_listeners.begin();
           listenersIterator != m_listeners.end();
           ++listenersIterator)
       {
@@ -148,7 +148,7 @@ namespace ogame {
       }
       else {
         std::cout << "[VIEW] Processing mouse button pressed event and calling " << m_listeners.size() << " listeners" << std::endl;
-        for (std::vector<SdlEventListener*>::iterator listenersIterator = m_listeners.begin();
+        for (std::vector<EventListener*>::iterator listenersIterator = m_listeners.begin();
             listenersIterator != m_listeners.end();
             ++listenersIterator)
         {
@@ -159,7 +159,7 @@ namespace ogame {
 
     void OgameAbstractView::processMouseButtonReleasedEvent(const SDL_Event& event) {
       std::cout << "[VIEW] Processing mouse button released event and calling " << m_listeners.size() << " listeners" << std::endl;
-      for (std::vector<SdlEventListener*>::iterator listenersIterator = m_listeners.begin();
+      for (std::vector<EventListener*>::iterator listenersIterator = m_listeners.begin();
           listenersIterator != m_listeners.end();
           ++listenersIterator)
       {
@@ -169,7 +169,7 @@ namespace ogame {
 
     void OgameAbstractView::processMouseWheelEvent(const SDL_Event& event) {
       std::cout << "[VIEW] Processing mouse wheel " << (event.button.button==SDL_BUTTON_WHEELUP?"up":"down") << " event and calling " << m_listeners.size() << " listeners" << std::endl;
-      for (std::vector<SdlEventListener*>::iterator listenersIterator = m_listeners.begin();
+      for (std::vector<EventListener*>::iterator listenersIterator = m_listeners.begin();
           listenersIterator != m_listeners.end();
           ++listenersIterator)
       {
