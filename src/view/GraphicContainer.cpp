@@ -64,7 +64,7 @@ namespace ogame {
           createContent();
         }
         else {
-          clearContent();
+          clearContentPrivate();
         }
 
         // Update layout if any.

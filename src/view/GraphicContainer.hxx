@@ -18,7 +18,7 @@ namespace ogame {
     utils::Area GraphicContainer::getRenderingArea() {
       utils::Area area;
       lock();
-      area = m_area;
+      area = getRenderingAreaPrivate();
       unlock();
       return area;
     }
@@ -121,6 +121,26 @@ namespace ogame {
       }
     }
 
+    template <typename ContainerPtr>
+    inline
+    ContainerPtr GraphicContainer::getChild(const std::string& name) const {
+      std::unordered_map<std::string, std::shared_ptr<GraphicContainer>>::const_iterator child = m_children.find(name);
+      if (child == m_children.cend()) {
+        return nullptr;
+      }
+      return dynamic_cast<ContainerPtr>(child->second.get());
+    }
+
+    inline
+    void GraphicContainer::makeDirty() {
+      m_dirty = true;
+    }
+
+    inline
+    void GraphicContainer::makeDeepDirty() {
+      m_deepDirty = true;
+    }
+
     inline
     void GraphicContainer::setParent(GraphicContainer* parent) {
       m_parent = parent;
@@ -141,6 +161,10 @@ namespace ogame {
       return m_dirty || m_deepDirty;
     }
 
+    inline
+    const utils::Area& GraphicContainer::getRenderingAreaPrivate() const noexcept {
+      return m_area;
+    }
 
     inline
     void GraphicContainer::onKeyPressedEventPrivate(const SDL_KeyboardEvent& keyEvent) {
@@ -173,13 +197,17 @@ namespace ogame {
     }
 
     inline
-    void GraphicContainer::makeDirty() {
-      m_dirty = true;
+    SDL_Surface* GraphicContainer::createContentPrivate() {
+      // Default implementation which should be overriden by inheriting classes.
+      return SDL_CreateRGBSurface(0, static_cast<int>(m_area.w()), static_cast<int>(m_area.h()), 32, 0, 0, 0, 0);
     }
 
     inline
-    void GraphicContainer::makeDeepDirty() {
-      m_deepDirty = true;
+    void GraphicContainer::clearContentPrivate() {
+      // Default implementation which should be overriden by inheriting classes.
+      if (m_panel != nullptr) {
+        SDL_FillRect(m_panel, nullptr, SDL_MapRGB(m_panel->format, m_color.r, m_color.g, m_color.b));
+      }
     }
 
     inline
@@ -200,14 +228,8 @@ namespace ogame {
       destroyContent();
 
       // Create new area.
-      m_panel = SDL_CreateRGBSurface(0,
-                                     static_cast<int>(m_area.w()),
-                                     static_cast<int>(m_area.h()),
-                                     32,
-                                     0,
-                                     0,
-                                     0,
-                                     0);
+      m_panel = createContentPrivate();
+
       if (m_panel == nullptr) {
         const std::string errorMessage = std::string("Cannot create graphic container with dimensions ") +
           std::to_string(m_area.w()) + "x" + std::to_string(m_area.h());
@@ -215,14 +237,7 @@ namespace ogame {
       }
 
       // Clear with background color.
-      clearContent();
-    }
-
-    inline
-    void GraphicContainer::clearContent() {
-      if (m_panel != nullptr) {
-        SDL_FillRect(m_panel, nullptr, SDL_MapRGB(m_panel->format, m_color.r, m_color.g, m_color.b));
-      }
+      clearContentPrivate();
     }
 
     inline
