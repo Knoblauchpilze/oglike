@@ -18,6 +18,12 @@ namespace ogame {
 
         virtual ~Planet();
 
+        const std::string& getName() const noexcept;
+
+        const bool hasMoon() const noexcept;
+
+        const bool hasWreckfield() const noexcept;
+
       protected:
 
         void create();
@@ -32,5 +38,7 @@ namespace ogame {
 
   }
 }
+
+#include "Planet.hxx"
 
 #endif // PLANET_H

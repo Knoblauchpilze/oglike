@@ -12,6 +12,7 @@ set (SOURCES
   GuiException.cpp
   GalaxyView.cpp
   PlanetGalaxyEntry.cpp
+  PictureContainer.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
@@ -23,11 +24,13 @@ add_library (SDL IMPORTED SHARED)
 
 target_link_libraries(ogamelike_lib_gui
   ${SDL_LIBRARY}
+  ogamelike_lib_core
   ogamelike_lib_view
   )
 
 target_include_directories (ogamelike_lib_gui PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}
+  ${CORE_INCLUDE_DIR}
   ${VIEW_INCLUDE_DIR}
   )
 

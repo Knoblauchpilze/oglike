@@ -56,6 +56,16 @@ namespace ogame {
 
       protected:
 
+        template <typename ContainerPtr>
+        inline
+        ContainerPtr getChild(const std::string& name) const;
+
+        // We assume that the object is locked before entering this method.
+        void makeDirty();
+
+        // We assume that the object is locked before entering this method.
+        void makeDeepDirty();
+
         void setParent(GraphicContainer* parent);
 
         const GraphicContainer* getParent() const noexcept;
@@ -63,6 +73,8 @@ namespace ogame {
         bool hasChanged() const noexcept override;
 
         virtual bool hasInternallyChanged() const noexcept;
+
+        const utils::Area& getRenderingAreaPrivate() const noexcept;
 
         virtual void onKeyPressedEventPrivate(const SDL_KeyboardEvent& keyEvent);
 
@@ -76,19 +88,15 @@ namespace ogame {
 
         virtual void onMouseWheelEventPrivate(bool upWheel);
 
+        virtual SDL_Surface* createContentPrivate();
+
+        virtual void clearContentPrivate();
+
       private:
-
-        // We assume that the object is locked before entering this method.
-        void makeDirty();
-
-        // We assume that the object is locked before entering this method.
-        void makeDeepDirty();
 
         bool childrenChanged() const noexcept;
 
         void createContent();
-
-        void clearContent();
 
         void destroyContent();
 
