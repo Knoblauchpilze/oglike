@@ -5,11 +5,14 @@
 namespace ogame {
   namespace core {
 
-    Universe::Universe(const unsigned& index, const unsigned& galaxiesCount):
+    Universe::Universe(const unsigned& index,
+                       const unsigned& galaxiesCount,
+                       const unsigned& systemsCount,
+                       const unsigned& planetsCount):
       m_index(index),
       m_galaxies()
     {
-      create(galaxiesCount);
+      create(galaxiesCount, systemsCount, planetsCount);
     }
 
     Universe::~Universe()
@@ -35,11 +38,14 @@ namespace ogame {
       return *m_galaxies[index];
     }
 
-    void Universe::create(const unsigned& galaxiesCount) {
+    void Universe::create(const unsigned& galaxiesCount,
+                          const unsigned& systemsCount,
+                          const unsigned& planetsCount)
+    {
       m_galaxies.clear();
       m_galaxies.resize(galaxiesCount);
       for (unsigned indexGalaxy = 0 ; indexGalaxy < galaxiesCount ; ++indexGalaxy) {
-        m_galaxies[indexGalaxy] = nullptr;
+        m_galaxies[indexGalaxy] = std::make_shared<Galaxy>(indexGalaxy, systemsCount, planetsCount);
       }
     }
 

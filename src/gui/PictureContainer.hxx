@@ -7,7 +7,7 @@ namespace ogame {
   namespace gui {
 
     inline
-    void PictureContainer::clearContentPrivate() {
+    void PictureContainer::clearContentPrivate(SDL_Surface* render) {
       // Nothing to do here.
     }
 

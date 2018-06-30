@@ -6,7 +6,7 @@
 namespace ogame {
   namespace gui {
 
-    class GuiException: public ogame::core::OgameException
+    class GuiException: public view::ViewException
     {
       public:
 

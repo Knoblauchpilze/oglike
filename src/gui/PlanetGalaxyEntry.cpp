@@ -6,25 +6,44 @@
 namespace ogame {
   namespace gui {
 
-    PlanetGalaxyEntry::PlanetGalaxyEntry(const unsigned& index):
-      view::GraphicContainer(std::string("Planet ") + std::to_string(index) + " view",
+    PlanetGalaxyEntry::PlanetGalaxyEntry(const unsigned& count, const std::string& name):
+      view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction,
-                             nullptr),
-      m_wreckfield(false),
-      m_moon(false)
+                             nullptr)
     {
-      createView();
+      // Assign the background color.
+      setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
+
+      createView(count);
     }
 
     PlanetGalaxyEntry::~PlanetGalaxyEntry() {}
 
-    void PlanetGalaxyEntry::populateWithPlanetData(const core::PlanetShPtr planet) {
+    void PlanetGalaxyEntry::populateWithPlanetData(const core::Planet& planet) {
       lock();
 
       // Update information.
-      m_wreckfield = planet->hasWreckfield();
-      m_moon = planet->hasMoon();
+      PlanetIconDisplay* icon = getChild<PlanetIconDisplay*>(std::string("Planet icon"));
+      if (checkChild(icon, std::string("Planet icon"))) {
+        icon->populateWithPlanetData(planet);
+      }
+      LabelContainer* label = getChild<LabelContainer*>(std::string("Planet name"));
+      if (checkChild(label, std::string("Planet name"))) {
+        label->setText(planet.isColonized() ? planet.getName() : "");
+      }
+      SwitchPictureContainer* moon = getChild<SwitchPictureContainer*>(std::string("Planet moon"));
+      if (checkChild(moon, std::string("Planet moon"))) {
+        moon->updateStatus(planet.hasMoon());
+      }
+      SwitchPictureContainer* wreckfield = getChild<SwitchPictureContainer*>(std::string("Planet wreck field"));
+      if (checkChild(wreckfield, std::string("Planet wreck field"))) {
+        wreckfield->updateStatus(planet.hasWreckfield());
+      }
+      LabelContainer* owner = getChild<LabelContainer*>(std::string("Planet owner's name"));
+      if (checkChild(label, std::string("Planet owner's name"))) {
+        owner->setText(planet.isColonized() ? "Colonized" : "");
+      }
 
       // Make this component dirty.
       makeDeepDirty();
@@ -32,7 +51,7 @@ namespace ogame {
       unlock();
     }
 
-    void PlanetGalaxyEntry::createView() {
+    void PlanetGalaxyEntry::createView(const unsigned& count) {
       // Create the main layout for this panel.
       view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(11u, 1u, 0.0f);
       if (layout == nullptr) {
@@ -40,21 +59,19 @@ namespace ogame {
       }
 
       // Add each informative panel to the layout and as child of this panel.
-      view::GraphicContainerShPtr icon = createInformativePanel(std::string("Planet icon"));
-      view::GraphicContainerShPtr name = createInformativePanel(std::string("Planet name"));
-      const std::string wreckfieldImageName = (m_wreckfield ?
-        std::string("data/img/wreckfield.bmp") :
-        std::string("data/img/wreckfield2.bmp")
-      );
-      PictureContainerShPtr wreckField = createPicturePanel(std::string("Planet wreck field"), 
-                                                            wreckfieldImageName);
-      const std::string moonImageName = (m_moon ?
-        std::string("data/img/moon.bmp") :
-        std::string("data/img/moon2.bmp")
-      );
-      PictureContainerShPtr moon = createPicturePanel(std::string("Planet moon"), 
-                                                      moonImageName);
-      view::GraphicContainerShPtr owner = createInformativePanel(std::string("Planet owner's name"));
+      PlanetIconDisplayShPtr icon = createPlanetIconPanel(count, std::string("Planet icon"));
+      LabelContainerShPtr name = createLabelPanel(std::string("Planet name"),
+                                                  std::string("Not available"),
+                                                  {128, 0, 0, SDL_ALPHA_OPAQUE});
+      SwitchPictureContainerShPtr wreckField = createSwitchPicture(std::string("Planet wreck field"), 
+                                                                   std::string("data/img/wreckfield.bmp"),
+                                                                   std::string("data/img/wreckfield_none.bmp"));
+      SwitchPictureContainerShPtr moon = createSwitchPicture(std::string("Planet moon"), 
+                                                             std::string("data/img/moon.bmp"),
+                                                             std::string("data/img/moon_none.bmp"));
+      LabelContainerShPtr owner = createLabelPanel(std::string("Planet owner's name"),
+                                                           std::string("Not available"),
+                                                           {255, 0, 0, SDL_ALPHA_OPAQUE});
       view::GraphicContainerShPtr actions = createInformativePanel(std::string("Planet actions"));
       if (icon == nullptr ||
           name == nullptr ||
@@ -70,10 +87,10 @@ namespace ogame {
       layout->addItem(icon,       0u, 0u, 1u, 1u);
       addChild(name);
       layout->addItem(name,       1u, 0u, 3u, 1u);
-      addChild(wreckField);
-      layout->addItem(wreckField, 4u, 0u, 1u, 1u);
       addChild(moon);
-      layout->addItem(moon,       5u, 0u, 1u, 1u);
+      layout->addItem(moon,       4u, 0u, 1u, 1u);
+      addChild(wreckField);
+      layout->addItem(wreckField, 5u, 0u, 1u, 1u);
       addChild(owner);
       layout->addItem(owner,      6u, 0u, 3u, 1u);
       addChild(actions);
@@ -81,21 +98,6 @@ namespace ogame {
 
       // Now assign the layout to this container.
       setLayout(layout);
-    }
-
-    view::GraphicContainerShPtr PlanetGalaxyEntry::createInformativePanel(const std::string& name) const {
-      return std::make_shared<view::GraphicContainer>(
-        name,
-        view::utils::Area(),
-        view::EventListener::Interaction::NoInteraction
-      );
-    }
-
-    PictureContainerShPtr PlanetGalaxyEntry::createPicturePanel(const std::string& name, const std::string& file) const {
-      return std::make_shared<PictureContainer>(
-        name,
-        file
-      );
     }
 
   }

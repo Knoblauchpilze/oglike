@@ -7,6 +7,9 @@
 #include "GraphicContainer.h"
 #include "Planet.h"
 #include "PictureContainer.h"
+#include "LabelContainer.h"
+#include "PlanetIconDisplay.h"
+#include "SwitchPictureContainer.h"
 
 namespace ogame {
   namespace gui {
@@ -15,29 +18,37 @@ namespace ogame {
     {
       public:
 
-        PlanetGalaxyEntry(const unsigned& index);
+        PlanetGalaxyEntry(const unsigned& count, const std::string& name);
         
         virtual ~PlanetGalaxyEntry();
 
-        void populateWithPlanetData(const core::PlanetShPtr planet);
+        void populateWithPlanetData(const core::Planet& planet);
 
       private:
 
-        void createView();
+        void createView(const unsigned& count);
 
-        view::GraphicContainerShPtr createInformativePanel(const std::string& name) const;
+        PlanetIconDisplayShPtr createPlanetIconPanel(const unsigned& count, const std::string& name) const;
 
         PictureContainerShPtr createPicturePanel(const std::string& name, const std::string& file) const;
 
-      private:
+        LabelContainerShPtr createLabelPanel(const std::string& name, const std::string& text, const SDL_Color& textColor) const;
 
-        bool m_wreckfield;
-        bool m_moon;
+        SwitchPictureContainerShPtr createSwitchPicture(const std::string& name, const std::string& onPicture, const std::string& offPicture) const;
+
+        view::GraphicContainerShPtr createInformativePanel(const std::string& name) const;
+
+        template <typename Type>
+        bool checkChild(const Type* child, const std::string& name) const noexcept;
+
+      private:
 
     };
 
     using PlanetGalaxyEntryShPtr = std::shared_ptr<PlanetGalaxyEntry>;
   }
 }
+
+#include "PlanetGalaxyEntry.hxx"
 
 #endif // PLANETGALAXYENTRY_H

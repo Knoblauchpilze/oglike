@@ -26,7 +26,12 @@ namespace ogame {
         static_cast<unsigned char>(std::rand() % 255),
         static_cast<unsigned char>(std::rand() % 255)
       };
-      createContent();
+      try {
+        createContent();
+      }
+      catch (const ViewException& e) {
+        std::cerr << "[GRAPHIC] Caught internal exception while rendering container " << getName() << ":" << std::endl << e.what() << std::endl;
+      }
       if (m_layout != nullptr) {
         m_layout->setContainer(this);
       }
@@ -61,10 +66,28 @@ namespace ogame {
       if (hasChanged()) {
         // Render this container.
         if (m_deepDirty) {
-          createContent();
+          try {
+            createContent();
+          }
+          catch (const GraphicContainerException& e) {
+            std::cerr << "[GRAPHIC] Caught internal exception while rendering container " << getName() << ":" << std::endl << e.what() << std::endl;
+            // Release the locker on this object.
+            unlock();
+
+            // Propagate the exception.
+            throw;
+          }
+          catch (const ViewException& e) {
+            std::cerr << "[GRAPHIC] Caught view exception while rendering container " << getName() << ":" << std::endl << e.what() << std::endl;
+            // Release the locker on this object.
+            unlock();
+
+            // Propagate the exception.
+            throw;
+          }
         }
         else {
-          clearContentPrivate();
+          clearContentPrivate(m_panel);
         }
 
         // Update layout if any.
@@ -84,6 +107,9 @@ namespace ogame {
           }
           catch (const GraphicContainerException& e) {
             std::cerr << "[CONTAINER] Caught internal exception while repainting child " << child->first << " for container " << getName() << std::endl << e.what() << std::endl;
+          }
+          catch (const ViewException& e) {
+            std::cerr << "[CONTAINER] Caught view exception while repainting child container " << child->first << " for container " << getName() << std::endl << e.what() << std::endl;
           }
         }
 

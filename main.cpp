@@ -15,6 +15,9 @@
 #include "LinearLayout.h"
 #include "GridLayout.h"
 
+#include <SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
+
 int main(int argc, char* argv[])
 {
   // Parse input arguments.
@@ -41,7 +44,7 @@ int main(int argc, char* argv[])
   const unsigned planetsCount = std::stoi(parser.getOptionValue("--planet"));
   std::cout << "[INFO] Instanciating universe with " << galaxiesCount << " galaxies, " << systemsCount << " systems per galaxy and " << planetsCount << " planets per system" << std::endl;
 
-  ogame::core::UniverseShPtr universe = std::make_shared<ogame::core::Universe>(1u, galaxiesCount);
+  ogame::core::UniverseShPtr universe = std::make_shared<ogame::core::Universe>(1u, galaxiesCount, systemsCount, planetsCount);
 
   // Instantiate the main view.
   const unsigned screenWidth = std::stoi(parser.getOptionValue("--width"));
@@ -64,6 +67,19 @@ int main(int argc, char* argv[])
     return 1;
   }
 
+  // Populate the main view.
+  try {
+    view->populateGalaxyView((*universe)[0][0]);
+  }
+  catch (const ogame::gui::GuiException& e) {
+    std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
+    return 1;
+  }
+  catch (const ogame::core::OgameException& e) {
+    std::cerr << "[MAIN] Caught internal exception:" << std::endl << e.what() << std::endl;
+    return 1;
+  }
+
   // Run the application.
   try {
     view->run();
@@ -75,5 +91,17 @@ int main(int argc, char* argv[])
     std::cerr << "[MAIN] Caught internal exception:" << std::endl << e.what() << std::endl;
   }
 
+  // We need to manually destroy objects before exiting the program to be sure that we can clean-up libraries afterwards.
+  view.reset();
+
+  // Unload the sdl and the ttf libs if needed.
+  if (TTF_WasInit()) {
+    TTF_Quit();
+  }
+  if (SDL_WasInit(0u)) {
+    SDL_Quit();
+  }
+
+  // All is good.
   return 0;
 }

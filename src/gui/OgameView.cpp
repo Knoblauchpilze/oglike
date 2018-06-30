@@ -13,9 +13,12 @@ namespace ogame {
                         std::string("data/icon.bmp"),
                         width,
                         height),
-      m_panel(nullptr),
-      m_views()
+      m_panel(nullptr)
     {
+      // Initialize the TTF lib.
+      initializeTTFLib();
+
+      // Create views.
       createViews(1.0f, planetCount);
     }
 
@@ -53,13 +56,10 @@ namespace ogame {
 
     void OgameView::createGalaxyView(const unsigned& planetCount) {
       // Create the view.
-      GalaxyViewShPtr galaxyView = std::make_shared<GalaxyView>(planetCount);
+      m_galaxyView = std::make_shared<GalaxyView>(planetCount);
 
       // Add it as a child of the main panel for event propagation purposes.
-      m_panel->addChild(galaxyView);
-
-      // Save it for further use.
-      m_views["galaxy_view"] = galaxyView;
+      m_panel->addChild(m_galaxyView);
     }
 
   }
