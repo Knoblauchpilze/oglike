@@ -5,6 +5,8 @@
 #include <vector>
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
+#include "System.h"
+#include "PlanetGalaxyEntry.h"
 
 namespace ogame {
   namespace gui {
@@ -17,11 +19,15 @@ namespace ogame {
         
         virtual ~GalaxyView();
 
+        void populateWithSystemData(const core::System& system);
+
       private:
 
         void createView(const unsigned& planetCount);
 
-        view::GraphicContainerShPtr createPlanetPanel(const unsigned& planetIndex) const;
+        PlanetGalaxyEntryShPtr createPlanetPanel(const unsigned& planetIndex, const unsigned& planetCount) const;
+
+        std::string getNameOfPlanetPanelFromIndex(const unsigned& planetIndex) const noexcept;
 
       private:
 
@@ -32,5 +38,7 @@ namespace ogame {
     using GalaxyViewShPtr = std::shared_ptr<GalaxyView>;
   }
 }
+
+#include "GalaxyView.hxx"
 
 #endif // GALAXYVIEW_H

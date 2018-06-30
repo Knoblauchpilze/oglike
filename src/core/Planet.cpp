@@ -1,11 +1,16 @@
 
 #include "Planet.h"
+#include "System.h"
+
+#include <iostream>
 
 namespace ogame {
   namespace core {
 
-    Planet::Planet(const std::string& name):
-      m_name(name)
+    Planet::Planet(const unsigned& index, const std::string& name, System* system):
+      m_index(index),
+      m_name(name),
+      m_parent(system)
     {
       create();
     }
@@ -13,6 +18,10 @@ namespace ogame {
     Planet::~Planet()
     {
       //dtor
+    }
+
+    const unsigned Planet::getPositionInSystem() const {
+      return m_parent->getPositionOf(*this);
     }
 
     void Planet::create() {

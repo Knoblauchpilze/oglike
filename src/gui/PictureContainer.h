@@ -5,7 +5,6 @@
 #include <string>
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
-#include "Planet.h"
 
 namespace ogame {
   namespace gui {
@@ -22,7 +21,7 @@ namespace ogame {
 
         SDL_Surface* createContentPrivate() override;
 
-        void clearContentPrivate() override;
+        void clearContentPrivate(SDL_Surface* render) override;
 
       private:
 

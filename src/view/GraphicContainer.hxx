@@ -203,10 +203,10 @@ namespace ogame {
     }
 
     inline
-    void GraphicContainer::clearContentPrivate() {
+    void GraphicContainer::clearContentPrivate(SDL_Surface* render) {
       // Default implementation which should be overriden by inheriting classes.
-      if (m_panel != nullptr) {
-        SDL_FillRect(m_panel, nullptr, SDL_MapRGB(m_panel->format, m_color.r, m_color.g, m_color.b));
+      if (render != nullptr) {
+        SDL_FillRect(render, nullptr, SDL_MapRGB(render->format, m_color.r, m_color.g, m_color.b));
       }
     }
 
@@ -237,13 +237,14 @@ namespace ogame {
       }
 
       // Clear with background color.
-      clearContentPrivate();
+      clearContentPrivate(m_panel);
     }
 
     inline
     void GraphicContainer::destroyContent() {
       if (m_panel != nullptr) {
         SDL_FreeSurface(m_panel);
+        m_panel = nullptr;
       }
     }
 

@@ -2,11 +2,14 @@
 #include "System.h"
 #include "SystemException.h"
 
+#include <iostream>
+
 namespace ogame {
   namespace core {
 
-    System::System(const unsigned& index, const unsigned& planetsCount):
+    System::System(const unsigned& index, const unsigned& planetsCount, Galaxy* galaxy):
       m_index(index),
+      m_parent(galaxy),
       m_planets()
     {
       create(planetsCount);
@@ -27,10 +30,21 @@ namespace ogame {
       return *m_planets[index];
     }
 
+    const int System::getPositionOf(const Planet& planet) const {
+      int index = 0;
+      while (index < m_planets.size()) {
+        if (m_planets[index] != nullptr && *m_planets[index] == planet) {
+          return index;
+        }
+        ++index;
+      }
+      throw SystemException(std::string("Could not find index of planet ") + planet.getName() + " in system " + std::to_string(m_index));
+    }
+
     void System::create(const unsigned& planetsCount) {
       m_planets.resize(planetsCount);
       for (unsigned indexPlanet = 0 ; indexPlanet < planetsCount ; ++indexPlanet) {
-        m_planets[indexPlanet] = nullptr;
+        m_planets[indexPlanet] = std::make_shared<Planet>(indexPlanet, generateRandomName(8), this);
       }
     }
 

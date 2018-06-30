@@ -5,7 +5,7 @@ namespace ogame {
   namespace gui {
 
     GuiException::GuiException(const std::string& cause):
-      OgameException(cause)
+      ViewException(cause)
     {
       //ctor
     }

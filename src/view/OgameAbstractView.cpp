@@ -211,15 +211,23 @@ namespace ogame {
       {
         Drawable* drawable(*drawablesIterator);
         // Draw this object (caching is handled by the object itself).
-        SDL_Surface* picture = drawable->draw();
-        // Draw the picture
-        utils::Area render = drawable->getRenderingArea();
-        SDL_Rect dstArea;
-        dstArea.x = static_cast<short int>(render.x());
-        dstArea.y = static_cast<short int>(render.y());
-        dstArea.w = static_cast<short int>(render.w());
-        dstArea.h = static_cast<short int>(render.h());
-        drawSurface(picture, nullptr, &dstArea);
+        try {
+          SDL_Surface* picture = drawable->draw();
+          // Draw the picture
+          utils::Area render = drawable->getRenderingArea();
+          SDL_Rect dstArea;
+          dstArea.x = static_cast<short int>(render.x());
+          dstArea.y = static_cast<short int>(render.y());
+          dstArea.w = static_cast<short int>(render.w());
+          dstArea.h = static_cast<short int>(render.h());
+          drawSurface(picture, nullptr, &dstArea);
+        }
+        catch (const ViewException& e) {
+          std::cerr << "[OGAME] Caught view exception while rendering drawable: " << std::endl << e.what() << std::endl;
+        }
+        catch (const core::OgameException& e) {
+          std::cerr << "[OGAME] Caught internal exception while rendering drawable: " << std::endl << e.what() << std::endl;
+        }
       }
     }
 

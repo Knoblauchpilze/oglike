@@ -14,7 +14,10 @@ namespace ogame {
     {
       public:
 
-        Universe(const unsigned& index, const unsigned& galaxiesCount);
+        Universe(const unsigned& index,
+                 const unsigned& galaxiesCount,
+                 const unsigned& systemsCount,
+                 const unsigned& planetsCount);
 
         virtual ~Universe();
 
@@ -26,7 +29,9 @@ namespace ogame {
 
       protected:
 
-        void create(const unsigned& galaxiesCount);
+        void create(const unsigned& galaxiesCount,
+                    const unsigned& systemsCount,
+                    const unsigned& planetsCount);
 
       private:
 

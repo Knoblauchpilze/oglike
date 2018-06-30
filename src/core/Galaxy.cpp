@@ -5,11 +5,13 @@
 namespace ogame {
   namespace core {
 
-    Galaxy::Galaxy(const unsigned& index, const unsigned& systemsCount):
+    Galaxy::Galaxy(const unsigned& index,
+                   const unsigned& systemsCount,
+                   const unsigned& planetsCount):
       m_index(index),
       m_systems()
     {
-      create(systemsCount);
+      create(systemsCount, planetsCount);
     }
 
     Galaxy::~Galaxy()
@@ -27,10 +29,12 @@ namespace ogame {
       return *m_systems[index];
     }
 
-    void Galaxy::create(const unsigned& systemsCount) {
+    void Galaxy::create(const unsigned& systemsCount,
+                        const unsigned& planetsCount)
+    {
       m_systems.resize(systemsCount);
       for (unsigned indexSystem = 0 ; indexSystem < systemsCount ; ++indexSystem) {
-        m_systems[indexSystem] = nullptr;
+        m_systems[indexSystem] = std::make_shared<System>(indexSystem, planetsCount, this);
       }
     }
 

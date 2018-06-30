@@ -13,7 +13,9 @@ namespace ogame {
     {
       public:
 
-        Galaxy(const unsigned& index, const unsigned& systemsCount);
+        Galaxy(const unsigned& index,
+               const unsigned& systemsCount,
+               const unsigned& planetsCount);
 
         virtual ~Galaxy();
 
@@ -21,7 +23,8 @@ namespace ogame {
 
       protected:
 
-        void create(const unsigned& systemsCount);
+        void create(const unsigned& systemsCount,
+                    const unsigned& planetsCount);
 
       private:
 

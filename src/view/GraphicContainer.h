@@ -90,7 +90,7 @@ namespace ogame {
 
         virtual SDL_Surface* createContentPrivate();
 
-        virtual void clearContentPrivate();
+        virtual void clearContentPrivate(SDL_Surface* render);
 
       private:
 

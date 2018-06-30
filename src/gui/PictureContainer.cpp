@@ -13,6 +13,8 @@ namespace ogame {
       m_file(picture),
       m_picture(nullptr)
     {
+      setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
+
       loadPicture();
     }
         
@@ -24,10 +26,11 @@ namespace ogame {
 
     SDL_Surface* PictureContainer::createContentPrivate() {
       // Create the surface based on the dimensions of this container.
-      SDL_Surface* croppedArea = SDL_CreateRGBSurface(0, static_cast<int>(getRenderingAreaPrivate().w()), static_cast<int>(getRenderingAreaPrivate().h()), 32, 0, 0, 0, 0);
+      SDL_Surface* croppedArea = GraphicContainer::createContentPrivate();
       if (croppedArea == nullptr) {
         throw GuiException(std::string("Unable to create perform rendering for picture container using file ") + m_file);
       }
+      GraphicContainer::clearContentPrivate(croppedArea);
 
       // Compute the blit position of the picture so that it is centered.
       SDL_Rect pictureBlitArea = {

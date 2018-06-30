@@ -5,8 +5,9 @@
 #include <unordered_map>
 #include <SDL/SDL.h>
 #include "OgameAbstractView.h"
-#include "GraphicContainer.h"
 #include "LinearLayout.h"
+#include "System.h"
+#include "GalaxyView.h"
 
 namespace ogame {
   namespace gui {
@@ -21,7 +22,11 @@ namespace ogame {
         
         virtual ~OgameView();
 
+        void populateGalaxyView(const core::System& system);
+
       private:
+
+          void initializeTTFLib();
 
           void createViews(const float& margin, const unsigned& planetCount);
 
@@ -30,12 +35,14 @@ namespace ogame {
       private:
 
         view::GraphicContainerShPtr m_panel;
-        std::unordered_map<std::string, view::GraphicContainerShPtr> m_views;
+        GalaxyViewShPtr m_galaxyView;
 
     };
 
     using OgameViewShPtr = std::shared_ptr<OgameView>;
   }
 }
+
+#include "OgameView.hxx"
 
 #endif // OGAMEVIEW_H
