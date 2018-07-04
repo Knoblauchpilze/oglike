@@ -131,6 +131,15 @@ namespace ogame {
       return dynamic_cast<ContainerPtr>(child->second.get());
     }
 
+    template <typename Type>
+    inline
+    bool GraphicContainer::checkChild(const Type* child, const std::string& name) const noexcept {
+      if (child == nullptr) {
+        std::cerr << "[GRAPHIC] Could not find " << name << " to update panel " << getName() << std::endl;
+      }
+      return child != nullptr;
+    }
+
     inline
     void GraphicContainer::makeDirty() {
       m_dirty = true;

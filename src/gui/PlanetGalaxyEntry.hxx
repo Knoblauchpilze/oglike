@@ -27,17 +27,13 @@ namespace ogame {
     }
 
     inline
-    view::GraphicContainerShPtr PlanetGalaxyEntry::createInformativePanel(const std::string& name) const {
-      return std::make_shared<view::GraphicContainer>(name, view::utils::Area());
+    PlanetActionListShPtr PlanetGalaxyEntry::createActionList(const std::string& name) const {
+      return std::make_shared<PlanetActionList>(name);
     }
 
-    template <typename Type>
     inline
-    bool PlanetGalaxyEntry::checkChild(const Type* child, const std::string& name) const noexcept {
-      if (child == nullptr) {
-        std::cerr << "[PLANET] Could not find " << name << " to update planet panel " << getName() << std::endl;
-      }
-      return child != nullptr;
+    view::GraphicContainerShPtr PlanetGalaxyEntry::createInformativePanel(const std::string& name) const {
+      return std::make_shared<view::GraphicContainer>(name, view::utils::Area());
     }
 
   }

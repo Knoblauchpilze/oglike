@@ -17,6 +17,7 @@ set (SOURCES
   LabelContainer.cpp
   PlanetIconDisplay.cpp
   SwitchPictureContainer.cpp
+  PlanetActionList.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
