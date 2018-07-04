@@ -18,7 +18,7 @@ namespace ogame {
 
       loadPictures();
     }
-        
+
     PlanetIconDisplay::~PlanetIconDisplay() {
       for (std::unordered_map<int, SDL_Surface*>::const_iterator picture = m_pictures.cbegin() ;
            picture != m_pictures.cend() ;

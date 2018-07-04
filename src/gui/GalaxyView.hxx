@@ -8,7 +8,7 @@ namespace ogame {
 
     inline
     PlanetGalaxyEntryShPtr GalaxyView::createPlanetPanel(const unsigned& planetIndex, const unsigned& planetCount) const {
-      return std::make_shared<PlanetGalaxyEntry>(planetCount, getNameOfPlanetPanelFromIndex(planetIndex));
+      return std::make_shared<PlanetGalaxyEntry>(planetIndex + 1u, planetCount, getNameOfPlanetPanelFromIndex(planetIndex));
     }
 
     inline

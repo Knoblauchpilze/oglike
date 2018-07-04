@@ -60,6 +60,9 @@ namespace ogame {
         inline
         ContainerPtr getChild(const std::string& name) const;
 
+        template <typename Type>
+        bool checkChild(const Type* child, const std::string& name) const noexcept;
+
         // We assume that the object is locked before entering this method.
         void makeDirty();
 

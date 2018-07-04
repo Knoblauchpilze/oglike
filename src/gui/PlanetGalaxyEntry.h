@@ -10,6 +10,7 @@
 #include "LabelContainer.h"
 #include "PlanetIconDisplay.h"
 #include "SwitchPictureContainer.h"
+#include "PlanetActionList.h"
 
 namespace ogame {
   namespace gui {
@@ -18,7 +19,7 @@ namespace ogame {
     {
       public:
 
-        PlanetGalaxyEntry(const unsigned& count, const std::string& name);
+        PlanetGalaxyEntry(const unsigned& index, const unsigned& count, const std::string& name);
         
         virtual ~PlanetGalaxyEntry();
 
@@ -26,7 +27,7 @@ namespace ogame {
 
       private:
 
-        void createView(const unsigned& count);
+        void createView(const unsigned& index, const unsigned& count);
 
         PlanetIconDisplayShPtr createPlanetIconPanel(const unsigned& count, const std::string& name) const;
 
@@ -36,10 +37,9 @@ namespace ogame {
 
         SwitchPictureContainerShPtr createSwitchPicture(const std::string& name, const std::string& onPicture, const std::string& offPicture) const;
 
-        view::GraphicContainerShPtr createInformativePanel(const std::string& name) const;
+        PlanetActionListShPtr createActionList(const std::string& name) const;
 
-        template <typename Type>
-        bool checkChild(const Type* child, const std::string& name) const noexcept;
+        view::GraphicContainerShPtr createInformativePanel(const std::string& name) const;
 
       private:
 
