@@ -18,6 +18,8 @@ set (SOURCES
   PlanetIconDisplay.cpp
   SwitchPictureContainer.cpp
   PlanetActionList.cpp
+  GalaxyNavigationPanel.cpp
+  ValueSelector.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED

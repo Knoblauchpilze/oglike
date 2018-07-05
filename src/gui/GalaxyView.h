@@ -2,7 +2,6 @@
 #define GALAXYVIEW_H
 
 #include <memory>
-#include <vector>
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
 #include "System.h"
@@ -15,7 +14,9 @@ namespace ogame {
     {
       public:
 
-        GalaxyView(const unsigned& planetCount);
+        GalaxyView(const unsigned& galaxyCount,
+                   const unsigned& systemCount,
+                   const unsigned& planetCount);
         
         virtual ~GalaxyView();
 
@@ -23,15 +24,16 @@ namespace ogame {
 
       private:
 
-        void createView(const unsigned& planetCount);
+        void createView(const unsigned& navigationHeight,
+                        const unsigned& galaxyCount,
+                        const unsigned& systemCount,
+                        const unsigned& planetCount);
 
         PlanetGalaxyEntryShPtr createPlanetPanel(const unsigned& planetIndex, const unsigned& planetCount) const;
 
         std::string getNameOfPlanetPanelFromIndex(const unsigned& planetIndex) const noexcept;
 
       private:
-
-        std::vector<view::GraphicContainerShPtr> m_planetsPanel;
 
     };
 

@@ -1,29 +1,33 @@
 
 #include "GalaxyView.h"
-#include "LinearLayout.h"
+#include "GridLayout.h"
 #include "GuiException.h"
 #include "PlanetGalaxyEntry.h"
 #include "SystemException.h"
+#include "GalaxyNavigationPanel.h"
 
 namespace ogame {
   namespace gui {
 
-    GalaxyView::GalaxyView(const unsigned& planetCount):
+    GalaxyView::GalaxyView(const unsigned& galaxyCount,
+                           const unsigned& systemCount,
+                           const unsigned& planetCount):
       view::GraphicContainer(std::string("Galaxy view"),
                              view::utils::Area(),
-                             view::EventListener::Interaction::MouseButton,
-                             std::make_shared<view::LinearLayout>(view::LinearLayout::Direction::Vertical,
-                                                                  0.0f,
-                                                                  1.0f,
-                                                                  this)),
-      m_planetsPanel()
+                             view::EventListener::Interaction::MouseButton)
     {
-      createView(planetCount);
+      createView(4u, galaxyCount, systemCount, planetCount);
     }
 
     GalaxyView::~GalaxyView() {}
 
     void GalaxyView::populateWithSystemData(const core::System& system) {
+      // Update the navigation view.
+      GalaxyNavigationPanel* navigation = getChild<GalaxyNavigationPanel*>(std::string("navigation_panel"));
+      if (checkChild(navigation, std::string("Navigation panel"))) {
+        navigation->populateWithSystemData(system);
+      }
+
       // Traverse the system and populate each panel.
       for (unsigned indexPlanet = 0u ; indexPlanet < system.getPlanetsCount() ; ++indexPlanet) {
         PlanetGalaxyEntry* planetPanel = getChild<PlanetGalaxyEntry*>(getNameOfPlanetPanelFromIndex(indexPlanet));
@@ -41,7 +45,28 @@ namespace ogame {
       }
     }
 
-    void GalaxyView::createView(const unsigned& planetCount) {
+    void GalaxyView::createView(const unsigned& navigationHeight,
+                                const unsigned& galaxyCount,
+                                const unsigned& systemCount,
+                                const unsigned& planetCount)
+    {
+      view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(1u, navigationHeight + planetCount, 0.0f);
+      if (layout == nullptr) {
+        throw GuiException(std::string("Could not allocate memory to create galaxy view"));
+      }
+
+      // Create the navigation panel.
+      GalaxyNavigationPanelShPtr navigation = std::make_shared<GalaxyNavigationPanel>(
+        std::string("navigation_panel"),
+        galaxyCount,
+        systemCount
+      );
+      if (navigation == nullptr) {
+        throw GuiException(std::string("Could not allocate memory to create galaxy view navigation panel"));
+      }
+      layout->addItem(navigation, 0u, 0u, 1u, navigationHeight);
+      addChild(navigation);
+
       // Create each row.
       for (int indexPlanet = 0 ; indexPlanet < planetCount ; ++indexPlanet) {
         // Create the planet panel.
@@ -49,15 +74,15 @@ namespace ogame {
           view::GraphicContainerShPtr planetPanel = createPlanetPanel(indexPlanet, planetCount);
 
           // Add it as a child of this view (to be able to propagate events): it will automatically added to the layout.
+          layout->addItem(planetPanel, 0u, navigationHeight + indexPlanet, 1u, 1u);
           addChild(planetPanel);
-
-          // Save it for further use.
-          m_planetsPanel.push_back(planetPanel);
         }
         catch (const GuiException& e) {
           std::cerr << "[GALAXY] Could not create planet " << indexPlanet + 1 << "'s panel, galaxy view may be wrong:" << std::endl << e.what() << std::endl;
         }
       }
+
+      setLayout(layout);
     }
 
   }

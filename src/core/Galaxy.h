@@ -19,6 +19,8 @@ namespace ogame {
 
         virtual ~Galaxy();
 
+        const unsigned& getIndex() const noexcept;
+
         const System& operator[](const unsigned& index) const;
 
       protected:
@@ -36,5 +38,7 @@ namespace ogame {
 
   }
 }
+
+#include "Galaxy.hxx"
 
 #endif // GALAXY_H

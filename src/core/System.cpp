@@ -1,8 +1,7 @@
 
 #include "System.h"
 #include "SystemException.h"
-
-#include <iostream>
+#include "Galaxy.h"
 
 namespace ogame {
   namespace core {
@@ -28,6 +27,13 @@ namespace ogame {
         throw SystemException("Cannot retrieve invalid planet " + std::to_string(index) + " in system " + std::to_string(m_index));
       }
       return *m_planets[index];
+    }
+
+    const unsigned& System::getGalaxyIndex() const {
+      if (m_parent == nullptr) {
+        throw SystemException(std::string("Could not retrieve galaxy of system ") + std::to_string(getIndex()) + " no associated galaxy");
+      }
+      return m_parent->getIndex();
     }
 
     const int System::getPositionOf(const Planet& planet) const {

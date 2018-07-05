@@ -8,6 +8,8 @@ namespace ogame {
 
     OgameView::OgameView(const unsigned& width,
                          const unsigned& height,
+                         const unsigned& galaxyCount,
+                         const unsigned& systemCount,
                          const unsigned& planetCount):
       OgameAbstractView(std::string("Ogame is life and ya know it !"),
                         std::string("data/icon.bmp"),
@@ -19,14 +21,18 @@ namespace ogame {
       initializeTTFLib();
 
       // Create views.
-      createViews(1.0f, planetCount);
+      createViews(1.0f, galaxyCount, systemCount, planetCount);
     }
 
     OgameView::~OgameView() {
       // Nothing to do.
     }
 
-    void OgameView::createViews(const float& margin, const unsigned& planetCount) {
+    void OgameView::createViews(const float& margin,
+                                const unsigned& galaxyCount,
+                                const unsigned& systemCount,
+                                const unsigned& planetCount)
+    {
       // Create the main panel in which views will be displayed.
       m_panel = std::make_shared<view::GraphicContainer>(
         std::string("Panel 0"),
@@ -51,12 +57,15 @@ namespace ogame {
       addListener(m_panel.get());
 
       // Create each view.
-      createGalaxyView(planetCount);
+      createGalaxyView(galaxyCount, systemCount, planetCount);
     }
 
-    void OgameView::createGalaxyView(const unsigned& planetCount) {
+    void OgameView::createGalaxyView(const unsigned& galaxyCount,
+                                     const unsigned& systemCount,
+                                     const unsigned& planetCount)
+    {
       // Create the view.
-      m_galaxyView = std::make_shared<GalaxyView>(planetCount);
+      m_galaxyView = std::make_shared<GalaxyView>(galaxyCount, systemCount, planetCount);
 
       // Add it as a child of the main panel for event propagation purposes.
       m_panel->addChild(m_galaxyView);

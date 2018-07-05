@@ -27,6 +27,8 @@ namespace ogame {
 
         const unsigned getPlanetsCount() const noexcept;
 
+        const unsigned& getGalaxyIndex() const;
+
         const int getPositionOf(const Planet& planet) const;
 
         const std::string generateRandomName(const unsigned& length) const noexcept;

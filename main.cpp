@@ -55,6 +55,8 @@ int main(int argc, char* argv[])
     view  = std::make_shared<ogame::gui::OgameView>(
       screenWidth,
       screenHeight,
+      galaxiesCount,
+      systemsCount,
       planetsCount
     );
   }
@@ -69,7 +71,7 @@ int main(int argc, char* argv[])
 
   // Populate the main view.
   try {
-    view->populateGalaxyView((*universe)[0][0]);
+    view->populateGalaxyView((*universe)[0][198]);
   }
   catch (const ogame::gui::GuiException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;

@@ -64,22 +64,29 @@ namespace ogame {
 
       // Add each informative panel to the layout and as child of this panel.
       LabelContainerShPtr position = createLabelPanel(std::string("Planet index"),
-                                                   std::to_string(index),
-                                                   {192, 0, 0, SDL_ALPHA_OPAQUE});
+                                                      std::to_string(index),
+                                                      {192, 0, 0, SDL_ALPHA_OPAQUE});
+
       PlanetIconDisplayShPtr icon = createPlanetIconPanel(count, std::string("Planet icon"));
+
       LabelContainerShPtr name = createLabelPanel(std::string("Planet name"),
                                                   std::string("Not available"),
                                                   {128, 0, 0, SDL_ALPHA_OPAQUE});
+
       SwitchPictureContainerShPtr wreckField = createSwitchPicture(std::string("Planet wreck field"), 
                                                                    std::string("data/img/wreckfield.bmp"),
                                                                    std::string("data/img/wreckfield_none.bmp"));
+
       SwitchPictureContainerShPtr moon = createSwitchPicture(std::string("Planet moon"), 
                                                              std::string("data/img/moon.bmp"),
                                                              std::string("data/img/moon_none.bmp"));
+
       LabelContainerShPtr owner = createLabelPanel(std::string("Planet owner's name"),
                                                    std::string("Not available"),
                                                    {255, 0, 0, SDL_ALPHA_OPAQUE});
+
       PlanetActionListShPtr actions = createActionList(std::string("Planet actions"));
+
       if (position == nullptr ||
           icon == nullptr ||
           name == nullptr ||
