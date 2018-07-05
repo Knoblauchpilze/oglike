@@ -18,6 +18,8 @@ namespace ogame {
 
         OgameView(const unsigned& width,
                   const unsigned& height,
+                  const unsigned& galaxyCount,
+                  const unsigned& systemCount,
                   const unsigned& planetCount);
         
         virtual ~OgameView();
@@ -28,9 +30,14 @@ namespace ogame {
 
           void initializeTTFLib();
 
-          void createViews(const float& margin, const unsigned& planetCount);
+          void createViews(const float& margin,
+                           const unsigned& galaxyCount,
+                           const unsigned& systemCount,
+                           const unsigned& planetCount);
 
-          void createGalaxyView(const unsigned& planetCount);
+          void createGalaxyView(const unsigned& galaxyCount,
+                                const unsigned& systemCount,
+                                const unsigned& planetCount);
 
       private:
 
