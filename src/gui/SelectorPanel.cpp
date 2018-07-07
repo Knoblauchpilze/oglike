@@ -41,8 +41,6 @@ namespace ogame {
           }
         }
 
-        std::cout << "[SELECTOR] Added child " << child->getName() << " to selector " << getName() << std::endl;
-
         // Add this child to the internal tables.
         m_indices[child->getName()] = m_availableChildren.size();
         indexToActivate = m_availableChildren.size();

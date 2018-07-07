@@ -30,7 +30,6 @@ namespace ogame {
         );
       }
 
-      std::cout << "[SELECTOR] Setting child " << name << " as active, index is " << child->second << std::endl;
       activateChild(child->second);
 
       makeDeepDirty();
@@ -64,7 +63,6 @@ namespace ogame {
       }
 
       // Activate the new one.
-      std::cout << "[SELECTOR] Calling graphic addChild method for child " << m_availableChildren[index]->getName() << std::endl;
       GraphicContainer::addChild(m_availableChildren[index]);
 
       // The new child is now active.
