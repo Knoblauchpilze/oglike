@@ -2,6 +2,7 @@
 #include "OgameView.h"
 #include "GuiException.h"
 #include "GalaxyView.h"
+#include "GridLayout.h"
 
 namespace ogame {
   namespace gui {
@@ -15,7 +16,15 @@ namespace ogame {
                         std::string("data/icon.bmp"),
                         width,
                         height),
-      m_panel(nullptr)
+      m_panel(nullptr),
+
+      m_menuView(nullptr),
+      m_optionsView(nullptr),
+      m_resourcesView(nullptr),
+      m_planetsView(nullptr),
+      m_generalView(nullptr),
+
+      m_galaxyView(nullptr)
     {
       // Initialize the TTF lib.
       initializeTTFLib();
@@ -33,42 +42,67 @@ namespace ogame {
                                 const unsigned& systemCount,
                                 const unsigned& planetCount)
     {
-      // Create the main panel in which views will be displayed.
-      m_panel = std::make_shared<view::GraphicContainer>(
-        std::string("Panel 0"),
-        view::utils::Area(margin,
-                          margin,
-                          static_cast<float>(getWidth()) - 2.0f * margin,
-                          static_cast<float>(getHeight()) - 2.0f * margin),
-        view::EventListener::Interaction::MouseButton,
-        std::make_shared<view::LinearLayout>(view::LinearLayout::Direction::Vertical,
-                                             0.0f,
-                                             0.0f,
-                                             nullptr),
-        nullptr
-      );
-      if (m_panel == nullptr) {
-        throw GuiException(std::string("Could not create main panel used for display"));
-      }
-      // Add main panel to drawables.
-      addDrawable(m_panel.get());
+      // Create the main panel.
+      createMainPanel(margin);
 
-      // Add main panel to listeners.
-      addListener(m_panel.get());
+      // Create the main layout: left and right views and the general view.
+      createMainLayout();
 
-      // Create each view.
-      createGalaxyView(galaxyCount, systemCount, planetCount);
+      // Create thematic views.
+      createThematicViews(galaxyCount, systemCount, planetCount);
     }
 
-    void OgameView::createGalaxyView(const unsigned& galaxyCount,
-                                     const unsigned& systemCount,
-                                     const unsigned& planetCount)
+    void OgameView::createMainLayout() {
+      // Create the layout for the main panel.
+      view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(12u, 12u, 0.0f);
+      if (layout == nullptr) {
+        throw GuiException(std::string("Could not create main panel layout used for display"));
+      }
+
+      // Create each view.
+      m_menuView        = createGraphicContainer(std::string("menu_view"));
+      m_optionsView     = createGraphicContainer(std::string("options_view"));
+      m_resourcesView   = createGraphicContainer(std::string("resources_view"));
+      m_planetsView     = createGraphicContainer(std::string("planets_view"));
+      m_generalView     = std::make_shared<SelectorPanel>(std::string("general_view"));
+
+      // Check whether we could create all the views.
+      if (m_menuView == nullptr ||
+          m_optionsView == nullptr ||
+          m_resourcesView == nullptr ||
+          m_planetsView == nullptr ||
+          m_generalView == nullptr)
+      {
+        throw GuiException(std::string("Could not create one or more of the views needed for main display"));
+      }
+
+      // Add each one to the main layout.
+      layout->addItem(m_optionsView,   0u, 0u, 12u, 1u);
+      m_panel->addChild(m_optionsView);
+      layout->addItem(m_menuView,      0u, 1u, 2u, 11u);
+      m_panel->addChild(m_menuView);
+      layout->addItem(m_resourcesView, 2u, 1u, 8u, 1u);
+      m_panel->addChild(m_resourcesView);
+      layout->addItem(m_planetsView,   10u, 1u, 2u, 11u);
+      m_panel->addChild(m_planetsView);
+      layout->addItem(m_generalView,   2u, 2u, 8u, 10u);
+      m_panel->addChild(m_generalView);
+
+      // Assign the layout to the main panel.
+      m_panel->setLayout(layout);
+    }
+
+    void OgameView::createThematicViews(const unsigned& galaxyCount,
+                                        const unsigned& systemCount,
+                                        const unsigned& planetCount)
     {
-      // Create the view.
+      // Create the views.
       m_galaxyView = std::make_shared<GalaxyView>(galaxyCount, systemCount, planetCount);
 
-      // Add it as a child of the main panel for event propagation purposes.
-      m_panel->addChild(m_galaxyView);
+      // Add each one as a child of the general view for event propagation purposes.
+      m_generalView->addChild(m_galaxyView);
+
+      m_generalView->setActiveChild(m_galaxyView->getName());
     }
 
   }
