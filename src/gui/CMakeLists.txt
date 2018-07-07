@@ -21,6 +21,7 @@ set (SOURCES
   GalaxyNavigationPanel.cpp
   ValueSelector.cpp
   GalaxyPlayerData.cpp
+  SelectorPanel.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
