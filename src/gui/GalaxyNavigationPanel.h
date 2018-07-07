@@ -26,6 +26,8 @@ namespace ogame {
 
         void populateWithSystemData(const core::System& system);
 
+        void populateWithPlayerData(/* TODO */);
+
       private:
 
         void createView(const unsigned& galaxyCount, const unsigned& systemCount);
