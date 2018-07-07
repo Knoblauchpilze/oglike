@@ -4,6 +4,7 @@
 #include "GuiException.h"
 #include "ComponentFactory.h"
 #include "SystemException.h"
+#include "GalaxyPlayerData.h"
 
 namespace ogame {
   namespace gui {
@@ -56,6 +57,19 @@ namespace ogame {
       unlock();
     }
 
+    void GalaxyNavigationPanel::populateWithPlayerData(/* TODO */) {
+      lock();
+      
+      GalaxyNavigationPanel* playerData = getChild<GalaxyNavigationPanel*>(std::string("player_data"));
+      if (checkChild(playerData, std::string("Player data"))) {
+        playerData->populateWithPlayerData(/* TODO */);
+      }
+
+      makeDeepDirty();
+
+      unlock();
+    }
+
     void GalaxyNavigationPanel::createView(const unsigned& galaxyCount, const unsigned& systemCount) {
       // Create the main layout for this panel.
       view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(4u, 4u, 0.0f);
@@ -96,11 +110,21 @@ namespace ogame {
         information = nullptr;
       }
 
+      GalaxyPlayerDataShPtr playerData = nullptr;
+      try {
+        playerData = std::make_shared<GalaxyPlayerData>(std::string("player_data"));
+      }
+      catch (const GuiException& e) {
+        std::cerr << "[NAVIGATION] Could not create player data information panel:" << std::endl << e.what() << std::endl;
+        playerData = nullptr;
+      }
+
       if (galaxy == nullptr ||
           system == nullptr ||
           galaxySelector == nullptr ||
           systemSelector == nullptr ||
-          information == nullptr)
+          information == nullptr ||
+          playerData == nullptr)
       {
         throw GuiException(std::string("Could not allocate one of the informative panel for galaxy's navigation panel"));
       }
@@ -113,6 +137,8 @@ namespace ogame {
       addChild(galaxySelector);
       layout->addItem(systemSelector,   1u, 1u, 1u, 1u);
       addChild(systemSelector);
+      layout->addItem(playerData,       0u, 2u, 4u, 1u);
+      addChild(playerData);
       layout->addItem(information,      0u, 3u, 4u, 1u);
       addChild(information);
 
