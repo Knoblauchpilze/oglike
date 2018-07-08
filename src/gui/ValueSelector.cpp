@@ -7,11 +7,9 @@
 namespace ogame {
   namespace gui {
 
-    ValueSelector::ValueSelector(const SDL_Color& textColor,
-                                 const std::string& font,
-                                 const std::string& name,
-                                 const std::vector<std::string>& options,
-                                 const int& fontSize):
+    ValueSelector::ValueSelector(const std::string& name,
+                                 view::FontShPtr font,
+                                 const std::vector<std::string>& options):
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::MouseButton,
@@ -26,9 +24,7 @@ namespace ogame {
       // Assign the background color.
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
 
-      createView(textColor,
-                 font,
-                 fontSize);
+      createView(font);
 
       buildIndicesTableFromOptions();
     }
@@ -62,14 +58,12 @@ namespace ogame {
       unlock();
     }
 
-    void ValueSelector::createView(const SDL_Color& textColor,
-                                   const std::string& font,
-                                   const int& fontSize)
+    void ValueSelector::createView(view::FontShPtr font)
     {
       // Left switch option.
       PictureContainerShPtr left = ComponentFactory::createPicturePanel(std::string("left_switch"), std::string("data/img/switch_left.bmp"));
       // The main label.
-      LabelContainerShPtr label = ComponentFactory::createLabelPanel(std::string("current_value"), std::string(""), font, textColor, fontSize);
+      LabelContainerShPtr label = ComponentFactory::createLabelPanel(std::string("current_value"), std::string(""), font, font);
       // Right switch option.
       PictureContainerShPtr right = ComponentFactory::createPicturePanel(std::string("right_switch"), std::string("data/img/switch_right.bmp"));
 

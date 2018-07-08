@@ -46,6 +46,7 @@ namespace ogame {
       m_highlightChanged = (m_highlight != true);
       m_highlight = true;
       if (m_highlightChanged) {
+        std::cout << "[LABEL] Highlighting container " << getName() << std::endl;
         makeDeepDirty();
       }
       unlock();
@@ -57,6 +58,7 @@ namespace ogame {
       m_highlightChanged = (m_highlight != false);
       m_highlight = false;
       if (m_highlightChanged) {
+        std::cout << "[LABEL] Unhighlighting container " << getName() << std::endl;
         makeDeepDirty();
       }
       unlock();

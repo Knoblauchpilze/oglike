@@ -4,8 +4,8 @@
 #include <memory>
 #include <string>
 #include <SDL/SDL.h>
-#include <SDL/SDL_ttf.h>
 #include "GraphicContainer.h"
+#include "Font.h"
 
 namespace ogame {
   namespace gui {
@@ -14,11 +14,9 @@ namespace ogame {
     {
       public:
 
-        ValueSelector(const SDL_Color& textColor,
-                      const std::string& font,
-                      const std::string& name,
-                      const std::vector<std::string>& options = std::vector<std::string>(),
-                      const int& fontSize = 25);
+        ValueSelector(const std::string& name,
+                      view::FontShPtr font,
+                      const std::vector<std::string>& options = std::vector<std::string>());
 
         virtual ~ValueSelector();
 
@@ -26,9 +24,7 @@ namespace ogame {
 
       private:
 
-        void createView(const SDL_Color& textColor,
-                        const std::string& font,
-                        const int& fontSize);
+        void createView(view::FontShPtr font);
 
         void buildIndicesTableFromOptions();
 
@@ -43,7 +39,5 @@ namespace ogame {
     using ValueSelectorShPtr = std::shared_ptr<ValueSelector>;
   }
 }
-
-#include "ValueSelector.hxx"
 
 #endif // VALUESELECTOR_H
