@@ -21,6 +21,8 @@ set (SOURCES
   LinearLayout.cpp
   GridLayout.cpp
   GraphicContainerException.cpp
+  Font.cpp
+  FontException.cpp
   )
 
 add_library (ogamelike_lib_view SHARED
