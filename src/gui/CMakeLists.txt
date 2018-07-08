@@ -25,6 +25,7 @@ set (SOURCES
   MenuView.cpp
   LabelledPicture.cpp
   ResourcesView.cpp
+  OptionsView.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
