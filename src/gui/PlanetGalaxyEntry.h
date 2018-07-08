@@ -21,7 +21,7 @@ namespace ogame {
       public:
 
         PlanetGalaxyEntry(const unsigned& index, const unsigned& count, const std::string& name);
-        
+
         virtual ~PlanetGalaxyEntry();
 
         void populateWithPlanetData(const core::Planet& planet);
