@@ -3,6 +3,7 @@
 
 #include "PictureContainer.h"
 #include "SwitchPictureContainer.h"
+#include "Font.h"
 #include "LabelContainer.h"
 #include "ValueSelector.h"
 
@@ -32,17 +33,14 @@ namespace ogame {
         LabelContainerShPtr
         createLabelPanel(const std::string& name,
                          const std::string& text,
-                         const std::string& font,
-                         const SDL_Color& textColor = {255, 255, 255, SDL_ALPHA_OPAQUE},
-                         const int& fontSize = 25);
+                         view::FontShPtr font,
+                         view::FontShPtr highlightFont = nullptr);
 
         static
         ValueSelectorShPtr
         createValueSelectorPanel(const std::string& name,
-                                 const std::string& font,
-                                 const SDL_Color& optionsColor = {255, 255, 255, SDL_ALPHA_OPAQUE},
-                                 const std::vector<std::string>& options = std::vector<std::string>(),
-                                 const int& fontSize = 25);
+                                 view::FontShPtr font,
+                                 const std::vector<std::string>& options = std::vector<std::string>());
 
     };
   }
