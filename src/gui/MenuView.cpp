@@ -18,6 +18,8 @@ namespace ogame {
                              )),
       m_highlightedView(initialView)
     {
+      setBackgroundColor(SDL_Color{29, 34, 40, SDL_ALPHA_OPAQUE});
+
       createView();
       highlightViewPrivate(initialView, false);
     }
