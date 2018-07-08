@@ -13,11 +13,6 @@ namespace ogame {
     }
 
     inline
-    const SDL_Color& Font::getColor() const noexcept {
-      return m_color;
-    }
-
-    inline
     const int& Font::getSize() const noexcept {
       return m_size;
     }
@@ -29,25 +24,20 @@ namespace ogame {
     }
 
     inline
-    void Font::setColor(const SDL_Color& color) {
-      m_color = color;
-    }
-
-    inline
     void Font::setSize(const int& size) {
       unload();
       m_size = size;
     }
 
     inline
-    SDL_Surface* Font::render(const std::string text) {
+    SDL_Surface* Font::render(const std::string text, const SDL_Color& color) {
       // Load the font if needed.
       if (!loaded()) {
         load();
       }
 
       // Proceed to rendering.
-      SDL_Surface* textSurface = TTF_RenderText_Blended(m_font, text.c_str(), m_color);
+      SDL_Surface* textSurface = TTF_RenderText_Blended(m_font, text.c_str(), color);
       if (textSurface == nullptr) {
         throw FontException(std::string("Could not render text ") + text + " with font " + m_name);
       }
@@ -75,6 +65,7 @@ namespace ogame {
     void Font::unload() {
       if (loaded()) {
         TTF_CloseFont(m_font);
+        m_font = nullptr;
       }
     }
     
