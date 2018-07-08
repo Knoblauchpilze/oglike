@@ -34,8 +34,8 @@ namespace ogame {
     LabelContainerShPtr
     ComponentFactory::createLabelPanel(const std::string& name,
                                        const std::string& text,
-                                       view::FontShPtr font,
-                                       view::FontShPtr highlightFont)
+                                       view::ColoredFontShPtr font,
+                                       view::ColoredFontShPtr highlightFont)
     {
       return std::make_shared<LabelContainer>(
         name,
@@ -48,7 +48,7 @@ namespace ogame {
     inline
     ValueSelectorShPtr
     ComponentFactory::createValueSelectorPanel(const std::string& name,
-                                               view::FontShPtr font,
+                                               view::ColoredFontShPtr font,
                                                const std::vector<std::string>& options)
     {
       return std::make_shared<ValueSelector>(

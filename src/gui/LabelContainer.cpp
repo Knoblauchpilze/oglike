@@ -7,8 +7,8 @@ namespace ogame {
 
     LabelContainer::LabelContainer(const std::string& name,
                                    const std::string& text,
-                                   view::FontShPtr font,
-                                   view::FontShPtr highlightFont):
+                                   view::ColoredFontShPtr font,
+                                   view::ColoredFontShPtr highlightFont):
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction,

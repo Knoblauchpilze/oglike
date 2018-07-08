@@ -3,16 +3,20 @@
 
 #include "GalaxyPlayerData.h"
 #include "ComponentFactory.h"
+#include "FontFactory.h"
 
 namespace ogame {
   namespace gui {
 
     inline
-    LabelContainerShPtr GalaxyPlayerData::createLabelPanel(const std::string& name, const std::string& text, view::FontShPtr font) const {
+    LabelContainerShPtr GalaxyPlayerData::createLabelPanel(const std::string& name, const std::string& text) const {
       return ComponentFactory::createLabelPanel(
         name,
         text,
-        font
+        view::FontFactory::getInstance().createColoredFont(
+          std::string("data/fonts/angsa.ttf"),
+          0, 0, 128
+        )
       );
     }
 

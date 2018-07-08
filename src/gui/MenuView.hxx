@@ -3,6 +3,7 @@
 
 #include "MenuView.h"
 #include "ComponentFactory.h"
+#include "FontFactory.h"
 
 namespace ogame {
   namespace gui {
@@ -17,8 +18,14 @@ namespace ogame {
       return ComponentFactory::createLabelPanel(
         getChildNameFromView(view),
         text,
-        m_font,
-        m_hFont
+        view::FontFactory::getInstance().createColoredFont(
+          std::string("data/fonts/tahomabd.ttf"),
+          128, 128, 128
+        ),
+        view::FontFactory::getInstance().createColoredFont(
+          std::string("data/fonts/tahomabd.ttf"),
+          255, 255, 255
+        )
       );
     }
 

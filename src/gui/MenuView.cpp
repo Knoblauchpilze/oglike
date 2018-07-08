@@ -16,15 +16,7 @@ namespace ogame {
                                0.0f,
                                this
                              )),
-      m_highlightedView(initialView),
-      m_font(std::make_shared<view::Font>(
-        std::string("data/fonts/tahomabd.ttf"),
-        128, 128, 128, SDL_ALPHA_OPAQUE
-      )),
-      m_hFont(std::make_shared<view::Font>(
-        std::string("data/fonts/tahomabd.ttf"),
-        255, 255, 255, SDL_ALPHA_OPAQUE
-      ))
+      m_highlightedView(initialView)
     {
       createView();
       highlightViewPrivate(initialView, false);

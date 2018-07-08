@@ -32,17 +32,13 @@ namespace ogame {
 
         PlanetIconDisplayShPtr createPlanetIconPanel(const unsigned& count, const std::string& name) const;
 
-        LabelContainerShPtr createLabelPanel(const std::string& name, const std::string& text, view::FontShPtr font) const;
+        LabelContainerShPtr createLabelPanel(const std::string& name, const std::string& text, view::ColoredFontShPtr font) const;
 
         SwitchPictureContainerShPtr createSwitchPicture(const std::string& name, const std::string& onPicture, const std::string& offPicture) const;
 
         PlanetActionListShPtr createActionList(const std::string& name) const;
 
       private:
-
-        view::FontShPtr m_planetIndexFont;
-        view::FontShPtr m_planetLabelFont;
-        view::FontShPtr m_planetOwnerFont;
 
     };
 

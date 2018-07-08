@@ -3,7 +3,7 @@
 
 #include "PictureContainer.h"
 #include "SwitchPictureContainer.h"
-#include "Font.h"
+#include "ColoredFont.h"
 #include "LabelContainer.h"
 #include "ValueSelector.h"
 
@@ -33,13 +33,13 @@ namespace ogame {
         LabelContainerShPtr
         createLabelPanel(const std::string& name,
                          const std::string& text,
-                         view::FontShPtr font,
-                         view::FontShPtr highlightFont = nullptr);
+                         view::ColoredFontShPtr font,
+                         view::ColoredFontShPtr highlightFont = nullptr);
 
         static
         ValueSelectorShPtr
         createValueSelectorPanel(const std::string& name,
-                                 view::FontShPtr font,
+                                 view::ColoredFontShPtr font,
                                  const std::vector<std::string>& options = std::vector<std::string>());
 
     };

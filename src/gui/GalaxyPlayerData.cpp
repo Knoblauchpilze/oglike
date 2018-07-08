@@ -15,11 +15,7 @@ namespace ogame {
                                0.0f,
                                0.0f,
                                this
-                             )),
-      m_font(std::make_shared<view::Font>(
-        std::string("data/fonts/angsa.ttf"),
-        0, 0, 128, SDL_ALPHA_OPAQUE
-      ))
+                             ))
     {
       createView();
     }
@@ -61,20 +57,16 @@ namespace ogame {
     void GalaxyPlayerData::createView() {
       // Create each information panel.
       LabelContainerShPtr probes = createLabelPanel(std::string("spy_probes"),
-                                                    std::string("0 spy probe"),
-                                                    m_font);
+                                                    std::string("0 spy probe"));
 
       LabelContainerShPtr recyclers = createLabelPanel(std::string("recyclers"),
-                                                    std::string("0 recycler"),
-                                                    m_font);
+                                                    std::string("0 recycler"));
 
       LabelContainerShPtr mips = createLabelPanel(std::string("interplanetary_missiles"),
-                                                    std::string("0 interplanetary missile"),
-                                                    m_font);
+                                                    std::string("0 interplanetary missile"));
 
       LabelContainerShPtr slots = createLabelPanel(std::string("used_slots"),
-                                                    std::string("0/0 used slot"),
-                                                    m_font);
+                                                    std::string("0/0 used slot"));
 
       if (probes == nullptr ||
           recyclers == nullptr ||

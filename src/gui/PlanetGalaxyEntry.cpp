@@ -2,6 +2,7 @@
 #include "PlanetGalaxyEntry.h"
 #include "GridLayout.h"
 #include "GuiException.h"
+#include "FontFactory.h"
 
 namespace ogame {
   namespace gui {
@@ -10,19 +11,7 @@ namespace ogame {
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction,
-                             nullptr),
-      m_planetIndexFont(std::make_shared<view::Font>(
-        std::string("data/fonts/upcfb.ttf"),
-        192, 0, 0, SDL_ALPHA_OPAQUE
-      )),
-      m_planetLabelFont(std::make_shared<view::Font>(
-        std::string("data/fonts/upcfb.ttf"),
-        128, 0, 0, SDL_ALPHA_OPAQUE
-      )),
-      m_planetOwnerFont(std::make_shared<view::Font>(
-        std::string("data/fonts/upcfb.ttf"),
-        255, 0, 0, SDL_ALPHA_OPAQUE
-      ))
+                             nullptr)
     {
       // Assign the background color.
       setBackgroundColor(SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE});
@@ -77,13 +66,19 @@ namespace ogame {
       // Add each informative panel to the layout and as child of this panel.
       LabelContainerShPtr position = createLabelPanel(std::string("Planet index"),
                                                       std::to_string(index),
-                                                      m_planetIndexFont);
+                                                      view::FontFactory::getInstance().createColoredFont(
+                                                        std::string("data/fonts/upcfb.ttf"),
+                                                        192, 0, 0
+                                                      ));
 
       PlanetIconDisplayShPtr icon = createPlanetIconPanel(count, std::string("Planet icon"));
 
       LabelContainerShPtr name = createLabelPanel(std::string("Planet name"),
                                                   std::string("Not available"),
-                                                  m_planetLabelFont);
+                                                  view::FontFactory::getInstance().createColoredFont(
+                                                    std::string("data/fonts/upcfb.ttf"),
+                                                    128, 0, 0
+                                                  ));
 
       SwitchPictureContainerShPtr wreckField = createSwitchPicture(std::string("Planet wreck field"), 
                                                                    std::string("data/img/wreckfield.bmp"),
@@ -95,7 +90,10 @@ namespace ogame {
 
       LabelContainerShPtr owner = createLabelPanel(std::string("Planet owner's name"),
                                                    std::string("Not available"),
-                                                   m_planetOwnerFont);
+                                                   view::FontFactory::getInstance().createColoredFont(
+                                                     std::string("data/fonts/upcfb.ttf"),
+                                                     255, 0, 0
+                                                   ));
 
       PlanetActionListShPtr actions = createActionList(std::string("Planet actions"));
 
