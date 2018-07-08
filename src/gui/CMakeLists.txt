@@ -23,6 +23,7 @@ set (SOURCES
   GalaxyPlayerData.cpp
   SelectorPanel.cpp
   MenuView.cpp
+  LabelledPicture.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
