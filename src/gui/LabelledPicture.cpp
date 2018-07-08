@@ -9,18 +9,19 @@ namespace ogame {
     LabelledPicture::LabelledPicture(const std::string& name,
                                      view::ColoredFontShPtr font,
                                      const std::string& picture,
+                                     const std::string& text,
                                      const Alignment& alignment):
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction),
       m_alignment(alignment)
     {
-      createView(font, picture);
+      createView(font, picture, text);
     }
 
     LabelledPicture::~LabelledPicture() {}
 
-    void LabelledPicture::createView(view::ColoredFontShPtr font, const std::string& picture) {
+    void LabelledPicture::createView(view::ColoredFontShPtr font, const std::string& picture, const std::string& text) {
       // Create the layout based on the alignment.
       view::LinearLayoutShPtr layout = createLayoutFromAlignment(m_alignment);
       setLayout(layout);
@@ -33,7 +34,7 @@ namespace ogame {
 
       LabelContainerShPtr label = ComponentFactory::createLabelPanel(
         std::string("label_panel"),
-        std::string(""),
+        text,
         font
       );
 
