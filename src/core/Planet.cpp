@@ -1,8 +1,7 @@
 
 #include "Planet.h"
 #include "System.h"
-
-#include <iostream>
+#include "PlanetException.h"
 
 namespace ogame {
   namespace core {
@@ -22,6 +21,20 @@ namespace ogame {
 
     const unsigned Planet::getPositionInSystem() const {
       return m_parent->getPositionOf(*this);
+    }
+
+    const unsigned& Planet::getSystemIndex() const {
+      if (m_parent == nullptr) {
+        throw PlanetException(std::string("Could not retrieve system of planet ") + std::to_string(m_index) + " no associated system");
+      }
+      return m_parent->getIndex();
+    }
+
+    const unsigned& Planet::getGalaxyIndex() const {
+      if (m_parent == nullptr) {
+        throw PlanetException(std::string("Could not retrieve galaxy of planet ") + std::to_string(m_index) + " no associated system");
+      }
+      return m_parent->getGalaxyIndex();
     }
 
     void Planet::create() {

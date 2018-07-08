@@ -15,7 +15,8 @@ namespace ogame {
 
         Galaxy(const unsigned& index,
                const unsigned& systemsCount,
-               const unsigned& planetsCount);
+               const unsigned& planetsCount,
+               const bool instantiate = true);
 
         virtual ~Galaxy();
 

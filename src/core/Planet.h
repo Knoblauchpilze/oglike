@@ -32,6 +32,10 @@ namespace ogame {
 
         const unsigned getPositionInSystem() const;
 
+        const unsigned& getSystemIndex() const;
+
+        const unsigned& getGalaxyIndex() const;
+
       protected:
 
         void create();
