@@ -11,6 +11,8 @@ namespace ogame {
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction)
     {
+      setBackgroundColor(SDL_Color{0, 0, 0, SDL_ALPHA_OPAQUE});
+
       createView();
     }
 
