@@ -36,10 +36,10 @@ namespace ogame {
         name->setText(planet.getName());
       }
 
-      LabelContainer* coord = getChild<LabelContainer*>(std::string("planet_coords"));
-      if (checkChild(name, "Planet name")) {
+      LabelContainer* coords = getChild<LabelContainer*>(std::string("planet_coords"));
+      if (checkChild(coords, "Planet name")) {
         try {
-          name->setText(
+          coords->setText(
             "[" +
             std::to_string(planet.getGalaxyIndex()) +
             ":" +
