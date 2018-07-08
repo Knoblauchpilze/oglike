@@ -6,6 +6,7 @@
 #include "ColoredFont.h"
 #include "LabelContainer.h"
 #include "ValueSelector.h"
+#include "LabelledPicture.h"
 
 namespace ogame {
   namespace gui {
@@ -41,6 +42,14 @@ namespace ogame {
         createValueSelectorPanel(const std::string& name,
                                  view::ColoredFontShPtr font,
                                  const std::vector<std::string>& options = std::vector<std::string>());
+
+        static
+        LabelledPictureShPtr
+        createLabelledPicturePanel(const std::string& name,
+                                   view::ColoredFontShPtr font,
+                                   const std::string& picture,
+                                   const std::string& text = std::string(),
+                                   const LabelledPicture::Alignment& alignment = LabelledPicture::Alignment::Below);
 
     };
   }

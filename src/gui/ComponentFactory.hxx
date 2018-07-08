@@ -58,6 +58,23 @@ namespace ogame {
       );
     }
 
+    inline
+    LabelledPictureShPtr
+    ComponentFactory::createLabelledPicturePanel(const std::string& name,
+                                                 view::ColoredFontShPtr font,
+                                                 const std::string& picture,
+                                                 const std::string& text,
+                                                 const LabelledPicture::Alignment& alignment)
+    {
+      return std::make_shared<LabelledPicture>(
+        name,
+        font,
+        picture,
+        text,
+        alignment
+      );
+    }
+
   }
 }
 
