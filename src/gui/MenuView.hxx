@@ -14,7 +14,7 @@ namespace ogame {
     }
 
     inline
-    LabelContainerShPtr MenuView::createLabelPanel(const View& view, const std::string&& text) const {
+    LabelContainerShPtr MenuView::createLabelPanel(const View& view, const std::string& text) const {
       return ComponentFactory::createLabelPanel(
         getChildNameFromView(view),
         text,
