@@ -96,6 +96,8 @@ int main(int argc, char* argv[])
   // We need to manually destroy objects before exiting the program to be sure that we can clean-up libraries afterwards.
   view.reset();
 
+  ogame::view::FontFactory::getInstance().releaseFonts();
+
   // Unload the sdl and the ttf libs if needed.
   if (TTF_WasInit()) {
     TTF_Quit();
