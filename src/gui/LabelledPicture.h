@@ -6,7 +6,6 @@
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
 #include "ColoredFont.h"
-#include "Planet.h"
 #include "LinearLayout.h"
 #include "PictureContainer.h"
 #include "LabelContainer.h"
@@ -29,6 +28,7 @@ namespace ogame {
         LabelledPicture(const std::string& name,
                         view::ColoredFontShPtr font,
                         const std::string& picture,
+                        const std::string& text = std::string(),
                         const Alignment& alignment = Alignment::Below);
 
         virtual ~LabelledPicture();
@@ -37,7 +37,7 @@ namespace ogame {
 
       private:
 
-        void createView(view::ColoredFontShPtr font, const std::string& picture);
+        void createView(view::ColoredFontShPtr font, const std::string& picture, const std::string& text);
 
         view::LinearLayoutShPtr createLayoutFromAlignment(const Alignment& alignment,
                                                           const float& margin = 0.0f,
