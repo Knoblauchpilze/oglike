@@ -3,7 +3,6 @@
 
 #include <memory>
 #include <SDL/SDL_ttf.h>
-#include "Layout.h"
 
 namespace ogame {
   namespace view {
@@ -12,30 +11,21 @@ namespace ogame {
     {
       public:
 
-        explicit Font(const std::string& name, const SDL_Color& color, const int& size = 25);
+        explicit Font(const std::string& name, const int& size = 25);
 
-        explicit Font(const std::string& name,
-                      const int& r,
-                      const int& g,
-                      const int& b,
-                      const int& a,
-                      const int& size = 25);
+        explicit Font(const Font& other);
 
         virtual ~Font();
 
         const std::string& getName() const noexcept;
 
-        const SDL_Color& getColor() const noexcept;
-
         const int& getSize() const noexcept;
 
         void setName(const std::string& name);
 
-        void setColor(const SDL_Color& color);
-
         void setSize(const int& size);
 
-        SDL_Surface* render(const std::string text);
+        SDL_Surface* render(const std::string text, const SDL_Color& color);
 
       private:
 
@@ -50,7 +40,6 @@ namespace ogame {
       private:
 
         std::string m_name;
-        SDL_Color m_color;
         int m_size;
         TTF_Font* m_font;
 
