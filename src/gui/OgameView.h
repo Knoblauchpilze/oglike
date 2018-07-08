@@ -12,6 +12,7 @@
 #include "SelectorPanel.h"
 #include "MenuView.h"
 #include "ResourcesView.h"
+#include "OptionsView.h"
 
 namespace ogame {
   namespace gui {
@@ -56,7 +57,7 @@ namespace ogame {
         // Left view (i.e. toggle between main views)
         MenuViewShPtr m_menuView;
         // Upper view to access highscores, options...)
-        view::GraphicContainerShPtr m_optionsView;
+        OptionsViewShPtr m_optionsView;
         // Upper view to display the resource of the current planet
         ResourcesViewShPtr m_resourcesView;
         // The list of the planets for this user.

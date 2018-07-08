@@ -56,7 +56,7 @@ namespace ogame {
       }
 
       // Create each view.
-      m_optionsView     = createGraphicContainer(std::string("options_view"));
+      m_optionsView     = std::make_shared<OptionsView>(std::string("options_view"));
       m_menuView        = std::make_shared<MenuView>(std::string("menu_view"));
       m_resourcesView   = std::make_shared<ResourcesView>(std::string("resources_view"));
       m_planetsView     = createGraphicContainer(std::string("planets_view"));
