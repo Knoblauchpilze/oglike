@@ -13,6 +13,7 @@
 #include "MenuView.h"
 #include "ResourcesView.h"
 #include "OptionsView.h"
+#include "PlanetsView.h"
 
 namespace ogame {
   namespace gui {
@@ -44,8 +45,6 @@ namespace ogame {
 
           void createMainLayout();
 
-          view::GraphicContainerShPtr createGraphicContainer(const std::string& name) const;
-
           void createThematicViews(const unsigned& galaxyCount,
                                    const unsigned& systemCount,
                                    const unsigned& planetCount);
@@ -61,7 +60,7 @@ namespace ogame {
         // Upper view to display the resource of the current planet
         ResourcesViewShPtr m_resourcesView;
         // The list of the planets for this user.
-        view::GraphicContainerShPtr m_planetsView;
+        PlanetsViewShPtr m_planetsView;
         // The main view displayed.
         SelectorPanelShPtr m_generalView;
 

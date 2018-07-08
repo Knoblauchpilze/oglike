@@ -59,7 +59,7 @@ namespace ogame {
       m_optionsView     = std::make_shared<OptionsView>(std::string("options_view"));
       m_menuView        = std::make_shared<MenuView>(std::string("menu_view"));
       m_resourcesView   = std::make_shared<ResourcesView>(std::string("resources_view"));
-      m_planetsView     = createGraphicContainer(std::string("planets_view"));
+      m_planetsView     = std::make_shared<PlanetsView>(std::string("planets_view"), 10u);
       m_generalView     = std::make_shared<SelectorPanel>(std::string("general_view"));
 
       // Check whether we could create all the views.
