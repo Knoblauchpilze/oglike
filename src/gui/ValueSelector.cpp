@@ -8,7 +8,7 @@ namespace ogame {
   namespace gui {
 
     ValueSelector::ValueSelector(const std::string& name,
-                                 view::FontShPtr font,
+                                 view::ColoredFontShPtr font,
                                  const std::vector<std::string>& options):
       view::GraphicContainer(name,
                              view::utils::Area(),
@@ -58,7 +58,7 @@ namespace ogame {
       unlock();
     }
 
-    void ValueSelector::createView(view::FontShPtr font)
+    void ValueSelector::createView(view::ColoredFontShPtr font)
     {
       // Left switch option.
       PictureContainerShPtr left = ComponentFactory::createPicturePanel(std::string("left_switch"), std::string("data/img/switch_left.bmp"));

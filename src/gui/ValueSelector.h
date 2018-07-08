@@ -5,7 +5,7 @@
 #include <string>
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
-#include "Font.h"
+#include "ColoredFont.h"
 
 namespace ogame {
   namespace gui {
@@ -15,7 +15,7 @@ namespace ogame {
       public:
 
         ValueSelector(const std::string& name,
-                      view::FontShPtr font,
+                      view::ColoredFontShPtr font,
                       const std::vector<std::string>& options = std::vector<std::string>());
 
         virtual ~ValueSelector();
@@ -24,7 +24,7 @@ namespace ogame {
 
       private:
 
-        void createView(view::FontShPtr font);
+        void createView(view::ColoredFontShPtr font);
 
         void buildIndicesTableFromOptions();
 

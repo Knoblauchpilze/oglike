@@ -5,7 +5,7 @@
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
 #include "LabelContainer.h"
-#include "Font.h"
+#include "ColoredFont.h"
 
 namespace ogame {
   namespace gui {
@@ -24,11 +24,9 @@ namespace ogame {
 
         void createView();
 
-        LabelContainerShPtr createLabelPanel(const std::string& name, const std::string& text, view::FontShPtr font) const;
+        LabelContainerShPtr createLabelPanel(const std::string& name, const std::string& text) const;
 
       private:
-
-      view::FontShPtr m_font;
 
     };
 

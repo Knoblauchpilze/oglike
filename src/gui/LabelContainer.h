@@ -5,7 +5,7 @@
 #include <string>
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
-#include "Font.h"
+#include "ColoredFont.h"
 
 namespace ogame {
   namespace gui {
@@ -16,8 +16,8 @@ namespace ogame {
 
         LabelContainer(const std::string& name,
                        const std::string& text,
-                       view::FontShPtr font,
-                       view::FontShPtr highlightFont);
+                       view::ColoredFontShPtr font,
+                       view::ColoredFontShPtr highlightFont);
 
         virtual ~LabelContainer();
 
@@ -25,9 +25,9 @@ namespace ogame {
 
         void setText(const std::string& text);
 
-        void setFont(view::FontShPtr font);
+        void setFont(view::ColoredFontShPtr font);
 
-        void setHighlightFont(view::FontShPtr font);
+        void setHighlightFont(view::ColoredFontShPtr font);
 
         void highlight();
 
@@ -46,7 +46,7 @@ namespace ogame {
         // We assume that the font is loaded before entering this method.
         void createText();
 
-        SDL_Surface* createTextFromFont(const std::string& text, view::FontShPtr font);
+        SDL_Surface* createTextFromFont(const std::string& text, view::ColoredFontShPtr font);
 
       private:
 
@@ -54,10 +54,10 @@ namespace ogame {
         std::string m_text;
 
         bool m_fontChanged;
-        view::FontShPtr m_font;
+        view::ColoredFontShPtr m_font;
 
         bool m_hFontChanged;
-        view::FontShPtr m_hFont;
+        view::ColoredFontShPtr m_hFont;
 
         bool m_highlightChanged;
         bool m_highlight;

@@ -10,14 +10,14 @@ namespace ogame {
     inline
     LabelContainerShPtr GalaxyNavigationPanel::createLabelPanel(const std::string& name,
                                                                 const std::string& text,
-                                                                view::FontShPtr font) const
+                                                                view::ColoredFontShPtr font) const
     {
       return ComponentFactory::createLabelPanel(name, text, font, font);
     }
 
     inline
     ValueSelectorShPtr GalaxyNavigationPanel::createValueSelector(const std::string& name,
-                                                                  view::FontShPtr font,
+                                                                  view::ColoredFontShPtr font,
                                                                   const std::vector<std::string>& options) const
     {
       return ComponentFactory::createValueSelectorPanel(name, font, options);

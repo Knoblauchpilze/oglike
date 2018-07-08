@@ -23,7 +23,7 @@ namespace ogame {
     }
 
     inline
-    void LabelContainer::setFont(view::FontShPtr font) {
+    void LabelContainer::setFont(view::ColoredFontShPtr font) {
       lock();
       m_fontChanged = true;
       m_font = font;
@@ -32,7 +32,7 @@ namespace ogame {
     }
 
     inline
-    void LabelContainer::setHighlightFont(view::FontShPtr font) {
+    void LabelContainer::setHighlightFont(view::ColoredFontShPtr font) {
       lock();
       m_hFontChanged = true;
       m_hFont = font;
@@ -92,7 +92,7 @@ namespace ogame {
     }
 
     inline
-    SDL_Surface* LabelContainer::createTextFromFont(const std::string& text, view::FontShPtr font) {
+    SDL_Surface* LabelContainer::createTextFromFont(const std::string& text, view::ColoredFontShPtr font) {
       if (font == nullptr) {
         throw GuiException(std::string("Could not render label container ") + getName() + ", invalid font");
       }

@@ -44,8 +44,6 @@ namespace ogame {
       private:
 
         View m_highlightedView;
-        view::FontShPtr m_font;
-        view::FontShPtr m_hFont;
 
     };
 
