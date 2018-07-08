@@ -16,6 +16,8 @@ namespace ogame {
                              view::utils::Area(),
                              view::EventListener::Interaction::MouseButton)
     {
+      setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
+
       createView(galaxyCount, systemCount);
     }
 

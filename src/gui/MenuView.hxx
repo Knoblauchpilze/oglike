@@ -15,7 +15,7 @@ namespace ogame {
 
     inline
     LabelContainerShPtr MenuView::createLabelPanel(const View& view, const std::string& text) const {
-      return ComponentFactory::createLabelPanel(
+      LabelContainerShPtr label = ComponentFactory::createLabelPanel(
         getChildNameFromView(view),
         text,
         view::FontFactory::getInstance().createColoredFont(
@@ -27,6 +27,12 @@ namespace ogame {
           255, 255, 255
         )
       );
+
+      if (label != nullptr) {
+        label->setBackgroundColor(SDL_Color{29, 34, 40, SDL_ALPHA_OPAQUE});
+      }
+
+      return label;
     }
 
     inline
