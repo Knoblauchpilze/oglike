@@ -23,6 +23,8 @@ set (SOURCES
   GraphicContainerException.cpp
   Font.cpp
   FontException.cpp
+  FontFactory.cpp
+  ColoredFont.cpp
   )
 
 add_library (ogamelike_lib_view SHARED
