@@ -33,34 +33,28 @@ namespace ogame {
     inline
     LabelContainerShPtr
     ComponentFactory::createLabelPanel(const std::string& name,
-                      const std::string& text,
-                      const std::string& font,
-                      const SDL_Color& textColor,
-                      const int& fontSize)
+                                       const std::string& text,
+                                       view::FontShPtr font,
+                                       view::FontShPtr highlightFont)
     {
       return std::make_shared<LabelContainer>(
-        text,
-        textColor,
-        font,
         name,
-        fontSize
+        text,
+        font,
+        (highlightFont == nullptr ? font : highlightFont)
       );
     }
 
     inline
     ValueSelectorShPtr
     ComponentFactory::createValueSelectorPanel(const std::string& name,
-                                               const std::string& font,
-                                               const SDL_Color& optionsColor,
-                                               const std::vector<std::string>& options,
-                                               const int& fontSize)
+                                               view::FontShPtr font,
+                                               const std::vector<std::string>& options)
     {
       return std::make_shared<ValueSelector>(
-        optionsColor,
-        font,
         name,
-        options,
-        fontSize
+        font,
+        options
       );
     }
 
