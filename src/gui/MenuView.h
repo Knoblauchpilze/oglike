@@ -35,7 +35,7 @@ namespace ogame {
 
         void createView();
 
-        LabelContainerShPtr createLabelPanel(const View& name, const std::string&& text) const;
+        LabelContainerShPtr createLabelPanel(const View& name, const std::string& text) const;
 
         std::string getChildNameFromView(const View& view) const noexcept;
 
