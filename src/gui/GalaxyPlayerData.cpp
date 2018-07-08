@@ -15,7 +15,11 @@ namespace ogame {
                                0.0f,
                                0.0f,
                                this
-                             ))
+                             )),
+      m_font(std::make_shared<view::Font>(
+        std::string("data/fonts/angsa.ttf"),
+        0, 0, 128, SDL_ALPHA_OPAQUE
+      ))
     {
       createView();
     }
@@ -58,19 +62,19 @@ namespace ogame {
       // Create each information panel.
       LabelContainerShPtr probes = createLabelPanel(std::string("spy_probes"),
                                                     std::string("0 spy probe"),
-                                                    {0, 0, 128});
+                                                    m_font);
 
       LabelContainerShPtr recyclers = createLabelPanel(std::string("recyclers"),
                                                     std::string("0 recycler"),
-                                                    {0, 0, 128});
+                                                    m_font);
 
       LabelContainerShPtr mips = createLabelPanel(std::string("interplanetary_missiles"),
                                                     std::string("0 interplanetary missile"),
-                                                    {0, 0, 128});
+                                                    m_font);
 
       LabelContainerShPtr slots = createLabelPanel(std::string("used_slots"),
                                                     std::string("0/0 used slot"),
-                                                    {0, 0, 128});
+                                                    m_font);
 
       if (probes == nullptr ||
           recyclers == nullptr ||

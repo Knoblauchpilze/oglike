@@ -10,10 +10,22 @@ namespace ogame {
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction,
-                             nullptr)
+                             nullptr),
+      m_planetIndexFont(std::make_shared<view::Font>(
+        std::string("data/fonts/upcfb.ttf"),
+        192, 0, 0, SDL_ALPHA_OPAQUE
+      )),
+      m_planetLabelFont(std::make_shared<view::Font>(
+        std::string("data/fonts/upcfb.ttf"),
+        128, 0, 0, SDL_ALPHA_OPAQUE
+      )),
+      m_planetOwnerFont(std::make_shared<view::Font>(
+        std::string("data/fonts/upcfb.ttf"),
+        255, 0, 0, SDL_ALPHA_OPAQUE
+      ))
     {
       // Assign the background color.
-      setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
+      setBackgroundColor(SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE});
 
       createView(index, count);
     }
@@ -65,13 +77,13 @@ namespace ogame {
       // Add each informative panel to the layout and as child of this panel.
       LabelContainerShPtr position = createLabelPanel(std::string("Planet index"),
                                                       std::to_string(index),
-                                                      {192, 0, 0, SDL_ALPHA_OPAQUE});
+                                                      m_planetIndexFont);
 
       PlanetIconDisplayShPtr icon = createPlanetIconPanel(count, std::string("Planet icon"));
 
       LabelContainerShPtr name = createLabelPanel(std::string("Planet name"),
                                                   std::string("Not available"),
-                                                  {128, 0, 0, SDL_ALPHA_OPAQUE});
+                                                  m_planetLabelFont);
 
       SwitchPictureContainerShPtr wreckField = createSwitchPicture(std::string("Planet wreck field"), 
                                                                    std::string("data/img/wreckfield.bmp"),
@@ -83,7 +95,7 @@ namespace ogame {
 
       LabelContainerShPtr owner = createLabelPanel(std::string("Planet owner's name"),
                                                    std::string("Not available"),
-                                                   {255, 0, 0, SDL_ALPHA_OPAQUE});
+                                                   m_planetOwnerFont);
 
       PlanetActionListShPtr actions = createActionList(std::string("Planet actions"));
 

@@ -13,8 +13,13 @@ namespace ogame {
     }
 
     inline
-    LabelContainerShPtr PlanetGalaxyEntry::createLabelPanel(const std::string& name, const std::string& text, const SDL_Color& textColor) const {
-      return ComponentFactory::createLabelPanel(name, text, std::string("data/fonts/upcfb.ttf"), textColor);
+    LabelContainerShPtr PlanetGalaxyEntry::createLabelPanel(const std::string& name, const std::string& text, view::FontShPtr font) const {
+      return ComponentFactory::createLabelPanel(
+        name,
+        text,
+        font,
+        font
+      );
     }
 
     inline

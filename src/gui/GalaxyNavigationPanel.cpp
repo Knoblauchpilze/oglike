@@ -14,7 +14,21 @@ namespace ogame {
                                                  const unsigned& systemCount):
       view::GraphicContainer(name,
                              view::utils::Area(),
-                             view::EventListener::Interaction::MouseButton)
+                             view::EventListener::Interaction::MouseButton),
+      m_labelFont(std::make_shared<view::Font>(
+        std::string("data/fonts/ARLRDBD.ttf"),
+        0, 0, 64, SDL_ALPHA_OPAQUE,
+        20
+      )),
+      m_selectorFont(std::make_shared<view::Font>(
+        std::string("data/fonts/ARLRDBD.ttf"),
+        0, 0, 0, SDL_ALPHA_OPAQUE
+      )),
+      m_infoFont(std::make_shared<view::Font>(
+        std::string("data/fonts/ARLRDBD.ttf"),
+        128, 128, 128, SDL_ALPHA_OPAQUE,
+        20
+      ))
     {
       createView(galaxyCount, systemCount);
     }
@@ -80,17 +94,17 @@ namespace ogame {
       // Add each informative panel to the layout and as child of this panel.
       LabelContainerShPtr galaxy = createLabelPanel(std::string("galaxy_label"),
                                                     std::string("Galaxy"),
-                                                    {0, 0, 64, SDL_ALPHA_OPAQUE});
+                                                    m_labelFont);
       LabelContainerShPtr system = createLabelPanel(std::string("system_label"),
                                                     std::string("System"),
-                                                    {0, 0, 64, SDL_ALPHA_OPAQUE});
+                                                    m_labelFont);
 
       std::vector<std::string> galaxies;
       for (unsigned galaxy = 0u ; galaxy < galaxyCount ; ++galaxy) {
         galaxies.push_back(std::to_string(galaxy + 1));
       }
       ValueSelectorShPtr galaxySelector = createValueSelector(std::string("galaxy_selector"),
-                                                              {0, 0, 0, SDL_ALPHA_OPAQUE},
+                                                              m_selectorFont,
                                                               galaxies);
 
       std::vector<std::string> systems;
@@ -98,7 +112,7 @@ namespace ogame {
         systems.push_back(std::to_string(system + 1));
       }
       ValueSelectorShPtr systemSelector = createValueSelector(std::string("system_selector"),
-                                                              {0, 0, 0, SDL_ALPHA_OPAQUE},
+                                                              m_selectorFont,
                                                               systems);
 
       view::GraphicContainerShPtr information = nullptr;
@@ -161,19 +175,17 @@ namespace ogame {
       }
 
       // Add each informative panel to the layout and as child of this panel.
-      const SDL_Color color = {128, 128, 128, SDL_ALPHA_OPAQUE};
+      LabelContainerShPtr index = createLabelPanel(std::string("planet_label"), std::string("Planet"), m_infoFont);
 
-      LabelContainerShPtr index = createLabelPanel(std::string("planet_label"), std::string("Planet"), color);
-      
-      LabelContainerShPtr name = createLabelPanel(std::string("planet_name_label"), std::string("Name"), color);
+      LabelContainerShPtr name = createLabelPanel(std::string("planet_name_label"), std::string("Name"), m_infoFont);
 
-      LabelContainerShPtr moon = createLabelPanel(std::string("planet_moon"),  std::string("Moon"), color);
+      LabelContainerShPtr moon = createLabelPanel(std::string("planet_moon"),  std::string("Moon"), m_infoFont);
 
-      LabelContainerShPtr wreckField = createLabelPanel(std::string("Planet wreck field"),  std::string("Debris"), color);
+      LabelContainerShPtr wreckField = createLabelPanel(std::string("Planet wreck field"),  std::string("Debris"), m_infoFont);
 
-      LabelContainerShPtr owner = createLabelPanel(std::string("planet_player"), std::string("Player (status)"), color);
+      LabelContainerShPtr owner = createLabelPanel(std::string("planet_player"), std::string("Player (status)"), m_infoFont);
 
-      LabelContainerShPtr actions = createLabelPanel(std::string("planet_actions"), std::string("Actions"), color);
+      LabelContainerShPtr actions = createLabelPanel(std::string("planet_actions"), std::string("Actions"), m_infoFont);
 
       information->addChild(index);
       layout->addItem(index,      0u, 0u, 2u, 1u);

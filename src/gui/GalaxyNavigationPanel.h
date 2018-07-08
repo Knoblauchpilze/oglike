@@ -10,6 +10,7 @@
 #include "SwitchPictureContainer.h"
 #include "ValueSelector.h"
 #include "System.h"
+#include "Font.h"
 
 namespace ogame {
   namespace gui {
@@ -32,13 +33,21 @@ namespace ogame {
 
         void createView(const unsigned& galaxyCount, const unsigned& systemCount);
 
-        LabelContainerShPtr createLabelPanel(const std::string& name, const std::string& text, const SDL_Color& textColor) const;
+        LabelContainerShPtr createLabelPanel(const std::string& name,
+                                             const std::string& text,
+                                             view::FontShPtr font) const;
 
-        ValueSelectorShPtr createValueSelector(const std::string& name, const SDL_Color& optionsColor, const std::vector<std::string>& options) const;
+        ValueSelectorShPtr createValueSelector(const std::string& name,
+                                               view::FontShPtr font,
+                                               const std::vector<std::string>& options) const;
 
         view::GraphicContainerShPtr createLabelForSystemView() const;
 
       private:
+
+        view::FontShPtr m_labelFont;
+        view::FontShPtr m_selectorFont;
+        view::FontShPtr m_infoFont;
 
     };
 

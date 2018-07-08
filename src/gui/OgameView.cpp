@@ -1,7 +1,6 @@
 
 #include "OgameView.h"
 #include "GuiException.h"
-#include "GalaxyView.h"
 #include "GridLayout.h"
 
 namespace ogame {
@@ -26,9 +25,6 @@ namespace ogame {
 
       m_galaxyView(nullptr)
     {
-      // Initialize the TTF lib.
-      initializeTTFLib();
-
       // Create views.
       createViews(1.0f, galaxyCount, systemCount, planetCount);
     }
@@ -60,8 +56,8 @@ namespace ogame {
       }
 
       // Create each view.
-      m_menuView        = createGraphicContainer(std::string("menu_view"));
       m_optionsView     = createGraphicContainer(std::string("options_view"));
+      m_menuView        = std::make_shared<MenuView>(std::string("menu_view"));
       m_resourcesView   = createGraphicContainer(std::string("resources_view"));
       m_planetsView     = createGraphicContainer(std::string("planets_view"));
       m_generalView     = std::make_shared<SelectorPanel>(std::string("general_view"));

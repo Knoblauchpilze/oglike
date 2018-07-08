@@ -11,6 +11,7 @@
 #include "PlanetIconDisplay.h"
 #include "SwitchPictureContainer.h"
 #include "PlanetActionList.h"
+#include "Font.h"
 
 namespace ogame {
   namespace gui {
@@ -31,13 +32,17 @@ namespace ogame {
 
         PlanetIconDisplayShPtr createPlanetIconPanel(const unsigned& count, const std::string& name) const;
 
-        LabelContainerShPtr createLabelPanel(const std::string& name, const std::string& text, const SDL_Color& textColor) const;
+        LabelContainerShPtr createLabelPanel(const std::string& name, const std::string& text, view::FontShPtr font) const;
 
         SwitchPictureContainerShPtr createSwitchPicture(const std::string& name, const std::string& onPicture, const std::string& offPicture) const;
 
         PlanetActionListShPtr createActionList(const std::string& name) const;
 
       private:
+
+        view::FontShPtr m_planetIndexFont;
+        view::FontShPtr m_planetLabelFont;
+        view::FontShPtr m_planetOwnerFont;
 
     };
 
