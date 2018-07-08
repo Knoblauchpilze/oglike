@@ -72,6 +72,7 @@ int main(int argc, char* argv[])
   // Populate the main view.
   try {
     view->populateGalaxyView((*universe)[0][198]);
+    view->populateResourceView((*universe)[0][198][2]);
   }
   catch (const ogame::gui::GuiException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
