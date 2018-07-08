@@ -4,8 +4,8 @@
 #include <memory>
 #include <string>
 #include <SDL/SDL.h>
-#include <SDL/SDL_ttf.h>
 #include "GraphicContainer.h"
+#include "Font.h"
 
 namespace ogame {
   namespace gui {
@@ -14,29 +14,24 @@ namespace ogame {
     {
       public:
 
-        LabelContainer(const std::string& text,
-                       const SDL_Color& color,
-                       const std::string& font,
-                       const std::string& name,
-                       const int& fontSize = 25);
-        
+        LabelContainer(const std::string& name,
+                       const std::string& text,
+                       view::FontShPtr font,
+                       view::FontShPtr highlightFont);
+
         virtual ~LabelContainer();
 
-        const std::string& getText() const noexcept;
-
-        const SDL_Color& getTextColor() const noexcept;
-
-        const std::string& getFont() const noexcept;
-
-        const int& getFontSize() const noexcept;
+        const std::string getText() const noexcept;
 
         void setText(const std::string& text);
 
-        void setTextColor(const SDL_Color& color);
+        void setFont(view::FontShPtr font);
 
-        void setFont(const std::string& font);
+        void setHighlightFont(view::FontShPtr font);
 
-        void setFontSize(const int& size);
+        void highlight();
+
+        void unhighlight();
 
       protected:
 
@@ -46,24 +41,26 @@ namespace ogame {
 
       private:
 
-        void loadFont();
-
-        void clearFont();
-
         void clearText();
 
         // We assume that the font is loaded before entering this method.
         void createText();
 
+        SDL_Surface* createTextFromFont(const std::string& text, view::FontShPtr font);
+
       private:
 
         bool m_textChanged;
         std::string m_text;
-        SDL_Color m_textColor;
+
         bool m_fontChanged;
-        std::string m_fontName;
-        TTF_Font* m_font;
-        int m_size;
+        view::FontShPtr m_font;
+
+        bool m_hFontChanged;
+        view::FontShPtr m_hFont;
+
+        bool m_highlightChanged;
+        bool m_highlight;
         SDL_Surface* m_textSurface;
 
     };
