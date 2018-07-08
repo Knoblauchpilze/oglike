@@ -7,11 +7,14 @@ namespace ogame {
 
     Galaxy::Galaxy(const unsigned& index,
                    const unsigned& systemsCount,
-                   const unsigned& planetsCount):
+                   const unsigned& planetsCount,
+                   const bool instantiate):
       m_index(index),
       m_systems()
     {
-      create(systemsCount, planetsCount);
+      if (instantiate) {
+        create(systemsCount, planetsCount);
+      }
     }
 
     Galaxy::~Galaxy()
