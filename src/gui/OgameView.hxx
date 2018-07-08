@@ -13,6 +13,11 @@ namespace ogame {
     }
 
     inline
+    void OgameView::populateResourceView(const core::Planet& planet) {
+      m_resourcesView->populateWithPlanetData(planet);
+    }
+
+    inline
     void OgameView::createMainPanel(const float& margin) {
       // Create the main panel in which views will be displayed.
       m_panel = std::make_shared<view::GraphicContainer>(

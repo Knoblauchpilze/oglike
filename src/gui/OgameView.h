@@ -6,10 +6,12 @@
 #include <SDL/SDL.h>
 #include "OgameAbstractView.h"
 #include "System.h"
+#include "Planet.h"
 #include "GraphicContainer.h"
 #include "GalaxyView.h"
 #include "SelectorPanel.h"
 #include "MenuView.h"
+#include "ResourcesView.h"
 
 namespace ogame {
   namespace gui {
@@ -27,6 +29,8 @@ namespace ogame {
         virtual ~OgameView();
 
         void populateGalaxyView(const core::System& system);
+
+        void populateResourceView(const core::Planet& planet);
 
       private:
 
@@ -54,7 +58,7 @@ namespace ogame {
         // Upper view to access highscores, options...)
         view::GraphicContainerShPtr m_optionsView;
         // Upper view to display the resource of the current planet
-        view::GraphicContainerShPtr m_resourcesView;
+        ResourcesViewShPtr m_resourcesView;
         // The list of the planets for this user.
         view::GraphicContainerShPtr m_planetsView;
         // The main view displayed.
