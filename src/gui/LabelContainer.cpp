@@ -5,38 +5,35 @@
 namespace ogame {
   namespace gui {
 
-    LabelContainer::LabelContainer(const std::string& text,
-                                   const SDL_Color& color,
-                                   const std::string& font,
-                                   const std::string& name,
-                                   const int& fontSize):
+    LabelContainer::LabelContainer(const std::string& name,
+                                   const std::string& text,
+                                   view::FontShPtr font,
+                                   view::FontShPtr highlightFont):
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction,
                              nullptr),
       m_textChanged(true),
       m_text(text),
-      m_textColor(color),
+      
       m_fontChanged(true),
-      m_fontName(font),
-      m_font(nullptr),
-      m_size(fontSize),
+      m_font(font),
+
+      m_hFontChanged(true),
+      m_hFont(highlightFont),
+
+      m_highlightChanged(true),
+      m_highlight(false),
       m_textSurface(nullptr)
     {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
     }
 
     LabelContainer::~LabelContainer() {
-      if (m_textSurface != nullptr) {
-        SDL_FreeSurface(m_textSurface);
-      }
-      clearFont();
+      clearText();
     }
 
     SDL_Surface* LabelContainer::createContentPrivate() {
-      // Load the font to render the text.
-      loadFont();
-
       // Create the text to render.
       createText();
 
@@ -62,27 +59,12 @@ namespace ogame {
       }
 
       // Reset flags.
+      m_highlightChanged = false;
       m_fontChanged = false;
       m_textChanged = false;
 
       // This is the final image for this container.
       return croppedArea;
-    }
-
-    void LabelContainer::loadFont() {
-      // Load the font if needed.
-      if (m_fontChanged) {
-        // Unload existing font.
-        clearFont();
-
-        // Open the new one.
-        m_font = TTF_OpenFont(m_fontName.c_str(), m_size);
-
-        // Check that we could effectively load the font.
-        if (m_font == nullptr) {
-          throw GuiException(std::string("Unable to create font from file ") + m_fontName + ": " + TTF_GetError());
-        }
-      }
     }
 
   }

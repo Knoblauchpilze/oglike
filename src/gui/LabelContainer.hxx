@@ -9,23 +9,8 @@ namespace ogame {
   namespace gui {
 
     inline
-    const std::string& LabelContainer::getText() const noexcept {
+    const std::string LabelContainer::getText() const noexcept {
       return m_text;
-    }
-
-    inline
-    const SDL_Color& LabelContainer::getTextColor() const noexcept {
-      return m_textColor;
-    }
-
-    inline
-    const std::string& LabelContainer::getFont() const noexcept {
-      return m_fontName;
-    }
-
-    inline
-    const int& LabelContainer::getFontSize() const noexcept {
-      return m_size;
     }
 
     inline
@@ -38,42 +23,48 @@ namespace ogame {
     }
 
     inline
-    void LabelContainer::setTextColor(const SDL_Color& color) {
+    void LabelContainer::setFont(view::FontShPtr font) {
       lock();
-      m_textColor = color;
-      m_textChanged = true;
+      m_fontChanged = true;
+      m_font = font;
       makeDirty();
       unlock();
     }
 
     inline
-    void LabelContainer::setFont(const std::string& font) {
+    void LabelContainer::setHighlightFont(view::FontShPtr font) {
       lock();
-      m_fontName = font;
-      m_fontChanged = true;
+      m_hFontChanged = true;
+      m_hFont = font;
       makeDirty();
       unlock();
     }
 
     inline
-    void LabelContainer::setFontSize(const int& size) {
+    void LabelContainer::highlight() {
       lock();
-      m_size = size;
-      m_fontChanged = true;
-      makeDirty();
+      m_highlightChanged = (m_highlight != true);
+      m_highlight = true;
+      if (m_highlightChanged) {
+        makeDeepDirty();
+      }
+      unlock();
+    }
+
+    inline
+    void LabelContainer::unhighlight() {
+      lock();
+      m_highlightChanged = (m_highlight != false);
+      m_highlight = false;
+      if (m_highlightChanged) {
+        makeDeepDirty();
+      }
       unlock();
     }
 
     inline
     void LabelContainer::clearContentPrivate(SDL_Surface* render) {
       // Nothing to do here.
-    }
-
-    inline
-    void LabelContainer::clearFont() {
-      if (m_font != nullptr) {
-        TTF_CloseFont(m_font);
-      }
     }
 
     inline
@@ -87,15 +78,23 @@ namespace ogame {
     inline
     void LabelContainer::createText() {
       // Create new text if needed.
-      if (m_textChanged || m_fontChanged) {
+      if (m_textChanged || m_fontChanged || m_highlightChanged) {
         clearText();
         if (!m_text.empty()) {
-          m_textSurface = TTF_RenderText_Blended(m_font, m_text.c_str(), m_textColor);
+          m_textSurface = createTextFromFont(m_text, m_font);
           if (m_textSurface == nullptr) {
-            throw GuiException(std::string("Could not render label container, error with text ") + m_text);
+            throw GuiException(std::string("Could not render label container ") + getName() + ", error with text " + m_text);
           }
         }
       }
+    }
+
+    inline
+    SDL_Surface* LabelContainer::createTextFromFont(const std::string& text, view::FontShPtr font) {
+      if (font == nullptr) {
+        throw GuiException(std::string("Could not render label container ") + getName() + ", invalid font");
+      }
+      return font->render(text);
     }
 
   }
