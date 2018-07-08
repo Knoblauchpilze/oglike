@@ -26,6 +26,8 @@ set (SOURCES
   LabelledPicture.cpp
   ResourcesView.cpp
   OptionsView.cpp
+  PlanetsView.cpp
+  PlanetViewLink.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
