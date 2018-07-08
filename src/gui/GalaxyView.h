@@ -17,7 +17,7 @@ namespace ogame {
         GalaxyView(const unsigned& galaxyCount,
                    const unsigned& systemCount,
                    const unsigned& planetCount);
-        
+
         virtual ~GalaxyView();
 
         void populateWithSystemData(const core::System& system);

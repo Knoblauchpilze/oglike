@@ -8,13 +8,11 @@ namespace ogame {
   namespace gui {
 
     inline
-    LabelContainerShPtr GalaxyPlayerData::createLabelPanel(const std::string& name, const std::string& text, const SDL_Color& textColor) const {
+    LabelContainerShPtr GalaxyPlayerData::createLabelPanel(const std::string& name, const std::string& text, view::FontShPtr font) const {
       return ComponentFactory::createLabelPanel(
         name,
         text,
-        std::string("data/fonts/angsa.ttf"),
-        textColor,
-        25
+        font
       );
     }
 

@@ -9,6 +9,7 @@
 #include "GraphicContainer.h"
 #include "GalaxyView.h"
 #include "SelectorPanel.h"
+#include "MenuView.h"
 
 namespace ogame {
   namespace gui {
@@ -28,8 +29,6 @@ namespace ogame {
         void populateGalaxyView(const core::System& system);
 
       private:
-
-          void initializeTTFLib();
 
           void createMainPanel(const float& margin);
 
@@ -51,7 +50,7 @@ namespace ogame {
         // Main panel.
         view::GraphicContainerShPtr m_panel;
         // Left view (i.e. toggle between main views)
-        view::GraphicContainerShPtr m_menuView;
+        MenuViewShPtr m_menuView;
         // Upper view to access highscores, options...)
         view::GraphicContainerShPtr m_optionsView;
         // Upper view to display the resource of the current planet

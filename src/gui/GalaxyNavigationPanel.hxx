@@ -8,13 +8,19 @@ namespace ogame {
   namespace gui {
 
     inline
-    LabelContainerShPtr GalaxyNavigationPanel::createLabelPanel(const std::string& name, const std::string& text, const SDL_Color& textColor) const {
-      return ComponentFactory::createLabelPanel(name, text, std::string("data/fonts/ARLRDBD.ttf"), textColor, 20);
+    LabelContainerShPtr GalaxyNavigationPanel::createLabelPanel(const std::string& name,
+                                                                const std::string& text,
+                                                                view::FontShPtr font) const
+    {
+      return ComponentFactory::createLabelPanel(name, text, font, font);
     }
 
     inline
-    ValueSelectorShPtr GalaxyNavigationPanel::createValueSelector(const std::string& name, const SDL_Color& optionsColor, const std::vector<std::string>& options) const {
-      return ComponentFactory::createValueSelectorPanel(name, std::string("data/fonts/ARLRDBD.ttf"), optionsColor, options);
+    ValueSelectorShPtr GalaxyNavigationPanel::createValueSelector(const std::string& name,
+                                                                  view::FontShPtr font,
+                                                                  const std::vector<std::string>& options) const
+    {
+      return ComponentFactory::createValueSelectorPanel(name, font, options);
     }
 
   }
