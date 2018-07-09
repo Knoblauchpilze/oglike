@@ -14,7 +14,10 @@ namespace ogame {
     }
 
     inline
-    LabelContainerShPtr MenuView::createLabelPanel(const View& view, const std::string& text) const {
+    LabelContainerShPtr MenuView::createLabelPanel(const View& view,
+                                                   const std::string& text,
+                                                   const StateContainer::StateAssociation& colors) const
+    {
       LabelContainerShPtr label = ComponentFactory::createLabelPanel(
         getChildNameFromView(view),
         text,
@@ -25,7 +28,8 @@ namespace ogame {
         view::FontFactory::getInstance().createColoredFont(
           std::string("data/fonts/tahomabd.ttf"),
           255, 255, 255
-        )
+        ),
+        colors
       );
 
       if (label != nullptr) {
