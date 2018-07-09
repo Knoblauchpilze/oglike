@@ -29,7 +29,9 @@ namespace ogame {
           static constexpr Mask MouseWheelUp = 0x40;
           static constexpr Mask MouseWheel = MouseWheelDown | MouseWheelUp;
 
-          static constexpr Mask FullInteraction = Key | MouseButton | MouseMotion | MouseWheel;
+          static constexpr Mask Mouse = MouseButton | MouseMotion | MouseWheel;
+
+          static constexpr Mask FullInteraction = Key | Mouse;
 
         };
 
