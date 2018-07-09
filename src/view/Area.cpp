@@ -67,6 +67,16 @@ namespace ogame {
         return true;
       }
 
+      bool Area::isInsideRect(const Vector2f& point) const {
+        if (point.x() < 0.0f || point.x() > m_w) {
+          return false;
+        }
+        if (point.y() < 0.0f || point.y() > m_h) {
+          return false;
+        }
+        return true;
+      }
+
       Vector2f Area::getNearestPoint(const Vector2f& point) const {
         const float nearestX(getLeftBound() > point.x() ? getLeftBound() : (getRightBound() < point.x() ? getRightBound() : point.x()));
         const float nearestY(getBottomBound() > point.y() ? getBottomBound() : (getTopBound() < point.y() ? getTopBound() : point.y()));

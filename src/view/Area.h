@@ -58,6 +58,9 @@ namespace ogame {
 
           bool isInside(const Vector2f& point) const;
 
+          // m_x and m_y are supposed to represent the top left corner of the area.
+          bool isInsideRect(const Vector2f& point) const;
+
           Vector2f getNearestPoint(const Vector2f& point) const;
 
         private:
