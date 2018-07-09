@@ -20,6 +20,8 @@ namespace ogame {
     constexpr EventListener::Interaction::Mask EventListener::Interaction::MouseWheelUp;
     constexpr EventListener::Interaction::Mask EventListener::Interaction::MouseWheel;
 
+    constexpr EventListener::Interaction::Mask EventListener::Interaction::Mouse;
+
     constexpr EventListener::Interaction::Mask EventListener::Interaction::FullInteraction;
 
     EventListener::EventListener(const Interaction::Mask& mask):
