@@ -79,6 +79,10 @@ namespace ogame {
 
         const utils::Area& getRenderingAreaPrivate() const noexcept;
 
+        const bool isInside(const float& x, const float& y);
+
+        const bool isInside(const utils::Vector2f& point);
+
         virtual void onKeyPressedEventPrivate(const SDL_KeyboardEvent& keyEvent);
 
         virtual void onKeyReleasedEventPrivate(const SDL_KeyboardEvent& keyEvent);
@@ -104,6 +108,8 @@ namespace ogame {
         void destroyContent();
 
         void drawChild(std::shared_ptr<GraphicContainer> child);
+
+        const utils::Vector2f convertCoordinates(const utils::Vector2f& point) noexcept;
 
       private:
 
