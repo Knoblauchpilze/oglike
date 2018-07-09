@@ -4,20 +4,21 @@
 #include <memory>
 #include <string>
 #include <SDL/SDL.h>
-#include "GraphicContainer.h"
+#include "StateContainer.h"
 #include "ColoredFont.h"
 
 namespace ogame {
   namespace gui {
 
-    class LabelContainer: public view::GraphicContainer
+    class LabelContainer: public StateContainer
     {
       public:
 
         LabelContainer(const std::string& name,
                        const std::string& text,
                        view::ColoredFontShPtr font,
-                       view::ColoredFontShPtr highlightFont);
+                       view::ColoredFontShPtr highlightFont,
+                       const StateContainer::StateAssociation& colors = StateContainer::StateAssociation());
 
         virtual ~LabelContainer();
 
