@@ -35,13 +35,15 @@ namespace ogame {
     ComponentFactory::createLabelPanel(const std::string& name,
                                        const std::string& text,
                                        view::ColoredFontShPtr font,
-                                       view::ColoredFontShPtr highlightFont)
+                                       view::ColoredFontShPtr highlightFont,
+                                       const StateContainer::StateAssociation& colors)
     {
       return std::make_shared<LabelContainer>(
         name,
         text,
         font,
-        (highlightFont == nullptr ? font : highlightFont)
+        (highlightFont == nullptr ? font : highlightFont),
+        colors
       );
     }
 

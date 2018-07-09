@@ -35,7 +35,8 @@ namespace ogame {
         createLabelPanel(const std::string& name,
                          const std::string& text,
                          view::ColoredFontShPtr font,
-                         view::ColoredFontShPtr highlightFont = nullptr);
+                         view::ColoredFontShPtr highlightFont = nullptr,
+                         const StateContainer::StateAssociation& colors = StateContainer::StateAssociation());
 
         static
         ValueSelectorShPtr
