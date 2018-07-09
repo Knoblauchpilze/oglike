@@ -28,6 +28,7 @@ set (SOURCES
   OptionsView.cpp
   PlanetsView.cpp
   PlanetViewLink.cpp
+  StateContainer.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
