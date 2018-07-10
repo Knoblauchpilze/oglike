@@ -18,7 +18,20 @@ namespace ogame {
 
     OptionsView::~OptionsView() {}
 
-    void OptionsView::populateWithPlayerData(/* TODO */) {}
+    void OptionsView::populateWithPlayerData(const core::Account& account) {
+      lock();
+
+      // Update information.
+      LabelContainer* player = getChild<LabelContainer*>(std::string("player_panel"));
+      if (checkChild(player, std::string("Player name"))) {
+        player->setText(account.getCommunity() + " " + account.getUniverse() + " " + account.getName());
+      }
+
+      // Make this component dirty.
+      makeDeepDirty();
+
+      unlock();
+    }
 
     void OptionsView::createView() {
       // Create the main layout.

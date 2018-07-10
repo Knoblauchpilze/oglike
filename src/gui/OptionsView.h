@@ -5,6 +5,7 @@
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
 #include "LabelContainer.h"
+#include "Account.h"
 
 namespace ogame {
   namespace gui {
@@ -17,7 +18,7 @@ namespace ogame {
 
         virtual ~OptionsView();
 
-        void populateWithPlayerData(/* TODO */);
+        void populateWithPlayerData(const core::Account& account);
 
       private:
 
