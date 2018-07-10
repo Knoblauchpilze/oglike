@@ -21,6 +21,26 @@ namespace ogame {
       return m_name;
     }
 
+    inline
+    const std::string& Account::getCommunity() const noexcept {
+      return m_community;
+    }
+
+    inline
+    const std::string& Account::getUniverse() const noexcept {
+      return m_universe;
+    }
+
+    inline
+    void Account::setCommunity(const std::string& community) {
+      m_community = community;
+    }
+
+    inline
+    void Account::setUniverse(const std::string& universe) {
+      m_universe = universe;
+    }
+
   }
 }
 
