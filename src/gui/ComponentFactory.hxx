@@ -34,16 +34,31 @@ namespace ogame {
     LabelContainerShPtr
     ComponentFactory::createLabelPanel(const std::string& name,
                                        const std::string& text,
-                                       view::ColoredFontShPtr font,
-                                       view::ColoredFontShPtr highlightFont,
-                                       const StateContainer::StateAssociation& colors)
+                                       view::ColoredFontShPtr font)
     {
       return std::make_shared<LabelContainer>(
         name,
         text,
+        font
+      );
+    }
+
+    inline
+    StateLabelContainerShPtr
+    ComponentFactory::createStateLabelPanel(const std::string& name,
+                                            const std::string& text,
+                                            view::ColoredFontShPtr font,
+                                            view::ColoredFontShPtr highlightFont,
+                                            const StateContainer::StateAssociation& colors,
+                                            const StateContainer::FailPolicy& policy)
+    {
+      return std::make_shared<StateLabelContainer>(
+        name,
+        text,
         font,
         (highlightFont == nullptr ? font : highlightFont),
-        colors
+        colors,
+        policy
       );
     }
 
