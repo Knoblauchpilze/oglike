@@ -20,10 +20,20 @@ namespace ogame {
 
         const std::string& getName() const noexcept;
 
+        const std::string& getCommunity() const noexcept;
+
+        const std::string& getUniverse() const noexcept;
+
+        void setCommunity(const std::string& community);
+
+        void setUniverse(const std::string& universe);
+
       private:
 
         unsigned m_uuid;
         std::string m_name;
+        std::string m_community;
+        std::string m_universe;
 
     };
 
