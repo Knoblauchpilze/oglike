@@ -4,7 +4,7 @@
 #include <memory>
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
-#include "LabelContainer.h"
+#include "StateLabelContainer.h"
 
 namespace ogame {
   namespace gui {
@@ -29,19 +29,15 @@ namespace ogame {
 
         virtual ~MenuView();
 
-        void highlightView(const View& view);
-
       private:
 
         void createView();
 
-        LabelContainerShPtr createLabelPanel(const View& view,
-                                             const std::string& text,
-                                             const StateContainer::StateAssociation& colors) const;
+        StateLabelContainerShPtr createStateLabelPanel(const View& view,
+                                                       const std::string& text,
+                                                       const StateContainer::StateAssociation& colors) const;
 
         std::string getChildNameFromView(const View& view) const noexcept;
-
-        void highlightViewPrivate(const View& view, const bool smartHighlight = true);
 
       private:
 
