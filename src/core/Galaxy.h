@@ -24,6 +24,13 @@ namespace ogame {
 
         const System& operator[](const unsigned& index) const;
 
+        System& operator[](const unsigned& index);
+
+        const bool findPosition(unsigned& system,
+                                unsigned& position,
+                                const unsigned& minStartingPosition,
+                                const unsigned& maxStartingPosition) const;
+
       protected:
 
         void create(const unsigned& systemsCount,
