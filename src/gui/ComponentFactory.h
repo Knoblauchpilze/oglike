@@ -5,6 +5,7 @@
 #include "SwitchPictureContainer.h"
 #include "ColoredFont.h"
 #include "LabelContainer.h"
+#include "StateLabelContainer.h"
 #include "ValueSelector.h"
 #include "LabelledPicture.h"
 
@@ -34,9 +35,16 @@ namespace ogame {
         LabelContainerShPtr
         createLabelPanel(const std::string& name,
                          const std::string& text,
-                         view::ColoredFontShPtr font,
-                         view::ColoredFontShPtr highlightFont = nullptr,
-                         const StateContainer::StateAssociation& colors = StateContainer::StateAssociation());
+                         view::ColoredFontShPtr font);
+
+        static
+        StateLabelContainerShPtr
+        createStateLabelPanel(const std::string& name,
+                              const std::string& text,
+                              view::ColoredFontShPtr font,
+                              view::ColoredFontShPtr highlightFont = nullptr,
+                              const StateContainer::StateAssociation& colors = StateContainer::StateAssociation(),
+                              const StateContainer::FailPolicy& policy = StateContainer::FailPolicy::Aggressive);
 
         static
         ValueSelectorShPtr
