@@ -10,10 +10,8 @@
 #include "OgameView.h"
 #include "GuiException.h"
 
-#include "Area.h"
-#include "GraphicContainer.h"
-#include "LinearLayout.h"
-#include "GridLayout.h"
+#include "Account.h"
+#include "Player.h"
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
@@ -39,12 +37,24 @@ int main(int argc, char* argv[])
     std::cerr << "[MAIN] Caught internal exception:" << std::endl << e.what() << std::endl;
   }
 
+  // Create a universe and a player in it.
   const unsigned galaxiesCount = std::stoi(parser.getOptionValue("--galaxy"));
   const unsigned systemsCount = std::stoi(parser.getOptionValue("--system"));
   const unsigned planetsCount = std::stoi(parser.getOptionValue("--planet"));
   std::cout << "[INFO] Instanciating universe with " << galaxiesCount << " galaxies, " << systemsCount << " systems per galaxy and " << planetsCount << " planets per system" << std::endl;
 
   ogame::core::UniverseShPtr universe = std::make_shared<ogame::core::Universe>(1u, galaxiesCount, systemsCount, planetsCount);
+  ogame::player::PlayerShPtr player = std::make_shared<ogame::player::Player>(std::string("tttttttttttttttttttt"));
+  ogame::core::AccountShPtr account = std::make_shared<ogame::core::Account>(0u, player->getName());
+  player->setAccount(account);
+
+  try {
+    universe->createAccount(player->getAccount());
+    universe->createAccount(player->getAccount());
+  }
+  catch (const ogame::core::OgameException& e) {
+    std::cerr << "[MAIN] Caught internal exception:" << std::endl << e.what() << std::endl;
+  }
 
   // Instantiate the main view.
   const unsigned screenWidth = std::stoi(parser.getOptionValue("--width"));
@@ -71,8 +81,8 @@ int main(int argc, char* argv[])
 
   // Populate the main view.
   try {
-    view->populateGalaxyView((*universe)[0][198]);
-    view->populateResourceView((*universe)[0][198][2]);
+    view->populateGalaxyView((*universe)[0][0]);
+    view->populateResourceView((*universe)[0][0][2]);
   }
   catch (const ogame::gui::GuiException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
