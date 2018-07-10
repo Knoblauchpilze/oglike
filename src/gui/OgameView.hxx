@@ -13,8 +13,13 @@ namespace ogame {
     }
 
     inline
-    void OgameView::populateResourceView(const core::Planet& planet) {
+    void OgameView::populateResourcesView(const core::Planet& planet) {
       m_resourcesView->populateWithPlanetData(planet);
+    }
+
+    inline
+    void OgameView::populateOptionsView(const core::Account& account) {
+      m_optionsView->populateWithPlayerData(account);
     }
 
     inline

@@ -32,7 +32,9 @@ namespace ogame {
 
         void populateGalaxyView(const core::System& system);
 
-        void populateResourceView(const core::Planet& planet);
+        void populateResourcesView(const core::Planet& planet);
+
+        void populateOptionsView(const core::Account& account);
 
       private:
 
