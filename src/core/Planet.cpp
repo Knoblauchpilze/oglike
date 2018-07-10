@@ -3,13 +3,16 @@
 #include "System.h"
 #include "PlanetException.h"
 
+#include <iostream>
+
 namespace ogame {
   namespace core {
 
     Planet::Planet(const unsigned& index, const std::string& name, System* system):
       m_index(index),
       m_name(name),
-      m_parent(system)
+      m_parent(system),
+      m_account(nullptr)
     {
       create();
     }
@@ -35,6 +38,29 @@ namespace ogame {
         throw PlanetException(std::string("Could not retrieve galaxy of planet ") + std::to_string(m_index) + " no associated system");
       }
       return m_parent->getGalaxyIndex();
+    }
+
+    void Planet::assignToAccount(AccountShPtr account) {
+      // Check account's validity.
+      if (account == nullptr) {
+        const std::string errorMessage = std::string("Cannot assign invalid account to planet [") +
+          std::to_string(getGalaxyIndex()) + ":" +
+          std::to_string(getSystemIndex()) + ":" +
+          std::to_string(m_index) + "]";
+        throw PlanetException(errorMessage);
+      }
+
+      // Assign the account to this planet.
+      m_account = account;
+
+      // Assign a default name
+      m_name = generateRandomName(15u);
+
+      std::cout << "[PLANET] Assigned new planet "
+                << m_name
+                << " at [" << getGalaxyIndex() << ":" << getSystemIndex() << ":" << m_index << "]"
+                << " to account " << account->getUuid()
+                << std::endl;
     }
 
     void Planet::create() {

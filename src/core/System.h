@@ -23,6 +23,8 @@ namespace ogame {
 
         const Planet& operator[](const unsigned& index) const;
 
+        Planet& operator[](const unsigned& index);
+
         const unsigned& getIndex() const noexcept;
 
         const unsigned getPlanetsCount() const noexcept;
@@ -31,7 +33,9 @@ namespace ogame {
 
         const int getPositionOf(const Planet& planet) const;
 
-        const std::string generateRandomName(const unsigned& length) const noexcept;
+        const bool findPosition(unsigned& position,
+                                const unsigned& minStartingPosition,
+                                const unsigned& maxStartingPosition) const;
 
       protected:
 

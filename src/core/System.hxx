@@ -16,18 +16,6 @@ namespace ogame {
       return m_planets.size();
     }
 
-    inline
-    const std::string System::generateRandomName(const unsigned& length) const noexcept {
-      std::string name;
-      name.resize(length);
-      unsigned index = 0u;
-      while (index < length) {
-        name[index] = 'a' + std::rand() % ('z' - 'a');
-        ++index;
-      }
-      return name;
-    }
-
   }
 }
 

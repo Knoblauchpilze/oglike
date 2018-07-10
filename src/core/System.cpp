@@ -29,6 +29,16 @@ namespace ogame {
       return *m_planets[index];
     }
 
+    Planet& System::operator[](const unsigned& index) {
+      if (index >= m_planets.size()) {
+        throw SystemException("Cannot access out of bounds planet " + std::to_string(index) + " in system " + std::to_string(m_index));
+      }
+      else if (m_planets[index] == nullptr) {
+        throw SystemException("Cannot retrieve invalid planet " + std::to_string(index) + " in system " + std::to_string(m_index));
+      }
+      return *m_planets[index];
+    }
+
     const unsigned& System::getGalaxyIndex() const {
       if (m_parent == nullptr) {
         throw SystemException(std::string("Could not retrieve galaxy of system ") + std::to_string(getIndex()) + " no associated galaxy");
@@ -47,10 +57,29 @@ namespace ogame {
       throw SystemException(std::string("Could not find index of planet ") + planet.getName() + " in system " + std::to_string(m_index));
     }
 
+    const bool System::findPosition(unsigned& position,
+                                    const unsigned& minStartingPosition,
+                                    const unsigned& maxStartingPosition) const
+    {
+      // We assume that we can only give a position between minStartingPosition and maxStartingPosition.
+      bool found = false;
+      unsigned currentPosition = minStartingPosition;
+      while (!found && currentPosition < m_planets.size() && currentPosition <= maxStartingPosition) {
+        if (m_planets[currentPosition] != nullptr) {
+          if (!m_planets[currentPosition]->isColonized()) {
+            position = currentPosition;
+            found = true;
+          }
+        }
+        ++currentPosition;
+      }
+      return found;
+    }
+
     void System::create(const unsigned& planetsCount) {
       m_planets.resize(planetsCount);
       for (unsigned indexPlanet = 0 ; indexPlanet < planetsCount ; ++indexPlanet) {
-        m_planets[indexPlanet] = std::make_shared<Planet>(indexPlanet, generateRandomName(8), this);
+        m_planets[indexPlanet] = std::make_shared<Planet>(indexPlanet, std::string(""), this);
       }
     }
 

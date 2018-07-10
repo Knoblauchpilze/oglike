@@ -2,6 +2,7 @@
 #define PLANET_HXX
 
 #include "Planet.h"
+#include "PlanetException.h"
 
 namespace ogame {
   namespace core {
@@ -18,17 +19,37 @@ namespace ogame {
 
     inline
     const bool Planet::isColonized() const noexcept {
-      return /*false*/std::rand() % 2 == 0 ? false : true;
+      return m_account != nullptr;
     }
 
     inline
     const bool Planet::hasMoon() const noexcept {
-      return /*false*/std::rand() % 2 == 0 ? false : true;
+      return false;
     }
 
     inline
     const bool Planet::hasWreckfield() const noexcept {
-      return /*false*/std::rand() % 2 == 0 ? false : true;
+      return false;
+    }
+
+    inline
+    const std::string& Planet::getOwnerName() const {
+      if (m_account == nullptr) {
+        throw PlanetException(std::string("Could not retrieve inexisting owner's name"));
+      }
+      return m_account->getName();
+    }
+
+    inline
+    const std::string Planet::generateRandomName(const unsigned& length) const noexcept {
+      std::string name;
+      name.resize(length);
+      unsigned index = 0u;
+      while (index < length) {
+        name[index] = 'a' + std::rand() % ('z' - 'a');
+        ++index;
+      }
+      return name;
     }
 
   }

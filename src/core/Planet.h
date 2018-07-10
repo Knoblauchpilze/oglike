@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "ResourceDeposit.h"
+#include "Account.h"
 
 namespace ogame {
   namespace core {
@@ -36,9 +37,17 @@ namespace ogame {
 
         const unsigned& getGalaxyIndex() const;
 
+        const std::string& getOwnerName() const;
+
+        void assignToAccount(AccountShPtr account);
+
       protected:
 
         void create();
+
+      private:
+
+        const std::string generateRandomName(const unsigned& length) const noexcept;
 
       private:
 
@@ -46,6 +55,7 @@ namespace ogame {
         std::string m_name;
         System* m_parent;
         std::vector<ResourceDepositShPtr> m_resources;
+        AccountShPtr m_account;
     };
 
     using PlanetShPtr = std::shared_ptr<Planet>;
