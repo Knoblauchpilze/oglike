@@ -288,12 +288,12 @@ namespace ogame {
     const utils::Vector2f GraphicContainer::convertCoordinates(const utils::Vector2f& point) noexcept {
       utils::Area area = getRenderingArea();
       if (m_parent == nullptr) {
-        std::cout << "[GRAPHIC] Root " << getName() << ", parent=" << point.x() << "x" << point.y() << ", this=" << (point - area.getCenter()).x() << "x" << (point - area.getCenter()).y() << " (area=" << area.x() << "x" << area.y() << " dims=" << area.w() << "x" << area.h() << ")" << std::endl;
+        // std::cout << "[GRAPHIC] Root " << getName() << ", parent=" << point.x() << "x" << point.y() << ", this=" << (point - area.getCenter()).x() << "x" << (point - area.getCenter()).y() << " (area=" << area.x() << "x" << area.y() << " dims=" << area.w() << "x" << area.h() << ")" << std::endl;
         return point - area.getCenter();
       }
       const utils::Vector2f par = m_parent->convertCoordinates(point);
       const utils::Vector2f thi = par - area.getCenter();
-      std::cout << "[GRAPHIC] Child " << getName() << ", parent=" << par.x() << "x" << par.y() << ", this=" << thi.x() << "x" << thi.y() << " (area=" << area.x() << "x" << area.y() << " dims=" << area.w() << "x" << area.h() << ")" << std::endl;
+      // std::cout << "[GRAPHIC] Child " << getName() << ", parent=" << par.x() << "x" << par.y() << ", this=" << thi.x() << "x" << thi.y() << " (area=" << area.x() << "x" << area.y() << " dims=" << area.w() << "x" << area.h() << ")" << std::endl;
       return par - area.getCenter();
     }
 
