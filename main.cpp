@@ -46,6 +46,8 @@ int main(int argc, char* argv[])
   ogame::core::UniverseShPtr universe = std::make_shared<ogame::core::Universe>(1u, galaxiesCount, systemsCount, planetsCount);
   ogame::player::PlayerShPtr player = std::make_shared<ogame::player::Player>(std::string("tttttttttttttttttttt"));
   ogame::core::AccountShPtr account = std::make_shared<ogame::core::Account>(0u, player->getName());
+  account->setCommunity("FR");
+  account->setUniverse("Oberon");
   player->setAccount(account);
 
   try {
@@ -82,7 +84,8 @@ int main(int argc, char* argv[])
   // Populate the main view.
   try {
     view->populateGalaxyView((*universe)[0][0]);
-    view->populateResourceView((*universe)[0][0][2]);
+    view->populateResourcesView((*universe)[0][0][2]);
+    view->populateOptionsView(*account);
   }
   catch (const ogame::gui::GuiException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
