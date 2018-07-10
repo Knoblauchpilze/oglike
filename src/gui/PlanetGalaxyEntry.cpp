@@ -43,7 +43,12 @@ namespace ogame {
       }
       LabelContainer* owner = getChild<LabelContainer*>(std::string("Planet owner's name"));
       if (checkChild(label, std::string("Planet owner's name"))) {
-        owner->setText(planet.isColonized() ? "Colonized" : "");
+        try {
+          owner->setText(planet.isColonized() ? planet.getOwnerName() : "");
+        }
+        catch (const core::PlanetException& e) {
+          std::cerr << "[ENTRY] Caught error while updating owner's name:" << std::endl << e.what() << std::endl;
+        }
       }
       PlanetActionList* actions = getChild<PlanetActionList*>(std::string("Planet actions"));
       if (checkChild(label, std::string("Planet actions"))) {
