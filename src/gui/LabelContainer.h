@@ -4,35 +4,25 @@
 #include <memory>
 #include <string>
 #include <SDL/SDL.h>
-#include "StateContainer.h"
+#include "GraphicContainer.h"
 #include "ColoredFont.h"
 
 namespace ogame {
   namespace gui {
 
-    class LabelContainer: public StateContainer
+    class LabelContainer: public view::GraphicContainer
     {
       public:
 
         LabelContainer(const std::string& name,
                        const std::string& text,
-                       view::ColoredFontShPtr font,
-                       view::ColoredFontShPtr highlightFont,
-                       const StateContainer::StateAssociation& colors = StateContainer::StateAssociation());
+                       view::ColoredFontShPtr font);
 
         virtual ~LabelContainer();
 
         const std::string getText() const noexcept;
 
         void setText(const std::string& text);
-
-        void setFont(view::ColoredFontShPtr font);
-
-        void setHighlightFont(view::ColoredFontShPtr font);
-
-        void highlight();
-
-        void unhighlight();
 
       protected:
 
@@ -57,11 +47,7 @@ namespace ogame {
         bool m_fontChanged;
         view::ColoredFontShPtr m_font;
 
-        bool m_hFontChanged;
-        view::ColoredFontShPtr m_hFont;
-
         bool m_highlightChanged;
-        bool m_highlight;
         SDL_Surface* m_textSurface;
 
     };

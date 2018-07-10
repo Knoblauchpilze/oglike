@@ -7,21 +7,17 @@ namespace ogame {
 
     LabelContainer::LabelContainer(const std::string& name,
                                    const std::string& text,
-                                   view::ColoredFontShPtr font,
-                                   view::ColoredFontShPtr highlightFont,
-                                   const StateContainer::StateAssociation& colors):
-      StateContainer(name, StateContainer::State::Normal, colors),
+                                   view::ColoredFontShPtr font):
+      view::GraphicContainer(name,
+                             view::utils::Area(),
+                             view::EventListener::Interaction::NoInteraction),
       m_textChanged(true),
       m_text(text),
       
       m_fontChanged(true),
       m_font(font),
 
-      m_hFontChanged(true),
-      m_hFont(highlightFont),
-
       m_highlightChanged(true),
-      m_highlight(false),
       m_textSurface(nullptr)
     {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
@@ -57,7 +53,6 @@ namespace ogame {
       }
 
       // Reset flags.
-      m_highlightChanged = false;
       m_fontChanged = false;
       m_textChanged = false;
 

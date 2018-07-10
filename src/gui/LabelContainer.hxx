@@ -23,48 +23,6 @@ namespace ogame {
     }
 
     inline
-    void LabelContainer::setFont(view::ColoredFontShPtr font) {
-      lock();
-      m_fontChanged = true;
-      m_font = font;
-      makeDirty();
-      unlock();
-    }
-
-    inline
-    void LabelContainer::setHighlightFont(view::ColoredFontShPtr font) {
-      lock();
-      m_hFontChanged = true;
-      m_hFont = font;
-      makeDirty();
-      unlock();
-    }
-
-    inline
-    void LabelContainer::highlight() {
-      lock();
-      m_highlightChanged = (m_highlight != true);
-      m_highlight = true;
-      if (m_highlightChanged) {
-        std::cout << "[LABEL] Highlighting container " << getName() << std::endl;
-        makeDeepDirty();
-      }
-      unlock();
-    }
-
-    inline
-    void LabelContainer::unhighlight() {
-      lock();
-      m_highlightChanged = (m_highlight != false);
-      m_highlight = false;
-      if (m_highlightChanged) {
-        std::cout << "[LABEL] Unhighlighting container " << getName() << std::endl;
-        makeDeepDirty();
-      }
-      unlock();
-    }
-
-    inline
     void LabelContainer::clearContentPrivate(SDL_Surface* render) {
       // Nothing to do here.
     }
