@@ -17,7 +17,6 @@ namespace ogame {
       return ComponentFactory::createLabelPanel(
         name,
         text,
-        font,
         font
       );
     }

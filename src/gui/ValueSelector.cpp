@@ -63,7 +63,7 @@ namespace ogame {
       // Left switch option.
       PictureContainerShPtr left = ComponentFactory::createPicturePanel(std::string("left_switch"), std::string("data/img/switch_left.bmp"));
       // The main label.
-      LabelContainerShPtr label = ComponentFactory::createLabelPanel(std::string("current_value"), std::string(""), font, font);
+      LabelContainerShPtr label = ComponentFactory::createLabelPanel(std::string("current_value"), std::string(""), font);
       // Right switch option.
       PictureContainerShPtr right = ComponentFactory::createPicturePanel(std::string("right_switch"), std::string("data/img/switch_right.bmp"));
 

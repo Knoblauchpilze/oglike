@@ -12,7 +12,7 @@ namespace ogame {
                                                                 const std::string& text,
                                                                 view::ColoredFontShPtr font) const
     {
-      return ComponentFactory::createLabelPanel(name, text, font, font);
+      return ComponentFactory::createLabelPanel(name, text, font);
     }
 
     inline
