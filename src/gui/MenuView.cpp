@@ -21,7 +21,6 @@ namespace ogame {
       setBackgroundColor(SDL_Color{29, 34, 40, SDL_ALPHA_OPAQUE});
 
       createView();
-      highlightViewPrivate(initialView, false);
     }
 
     MenuView::~MenuView() {}
@@ -29,21 +28,21 @@ namespace ogame {
     void MenuView::createView() {
       // Create the colors for these state panels.
       const StateContainer::StateAssociation colors = {
-        {StateContainer::State::Normal,       SDL_Color{255, 0, 0, SDL_ALPHA_OPAQUE}},
-        {StateContainer::State::Highlighted,  SDL_Color{0, 255, 0, SDL_ALPHA_OPAQUE}},
-        {StateContainer::State::Selected,     SDL_Color{0, 0, 255, SDL_ALPHA_OPAQUE}},
+        {StateContainer::State::Normal,       SDL_Color{29, 34, 40, SDL_ALPHA_OPAQUE}},
+        {StateContainer::State::Highlighted,  SDL_Color{97, 154, 191, SDL_ALPHA_OPAQUE}},
+        {StateContainer::State::Selected,     SDL_Color{97, 154, 191, SDL_ALPHA_OPAQUE}},
       };
 
       // Add each option.
-      LabelContainerShPtr overview = createLabelPanel(View::Overview, std::string("Overview"), colors);
-      LabelContainerShPtr resources = createLabelPanel(View::Resources, std::string("Resources"), colors);
-      LabelContainerShPtr facilities = createLabelPanel(View::Facilities, std::string("Facilities"), colors);
-      LabelContainerShPtr research = createLabelPanel(View::Research, std::string("Research"), colors);
-      LabelContainerShPtr shipyard = createLabelPanel(View::Shipyard, std::string("Shipyard"), colors);
-      LabelContainerShPtr defense = createLabelPanel(View::Defense, std::string("Defense"), colors);
-      LabelContainerShPtr fleet = createLabelPanel(View::Fleet, std::string("Fleet"), colors);
-      LabelContainerShPtr galaxy = createLabelPanel(View::Galaxy, std::string("Galaxy"), colors);
-      LabelContainerShPtr alliance = createLabelPanel(View::Alliance, std::string("Alliance"), colors);
+      StateLabelContainerShPtr overview = createStateLabelPanel(View::Overview, std::string("Overview"), colors);
+      StateLabelContainerShPtr resources = createStateLabelPanel(View::Resources, std::string("Resources"), colors);
+      StateLabelContainerShPtr facilities = createStateLabelPanel(View::Facilities, std::string("Facilities"), colors);
+      StateLabelContainerShPtr research = createStateLabelPanel(View::Research, std::string("Research"), colors);
+      StateLabelContainerShPtr shipyard = createStateLabelPanel(View::Shipyard, std::string("Shipyard"), colors);
+      StateLabelContainerShPtr defense = createStateLabelPanel(View::Defense, std::string("Defense"), colors);
+      StateLabelContainerShPtr fleet = createStateLabelPanel(View::Fleet, std::string("Fleet"), colors);
+      StateLabelContainerShPtr galaxy = createStateLabelPanel(View::Galaxy, std::string("Galaxy"), colors);
+      StateLabelContainerShPtr alliance = createStateLabelPanel(View::Alliance, std::string("Alliance"), colors);
 
       if (overview == nullptr ||
           resources == nullptr ||

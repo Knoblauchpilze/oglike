@@ -9,16 +9,11 @@ namespace ogame {
   namespace gui {
 
     inline
-    void MenuView::highlightView(const View& view) {
-      highlightViewPrivate(view, true);
-    }
-
-    inline
-    LabelContainerShPtr MenuView::createLabelPanel(const View& view,
-                                                   const std::string& text,
-                                                   const StateContainer::StateAssociation& colors) const
+    StateLabelContainerShPtr MenuView::createStateLabelPanel(const View& view,
+                                                             const std::string& text,
+                                                             const StateContainer::StateAssociation& colors) const
     {
-      LabelContainerShPtr label = ComponentFactory::createLabelPanel(
+      return ComponentFactory::createStateLabelPanel(
         getChildNameFromView(view),
         text,
         view::FontFactory::getInstance().createColoredFont(
@@ -31,12 +26,6 @@ namespace ogame {
         ),
         colors
       );
-
-      if (label != nullptr) {
-        label->setBackgroundColor(SDL_Color{29, 34, 40, SDL_ALPHA_OPAQUE});
-      }
-
-      return label;
     }
 
     inline
@@ -73,37 +62,6 @@ namespace ogame {
           break;
       }
       return name;
-    }
-
-    inline
-    void MenuView::highlightViewPrivate(const View& view, const bool smartHighlight) {
-      lock();
-
-      // Highlight only if the view is not already highlighted or if we want to force the highlight.
-      if (view != m_highlightedView || !smartHighlight) {
-        // Reset the selected node.
-        if (view != m_highlightedView) {
-          const std::string name = getChildNameFromView(m_highlightedView);
-          LabelContainer* view = getChild<LabelContainer*>(name);
-          if (checkChild(view, name)) {
-            view->unhighlight();
-          }
-        }
-
-        // Highlight the new view.
-        const std::string name = getChildNameFromView(view);
-        LabelContainer* hView = getChild<LabelContainer*>(name);
-        if (checkChild(hView, name)) {
-          hView->highlight();
-        }
-
-        // This is the new highlighted view.
-        m_highlightedView = view;
-
-        makeDirty();
-      }
-
-      unlock();
     }
 
   }
