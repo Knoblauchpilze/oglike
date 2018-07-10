@@ -5,6 +5,7 @@
 #include <vector>
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
+#include <map>
 
 namespace ogame {
   namespace gui {
@@ -19,13 +20,23 @@ namespace ogame {
           Selected
         };
 
-        using StateAssociation = std::vector<std::pair<State, SDL_Color>>;
+        // Used to describe the policy to apply by this container if a given state does not have an associated color.
+        enum class FailPolicy {
+          Preserve,       //< Preserve the current color (do nothing)
+          Aggressive      //< Aggressively replace the color with the default state (i.e. normal).
+                          //  If it is not defined fallback to preserve strategy.
+        };
+
+        using StateAssociation = std::map<State, SDL_Color>;
 
         StateContainer(const std::string& name,
                        const State& initState,
-                       const StateAssociation& colors);
+                       const StateAssociation& colors,
+                       const FailPolicy& policy = FailPolicy::Aggressive);
 
         virtual ~StateContainer();
+
+        const State getState();
 
       protected:
 
@@ -33,14 +44,25 @@ namespace ogame {
 
         void onMouseButtonReleasedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) override;
 
+        // Called upon modifying the internal state. Can be reimplemented in inheriting classes.
+        virtual void onStateModified();
+
+        const State& getStatePrivate() const noexcept;
+
       private:
 
         const SDL_Color getColorFromState(const State& state) const noexcept;
 
+        void assignColorFromState(const State& state);
+
+        void assignNormalStateOrDefault();
+
       private:
 
         State m_state;
+        FailPolicy m_policy;
         StateAssociation m_colors;
+        std::map<State, int> m_toto;
 
     };
 
