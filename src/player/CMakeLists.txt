@@ -9,6 +9,7 @@ find_package (SDL REQUIRED)
 
 set (SOURCES
   Player.cpp
+  PlayerException.cpp
   )
 
 add_library (ogamelike_lib_player SHARED

@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <string>
-#include "Account.h"
+#include "Community.h"
 
 namespace ogame {
   namespace player {
@@ -12,20 +12,21 @@ namespace ogame {
     {
       public:
 
-        Player(const std::string& name);
+        Player(const std::string& name,
+               core::CommunityShPtr community);
 
         ~Player();
 
-        core::AccountShPtr getAccount() const noexcept;
+        const unsigned& getUuid() const noexcept;
 
         const std::string& getName() const noexcept;
 
-        void setAccount(core::AccountShPtr account);
+        core::CommunityShPtr getCommunity() const noexcept;
 
       private:
 
-        core::AccountShPtr m_account;
-        std::string m_name;
+        unsigned m_uuid;
+        core::CommunityShPtr m_community;
 
     };
 
