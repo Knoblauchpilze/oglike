@@ -11,6 +11,8 @@
 namespace ogame {
   namespace core {
 
+    class Galaxy;
+
     class Universe
     {
       public:
@@ -27,6 +29,8 @@ namespace ogame {
         bool operator==(const Universe& other) const;
 
         bool operator<(const Universe& other) const;
+
+        const unsigned& getUuid() const noexcept;
 
         const Galaxy& operator[](const unsigned& index) const;
 
