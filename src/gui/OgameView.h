@@ -14,6 +14,7 @@
 #include "ResourcesView.h"
 #include "OptionsView.h"
 #include "PlanetsView.h"
+#include "DataModel.h"
 
 namespace ogame {
   namespace gui {
@@ -26,8 +27,9 @@ namespace ogame {
                   const unsigned& height,
                   const unsigned& galaxyCount,
                   const unsigned& systemCount,
-                  const unsigned& planetCount);
-        
+                  const unsigned& planetCount,
+                  player::DataModelShPtr dataModel);
+
         virtual ~OgameView();
 
         void populateGalaxyView(const core::System& system);
@@ -50,6 +52,8 @@ namespace ogame {
           void createThematicViews(const unsigned& galaxyCount,
                                    const unsigned& systemCount,
                                    const unsigned& planetCount);
+
+          void connectDataModel(player::DataModelShPtr dataModel);
 
       private:
 

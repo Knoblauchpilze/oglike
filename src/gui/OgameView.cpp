@@ -10,7 +10,8 @@ namespace ogame {
                          const unsigned& height,
                          const unsigned& galaxyCount,
                          const unsigned& systemCount,
-                         const unsigned& planetCount):
+                         const unsigned& planetCount,
+                         player::DataModelShPtr dataModel):
       OgameAbstractView(std::string("Ogame is life and ya know it !"),
                         std::string("data/icon.bmp"),
                         width,
@@ -27,6 +28,9 @@ namespace ogame {
     {
       // Create views.
       createViews(1.0f, galaxyCount, systemCount, planetCount);
+
+      // Connect the data model.
+      connectDataModel(dataModel);
     }
 
     OgameView::~OgameView() {
@@ -100,6 +104,8 @@ namespace ogame {
 
       m_generalView->setActiveChild(m_galaxyView->getName());
     }
+
+    void OgameView::connectDataModel(player::DataModelShPtr dataModel) {}
 
   }
 }
