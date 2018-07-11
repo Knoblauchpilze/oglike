@@ -37,7 +37,7 @@ namespace ogame {
       if (m_account == nullptr) {
         throw PlanetException(std::string("Could not retrieve inexisting owner's name"));
       }
-      return m_account->getName();
+      return m_account->getPlayerName();
     }
 
     inline

@@ -59,7 +59,7 @@ namespace ogame {
       std::cout << "[PLANET] Assigned new planet "
                 << m_name
                 << " at [" << getGalaxyIndex() << ":" << getSystemIndex() << ":" << m_index << "]"
-                << " to account " << account->getUuid()
+                << " to player " << account->getPlayerName()
                 << std::endl;
     }
 

@@ -25,14 +25,6 @@ namespace ogame {
       //dtor
     }
 
-    bool Universe::operator==(const Universe& other) const {
-      return m_index == other.m_index;
-    }
-
-    bool Universe::operator<(const Universe& other) const {
-      return m_index < other.m_index;
-    }
-
     const Galaxy& Universe::operator[](const unsigned& index) const {
       if (index >= m_galaxies.size()) {
         throw UniverseException("Cannot access out of bounds galaxy " + std::to_string(index) + " in universe " + std::to_string(m_index));
@@ -52,7 +44,7 @@ namespace ogame {
       // Check whether this account already exists.
       if (checkForDuplicatedAccounts(*account)) {
         const std::string errorMessage = std::string("Cannot create account for ") +
-          std::to_string(account->getUuid()) +
+          account->getPlayerName() +
           " already existing in universe " + std::to_string(m_index);
         throw UniverseException(errorMessage);
       }
@@ -63,7 +55,7 @@ namespace ogame {
       unsigned position;
       const bool valid = findPositionForAccount(galaxy, system, position);
       if (!valid) {
-        throw UniverseException(std::string("Could not find a valid position for account ") + std::to_string(account->getUuid()) + " in universe " + std::to_string(m_index));
+        throw UniverseException(std::string("Could not find a valid position for account ") + account->getPlayerName() + " in universe " + std::to_string(m_index));
       }
 
       // Retrieve the planet described by the coordinates.
