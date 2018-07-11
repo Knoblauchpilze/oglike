@@ -10,11 +10,15 @@ find_package (SDL REQUIRED)
 set (SOURCES
   Player.cpp
   PlayerException.cpp
+  DataModel.cpp
+  ActionListener.cpp
   )
 
 add_library (ogamelike_lib_player SHARED
   ${SOURCES}
   )
+
+set(PLAYER_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" PARENT_SCOPE)
 
 target_link_libraries(ogamelike_lib_player
   ogamelike_lib_core
