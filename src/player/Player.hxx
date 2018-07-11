@@ -2,23 +2,27 @@
 #define PLAYER_HXX
 
 #include "Player.h"
+#include "PlayerException.h"
 
 namespace ogame {
   namespace player {
 
     inline
-    core::AccountShPtr Player::getAccount() const noexcept {
-      return m_account;
+    const unsigned& Player::getUuid() const noexcept {
+      return m_uuid;
     }
 
     inline
     const std::string& Player::getName() const noexcept {
-      return m_name;
+      if (m_community == nullptr) {
+        throw PlayerException(std::string("Could not get null community for player account " + std::to_string(m_uuid)));
+      }
+      return m_community->getPlayerName(m_uuid);
     }
 
     inline
-    void Player::setAccount(core::AccountShPtr account) {
-      m_account = account;
+    core::CommunityShPtr Player::getCommunity() const noexcept {
+      return m_community;
     }
 
   }
