@@ -2,6 +2,7 @@
 #define ACCOUNT_H
 
 #include <memory>
+#include "Community.h"
 
 namespace ogame {
   namespace core {
@@ -10,30 +11,29 @@ namespace ogame {
     {
       public:
 
-        Account(const unsigned& uuid, const std::string& name = std::string());
+        Account(const unsigned& playerUuid,
+                const unsigned& universeUuid,
+                CommunityShPtr community);
 
         ~Account();
 
         bool operator==(const Account& other) const noexcept;
 
-        const unsigned& getUuid() const noexcept;
+        const unsigned& getPlayerUuid() const noexcept;
 
-        const std::string& getName() const noexcept;
+        const std::string& getPlayerName() const noexcept;
 
-        const std::string& getCommunity() const noexcept;
+        const std::string& getCommunityName() const noexcept;
 
-        const std::string& getUniverse() const noexcept;
+        const std::string& getUniverseName() const noexcept;
 
-        void setCommunity(const std::string& community);
-
-        void setUniverse(const std::string& universe);
+        CommunityShPtr getCommunity() const noexcept;
 
       private:
 
-        unsigned m_uuid;
-        std::string m_name;
-        std::string m_community;
-        std::string m_universe;
+        CommunityShPtr m_community;
+        unsigned m_playerUuid;
+        unsigned m_universeUuid;
 
     };
 
