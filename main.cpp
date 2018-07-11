@@ -5,13 +5,13 @@
 #include "ArgumentsParser.h"
 #include "ArgumentsException.h"
 
-#include "Universe.h"
-
 #include "OgameView.h"
 #include "GuiException.h"
 
-#include "Account.h"
+#include "Community.h"
 #include "Player.h"
+#include "Universe.h"
+#include "Account.h"
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
@@ -43,16 +43,30 @@ int main(int argc, char* argv[])
   const unsigned planetsCount = std::stoi(parser.getOptionValue("--planet"));
   std::cout << "[INFO] Instanciating universe with " << galaxiesCount << " galaxies, " << systemsCount << " systems per galaxy and " << planetsCount << " planets per system" << std::endl;
 
-  ogame::core::UniverseShPtr universe = std::make_shared<ogame::core::Universe>(1u, galaxiesCount, systemsCount, planetsCount);
-  ogame::player::PlayerShPtr player = std::make_shared<ogame::player::Player>(std::string("tttttttttttttttttttt"));
-  ogame::core::AccountShPtr account = std::make_shared<ogame::core::Account>(0u, player->getName());
-  account->setCommunity("FR");
-  account->setUniverse("Oberon");
-  player->setAccount(account);
 
+  ogame::core::CommunityShPtr community = std::make_shared<ogame::core::Community>("FR");
+  ogame::core::UniverseShPtr universe = nullptr;
+  ogame::player::PlayerShPtr player = nullptr;
+  ogame::core::AccountShPtr account = nullptr;
+
+  ogame::player::PlayerShPtr player2 = nullptr;
+  ogame::core::AccountShPtr account2 = nullptr;
   try {
-    universe->createAccount(player->getAccount());
-    universe->createAccount(player->getAccount());
+    universe = std::make_shared<ogame::core::Universe>(
+      community->createUniverse(std::string("Oberon")),
+      galaxiesCount,
+      systemsCount,
+      planetsCount
+    );
+    player = std::make_shared<ogame::player::Player>(std::string("tttttttttttttttttttt"), community);
+    account = std::make_shared<ogame::core::Account>(player->getUuid(), universe->getUuid(), community);
+    universe->createAccount(account);
+
+    player2 = std::make_shared<ogame::player::Player>(std::string("ergerger"), community);
+    account2 = std::make_shared<ogame::core::Account>(player2->getUuid(), universe->getUuid(), community);
+    universe->createAccount(account2);
+
+    universe->createAccount(account);
   }
   catch (const ogame::core::OgameException& e) {
     std::cerr << "[MAIN] Caught internal exception:" << std::endl << e.what() << std::endl;
