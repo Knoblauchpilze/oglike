@@ -16,6 +16,17 @@ namespace ogame {
     }
 
     inline
+    void StateContainer::setState(const State& state) {
+      lock();
+      m_state = state;
+      unlock();
+      assignColorFromState(m_state);
+      lock();
+      makeDirty();
+      unlock();
+    }
+
+    inline
     void StateContainer::onMouseMotionEventPrivate(const SDL_MouseMotionEvent& mouseMotionEvent) {
       // This container can be highlighted using a mouse motion.
       const float x = static_cast<float>(mouseMotionEvent.x);

@@ -38,6 +38,8 @@ namespace ogame {
 
         const State getState();
 
+        void setState(const State& state);
+
       protected:
 
         void onMouseMotionEventPrivate(const SDL_MouseMotionEvent& mouseMotionEvent) override;
