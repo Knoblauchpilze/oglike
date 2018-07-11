@@ -21,6 +21,8 @@ set (SOURCES
   UniverseException.cpp
   Account.cpp
   AccountException.cpp
+  Community.cpp
+  CommunityException.cpp
   )
 
 add_library (ogamelike_lib_core SHARED
