@@ -13,6 +13,8 @@
 #include "Universe.h"
 #include "Account.h"
 
+#include "DataModel.h"
+
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 
@@ -72,6 +74,9 @@ int main(int argc, char* argv[])
     std::cerr << "[MAIN] Caught internal exception:" << std::endl << e.what() << std::endl;
   }
 
+  // Instantiate the data model.
+  ogame::player::DataModelShPtr dataModel = std::make_shared<ogame::player::DataModel>(ogame::player::DataModel::View::Galaxy);
+
   // Instantiate the main view.
   const unsigned screenWidth = std::stoi(parser.getOptionValue("--width"));
   const unsigned screenHeight = std::stoi(parser.getOptionValue("--height"));
@@ -83,7 +88,8 @@ int main(int argc, char* argv[])
       screenHeight,
       galaxiesCount,
       systemsCount,
-      planetsCount
+      planetsCount,
+      dataModel
     );
   }
   catch (const ogame::gui::GuiException& e) {
