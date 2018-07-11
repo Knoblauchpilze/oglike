@@ -46,11 +46,13 @@ target_link_libraries(ogamelike_lib_gui
   ${SDLTTF_LIBRARY}
   ogamelike_lib_core
   ogamelike_lib_view
+  ogamelike_lib_player
   )
 
 target_include_directories (ogamelike_lib_gui PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CORE_INCLUDE_DIR}
   ${VIEW_INCLUDE_DIR}
+  ${PLAYER_INCLUDE_DIR}
   )
 
