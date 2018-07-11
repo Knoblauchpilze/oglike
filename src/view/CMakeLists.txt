@@ -34,6 +34,8 @@ add_library (ogamelike_lib_view SHARED
 
 add_library (SDL IMPORTED SHARED)
 
+set(VIEW_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" PARENT_SCOPE)
+
 target_link_libraries(ogamelike_lib_view
   ${SDL_LIBRARY}
   ogamelike_lib_core
