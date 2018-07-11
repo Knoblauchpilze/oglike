@@ -24,7 +24,7 @@ namespace ogame {
       // Update information.
       LabelContainer* player = getChild<LabelContainer*>(std::string("player_panel"));
       if (checkChild(player, std::string("Player name"))) {
-        player->setText(account.getCommunity() + " " + account.getUniverse() + " " + account.getName());
+        player->setText(account.getCommunityName() + " " + account.getUniverseName() + " " + account.getPlayerName());
       }
 
       // Make this component dirty.
