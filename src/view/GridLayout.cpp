@@ -35,7 +35,12 @@ namespace ogame {
       }
     }
 
-    void GridLayout::addItem(std::shared_ptr<GraphicContainer> container, const unsigned& x, const unsigned& y, const unsigned& w, const unsigned& h) {
+    int GridLayout::addItem(std::shared_ptr<GraphicContainer> container,
+                             const unsigned& x,
+                             const unsigned& y,
+                             const unsigned& w,
+                             const unsigned& h)
+    {
       int containerIndex = Layout::addItem(container);
       m_itemsLocation[containerIndex] = {
         1.0f * std::min(m_width - 1, x),
@@ -43,6 +48,7 @@ namespace ogame {
         1.0f * std::min(m_width - x, w),
         1.0f * std::min(m_height - y, h)
       };
+      return containerIndex;
     }
 
   }
