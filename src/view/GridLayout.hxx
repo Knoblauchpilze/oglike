@@ -22,6 +22,12 @@ namespace ogame {
       return m_margin;
     }
 
+    inline
+    void GridLayout::setGrid(const unsigned& w, const unsigned& h) {
+      m_width = w;
+      m_height = h;
+    }
+
   }
 }
 

@@ -22,7 +22,13 @@ namespace ogame {
 
         const float& getMargin() const noexcept;
 
-        void addItem(std::shared_ptr<GraphicContainer> container, const unsigned& x, const unsigned& y, const unsigned& w, const unsigned& h);
+        int addItem(std::shared_ptr<GraphicContainer> container,
+                    const unsigned& x,
+                    const unsigned& y,
+                    const unsigned& w,
+                    const unsigned& h) override;
+
+        void setGrid(const unsigned& w, const unsigned& h);
 
       protected:
 
