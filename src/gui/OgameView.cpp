@@ -2,6 +2,7 @@
 #include "OgameView.h"
 #include "GuiException.h"
 #include "GridLayout.h"
+#include "ActionListener.h"
 
 namespace ogame {
   namespace gui {
@@ -16,6 +17,8 @@ namespace ogame {
                         std::string("data/icon.bmp"),
                         width,
                         height),
+      player::ActionListener(player::ActionListener::Action::ChangePlanet, dataModel.get()),
+
       m_panel(nullptr),
 
       m_menuView(nullptr),
@@ -27,7 +30,7 @@ namespace ogame {
       m_galaxyView(nullptr)
     {
       // Create views.
-      createViews(1.0f, galaxyCount, systemCount, planetCount);
+      createViews(1.0f, galaxyCount, systemCount, planetCount, dataModel.get());
 
       // Connect the data model.
       connectDataModel(dataModel);
@@ -40,19 +43,20 @@ namespace ogame {
     void OgameView::createViews(const float& margin,
                                 const unsigned& galaxyCount,
                                 const unsigned& systemCount,
-                                const unsigned& planetCount)
+                                const unsigned& planetCount,
+                                player::DataModel* model)
     {
       // Create the main panel.
       createMainPanel(margin);
 
       // Create the main layout: left and right views and the general view.
-      createMainLayout();
+      createMainLayout(model);
 
       // Create thematic views.
       createThematicViews(galaxyCount, systemCount, planetCount);
     }
 
-    void OgameView::createMainLayout() {
+    void OgameView::createMainLayout(player::DataModel* model) {
       // Create the layout for the main panel.
       view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(12u, 12u, 0.0f);
       if (layout == nullptr) {
@@ -60,10 +64,10 @@ namespace ogame {
       }
 
       // Create each view.
-      m_optionsView     = std::make_shared<OptionsView>(std::string("options_view"));
+      m_optionsView     = std::make_shared<OptionsView>(std::string("options_view"), model);
       m_menuView        = std::make_shared<MenuView>(std::string("menu_view"));
-      m_resourcesView   = std::make_shared<ResourcesView>(std::string("resources_view"));
-      m_planetsView     = std::make_shared<PlanetsView>(std::string("planets_view"), 10u);
+      m_resourcesView   = std::make_shared<ResourcesView>(std::string("resources_view"), model);
+      m_planetsView     = std::make_shared<PlanetsView>(std::string("planets_view"), model);
       m_generalView     = std::make_shared<SelectorPanel>(std::string("general_view"));
 
       // Check whether we could create all the views.
@@ -105,7 +109,14 @@ namespace ogame {
       m_generalView->setActiveChild(m_galaxyView->getName());
     }
 
-    void OgameView::connectDataModel(player::DataModelShPtr dataModel) {}
+    void OgameView::connectDataModel(player::DataModelShPtr dataModel) {
+      // Connect each view to its dedicated slot in the data model.
+      dataModel->registerForAction(player::ActionListener::Action::ChangeAccount, m_planetsView.get());
+      dataModel->registerForAction(player::ActionListener::Action::ChangeAccount, m_optionsView.get());
+
+      dataModel->registerForAction(player::ActionListener::Action::ChangePlanet, m_resourcesView.get());
+      dataModel->registerForAction(player::ActionListener::Action::ChangePlanet, this);
+    }
 
   }
 }

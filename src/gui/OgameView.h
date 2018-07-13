@@ -15,11 +15,12 @@
 #include "OptionsView.h"
 #include "PlanetsView.h"
 #include "DataModel.h"
+#include "ActionListener.h"
 
 namespace ogame {
   namespace gui {
 
-    class OgameView: public view::OgameAbstractView
+    class OgameView: public view::OgameAbstractView, public player::ActionListener
     {
       public:
 
@@ -32,11 +33,7 @@ namespace ogame {
 
         virtual ~OgameView();
 
-        void populateGalaxyView(const core::System& system);
-
-        void populateResourcesView(const core::Planet& planet);
-
-        void populateOptionsView(const core::Account& account);
+        void onActionTriggered(const player::DataModel& model) override;
 
       private:
 
@@ -45,9 +42,10 @@ namespace ogame {
           void createViews(const float& margin,
                            const unsigned& galaxyCount,
                            const unsigned& systemCount,
-                           const unsigned& planetCount);
+                           const unsigned& planetCount,
+                           player::DataModel* model);
 
-          void createMainLayout();
+          void createMainLayout(player::DataModel* model);
 
           void createThematicViews(const unsigned& galaxyCount,
                                    const unsigned& systemCount,

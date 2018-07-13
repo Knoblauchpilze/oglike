@@ -55,7 +55,6 @@ namespace ogame {
       }
 
       makeDeepDirty();
-
       unlock();
     }
 
@@ -68,7 +67,6 @@ namespace ogame {
       }
 
       makeDeepDirty();
-
       unlock();
     }
 
