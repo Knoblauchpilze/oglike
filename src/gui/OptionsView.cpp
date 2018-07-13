@@ -2,14 +2,16 @@
 #include "OptionsView.h"
 #include "GuiException.h"
 #include "GridLayout.h"
+#include "DataModelException.h"
 
 namespace ogame {
   namespace gui {
 
-    OptionsView::OptionsView(const std::string& name):
+    OptionsView::OptionsView(const std::string& name, player::DataModel* model):
       view::GraphicContainer(name,
                              view::utils::Area(),
-                             view::EventListener::Interaction::NoInteraction)
+                             view::EventListener::Interaction::NoInteraction),
+      player::ActionListener(player::ActionListener::Action::ChangeAccount, model)
     {
       setBackgroundColor(SDL_Color{0, 0, 0, SDL_ALPHA_OPAQUE});
 
@@ -18,13 +20,19 @@ namespace ogame {
 
     OptionsView::~OptionsView() {}
 
-    void OptionsView::populateWithPlayerData(const core::Account& account) {
+    void OptionsView::onActionTriggered(const player::DataModel& model) {
       lock();
 
       // Update information.
       LabelContainer* player = getChild<LabelContainer*>(std::string("player_panel"));
       if (checkChild(player, std::string("Player name"))) {
-        player->setText(account.getCommunityName() + " " + account.getUniverseName() + " " + account.getPlayerName());
+        try {
+          const core::Account& account = model.getActiveAccount();
+          player->setText(account.getCommunityName() + " " + account.getUniverseName() + " " + account.getPlayerName());
+        }
+        catch (const player::DataModelException& e) {
+          std::cerr << "[OPTIONS] Caught exception while setting player information:" << std::endl << e.what() << std::endl;
+        }
       }
 
       // Make this component dirty.
