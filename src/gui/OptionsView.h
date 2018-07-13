@@ -6,19 +6,21 @@
 #include "GraphicContainer.h"
 #include "LabelContainer.h"
 #include "Account.h"
+#include "ActionListener.h"
+#include "DataModel.h"
 
 namespace ogame {
   namespace gui {
 
-    class OptionsView: public view::GraphicContainer
+    class OptionsView: public view::GraphicContainer, public player::ActionListener
     {
       public:
 
-        OptionsView(const std::string& name);
+        OptionsView(const std::string& name, player::DataModel* model);
 
         virtual ~OptionsView();
 
-        void populateWithPlayerData(const core::Account& account);
+        void onActionTriggered(const player::DataModel& model) override;
 
       private:
 

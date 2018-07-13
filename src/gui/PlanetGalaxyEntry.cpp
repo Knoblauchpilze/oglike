@@ -79,7 +79,7 @@ namespace ogame {
       PlanetIconDisplayShPtr icon = createPlanetIconPanel(count, std::string("Planet icon"));
 
       LabelContainerShPtr name = createLabelPanel(std::string("Planet name"),
-                                                  std::string("Not available"),
+                                                  std::string(""),
                                                   view::FontFactory::getInstance().createColoredFont(
                                                     std::string("data/fonts/upcfb.ttf"),
                                                     128, 0, 0
@@ -94,7 +94,7 @@ namespace ogame {
                                                              std::string("data/img/moon_none.bmp"));
 
       LabelContainerShPtr owner = createLabelPanel(std::string("Planet owner's name"),
-                                                   std::string("Not available"),
+                                                   std::string(""),
                                                    view::FontFactory::getInstance().createColoredFont(
                                                      std::string("data/fonts/upcfb.ttf"),
                                                      255, 0, 0

@@ -4,31 +4,82 @@
 #include "GuiException.h"
 #include "ComponentFactory.h"
 #include "FontFactory.h"
+#include "GridLayout.h"
 
 namespace ogame {
   namespace gui {
 
     PlanetsView::PlanetsView(const std::string& name,
+                             player::DataModel* model,
                              const unsigned& planetCount,
                              const std::vector<core::Planet>& planets):
       view::GraphicContainer(name,
                              view::utils::Area(),
-                             view::EventListener::Interaction::NoInteraction)
+                             view::EventListener::Interaction::NoInteraction),
+      player::ActionListener(player::ActionListener::Action::ChangeAccount, model),
+      m_planetCount(planetCount)
     {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
 
-      createView(planetCount, planets);
+      createView(planets);
     }
 
     PlanetsView::~PlanetsView() {}
 
-    void PlanetsView::populateWithPlayerData(/* TODO */) {}
+    void PlanetsView::onActionTriggered(const player::DataModel& model) {
+      lock();
 
-    void PlanetsView::createView(const unsigned& planetCount,
-                                 const std::vector<core::Planet>& planets)
+      // Update each planet.
+      try {
+        const core::Account& account = model.getActiveAccount();
+
+        m_planetCount = account.getAvailablePlanetsSlots();
+
+        LabelContainer* planetCount = getChild<LabelContainer*>(std::string("planet_count_info_panel"));
+        if (checkChild(planetCount, std::string("Planet count information"))) {
+          planetCount->setText(
+            std::to_string(account.getOccupiedPlanetsSlots()) +
+            "/" +
+            std::to_string(m_planetCount) +
+            " planet" + (m_planetCount > 1 ? "s" : "")
+          );
+        }
+
+        const std::vector<core::Planet*>& planets = account.getPlanets();
+        const core::Planet& activePlanet = model.getActivePlanet();
+
+        view::GridLayout* grid = getLayout<view::GridLayout*>();
+        if (!checkLayout(grid, "grid layout")) {
+          throw GuiException(std::string("Could not retrieve grid layout to update planets view, this view may be incorrect"));
+        }
+        grid->setGrid(1u, 2u * m_planetCount + 1u);
+
+        for (unsigned indexPlanet = 0u ; indexPlanet < planets.size() ; ++indexPlanet) {
+          PlanetViewLink* planet = getOrCreatePlanetView(indexPlanet);
+          if (planet == nullptr) {
+            std::cerr << "[PLANETS] Coult not render planet link " << indexPlanet << ", planets view may be incorrect" << std::endl;
+          }
+          else {
+            planet->populateWithPlanetData(*planets[indexPlanet]);
+          }
+        }
+
+      }
+      catch (const player::DataModelException& e) {
+        std::cerr << "[PLANETS] Caught exception while setting planets information:" << std::endl << e.what() << std::endl;
+      }
+      catch (const GuiException& e) {
+        std::cerr << "[PLANETS] Caught exception while setting planets information:" << std::endl << e.what() << std::endl;
+      }
+
+      makeDeepDirty();
+      unlock();
+    }
+
+    void PlanetsView::createView(const std::vector<core::Planet>& planets)
     {
       // Create the main layout.
-      view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(1u, 2u * planetCount + 1u, 0.0f);
+      view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(1u, 2u * m_planetCount + 1u, 0.0f);
       if (layout == nullptr) {
         throw GuiException(std::string("Could not create layout for container" ) + getName());
       }
@@ -36,7 +87,7 @@ namespace ogame {
       // Informative panel.
       LabelContainerShPtr info = ComponentFactory::createLabelPanel(
         std::string("planet_count_info_panel"),
-        std::to_string(planets.size()) + "/" + std::to_string(planetCount) + " planet" + (planetCount > 1 ? "s" : ""),
+        std::to_string(planets.size()) + "/" + std::to_string(m_planetCount) + " planet" + (m_planetCount > 1 ? "s" : ""),
         view::FontFactory::getInstance().createColoredFont(
           std::string("data/fonts/times.ttf"),
           85, 126, 148, SDL_ALPHA_OPAQUE,
@@ -54,7 +105,7 @@ namespace ogame {
       // Create each planet data.
       for (unsigned indexPlanet = 0u ; indexPlanet < planets.size() ; ++indexPlanet) {
         try {
-          PlanetViewLinkShPtr planet = createPlanetView(std::string("planet_") + std::to_string(indexPlanet) + "_panel", planetCount);
+          PlanetViewLinkShPtr planet = createPlanetView(indexPlanet);
           if (planet != nullptr) {
             // Update the data.
             planet->populateWithPlanetData(planets[indexPlanet]);
