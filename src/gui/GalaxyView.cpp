@@ -22,6 +22,8 @@ namespace ogame {
     GalaxyView::~GalaxyView() {}
 
     void GalaxyView::populateWithSystemData(const core::System& system) {
+      lock();
+
       // Update the navigation view.
       GalaxyNavigationPanel* navigation = getChild<GalaxyNavigationPanel*>(std::string("navigation_panel"));
       if (checkChild(navigation, std::string("Navigation panel"))) {
@@ -43,6 +45,9 @@ namespace ogame {
           }
         }
       }
+
+      makeDeepDirty();
+      unlock();
     }
 
     void GalaxyView::createView(const unsigned& navigationHeight,

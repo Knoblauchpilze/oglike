@@ -3,23 +3,25 @@
 
 #include "OgameView.h"
 #include "GuiException.h"
+#include "Planet.h"
+#include "PlanetException.h"
 
 namespace ogame {
   namespace gui {
 
     inline
-    void OgameView::populateGalaxyView(const core::System& system) {
-      m_galaxyView->populateWithSystemData(system);
-    }
-
-    inline
-    void OgameView::populateResourcesView(const core::Planet& planet) {
-      m_resourcesView->populateWithPlanetData(planet);
-    }
-
-    inline
-    void OgameView::populateOptionsView(const core::Account& account) {
-      m_optionsView->populateWithPlayerData(account);
+    void OgameView::onActionTriggered(const player::DataModel& model) {
+      // Update each view.
+      try {
+        const core::Planet& planet = model.getActivePlanet();
+        m_galaxyView->populateWithSystemData(planet.getSystem());
+      }
+      catch (const core::PlanetException& e) {
+        std::cerr << "[OGAME] Caught exception while setting up general view:" << std::endl << e.what() << std::endl;
+      }
+      catch (const player::DataModelException& e) {
+        std::cerr << "[OGAME] Caught exception while setting up general view:" << std::endl << e.what() << std::endl;
+      }
     }
 
     inline
