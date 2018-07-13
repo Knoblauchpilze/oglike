@@ -67,8 +67,6 @@ int main(int argc, char* argv[])
     player2 = std::make_shared<ogame::player::Player>(std::string("ergerger"), community);
     account2 = std::make_shared<ogame::core::Account>(player2->getUuid(), universe->getUuid(), community);
     universe->createAccount(account2);
-
-    universe->createAccount(account);
   }
   catch (const ogame::core::OgameException& e) {
     std::cerr << "[MAIN] Caught internal exception:" << std::endl << e.what() << std::endl;
@@ -103,9 +101,12 @@ int main(int argc, char* argv[])
 
   // Populate the main view.
   try {
-    view->populateGalaxyView((*universe)[0][0]);
-    view->populateResourcesView((*universe)[0][0][2]);
-    view->populateOptionsView(*account);
+    // view->populateGalaxyView((*universe)[0][0]);
+    // view->populateResourcesView((*universe)[0][0][2]);
+    // view->populateOptionsView(*account);
+    dataModel->setActiveAccount(account.get());
+    dataModel->setActivePlanet(&account->getHomeWorld());
+    dataModel->setActiveView(ogame::player::DataModel::View::Galaxy);
   }
   catch (const ogame::gui::GuiException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
