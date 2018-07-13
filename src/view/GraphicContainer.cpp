@@ -51,6 +51,21 @@ namespace ogame {
       }
     }
 
+    void GraphicContainer::addChild(std::shared_ptr<GraphicContainer> child,
+                                    const unsigned& x,
+                                    const unsigned& y,
+                                    const unsigned& w,
+                                    const unsigned& h)
+    {
+      if (child != nullptr) {
+        m_children[child->getName()] = child;
+        child->setParent(this);
+        if (m_layout != nullptr) {
+          m_layout->addItem(child, x, y, w, h);
+        }
+      }
+    }
+
     void GraphicContainer::removeChild(GraphicContainerShPtr child) {
       if (child != nullptr) {
         m_children.erase(child->getName());

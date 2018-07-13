@@ -15,6 +15,11 @@ namespace ogame {
     }
 
     inline
+    const unsigned GraphicContainer::getChildCount() const noexcept {
+      return m_children.size();
+    }
+
+    inline
     utils::Area GraphicContainer::getRenderingArea() {
       utils::Area area;
       lock();
@@ -138,6 +143,20 @@ namespace ogame {
         std::cerr << "[GRAPHIC] Could not find " << name << " to update panel " << getName() << std::endl;
       }
       return child != nullptr;
+    }
+
+    template <typename LayoutPtr>
+    inline
+    LayoutPtr GraphicContainer::getLayout() const {
+      return dynamic_cast<LayoutPtr>(m_layout.get());
+    }
+
+    template <typename Type>
+    bool GraphicContainer::checkLayout(const Type* layout, const std::string& type) const noexcept {
+      if (layout == nullptr) {
+        std::cerr << "[GRAPHIC] Could not convert layout to " << type << " for container " << getName() << std::endl;
+      }
+      return layout != nullptr;
     }
 
     inline
