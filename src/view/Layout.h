@@ -26,6 +26,12 @@ namespace ogame {
 
         virtual int addItem(std::shared_ptr<GraphicContainer> item);
 
+        virtual int addItem(std::shared_ptr<GraphicContainer> item,
+                            const unsigned& x,
+                            const unsigned& y,
+                            const unsigned& w,
+                            const unsigned& h);
+
         virtual void removeItem(std::shared_ptr<GraphicContainer> item);
 
       protected:

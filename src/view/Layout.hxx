@@ -17,6 +17,17 @@ namespace ogame {
     }
 
     inline
+    int Layout::addItem(std::shared_ptr<GraphicContainer> item,
+                        const unsigned& x,
+                        const unsigned& y,
+                        const unsigned& w,
+                        const unsigned& h)
+    {
+      // No specialization at this level.
+      return addItem(item);
+    }
+
+    inline
     void Layout::removeItem(std::shared_ptr<GraphicContainer> item) {
       int index = 0;
       getContainerOrNull(item, &index);
