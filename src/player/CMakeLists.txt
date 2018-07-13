@@ -12,6 +12,7 @@ set (SOURCES
   PlayerException.cpp
   DataModel.cpp
   ActionListener.cpp
+  DataModelException.cpp
   )
 
 add_library (ogamelike_lib_player SHARED
