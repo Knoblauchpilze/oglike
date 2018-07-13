@@ -33,14 +33,6 @@ namespace ogame {
     }
 
     inline
-    const std::string& Planet::getOwnerName() const {
-      if (m_account == nullptr) {
-        throw PlanetException(std::string("Could not retrieve inexisting owner's name"));
-      }
-      return m_account->getPlayerName();
-    }
-
-    inline
     const std::string Planet::generateRandomName(const unsigned& length) const noexcept {
       std::string name;
       name.resize(length);
@@ -50,6 +42,19 @@ namespace ogame {
         ++index;
       }
       return name;
+    }
+
+    inline
+    const float Planet::getResourceQuantity(const std::string& name) const {
+      return 456.0f;
+    }
+
+    inline
+    const System& Planet::getSystem() const {
+      if (m_parent == nullptr) {
+        throw PlanetException(std::string("Could not retrieve system of planet ") + std::to_string(m_index) + " no associated system");
+      }
+      return *m_parent;
     }
 
   }

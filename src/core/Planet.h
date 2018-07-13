@@ -12,6 +12,7 @@ namespace ogame {
   namespace core {
 
     class System;
+    class Account;
 
     class Planet
     {
@@ -39,7 +40,11 @@ namespace ogame {
 
         const std::string& getOwnerName() const;
 
-        void assignToAccount(AccountShPtr account);
+        void assignToAccount(std::shared_ptr<Account> account);
+
+        const float getResourceQuantity(const std::string& name) const;
+
+        const System& getSystem() const;
 
       protected:
 
@@ -55,7 +60,7 @@ namespace ogame {
         std::string m_name;
         System* m_parent;
         std::vector<ResourceDepositShPtr> m_resources;
-        AccountShPtr m_account;
+        std::shared_ptr<Account> m_account;
     };
 
     using PlanetShPtr = std::shared_ptr<Planet>;
