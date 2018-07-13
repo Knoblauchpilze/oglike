@@ -2,6 +2,7 @@
 #define ACTIONLISTENER_HXX
 
 #include "ActionListener.h"
+#include "DataModelException.h"
 
 namespace ogame {
   namespace player {
