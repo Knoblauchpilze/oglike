@@ -6,6 +6,8 @@
 namespace ogame {
   namespace player {
 
+    class DataModel;
+
     class ActionListener
     {
       public:
@@ -14,10 +16,11 @@ namespace ogame {
           None,
           ChangeView,
           ChangePlanet,
-          ChangePlayer
+          ChangeAccount
         };
 
-        ActionListener(const Action& action);
+        ActionListener(const Action& action,
+                       DataModel* model);
 
         ~ActionListener();
 
@@ -27,11 +30,16 @@ namespace ogame {
 
         void setAction(const Action& action);
 
-        virtual void onActionTriggered() = 0;
+        virtual void onActionTriggered(const player::DataModel& model) = 0;
+
+      protected:
+
+        void triggerAction();
 
       private:
 
         Action m_action;
+        DataModel* m_model;
 
     };
 
