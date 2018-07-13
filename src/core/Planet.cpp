@@ -1,9 +1,8 @@
 
+#include <iostream>
 #include "Planet.h"
 #include "System.h"
 #include "PlanetException.h"
-
-#include <iostream>
 
 namespace ogame {
   namespace core {
@@ -40,6 +39,13 @@ namespace ogame {
       return m_parent->getGalaxyIndex();
     }
 
+    const std::string& Planet::getOwnerName() const {
+      if (m_account == nullptr) {
+        throw PlanetException(std::string("Could not retrieve inexisting owner's name"));
+      }
+      return m_account->getPlayerName();
+    }
+
     void Planet::assignToAccount(AccountShPtr account) {
       // Check account's validity.
       if (account == nullptr) {
@@ -61,6 +67,8 @@ namespace ogame {
                 << " at [" << getGalaxyIndex() << ":" << getSystemIndex() << ":" << m_index << "]"
                 << " to player " << account->getPlayerName()
                 << std::endl;
+
+      account->setHomePlanet(this);
     }
 
     void Planet::create() {
