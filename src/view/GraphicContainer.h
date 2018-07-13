@@ -24,7 +24,15 @@ namespace ogame {
 
         virtual void addChild(std::shared_ptr<GraphicContainer> child);
 
+        virtual void addChild(std::shared_ptr<GraphicContainer> child,
+                              const unsigned& x,
+                              const unsigned& y,
+                              const unsigned& w,
+                              const unsigned& h);
+
         virtual void removeChild(std::shared_ptr<GraphicContainer> child);
+
+        const unsigned getChildCount() const noexcept;
 
         utils::Area getRenderingArea() override;
 
@@ -62,6 +70,13 @@ namespace ogame {
 
         template <typename Type>
         bool checkChild(const Type* child, const std::string& name) const noexcept;
+
+        template <typename LayoutPtr>
+        inline
+        LayoutPtr getLayout() const;
+
+        template <typename Type>
+        bool checkLayout(const Type* layout, const std::string& type) const noexcept;
 
         // We assume that the object is locked before entering this method.
         void makeDirty();
