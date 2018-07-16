@@ -88,17 +88,6 @@ namespace ogame {
         throw AccountException(std::string("Could not set null home planet for player " + getPlayerName()));
       }
       m_planets.insert(m_planets.begin(), planet);
-      m_planets.push_back(planet);
-      m_planets.push_back(planet);
-      m_planets.push_back(planet);
-      m_planets.push_back(planet);
-      m_planets.push_back(planet);
-      m_planets.push_back(planet);
-      m_planets.push_back(planet);
-      m_planets.push_back(planet);
-      m_planets.push_back(planet);
-      m_planets.push_back(planet);
-      m_planets.push_back(planet);
       m_occupiedPlanetsSlots = m_planets.size();
       m_availablePlanetsSlots = m_planets.size();
     }
