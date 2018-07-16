@@ -11,10 +11,16 @@ namespace ogame {
 
     inline
     void OgameView::onActionTriggered(const player::DataModel& model) {
-      // Update each view.
+      // Process this action.
       try {
         const core::Planet& planet = model.getActivePlanet();
+
+        // Update each view.
         m_galaxyView->populateWithSystemData(planet.getSystem());
+
+        // Update the main panel with the corresponding view.
+        const std::string& activeView = getViewNameFromView(model.getActiveView());
+        m_generalView->setActiveChild(activeView);
       }
       catch (const core::PlanetException& e) {
         std::cerr << "[OGAME] Caught exception while setting up general view:" << std::endl << e.what() << std::endl;
@@ -46,6 +52,52 @@ namespace ogame {
 
       // Add main panel to listeners.
       addListener(m_panel.get());
+    }
+
+    inline
+    view::GraphicContainerShPtr OgameView::createGraphicContainer(const std::string& name) const {
+      return std::make_shared<view::GraphicContainer>(
+        name,
+        view::utils::Area(),
+        view::EventListener::Interaction::NoInteraction
+      );
+    }
+
+    inline
+    const std::string OgameView::getViewNameFromView(const player::DataModel::View& view) const noexcept {
+      std::string name;
+      switch (view) {
+        case player::DataModel::View::Overview:
+          name = "over_view";
+          break;
+        case player::DataModel::View::Resources:
+          name = "resources_view";
+          break;
+        case player::DataModel::View::Facilities:
+          name = "facilities_view";
+          break;
+        case player::DataModel::View::Research:
+          name = "research_view";
+          break;
+        case player::DataModel::View::Shipyard:
+          name = "shipyard_view";
+          break;
+        case player::DataModel::View::Defense:
+          name = "defens_view";
+          break;
+        case player::DataModel::View::Fleet:
+          name = "fleet_view";
+          break;
+        case player::DataModel::View::Alliance:
+          name = "alliance_view";
+          break;
+        case player::DataModel::View::Galaxy:
+        default:
+          name = "galaxy_view";
+          break;
+      }
+
+      return name;
     }
 
   }

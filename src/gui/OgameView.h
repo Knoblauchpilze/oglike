@@ -53,6 +53,10 @@ namespace ogame {
 
           void connectDataModel(player::DataModelShPtr dataModel);
 
+          view::GraphicContainerShPtr createGraphicContainer(const std::string& name) const;
+
+          const std::string getViewNameFromView(const player::DataModel::View& view) const noexcept;
+
       private:
 
         // Main panel.
@@ -69,7 +73,16 @@ namespace ogame {
         SelectorPanelShPtr m_generalView;
 
         // Galaxy view display.
+        view::GraphicContainerShPtr m_overView;
+        view::GraphicContainerShPtr m_buildingsView;
+        view::GraphicContainerShPtr m_facilitiesView;
+        view::GraphicContainerShPtr m_researchView;
+        view::GraphicContainerShPtr m_shipyardView;
+        view::GraphicContainerShPtr m_defenseView;
+        view::GraphicContainerShPtr m_fleetView;
         GalaxyViewShPtr m_galaxyView;
+        view::GraphicContainerShPtr m_allianceView;
+
 
     };
 
