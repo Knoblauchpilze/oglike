@@ -6,7 +6,7 @@
 namespace ogame {
   namespace gui {
 
-    MenuView::MenuView(const std::string& name, const View& initialView):
+    MenuView::MenuView(const std::string& name, player::DataModel* model, const player::DataModel::View& initialView):
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction,
@@ -16,6 +16,7 @@ namespace ogame {
                                0.0f,
                                this
                              )),
+      player::ActionListener(player::ActionListener::Action::ChangeView, model),
       m_highlightedView(initialView)
     {
       setBackgroundColor(SDL_Color{29, 34, 40, SDL_ALPHA_OPAQUE});
@@ -34,15 +35,15 @@ namespace ogame {
       };
 
       // Add each option.
-      StateLabelContainerShPtr overview = createStateLabelPanel(View::Overview, std::string("Overview"), colors);
-      StateLabelContainerShPtr resources = createStateLabelPanel(View::Resources, std::string("Resources"), colors);
-      StateLabelContainerShPtr facilities = createStateLabelPanel(View::Facilities, std::string("Facilities"), colors);
-      StateLabelContainerShPtr research = createStateLabelPanel(View::Research, std::string("Research"), colors);
-      StateLabelContainerShPtr shipyard = createStateLabelPanel(View::Shipyard, std::string("Shipyard"), colors);
-      StateLabelContainerShPtr defense = createStateLabelPanel(View::Defense, std::string("Defense"), colors);
-      StateLabelContainerShPtr fleet = createStateLabelPanel(View::Fleet, std::string("Fleet"), colors);
-      StateLabelContainerShPtr galaxy = createStateLabelPanel(View::Galaxy, std::string("Galaxy"), colors);
-      StateLabelContainerShPtr alliance = createStateLabelPanel(View::Alliance, std::string("Alliance"), colors);
+      StateLabelContainerShPtr overview = createStateLabelPanel(player::DataModel::View::Overview, std::string("Overview"), colors);
+      StateLabelContainerShPtr resources = createStateLabelPanel(player::DataModel::View::Resources, std::string("Resources"), colors);
+      StateLabelContainerShPtr facilities = createStateLabelPanel(player::DataModel::View::Facilities, std::string("Facilities"), colors);
+      StateLabelContainerShPtr research = createStateLabelPanel(player::DataModel::View::Research, std::string("Research"), colors);
+      StateLabelContainerShPtr shipyard = createStateLabelPanel(player::DataModel::View::Shipyard, std::string("Shipyard"), colors);
+      StateLabelContainerShPtr defense = createStateLabelPanel(player::DataModel::View::Defense, std::string("Defense"), colors);
+      StateLabelContainerShPtr fleet = createStateLabelPanel(player::DataModel::View::Fleet, std::string("Fleet"), colors);
+      StateLabelContainerShPtr galaxy = createStateLabelPanel(player::DataModel::View::Galaxy, std::string("Galaxy"), colors);
+      StateLabelContainerShPtr alliance = createStateLabelPanel(player::DataModel::View::Alliance, std::string("Alliance"), colors);
 
       if (overview == nullptr ||
           resources == nullptr ||

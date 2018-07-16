@@ -5,43 +5,35 @@
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
 #include "StateLabelContainer.h"
+#include "DataModel.h"
+#include "ActionListener.h"
 
 namespace ogame {
   namespace gui {
 
-    class MenuView: public view::GraphicContainer
+    class MenuView: public view::GraphicContainer, public player::ActionListener
     {
       public:
 
-        enum class View {
-          Overview,
-          Resources,
-          Facilities,
-          Research,
-          Shipyard,
-          Defense,
-          Fleet,
-          Galaxy,
-          Alliance
-        };
-
-        MenuView(const std::string& name, const View& initialView = View::Overview);
+        MenuView(const std::string& name, player::DataModel* model, const player::DataModel::View& initialView = player::DataModel::View::Overview);
 
         virtual ~MenuView();
+
+        void onActionTriggered(const player::DataModel& model) override;
 
       private:
 
         void createView();
 
-        StateLabelContainerShPtr createStateLabelPanel(const View& view,
+        StateLabelContainerShPtr createStateLabelPanel(const player::DataModel::View& view,
                                                        const std::string& text,
                                                        const StateContainer::StateAssociation& colors) const;
 
-        std::string getChildNameFromView(const View& view) const noexcept;
+        std::string getChildNameFromView(const player::DataModel::View& view) const noexcept;
 
       private:
 
-        View m_highlightedView;
+        player::DataModel::View m_highlightedView;
 
     };
 
