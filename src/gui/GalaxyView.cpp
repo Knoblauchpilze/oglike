@@ -9,10 +9,11 @@
 namespace ogame {
   namespace gui {
 
-    GalaxyView::GalaxyView(const unsigned& galaxyCount,
+    GalaxyView::GalaxyView(const std::string& name,
+                           const unsigned& galaxyCount,
                            const unsigned& systemCount,
                            const unsigned& planetCount):
-      view::GraphicContainer(std::string("Galaxy view"),
+      view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::MouseButton)
     {

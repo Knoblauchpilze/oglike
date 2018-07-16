@@ -14,7 +14,8 @@ namespace ogame {
     {
       public:
 
-        GalaxyView(const unsigned& galaxyCount,
+        GalaxyView(const std::string& name,
+                   const unsigned& galaxyCount,
                    const unsigned& systemCount,
                    const unsigned& planetCount);
 
