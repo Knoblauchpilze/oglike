@@ -16,9 +16,8 @@ namespace ogame {
     {
       public:
 
-        SelectorPanel(const std::string& name
-                      );
-        
+        SelectorPanel(const std::string& name);
+
         virtual ~SelectorPanel();
 
         void addChild(std::shared_ptr<GraphicContainer> child) override;
