@@ -9,7 +9,12 @@ namespace ogame {
   namespace gui {
 
     inline
-    StateLabelContainerShPtr MenuView::createStateLabelPanel(const View& view,
+    void MenuView::onActionTriggered(const player::DataModel& model) {
+      // No specific action should trigger the menu view.
+    }
+
+    inline
+    StateLabelContainerShPtr MenuView::createStateLabelPanel(const player::DataModel::View& view,
                                                              const std::string& text,
                                                              const StateContainer::StateAssociation& colors) const
     {
@@ -29,34 +34,34 @@ namespace ogame {
     }
 
     inline
-    std::string MenuView::getChildNameFromView(const View& view) const noexcept {
+    std::string MenuView::getChildNameFromView(const player::DataModel::View& view) const noexcept {
       std::string name;
       switch (view) {
-        case View::Resources:
+        case player::DataModel::View::Resources:
           name = "resources_view";
           break;
-        case View::Facilities:
+        case player::DataModel::View::Facilities:
           name = "facilities_view";
           break;
-        case View::Research:
+        case player::DataModel::View::Research:
           name = "research_view";
           break;
-        case View::Shipyard:
+        case player::DataModel::View::Shipyard:
           name = "shipyard_view";
           break;
-        case View::Defense:
+        case player::DataModel::View::Defense:
           name = "defense_view";
           break;
-        case View::Fleet:
+        case player::DataModel::View::Fleet:
           name = "fleet_view";
           break;
-        case View::Galaxy:
+        case player::DataModel::View::Galaxy:
           name = "galaxy_view";
           break;
-        case View::Alliance:
+        case player::DataModel::View::Alliance:
           name = "alliance_view";
           break;
-        case View::Overview:
+        case player::DataModel::View::Overview:
         default:
           name = "over_view";
           break;
