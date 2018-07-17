@@ -47,6 +47,8 @@ namespace ogame {
     StateLabelContainerShPtr
     ComponentFactory::createStateLabelPanel(const std::string& name,
                                             const std::string& text,
+                                            const player::View& view,
+                                            player::DataModel* model,
                                             view::ColoredFontShPtr font,
                                             view::ColoredFontShPtr highlightFont,
                                             const StateContainer::StateAssociation& colors,
@@ -55,6 +57,8 @@ namespace ogame {
       return std::make_shared<StateLabelContainer>(
         name,
         text,
+        view,
+        model,
         font,
         (highlightFont == nullptr ? font : highlightFont),
         colors,
