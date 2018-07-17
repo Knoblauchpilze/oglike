@@ -2,6 +2,7 @@
 #define ABSTRACTDATAMODEL_HXX
 
 #include "AbstractDataModel.h"
+#include "DataModelException.h"
 
 namespace ogame {
   namespace player {
@@ -9,7 +10,8 @@ namespace ogame {
     template <typename Action>
     AbstractDataModel<Action>::AbstractDataModel(const std::string& name):
       m_name(name),
-      m_listeners()
+      m_listeners(),
+      m_properties()
     {
       // Nothing to do.
     }
@@ -48,6 +50,40 @@ namespace ogame {
             listener->onActionTriggered(*this);
           }
         }
+      }
+    }
+
+    template <typename Action>
+    template <typename Property>
+    void AbstractDataModel<Action>::addProperty(const std::string& name, Property* property) {
+      if (property == nullptr) {
+        throw DataModelException(std::string("Cannot add property ") + name + ", invalid null property");
+      }
+
+      // Try to find the property in the internal table.
+      typename Properties::iterator propertyIterator = m_properties.find(name);
+      if (propertyIterator != m_properties.end()) {
+        throw DataModelException(std::string("Cannot add duplicated property ") + name + " in model " + getName());
+      }
+
+      m_properties[name] = reinterpret_cast<void*>(property);
+    }
+
+    template <typename Action>
+    template <typename Property>
+    void AbstractDataModel<Action>::setProperty(const std::string& name, Property* property) {
+      if (property == nullptr) {
+        throw DataModelException(std::string("Cannot set property ") + name + ", invalid null property");
+      }
+
+      // Try to find the property in the internal table.
+      typename Properties::iterator propertyIterator = m_properties.find(name);
+      if (propertyIterator == m_properties.end()) {
+        // Add this property.
+        addProperty(name, property);
+      }
+      else {
+        m_properties[name] = property;
       }
     }
 

@@ -19,9 +19,12 @@ namespace ogame {
 
         ~AbstractActionListener();
 
-        virtual void onActionTriggered(const player::AbstractDataModel<Action>& model) = 0;
+        virtual void onActionTriggered(const player::AbstractDataModel<Action>& model);
 
-      protected:
+      public:
+
+        template <typename Property>
+        void setProperty(const std::string& name, Property* property);
 
         void triggerAction(const Action& action);
 

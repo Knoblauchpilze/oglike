@@ -27,12 +27,20 @@ namespace ogame {
 
         void triggerAction(const Action& action);
 
+        template <typename Property>
+        void addProperty(const std::string& name, Property* property);
+
+        template <typename Property>
+        void setProperty(const std::string& name, Property* property);
+
       private:
 
         using ListenersByAction = std::map<Action, std::vector<AbstractActionListener<Action>*>>;
+        using Properties = std::unordered_map<std::string, void*>;
 
         std::string m_name;
         ListenersByAction m_listeners;
+        Properties m_properties;
 
     };
 
