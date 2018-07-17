@@ -22,6 +22,7 @@ namespace ogame {
       unlock();
       assignColorFromState(m_state);
       lock();
+      onStateModified();
       makeDirty();
       unlock();
     }
@@ -32,36 +33,21 @@ namespace ogame {
       const float x = static_cast<float>(mouseMotionEvent.x);
       const float y = static_cast<float>(mouseMotionEvent.y);
 
-      // std::cout << "-----" << std::endl;
       if (isInside(x, y) && m_state != State::Selected) {
         if (m_state != State::Highlighted) {
-          // std::cout << "[STATE] " << getName()
-          //           << " mouse: " << x << "x" << y
-          //           << ", area=" << getRenderingAreaPrivate().x() << "x" << getRenderingAreaPrivate().y()
-          //           << " dims=" << getRenderingAreaPrivate().w() << "x" << getRenderingAreaPrivate().h()
-          //           << ", state was " << (m_state == State::Selected ? "selected" : m_state == State::Highlighted ? "highlighted": "normal")
-          //           << " and is now highlighted"
-          //           << std::endl;
           m_state = State::Highlighted;
+          onStateModified();
           assignColorFromState(m_state);
         }
       }
-      // std::cout << "-----" << std::endl;
-      // std::cout << "*****" << std::endl;
+
       if (!isInside(x, y) && m_state != State::Normal) {
         if (m_state != State::Selected) {
-          // std::cout << "[STATE] " << getName()
-          //           << " mouse: " << x << "x" << y
-          //           << ", area=" << getRenderingAreaPrivate().x() << "x" << getRenderingAreaPrivate().y()
-          //           << " dims=" << getRenderingAreaPrivate().w() << "x" << getRenderingAreaPrivate().h()
-          //           << ", state was " << (m_state == State::Selected ? "selected" : m_state == State::Highlighted ? "highlighted": "normal")
-          //           << " and is now normal"
-          //           << std::endl;
           m_state = State::Normal;
+          onStateModified();
           assignColorFromState(m_state);
         }
       }
-      // std::cout << "*****" << std::endl;
     }
 
     inline
@@ -72,10 +58,12 @@ namespace ogame {
 
       if (isInside(x, y) && m_state != State::Selected) {
         m_state = State::Selected;
+        onStateModified();
         assignColorFromState(m_state);
       }
       if (!isInside(x, y) && m_state != State::Normal) {
         m_state = State::Normal;
+        onStateModified();
         assignColorFromState(m_state);
       }
     }
