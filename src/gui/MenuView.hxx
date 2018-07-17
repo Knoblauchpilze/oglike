@@ -10,17 +10,24 @@ namespace ogame {
 
     inline
     void MenuView::onActionTriggered(const player::DataModel& model) {
-      // No specific action should trigger the menu view.
+      // This slot is updated by internal children containers to update the active view.
+      // We should propagate this information to the global data model.
+      // First retrieve the active view based on the internal data model and set it as the new
+      // active view of the global model.
+      // In the meantime the data model will fire an action for the specified view so this is all good.
+      setActiveView(model.getActiveView());
     }
 
     inline
-    StateLabelContainerShPtr MenuView::createStateLabelPanel(const player::DataModel::View& view,
+    StateLabelContainerShPtr MenuView::createStateLabelPanel(const player::View& view,
                                                              const std::string& text,
                                                              const StateContainer::StateAssociation& colors) const
     {
       return ComponentFactory::createStateLabelPanel(
         getChildNameFromView(view),
         text,
+        view,
+        m_model.get(),
         view::FontFactory::getInstance().createColoredFont(
           std::string("data/fonts/tahomabd.ttf"),
           128, 128, 128
@@ -34,34 +41,34 @@ namespace ogame {
     }
 
     inline
-    std::string MenuView::getChildNameFromView(const player::DataModel::View& view) const noexcept {
+    std::string MenuView::getChildNameFromView(const player::View& view) const noexcept {
       std::string name;
       switch (view) {
-        case player::DataModel::View::Resources:
+        case player::View::Resources:
           name = "resources_view";
           break;
-        case player::DataModel::View::Facilities:
+        case player::View::Facilities:
           name = "facilities_view";
           break;
-        case player::DataModel::View::Research:
+        case player::View::Research:
           name = "research_view";
           break;
-        case player::DataModel::View::Shipyard:
+        case player::View::Shipyard:
           name = "shipyard_view";
           break;
-        case player::DataModel::View::Defense:
+        case player::View::Defense:
           name = "defense_view";
           break;
-        case player::DataModel::View::Fleet:
+        case player::View::Fleet:
           name = "fleet_view";
           break;
-        case player::DataModel::View::Galaxy:
+        case player::View::Galaxy:
           name = "galaxy_view";
           break;
-        case player::DataModel::View::Alliance:
+        case player::View::Alliance:
           name = "alliance_view";
           break;
-        case player::DataModel::View::Overview:
+        case player::View::Overview:
         default:
           name = "over_view";
           break;

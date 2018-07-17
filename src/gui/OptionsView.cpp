@@ -11,7 +11,7 @@ namespace ogame {
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction),
-      player::ActionListener(player::ActionListener::Action::ChangeAccount, model)
+      player::ActionListener(model)
     {
       setBackgroundColor(SDL_Color{0, 0, 0, SDL_ALPHA_OPAQUE});
 

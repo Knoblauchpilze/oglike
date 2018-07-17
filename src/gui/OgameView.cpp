@@ -18,7 +18,7 @@ namespace ogame {
                         std::string("data/icon.bmp"),
                         width,
                         height),
-      player::ActionListener(player::ActionListener::Action::ChangePlanet, dataModel.get()),
+      player::ActionListener(dataModel.get()),
 
       m_panel(nullptr),
 
@@ -110,15 +110,15 @@ namespace ogame {
                                         const unsigned& planetCount)
     {
       // Create the views.
-      m_overView = createGraphicContainer(getViewNameFromView(player::DataModel::View::Overview));
-      m_buildingsView = createGraphicContainer(getViewNameFromView(player::DataModel::View::Resources));
-      m_facilitiesView = createGraphicContainer(getViewNameFromView(player::DataModel::View::Facilities));
-      m_researchView = createGraphicContainer(getViewNameFromView(player::DataModel::View::Research));
-      m_shipyardView = createGraphicContainer(getViewNameFromView(player::DataModel::View::Shipyard));
-      m_defenseView = createGraphicContainer(getViewNameFromView(player::DataModel::View::Defense));
-      m_fleetView = createGraphicContainer(getViewNameFromView(player::DataModel::View::Fleet));
-      m_galaxyView = std::make_shared<GalaxyView>(getViewNameFromView(player::DataModel::View::Galaxy), galaxyCount, systemCount, planetCount);
-      m_allianceView = createGraphicContainer(getViewNameFromView(player::DataModel::View::Alliance));
+      m_overView = createGraphicContainer(getViewNameFromView(player::View::Overview));
+      m_buildingsView = createGraphicContainer(getViewNameFromView(player::View::Resources));
+      m_facilitiesView = createGraphicContainer(getViewNameFromView(player::View::Facilities));
+      m_researchView = createGraphicContainer(getViewNameFromView(player::View::Research));
+      m_shipyardView = createGraphicContainer(getViewNameFromView(player::View::Shipyard));
+      m_defenseView = createGraphicContainer(getViewNameFromView(player::View::Defense));
+      m_fleetView = createGraphicContainer(getViewNameFromView(player::View::Fleet));
+      m_galaxyView = std::make_shared<GalaxyView>(getViewNameFromView(player::View::Galaxy), galaxyCount, systemCount, planetCount);
+      m_allianceView = createGraphicContainer(getViewNameFromView(player::View::Alliance));
 
       // Add each one as a child of the general view for event propagation purposes.
       m_generalView->addChild(m_overView);
@@ -136,13 +136,13 @@ namespace ogame {
 
     void OgameView::connectDataModel(player::DataModelShPtr dataModel) {
       // Connect each view to its dedicated slot in the data model.
-      dataModel->registerForAction(player::ActionListener::Action::ChangeAccount, m_planetsView.get());
-      dataModel->registerForAction(player::ActionListener::Action::ChangeAccount, m_optionsView.get());
+      dataModel->registerForAction(player::Action::ChangeAccount, m_planetsView.get());
+      dataModel->registerForAction(player::Action::ChangeAccount, m_optionsView.get());
 
-      dataModel->registerForAction(player::ActionListener::Action::ChangePlanet, m_resourcesView.get());
-      dataModel->registerForAction(player::ActionListener::Action::ChangePlanet, this);
+      dataModel->registerForAction(player::Action::ChangePlanet, m_resourcesView.get());
+      dataModel->registerForAction(player::Action::ChangePlanet, this);
 
-      dataModel->registerForAction(player::ActionListener::Action::ChangeView, this);
+      dataModel->registerForAction(player::Action::ChangeView, this);
     }
 
   }

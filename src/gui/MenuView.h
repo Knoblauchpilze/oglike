@@ -15,7 +15,7 @@ namespace ogame {
     {
       public:
 
-        MenuView(const std::string& name, player::DataModel* model, const player::DataModel::View& initialView = player::DataModel::View::Overview);
+        MenuView(const std::string& name, player::DataModel* model, const player::View& initialView = player::View::Overview);
 
         virtual ~MenuView();
 
@@ -25,15 +25,17 @@ namespace ogame {
 
         void createView();
 
-        StateLabelContainerShPtr createStateLabelPanel(const player::DataModel::View& view,
+        StateLabelContainerShPtr createStateLabelPanel(const player::View& view,
                                                        const std::string& text,
                                                        const StateContainer::StateAssociation& colors) const;
 
-        std::string getChildNameFromView(const player::DataModel::View& view) const noexcept;
+        std::string getChildNameFromView(const player::View& view) const noexcept;
+
+        void connectDataModel();
 
       private:
 
-        player::DataModel::View m_highlightedView;
+        player::DataModelShPtr m_model;
 
     };
 
