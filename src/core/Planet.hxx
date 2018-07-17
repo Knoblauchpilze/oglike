@@ -46,7 +46,17 @@ namespace ogame {
 
     inline
     const float Planet::getResourceQuantity(const std::string& name) const {
-      return 456.0f;
+      // Search across the resource deposit for this planet.
+      unsigned indexDeposit = 0u;
+      while (indexDeposit < m_resources.size()) {
+        if (m_resources[indexDeposit] != nullptr && m_resources[indexDeposit]->getResourceName() == name) {
+          return m_resources[indexDeposit]->getValue();
+        }
+        ++indexDeposit;
+      }
+
+      // If no deposit for this resource exists on this planet, assume the quantity is 0.
+      return 0.0f;
     }
 
     inline
