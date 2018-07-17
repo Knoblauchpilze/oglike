@@ -14,12 +14,14 @@ namespace ogame {
 
     inline
     void StateLabelContainer::onStateModified() {
-      lock();
+      // Call the parent method
+      ActionProviderStateContainer::onStateModified();
 
+      // Update internal attributes.
       m_highlightChanged = true;
 
+      // Flag for redraw.
       makeDeepDirty();
-      unlock();
     }
 
     inline

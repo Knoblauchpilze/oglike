@@ -7,14 +7,18 @@ namespace ogame {
 
     StateLabelContainer::StateLabelContainer(const std::string& name,
                                              const std::string& text,
+                                             const player::View& view,
+                                             player::DataModel* model,
                                              view::ColoredFontShPtr font,
                                              view::ColoredFontShPtr highlightFont,
                                              const StateContainer::StateAssociation& colors,
                                              const StateContainer::FailPolicy& policy):
-      StateContainer(name,
-                     StateContainer::State::Normal,
-                     colors,
-                     policy),
+      ActionProviderStateContainer(name,
+                                   StateContainer::State::Normal,
+                                   colors,
+                                   view,
+                                   model,
+                                   policy),
       m_textChanged(true),
       m_text(text),
       
