@@ -2,43 +2,40 @@
 #define ACTIONLISTENER_H
 
 #include <memory>
+#include "DataModel.h"
 
 namespace ogame {
   namespace player {
 
     class DataModel;
+    enum class View;
+
+    // Enumeration to describe available actions.
+    enum class Action {
+      None,
+      ChangeView,
+      ChangePlanet,
+      ChangeAccount
+    };
 
     class ActionListener
     {
       public:
 
-        enum class Action {
-          None,
-          ChangeView,
-          ChangePlanet,
-          ChangeAccount
-        };
-
-        ActionListener(const Action& action,
-                       DataModel* model);
+        ActionListener(DataModel* model);
 
         ~ActionListener();
-
-        const Action& getAction() const noexcept;
-
-        const bool hasAction() const noexcept;
-
-        void setAction(const Action& action);
 
         virtual void onActionTriggered(const player::DataModel& model) = 0;
 
       protected:
 
-        void triggerAction();
+        void setActiveView(const View& view);
+
+        void triggerAction(const Action& action);
 
       private:
 
-        Action m_action;
         DataModel* m_model;
 
     };

@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include <map>
 #include "ActionListener.h"
 #include "Account.h"
 #include "Planet.h"
@@ -11,30 +12,35 @@ namespace ogame {
   namespace player {
 
     class ActionListener;
+    enum class Action;
+
+    // Enumeration to describe available views.
+    enum class View {
+      Overview,
+      Resources,
+      Facilities,
+      Research,
+      Shipyard,
+      Defense,
+      Fleet,
+      Galaxy,
+      Alliance
+    };
 
     class DataModel
     {
       public:
 
-        enum class View {
-          Overview,
-          Resources,
-          Facilities,
-          Research,
-          Shipyard,
-          Defense,
-          Fleet,
-          Galaxy,
-          Alliance
-        };
-
-        DataModel(const View& initView);
+        DataModel(const std::string& name,
+                  const View& initView);
 
         ~DataModel();
 
-        void registerForAction(const ActionListener::Action& action, ActionListener* listener);
+        const std::string& getName() const noexcept;
 
-        void triggerAction(const ActionListener::Action& action);
+        void registerForAction(const Action& action, ActionListener* listener);
+
+        void triggerAction(const Action& action);
 
         void setActiveAccount(core::Account* account);
 
@@ -50,7 +56,10 @@ namespace ogame {
 
       private:
 
-        std::vector<ActionListener*> m_listeners;
+        using ListenersByAction = std::map<Action, std::vector<ActionListener*>>;
+
+        std::string m_name;
+        ListenersByAction m_listeners;
         core::Account* m_activeAccount;
         core::Planet* m_activePlanet;
         View m_activeView;
