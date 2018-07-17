@@ -7,12 +7,17 @@ namespace ogame {
   namespace core {
 
     inline
-    const float& ResourceDeposit::getValue() const {
+    const std::string& ResourceDeposit::getResourceName() const noexcept {
+      return m_resource.getName();
+    }
+
+    inline
+    const float& ResourceDeposit::getValue() const noexcept {
       return m_value;
     }
 
     inline
-    const float& ResourceDeposit::getCapacity() const {
+    const float& ResourceDeposit::getCapacity() const noexcept {
       return m_capacity;
     }
 
