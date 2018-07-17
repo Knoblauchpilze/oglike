@@ -16,9 +16,11 @@ namespace ogame {
 
         virtual ~ResourceDeposit();
 
-        const float& getValue() const;
+        const std::string& getResourceName() const noexcept;
 
-        const float& getCapacity() const;
+        const float& getValue() const noexcept;
+
+        const float& getCapacity() const noexcept;
 
       protected:
 
