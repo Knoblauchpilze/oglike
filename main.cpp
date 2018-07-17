@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
   }
 
   // Instantiate the data model.
-  ogame::player::DataModelShPtr dataModel = std::make_shared<ogame::player::DataModel>(ogame::player::DataModel::View::Galaxy);
+  ogame::player::DataModelShPtr dataModel = std::make_shared<ogame::player::DataModel>(std::string("general_model"), ogame::player::View::Galaxy);
 
   // Instantiate the main view.
   const unsigned screenWidth = std::stoi(parser.getOptionValue("--width"));
@@ -106,7 +106,7 @@ int main(int argc, char* argv[])
     // view->populateOptionsView(*account);
     dataModel->setActiveAccount(account.get());
     dataModel->setActivePlanet(&account->getHomeWorld());
-    dataModel->setActiveView(ogame::player::DataModel::View::Galaxy);
+    dataModel->setActiveView(ogame::player::View::Galaxy);
   }
   catch (const ogame::gui::GuiException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
