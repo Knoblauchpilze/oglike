@@ -16,7 +16,7 @@ namespace ogame {
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction),
-      player::ActionListener(player::ActionListener::Action::ChangeAccount, model),
+      player::ActionListener(model),
       m_planetCount(planetCount)
     {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});

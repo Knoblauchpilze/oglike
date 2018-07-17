@@ -20,6 +20,7 @@ namespace ogame {
 
         // Update the main panel with the corresponding view.
         const std::string& activeView = getViewNameFromView(model.getActiveView());
+
         m_generalView->setActiveChild(activeView);
       }
       catch (const core::PlanetException& e) {
@@ -64,34 +65,34 @@ namespace ogame {
     }
 
     inline
-    const std::string OgameView::getViewNameFromView(const player::DataModel::View& view) const noexcept {
+    const std::string OgameView::getViewNameFromView(const player::View& view) const noexcept {
       std::string name;
       switch (view) {
-        case player::DataModel::View::Overview:
+        case player::View::Overview:
           name = "over_view";
           break;
-        case player::DataModel::View::Resources:
+        case player::View::Resources:
           name = "resources_view";
           break;
-        case player::DataModel::View::Facilities:
+        case player::View::Facilities:
           name = "facilities_view";
           break;
-        case player::DataModel::View::Research:
+        case player::View::Research:
           name = "research_view";
           break;
-        case player::DataModel::View::Shipyard:
+        case player::View::Shipyard:
           name = "shipyard_view";
           break;
-        case player::DataModel::View::Defense:
+        case player::View::Defense:
           name = "defens_view";
           break;
-        case player::DataModel::View::Fleet:
+        case player::View::Fleet:
           name = "fleet_view";
           break;
-        case player::DataModel::View::Alliance:
+        case player::View::Alliance:
           name = "alliance_view";
           break;
-        case player::DataModel::View::Galaxy:
+        case player::View::Galaxy:
         default:
           name = "galaxy_view";
           break;

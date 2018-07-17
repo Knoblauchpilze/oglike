@@ -55,7 +55,7 @@ namespace ogame {
 
           view::GraphicContainerShPtr createGraphicContainer(const std::string& name) const;
 
-          const std::string getViewNameFromView(const player::DataModel::View& view) const noexcept;
+          const std::string getViewNameFromView(const player::View& view) const noexcept;
 
       private:
 

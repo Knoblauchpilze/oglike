@@ -16,7 +16,7 @@ namespace ogame {
                                20.0f,
                                this
                              )),
-      player::ActionListener(player::ActionListener::Action::ChangePlanet, model)
+      player::ActionListener(model)
     {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
 
