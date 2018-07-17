@@ -4,18 +4,20 @@
 #include <memory>
 #include <vector>
 #include <SDL/SDL.h>
-#include "StateContainer.h"
+#include "ActionProviderStateContainer.h"
 #include "ColoredFont.h"
 
 namespace ogame {
   namespace gui {
 
-    class StateLabelContainer: public StateContainer
+    class StateLabelContainer: public ActionProviderStateContainer
     {
       public:
 
         StateLabelContainer(const std::string& name,
                             const std::string& text,
+                            const player::View& view,
+                            player::DataModel* model,
                             view::ColoredFontShPtr font,
                             view::ColoredFontShPtr highlightFont,
                             const StateContainer::StateAssociation& colors = StateContainer::StateAssociation(),
