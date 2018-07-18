@@ -8,10 +8,10 @@ namespace ogame {
                                                                const State& initState,
                                                                const StateAssociation& colors,
                                                                const player::View& view,
-                                                               player::DataModel* model,
+                                                               player::AbstractDataModel<player::Action>* model,
                                                                const FailPolicy& policy):
       StateContainer(name, initState, colors, policy),
-      player::ActionListener(model),
+      player::AbstractActionListener<player::Action>(model),
       m_view(view)
     {
       // Nothing to do here.

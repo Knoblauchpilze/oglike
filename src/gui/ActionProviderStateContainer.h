@@ -5,12 +5,12 @@
 #include <vector>
 #include <SDL/SDL.h>
 #include "StateContainer.h"
-#include "ActionListener.h"
+#include "DataModelImplementation.h"
 
 namespace ogame {
   namespace gui {
 
-    class ActionProviderStateContainer: public StateContainer, public player::ActionListener
+    class ActionProviderStateContainer: public StateContainer, public player::GeneralActionListener
     {
       public:
 
@@ -18,13 +18,13 @@ namespace ogame {
                                      const State& initState,
                                      const StateAssociation& colors,
                                      const player::View& view,
-                                     player::DataModel* model,
+                                     player::GeneralDataModel* model,
                                      const FailPolicy& policy = FailPolicy::Aggressive);
 
         virtual ~ActionProviderStateContainer();
 
         // Nothing to do at this level.
-        virtual void onActionTriggered(const player::DataModel& model);
+        virtual void onActionTriggered(const player::AbstractDataModel<player::Action>& model);
 
       protected:
 
