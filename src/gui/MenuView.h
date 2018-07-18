@@ -5,37 +5,31 @@
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
 #include "StateLabelContainer.h"
-#include "DataModel.h"
-#include "ActionListener.h"
+#include "DataModelImplementation.h"
 
 namespace ogame {
   namespace gui {
 
-    class MenuView: public view::GraphicContainer, public player::ActionListener
+    class MenuView: public view::GraphicContainer
     {
       public:
 
-        MenuView(const std::string& name, player::DataModel* model, const player::View& initialView = player::View::Overview);
+        MenuView(const std::string& name, player::GeneralDataModel* model, const player::View& initialView = player::View::Overview);
 
         virtual ~MenuView();
 
-        void onActionTriggered(const player::DataModel& model) override;
-
       private:
 
-        void createView();
+        void createView(player::GeneralDataModel* model);
 
         StateLabelContainerShPtr createStateLabelPanel(const player::View& view,
                                                        const std::string& text,
-                                                       const StateContainer::StateAssociation& colors) const;
+                                                       const StateContainer::StateAssociation& colors,
+                                                       player::GeneralDataModel* model) const;
 
         std::string getChildNameFromView(const player::View& view) const noexcept;
 
-        void connectDataModel();
-
       private:
-
-        player::DataModelShPtr m_model;
 
     };
 
