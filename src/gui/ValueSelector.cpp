@@ -8,6 +8,7 @@ namespace ogame {
   namespace gui {
 
     ValueSelector::ValueSelector(const std::string& name,
+                                 player::GeneralDataModel* model,
                                  view::ColoredFontShPtr font,
                                  const std::vector<std::string>& options):
       view::GraphicContainer(name,
@@ -18,6 +19,7 @@ namespace ogame {
                                0.0f, 0.0f,
                                this
                              )),
+      player::GeneralActionListener(model),
       m_selectedOption(0u),
       m_options(options)
     {
@@ -58,14 +60,40 @@ namespace ogame {
       unlock();
     }
 
+    void ValueSelector::onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) {
+      if (mask == view::EventListener::Interaction::MouseButtonReleased) {
+        // Update the value displayed in this selector.
+        if (origin == std::string("left_switch")) {
+          lock();
+          const unsigned optionToSet = (m_selectedOption + m_options.size() - 1u) % m_options.size();
+          unlock();
+          setActiveOption(optionToSet);
+        }
+        else if (origin == std::string("right_switch")) {
+          lock();
+          const unsigned optionToSet = (m_selectedOption + 1u) % m_options.size();
+          unlock();
+          setActiveOption(optionToSet);
+        }
+      }
+    }
+
     void ValueSelector::createView(view::ColoredFontShPtr font)
     {
       // Left switch option.
-      PictureContainerShPtr left = ComponentFactory::createPicturePanel(std::string("left_switch"), std::string("data/img/switch_left.bmp"));
+      PictureContainerShPtr left = ComponentFactory::createPicturePanel(
+        std::string("left_switch"),
+        std::string("data/img/switch_left.bmp"),
+        view::EventListener::Interaction::MouseButtonReleased
+      );
       // The main label.
       LabelContainerShPtr label = ComponentFactory::createLabelPanel(std::string("current_value"), std::string(""), font);
       // Right switch option.
-      PictureContainerShPtr right = ComponentFactory::createPicturePanel(std::string("right_switch"), std::string("data/img/switch_right.bmp"));
+      PictureContainerShPtr right = ComponentFactory::createPicturePanel(
+        std::string("right_switch"),
+        std::string("data/img/switch_right.bmp"),
+        view::EventListener::Interaction::MouseButtonReleased
+      );
 
       if (left == nullptr ||
           label == nullptr ||
@@ -77,6 +105,9 @@ namespace ogame {
       addChild(left);
       addChild(label);
       addChild(right);
+
+      left->addEventListener(this);
+      right->addEventListener(this);
 
       label->setBackgroundColor({255, 255, 255, SDL_ALPHA_OPAQUE});
     }
