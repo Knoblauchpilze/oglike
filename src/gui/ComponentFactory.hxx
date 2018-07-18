@@ -9,11 +9,13 @@ namespace ogame {
     inline
     PictureContainerShPtr
     ComponentFactory::createPicturePanel(const std::string& name,
-                                         const std::string& file)
+                                         const std::string& file,
+                                         const view::EventListener::Interaction::Mask& mask)
     {
       return std::make_shared<PictureContainer>(
         name,
-        file
+        file,
+        mask
       );
     }
 
@@ -69,11 +71,13 @@ namespace ogame {
     inline
     ValueSelectorShPtr
     ComponentFactory::createValueSelectorPanel(const std::string& name,
+                                               player::GeneralDataModel* model,
                                                view::ColoredFontShPtr font,
                                                const std::vector<std::string>& options)
     {
       return std::make_shared<ValueSelector>(
         name,
+        model,
         font,
         options
       );

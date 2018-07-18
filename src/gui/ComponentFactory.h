@@ -23,7 +23,8 @@ namespace ogame {
         static
         PictureContainerShPtr
         createPicturePanel(const std::string& name,
-                           const std::string& file);
+                           const std::string& file,
+                           const view::EventListener::Interaction::Mask& mask = view::EventListener::Interaction::NoInteraction);
 
         static
         SwitchPictureContainerShPtr
@@ -42,7 +43,7 @@ namespace ogame {
         createStateLabelPanel(const std::string& name,
                               const std::string& text,
                               const player::View& view,
-                              player::AbstractDataModel<player::Action>* model,
+                              player::GeneralDataModel* model,
                               view::ColoredFontShPtr font,
                               view::ColoredFontShPtr highlightFont = nullptr,
                               const StateContainer::StateAssociation& colors = StateContainer::StateAssociation(),
@@ -51,6 +52,7 @@ namespace ogame {
         static
         ValueSelectorShPtr
         createValueSelectorPanel(const std::string& name,
+                                 player::GeneralDataModel* model,
                                  view::ColoredFontShPtr font,
                                  const std::vector<std::string>& options = std::vector<std::string>());
 
