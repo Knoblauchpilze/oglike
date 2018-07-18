@@ -9,7 +9,8 @@ namespace ogame {
       None,
       ChangeView,
       ChangePlanet,
-      ChangeAccount
+      ChangeAccount,
+      ChangeSystem
     };
 
     // Enumeration to describe available views.
