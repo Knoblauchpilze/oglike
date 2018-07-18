@@ -13,10 +13,11 @@
 #include "Universe.h"
 #include "Account.h"
 
-#include "DataModel.h"
-
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
+
+#include "AbstractDataModel.h"
+#include "AbstractActionListener.h"
 
 int main(int argc, char* argv[])
 {
@@ -73,7 +74,9 @@ int main(int argc, char* argv[])
   }
 
   // Instantiate the data model.
-  ogame::player::DataModelShPtr dataModel = std::make_shared<ogame::player::DataModel>(std::string("general_model"), ogame::player::View::Galaxy);
+  std::shared_ptr<ogame::player::AbstractDataModel<ogame::player::Action>> dataModel = nullptr;
+  dataModel = std::make_shared<ogame::player::AbstractDataModel<ogame::player::Action>>(std::string("general_model"));
+  std::shared_ptr<ogame::player::View> activeView = std::make_shared<ogame::player::View>(ogame::player::View::Galaxy);
 
   // Instantiate the main view.
   const unsigned screenWidth = std::stoi(parser.getOptionValue("--width"));
@@ -99,14 +102,11 @@ int main(int argc, char* argv[])
     return 1;
   }
 
-  // Populate the main view.
+  // Populate the data model.
   try {
-    // view->populateGalaxyView((*universe)[0][0]);
-    // view->populateResourcesView((*universe)[0][0][2]);
-    // view->populateOptionsView(*account);
-    dataModel->setActiveAccount(account.get());
-    dataModel->setActivePlanet(&account->getHomeWorld());
-    dataModel->setActiveView(ogame::player::View::Galaxy);
+    dataModel->addProperty(std::string("active_account"), ogame::player::Action::ChangeAccount, account.get());
+    dataModel->addProperty(std::string("active_planet"), ogame::player::Action::ChangePlanet, &account->getHomeWorld());
+    dataModel->addProperty(std::string("active_view"), ogame::player::Action::ChangeView, activeView.get());
   }
   catch (const ogame::gui::GuiException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
