@@ -6,21 +6,20 @@
 #include "GraphicContainer.h"
 #include "LabelledPicture.h"
 #include "Planet.h"
-#include "ActionListener.h"
-#include "DataModel.h"
+#include "DataModelImplementation.h"
 
 namespace ogame {
   namespace gui {
 
-    class ResourcesView: public view::GraphicContainer, public player::ActionListener
+    class ResourcesView: public view::GraphicContainer, public player::GeneralActionListener
     {
       public:
 
-        ResourcesView(const std::string& name, player::DataModel* model);
+        ResourcesView(const std::string& name, player::GeneralDataModel* model);
 
         virtual ~ResourcesView();
 
-        void onActionTriggered(const player::DataModel& model);
+        void onActionTriggered(const player::GeneralDataModel& model);
 
       private:
 

@@ -10,13 +10,13 @@ namespace ogame {
   namespace gui {
 
     PlanetsView::PlanetsView(const std::string& name,
-                             player::DataModel* model,
+                             player::GeneralDataModel* model,
                              const unsigned& planetCount,
                              const std::vector<core::Planet>& planets):
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction),
-      player::ActionListener(model),
+      player::GeneralActionListener(model),
       m_planetCount(planetCount)
     {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
@@ -26,27 +26,28 @@ namespace ogame {
 
     PlanetsView::~PlanetsView() {}
 
-    void PlanetsView::onActionTriggered(const player::DataModel& model) {
+    void PlanetsView::onActionTriggered(const player::GeneralDataModel& model) {
       lock();
 
       // Update each planet.
       try {
-        const core::Account& account = model.getActiveAccount();
+        const core::Account* account = model.getProperty<const core::Account>(std::string("active_account"));
 
-        m_planetCount = account.getAvailablePlanetsSlots();
+        m_planetCount = account->getAvailablePlanetsSlots();
 
         LabelContainer* planetCount = getChild<LabelContainer*>(std::string("planet_count_info_panel"));
         if (checkChild(planetCount, std::string("Planet count information"))) {
           planetCount->setText(
-            std::to_string(account.getOccupiedPlanetsSlots()) +
+            std::to_string(account->getOccupiedPlanetsSlots()) +
             "/" +
             std::to_string(m_planetCount) +
             " planet" + (m_planetCount > 1 ? "s" : "")
           );
         }
 
-        const std::vector<core::Planet*>& planets = account.getPlanets();
-        const core::Planet& activePlanet = model.getActivePlanet();
+        const std::vector<core::Planet*>& planets = account->getPlanets();
+        // const core::Planet* activePlanet = model.getProperty<const core::Planet>(std::string("active_planet"));
+        // TODO: Highlight active planet
 
         view::GridLayout* grid = getLayout<view::GridLayout*>();
         if (!checkLayout(grid, "grid layout")) {
