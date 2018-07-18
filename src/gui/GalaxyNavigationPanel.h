@@ -11,19 +11,23 @@
 #include "ValueSelector.h"
 #include "System.h"
 #include "ColoredFont.h"
+#include "DataModelImplementation.h"
 
 namespace ogame {
   namespace gui {
 
-    class GalaxyNavigationPanel: public view::GraphicContainer
+    class GalaxyNavigationPanel: public view::GraphicContainer, public player::GeneralActionListener
     {
       public:
 
         GalaxyNavigationPanel(const std::string& name,
                               const unsigned& galaxyCount,
-                              const unsigned& systemCount);
+                              const unsigned& systemCount,
+                              player::GeneralDataModelShPtr model);
 
         virtual ~GalaxyNavigationPanel();
+
+        void onActionTriggered(const player::GeneralDataModel& model) override;
 
         void populateWithSystemData(const core::System& system);
 
@@ -31,17 +35,22 @@ namespace ogame {
 
       private:
 
-        void createView(const unsigned& galaxyCount, const unsigned& systemCount);
+        void createView(const unsigned& galaxyCount,
+                        const unsigned& systemCount,
+                        player::GeneralDataModelShPtr model);
 
         LabelContainerShPtr createLabelPanel(const std::string& name,
                                              const std::string& text,
                                              view::ColoredFontShPtr font) const;
 
         ValueSelectorShPtr createValueSelector(const std::string& name,
+                                               player::GeneralDataModel* model,
                                                view::ColoredFontShPtr font,
                                                const std::vector<std::string>& options) const;
 
         view::GraphicContainerShPtr createLabelForSystemView() const;
+
+        void connectDataModel(player::GeneralDataModelShPtr model);
 
       private:
 
