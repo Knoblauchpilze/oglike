@@ -16,6 +16,11 @@ namespace ogame {
       return m_planets.size();
     }
 
+    inline
+    const SystemCoordinates& System::getCoordinates() const {
+      return m_coordinates;
+    }
+
   }
 }
 

@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "Planet.h"
+#include "SystemCoordinates.h"
 
 namespace ogame {
   namespace core {
@@ -37,6 +38,8 @@ namespace ogame {
                                 const unsigned& minStartingPosition,
                                 const unsigned& maxStartingPosition) const;
 
+        const SystemCoordinates& getCoordinates() const;
+
       protected:
 
         void create(const unsigned& planetsCount);
@@ -46,6 +49,7 @@ namespace ogame {
         const unsigned m_index;
         Galaxy* m_parent;
         std::vector<PlanetShPtr> m_planets;
+        SystemCoordinates m_coordinates;
 
 
     };
