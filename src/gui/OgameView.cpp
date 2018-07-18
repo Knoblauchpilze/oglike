@@ -61,7 +61,7 @@ namespace ogame {
       createMainLayout(model);
 
       // Create thematic views.
-      createThematicViews(galaxyCount, systemCount, planetCount);
+      createThematicViews(galaxyCount, systemCount, planetCount, model);
     }
 
     void OgameView::createMainLayout(player::GeneralDataModelShPtr model) {
@@ -106,7 +106,8 @@ namespace ogame {
 
     void OgameView::createThematicViews(const unsigned& galaxyCount,
                                         const unsigned& systemCount,
-                                        const unsigned& planetCount)
+                                        const unsigned& planetCount,
+                                        player::GeneralDataModelShPtr model)
     {
       // Create the views.
       m_overView = createGraphicContainer(getViewNameFromView(player::View::Overview));
@@ -116,7 +117,7 @@ namespace ogame {
       m_shipyardView = createGraphicContainer(getViewNameFromView(player::View::Shipyard));
       m_defenseView = createGraphicContainer(getViewNameFromView(player::View::Defense));
       m_fleetView = createGraphicContainer(getViewNameFromView(player::View::Fleet));
-      m_galaxyView = std::make_shared<GalaxyView>(getViewNameFromView(player::View::Galaxy), galaxyCount, systemCount, planetCount);
+      m_galaxyView = std::make_shared<GalaxyView>(getViewNameFromView(player::View::Galaxy), galaxyCount, systemCount, planetCount, model);
       m_allianceView = createGraphicContainer(getViewNameFromView(player::View::Alliance));
 
       // Add each one as a child of the general view for event propagation purposes.
