@@ -24,7 +24,7 @@ namespace ogame {
         virtual ~ActionProviderStateContainer();
 
         // Nothing to do at this level.
-        virtual void onActionTriggered(const player::AbstractDataModel<player::Action>& model);
+        void onActionTriggered(const player::GeneralDataModel& model) override;
 
       protected:
 
