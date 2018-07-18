@@ -20,6 +20,16 @@ namespace ogame {
     }
 
     inline
+    void GraphicContainer::addEventListener(GraphicContainerListener* listener) {
+      m_listeners.insert(listener);
+    }
+
+    inline
+    void GraphicContainer::removeEventListener(GraphicContainerListener* listener) {
+      m_listeners.erase(listener);
+    }
+
+    inline
     utils::Area GraphicContainer::getRenderingArea() {
       utils::Area area;
       lock();
@@ -91,7 +101,9 @@ namespace ogame {
       );
 
       // Process the event internally.
-      if (isRelevant(EventListener::Interaction::MouseButtonPressed)) {
+      if (isRelevant(EventListener::Interaction::MouseButtonPressed) &&
+          isInside(mouseButtonEvent.x, mouseButtonEvent.y))
+      {
         onMouseButtonPressedEventPrivate(mouseButtonEvent);
       }
     }
@@ -106,7 +118,9 @@ namespace ogame {
       );
 
       // Process the event internally.
-      if (isRelevant(EventListener::Interaction::MouseButtonReleased)) {
+      if (isRelevant(EventListener::Interaction::MouseButtonReleased) &&
+          isInside(mouseButtonEvent.x, mouseButtonEvent.y))
+      {
         onMouseButtonReleasedEventPrivate(mouseButtonEvent);
       }
     }
@@ -208,31 +222,40 @@ namespace ogame {
     inline
     void GraphicContainer::onKeyPressedEventPrivate(const SDL_KeyboardEvent& keyEvent) {
       std::cout << "[GRAPHIC] Key pressed event" << std::endl;
+      notifyGraphicListeners(view::EventListener::Interaction::KeyPressed);
     }
 
     inline
     void GraphicContainer::onKeyReleasedEventPrivate(const SDL_KeyboardEvent& keyEvent) {
       std::cout << "[GRAPHIC] Key released event" << std::endl;
+      notifyGraphicListeners(view::EventListener::Interaction::KeyReleased);
     }
 
     inline
     void GraphicContainer::onMouseMotionEventPrivate(const SDL_MouseMotionEvent& mouseMotionEvent) {
       std::cout << "[GRAPHIC] Mouse motion event" << std::endl;
+      notifyGraphicListeners(view::EventListener::Interaction::MouseMotion);
     }
 
     inline
     void GraphicContainer::onMouseButtonPressedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) {
       std::cout << "[GRAPHIC] Mouse button pressed event" << std::endl;
+      notifyGraphicListeners(view::EventListener::Interaction::MouseButtonPressed);
     }
 
     inline
     void GraphicContainer::onMouseButtonReleasedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) {
       std::cout << "[GRAPHIC] Mouse button released event" << std::endl;
+      notifyGraphicListeners(view::EventListener::Interaction::MouseButtonReleased);
     }
 
     inline
     void GraphicContainer::onMouseWheelEventPrivate(bool upWheel) {
       // std::cout << "[GRAPHIC] Wheel " << (upWheel ? "up" : "down") << " event" << std::endl;
+      notifyGraphicListeners(upWheel ?
+        view::EventListener::Interaction::MouseWheelUp :
+        view::EventListener::Interaction::MouseWheelDown
+      );
     }
 
     inline
@@ -307,13 +330,20 @@ namespace ogame {
     const utils::Vector2f GraphicContainer::convertCoordinates(const utils::Vector2f& point) noexcept {
       utils::Area area = getRenderingArea();
       if (m_parent == nullptr) {
-        // std::cout << "[GRAPHIC] Root " << getName() << ", parent=" << point.x() << "x" << point.y() << ", this=" << (point - area.getCenter()).x() << "x" << (point - area.getCenter()).y() << " (area=" << area.x() << "x" << area.y() << " dims=" << area.w() << "x" << area.h() << ")" << std::endl;
         return point - area.getCenter();
       }
       const utils::Vector2f par = m_parent->convertCoordinates(point);
       const utils::Vector2f thi = par - area.getCenter();
-      // std::cout << "[GRAPHIC] Child " << getName() << ", parent=" << par.x() << "x" << par.y() << ", this=" << thi.x() << "x" << thi.y() << " (area=" << area.x() << "x" << area.y() << " dims=" << area.w() << "x" << area.h() << ")" << std::endl;
       return par - area.getCenter();
+    }
+
+    inline
+    void GraphicContainer::notifyGraphicListeners(const view::EventListener::Interaction::Mask& interaction) {
+      std::for_each(m_listeners.cbegin(), m_listeners.cend(),
+        [&interaction, this](const GraphicContainerListener* listener) {
+          const_cast<GraphicContainerListener*>(listener)->onInteractionPerformed(getName(), interaction);
+        }
+      );
     }
 
   }

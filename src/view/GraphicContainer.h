@@ -3,10 +3,12 @@
 
 #include <memory>
 #include <unordered_map>
+#include <unordered_set>
 #include "Drawable.h"
 #include "Area.h"
 #include "Layout.h"
 #include "EventListener.h"
+#include "GraphicContainerListener.h"
 
 namespace ogame {
   namespace view {
@@ -33,6 +35,10 @@ namespace ogame {
         virtual void removeChild(std::shared_ptr<GraphicContainer> child);
 
         const unsigned getChildCount() const noexcept;
+
+        void addEventListener(GraphicContainerListener* listener);
+
+        void removeEventListener(GraphicContainerListener* listener);
 
         utils::Area getRenderingArea() override;
 
@@ -126,6 +132,8 @@ namespace ogame {
 
         const utils::Vector2f convertCoordinates(const utils::Vector2f& point) noexcept;
 
+        void notifyGraphicListeners(const view::EventListener::Interaction::Mask& interaction);
+
       private:
 
         std::string m_name;
@@ -135,6 +143,7 @@ namespace ogame {
         bool m_dirty;
         bool m_deepDirty;
         std::unordered_map<std::string, std::shared_ptr<GraphicContainer>> m_children;
+        std::unordered_set<GraphicContainerListener*> m_listeners;
         SDL_Surface* m_panel;
         SDL_Color m_color;
 

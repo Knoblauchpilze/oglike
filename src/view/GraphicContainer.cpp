@@ -18,6 +18,7 @@ namespace ogame {
       m_dirty(true),
       m_deepDirty(true),
       m_children(),
+      m_listeners(),
       m_panel(nullptr),
       m_color()
     {
