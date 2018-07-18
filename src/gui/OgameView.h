@@ -48,7 +48,8 @@ namespace ogame {
 
           void createThematicViews(const unsigned& galaxyCount,
                                    const unsigned& systemCount,
-                                   const unsigned& planetCount);
+                                   const unsigned& planetCount,
+                                   player::GeneralDataModelShPtr model);
 
           void connectDataModel(player::GeneralDataModelShPtr dataModel);
 

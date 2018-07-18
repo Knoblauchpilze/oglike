@@ -13,11 +13,6 @@ namespace ogame {
     void OgameView::onActionTriggered(const player::GeneralDataModel& model) {
       // Process this action.
       try {
-        const core::Planet* planet = model.getProperty<const core::Planet>(std::string("active_planet"));
-
-        // Update each view.
-        m_galaxyView->populateWithSystemData(planet->getSystem());
-
         // Update the main panel with the corresponding view.
         const std::string& activeView = getViewNameFromView(*model.getProperty<const player::View>(std::string("active_view")));
 
