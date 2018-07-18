@@ -6,24 +6,23 @@
 #include "GraphicContainer.h"
 #include "PlanetViewLink.h"
 #include "Planet.h"
-#include "ActionListener.h"
-#include "DataModel.h"
+#include "DataModelImplementation.h"
 
 namespace ogame {
   namespace gui {
 
-    class PlanetsView: public view::GraphicContainer, public player::ActionListener
+    class PlanetsView: public view::GraphicContainer, public player::GeneralActionListener
     {
       public:
 
         PlanetsView(const std::string& name,
-                    player::DataModel* model = nullptr,
+                    player::GeneralDataModel* model = nullptr,
                     const unsigned& planetCount = 0u,
                     const std::vector<core::Planet>& planets = std::vector<core::Planet>());
 
         virtual ~PlanetsView();
 
-        void onActionTriggered(const player::DataModel& model) override;
+        void onActionTriggered(const player::GeneralDataModel& model) override;
 
       private:
 

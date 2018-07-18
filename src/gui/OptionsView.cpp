@@ -7,11 +7,11 @@
 namespace ogame {
   namespace gui {
 
-    OptionsView::OptionsView(const std::string& name, player::DataModel* model):
+    OptionsView::OptionsView(const std::string& name, player::GeneralDataModel* model):
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction),
-      player::ActionListener(model)
+      player::GeneralActionListener(model)
     {
       setBackgroundColor(SDL_Color{0, 0, 0, SDL_ALPHA_OPAQUE});
 
@@ -20,15 +20,15 @@ namespace ogame {
 
     OptionsView::~OptionsView() {}
 
-    void OptionsView::onActionTriggered(const player::DataModel& model) {
+    void OptionsView::onActionTriggered(const player::GeneralDataModel& model) {
       lock();
 
       // Update information.
       LabelContainer* player = getChild<LabelContainer*>(std::string("player_panel"));
       if (checkChild(player, std::string("Player name"))) {
         try {
-          const core::Account& account = model.getActiveAccount();
-          player->setText(account.getCommunityName() + " " + account.getUniverseName() + " " + account.getPlayerName());
+          const core::Account* account = model.getProperty<const core::Account>(std::string("active_account"));
+          player->setText(account->getCommunityName() + " " + account->getUniverseName() + " " + account->getPlayerName());
         }
         catch (const player::DataModelException& e) {
           std::cerr << "[OPTIONS] Caught exception while setting player information:" << std::endl << e.what() << std::endl;

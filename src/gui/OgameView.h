@@ -14,13 +14,12 @@
 #include "ResourcesView.h"
 #include "OptionsView.h"
 #include "PlanetsView.h"
-#include "DataModel.h"
-#include "ActionListener.h"
+#include "DataModelImplementation.h"
 
 namespace ogame {
   namespace gui {
 
-    class OgameView: public view::OgameAbstractView, public player::ActionListener
+    class OgameView: public view::OgameAbstractView, public player::GeneralActionListener
     {
       public:
 
@@ -29,11 +28,11 @@ namespace ogame {
                   const unsigned& galaxyCount,
                   const unsigned& systemCount,
                   const unsigned& planetCount,
-                  player::DataModelShPtr dataModel);
+                  player::GeneralDataModelShPtr dataModel);
 
         virtual ~OgameView();
 
-        void onActionTriggered(const player::DataModel& model) override;
+        void onActionTriggered(const player::GeneralDataModel& model) override;
 
       private:
 
@@ -43,15 +42,15 @@ namespace ogame {
                            const unsigned& galaxyCount,
                            const unsigned& systemCount,
                            const unsigned& planetCount,
-                           player::DataModel* model);
+                           player::GeneralDataModelShPtr model);
 
-          void createMainLayout(player::DataModel* model);
+          void createMainLayout(player::GeneralDataModelShPtr model);
 
           void createThematicViews(const unsigned& galaxyCount,
                                    const unsigned& systemCount,
                                    const unsigned& planetCount);
 
-          void connectDataModel(player::DataModelShPtr dataModel);
+          void connectDataModel(player::GeneralDataModelShPtr dataModel);
 
           view::GraphicContainerShPtr createGraphicContainer(const std::string& name) const;
 
