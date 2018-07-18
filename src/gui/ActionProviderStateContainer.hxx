@@ -9,13 +9,18 @@ namespace ogame {
   namespace gui {
 
     inline
-    void ActionProviderStateContainer::onActionTriggered(const player::DataModel& model) {}
+    void ActionProviderStateContainer::onActionTriggered(const player::AbstractDataModel<player::Action>& model) {}
 
     inline
     void ActionProviderStateContainer::onStateModified() {
       // Trigger this action if needed.
       if (getStatePrivate() == StateContainer::State::Selected) {
-        setActiveView(m_view);
+        try {
+          setProperty<player::View>(std::string("active_view"), &m_view);
+        }
+        catch (const player::DataModelException& e) {
+          std::cerr << "[STATE] Could not assign view " << static_cast<int>(m_view) << " to data model:" << std::endl << e.what() << std::endl;
+        }
       }
     }
 
