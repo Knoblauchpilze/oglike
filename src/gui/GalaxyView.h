@@ -6,33 +6,40 @@
 #include "GraphicContainer.h"
 #include "System.h"
 #include "PlanetGalaxyEntry.h"
+#include "DataModelImplementation.h"
 
 namespace ogame {
   namespace gui {
 
-    class GalaxyView: public view::GraphicContainer
+    class GalaxyView: public view::GraphicContainer, public player::GeneralActionListener
     {
       public:
 
         GalaxyView(const std::string& name,
                    const unsigned& galaxyCount,
                    const unsigned& systemCount,
-                   const unsigned& planetCount);
+                   const unsigned& planetCount,
+                   player::GeneralDataModelShPtr model);
 
         virtual ~GalaxyView();
 
-        void populateWithSystemData(const core::System& system);
+        void onActionTriggered(const player::GeneralDataModel& model) override;
 
       private:
 
         void createView(const unsigned& navigationHeight,
                         const unsigned& galaxyCount,
                         const unsigned& systemCount,
-                        const unsigned& planetCount);
+                        const unsigned& planetCount,
+                        player::GeneralDataModelShPtr model);
+
+        void populateWithSystemData(const core::System& system);
 
         PlanetGalaxyEntryShPtr createPlanetPanel(const unsigned& planetIndex, const unsigned& planetCount) const;
 
         std::string getNameOfPlanetPanelFromIndex(const unsigned& planetIndex) const noexcept;
+
+        void connectDataModel(player::GeneralDataModelShPtr dataModel);
 
       private:
 
