@@ -18,9 +18,6 @@ namespace ogame {
     AbstractActionListener<Action>::~AbstractActionListener() {}
 
     template <typename Action>
-    void AbstractActionListener<Action>::onActionTriggered(const player::AbstractDataModel<Action>& model) {}
-
-    template <typename Action>
     template <typename Property>
     void AbstractActionListener<Action>::setProperty(const std::string& name, Property* property) {
       if (property == nullptr) {

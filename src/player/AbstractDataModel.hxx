@@ -11,7 +11,8 @@ namespace ogame {
     AbstractDataModel<Action>::AbstractDataModel(const std::string& name):
       m_name(name),
       m_listeners(),
-      m_properties()
+      m_properties(),
+      m_actions()
     {
       // Nothing to do.
     }
@@ -55,18 +56,15 @@ namespace ogame {
 
     template <typename Action>
     template <typename Property>
-    void AbstractDataModel<Action>::addProperty(const std::string& name, Property* property) {
-      if (property == nullptr) {
-        throw DataModelException(std::string("Cannot add property ") + name + ", invalid null property");
-      }
+    void AbstractDataModel<Action>::addProperty(const std::string& name, const Action& action, Property* property) {
+      // Add this property using the private handler.
+      addPropertyWithNoAction(name, property);
 
-      // Try to find the property in the internal table.
-      typename Properties::iterator propertyIterator = m_properties.find(name);
-      if (propertyIterator != m_properties.end()) {
-        throw DataModelException(std::string("Cannot add duplicated property ") + name + " in model " + getName());
-      }
+      // Add the action for this property.
+      m_actions[name] = action;
 
-      m_properties[name] = reinterpret_cast<void*>(property);
+      // Trigger the corresponding action.
+      triggerAction(action);
     }
 
     template <typename Action>
@@ -80,11 +78,45 @@ namespace ogame {
       typename Properties::iterator propertyIterator = m_properties.find(name);
       if (propertyIterator == m_properties.end()) {
         // Add this property.
-        addProperty(name, property);
+        addPropertyWithNoAction(name, property);
       }
       else {
         m_properties[name] = property;
       }
+
+      // Check whether this property should trigger an action.
+      typename ActionByProperties::const_iterator actionIterator = m_actions.find(name);
+      if (actionIterator != m_actions.cend()) {
+        triggerAction(actionIterator->second);
+      }
+    }
+
+    template <typename Action>
+    template <typename Property>
+    const Property* AbstractDataModel<Action>::getProperty(const std::string& name) const {
+      // Try to find the property in the internal table.
+      typename Properties::const_iterator propertyIterator = m_properties.find(name);
+      if (propertyIterator == m_properties.cend()) {
+        throw DataModelException(std::string("Cannot retrieve property ") + name + ", no such element registered in " + getName());
+      }
+
+      return reinterpret_cast<const Property*>(propertyIterator->second);
+    }
+
+    template <typename Action>
+    template <typename Property>
+    void AbstractDataModel<Action>::addPropertyWithNoAction(const std::string& name, Property* property) {
+      if (property == nullptr) {
+        throw DataModelException(std::string("Cannot add property ") + name + ", invalid null property");
+      }
+
+      // Try to find the property in the internal table.
+      typename Properties::iterator propertyIterator = m_properties.find(name);
+      if (propertyIterator != m_properties.end()) {
+        throw DataModelException(std::string("Cannot add duplicated property ") + name + " in model " + getName());
+      }
+
+      m_properties[name] = reinterpret_cast<void*>(property);
     }
 
   }
