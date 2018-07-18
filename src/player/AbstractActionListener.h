@@ -24,13 +24,13 @@ namespace ogame {
       public:
 
         template <typename Property>
-        void setProperty(const std::string& name, Property* property);
+        void setProperty(const std::string& name, Property* property) const;
 
-        void triggerAction(const Action& action);
+        void triggerAction(const Action& action) const;
 
       private:
 
-        AbstractDataModel<Action>* m_model;
+        mutable AbstractDataModel<Action>* m_model;
 
     };
 

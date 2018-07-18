@@ -44,7 +44,7 @@ namespace ogame {
       private:
 
         using ListenersByAction = std::map<Action, std::vector<AbstractActionListener<Action>*>>;
-        using Properties = std::unordered_map<std::string, void*>;
+        using Properties = std::unordered_map<std::string, const void*>;
         using ActionByProperties = std::unordered_map<std::string, Action>;
 
         std::string m_name;
