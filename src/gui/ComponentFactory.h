@@ -42,7 +42,7 @@ namespace ogame {
         createStateLabelPanel(const std::string& name,
                               const std::string& text,
                               const player::View& view,
-                              player::DataModel* model,
+                              player::AbstractDataModel<player::Action>* model,
                               view::ColoredFontShPtr font,
                               view::ColoredFontShPtr highlightFont = nullptr,
                               const StateContainer::StateAssociation& colors = StateContainer::StateAssociation(),
