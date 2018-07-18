@@ -116,7 +116,7 @@ namespace ogame {
         throw DataModelException(std::string("Cannot add duplicated property ") + name + " in model " + getName());
       }
 
-      m_properties[name] = reinterpret_cast<void*>(property);
+      m_properties[name] = reinterpret_cast<const void*>(property);
     }
 
   }

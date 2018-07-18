@@ -19,7 +19,7 @@ namespace ogame {
 
     template <typename Action>
     template <typename Property>
-    void AbstractActionListener<Action>::setProperty(const std::string& name, Property* property) {
+    void AbstractActionListener<Action>::setProperty(const std::string& name, Property* property) const {
       if (property == nullptr) {
         throw DataModelException(std::string("Cannot set property ") + name + ", invalid null property");
       }
@@ -27,7 +27,7 @@ namespace ogame {
     }
 
     template <typename Action>
-    void AbstractActionListener<Action>::triggerAction(const Action& action) {
+    void AbstractActionListener<Action>::triggerAction(const Action& action) const {
       if (m_model == nullptr) {
         throw DataModelException(std::string("Cannot trigger action, invalid null data model"));
       }
