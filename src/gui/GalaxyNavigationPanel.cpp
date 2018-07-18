@@ -11,14 +11,16 @@ namespace ogame {
 
     GalaxyNavigationPanel::GalaxyNavigationPanel(const std::string& name,
                                                  const unsigned& galaxyCount,
-                                                 const unsigned& systemCount):
+                                                 const unsigned& systemCount,
+                                                 player::GeneralDataModelShPtr model):
       view::GraphicContainer(name,
                              view::utils::Area(),
-                             view::EventListener::Interaction::MouseButton)
+                             view::EventListener::Interaction::MouseButton),
+      player::GeneralActionListener(model.get())
     {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
 
-      createView(galaxyCount, systemCount);
+      createView(galaxyCount, systemCount, model);
     }
 
     GalaxyNavigationPanel::~GalaxyNavigationPanel() {
@@ -70,7 +72,10 @@ namespace ogame {
       unlock();
     }
 
-    void GalaxyNavigationPanel::createView(const unsigned& galaxyCount, const unsigned& systemCount) {
+    void GalaxyNavigationPanel::createView(const unsigned& galaxyCount,
+                                           const unsigned& systemCount,
+                                           player::GeneralDataModelShPtr model)
+    {
       // Create the main layout for this panel.
       view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(4u, 4u, 0.0f);
       if (layout == nullptr) {
@@ -98,6 +103,7 @@ namespace ogame {
         galaxies.push_back(std::to_string(galaxy + 1));
       }
       ValueSelectorShPtr galaxySelector = createValueSelector(std::string("galaxy_selector"),
+                                                              model.get(),
                                                               view::FontFactory::getInstance().createColoredFont(
                                                                 std::string("data/fonts/ARLRDBD.ttf"),
                                                                 0, 0, 0
@@ -109,6 +115,7 @@ namespace ogame {
         systems.push_back(std::to_string(system + 1));
       }
       ValueSelectorShPtr systemSelector = createValueSelector(std::string("system_selector"),
+                                                              model.get(),
                                                               view::FontFactory::getInstance().createColoredFont(
                                                                 std::string("data/fonts/ARLRDBD.ttf"),
                                                                 0, 0, 0
@@ -239,6 +246,10 @@ namespace ogame {
       information->setLayout(layout);
 
       return information;
+    }
+
+    void GalaxyNavigationPanel::connectDataModel(player::GeneralDataModelShPtr model) {
+      // TODO: Connect to value selector changed.
     }
 
   }
