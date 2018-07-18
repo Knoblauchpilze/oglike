@@ -9,7 +9,8 @@ namespace ogame {
     System::System(const unsigned& index, const unsigned& planetsCount, Galaxy* galaxy):
       m_index(index),
       m_parent(galaxy),
-      m_planets()
+      m_planets(),
+      m_coordinates(galaxy == nullptr ? 0u : 1u, index)
     {
       create(planetsCount);
     }

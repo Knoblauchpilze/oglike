@@ -23,6 +23,7 @@ set (SOURCES
   AccountException.cpp
   Community.cpp
   CommunityException.cpp
+  SystemCoordinates.cpp
   )
 
 add_library (ogamelike_lib_core SHARED
