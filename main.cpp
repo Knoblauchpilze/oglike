@@ -107,6 +107,7 @@ int main(int argc, char* argv[])
     dataModel->addProperty(std::string("active_account"), ogame::player::Action::ChangeAccount, account.get());
     dataModel->addProperty(std::string("active_planet"), ogame::player::Action::ChangePlanet, &account->getHomeWorld());
     dataModel->addProperty(std::string("active_view"), ogame::player::Action::ChangeView, activeView.get());
+    dataModel->addProperty(std::string("active_system"), ogame::player::Action::ChangeSystem, &account->getHomeWorld().getSystem());
   }
   catch (const ogame::gui::GuiException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
