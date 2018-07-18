@@ -5,10 +5,12 @@
 namespace ogame {
   namespace gui {
 
-    PictureContainer::PictureContainer(const std::string& name, const std::string& picture):
+    PictureContainer::PictureContainer(const std::string& name,
+                                       const std::string& picture,
+                                       const view::EventListener::Interaction::Mask& mask):
       view::GraphicContainer(name,
                              view::utils::Area(),
-                             view::EventListener::Interaction::NoInteraction,
+                             mask,
                              nullptr),
       m_file(picture),
       m_picture(nullptr)
