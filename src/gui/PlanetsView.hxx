@@ -8,7 +8,7 @@ namespace ogame {
 
     inline
     PlanetViewLinkShPtr PlanetsView::createPlanetView(const unsigned& index) const {
-      return std::make_shared<PlanetViewLink>(computePlanetPanelNameFromIndex(index), m_planetCount);
+      return std::make_shared<PlanetViewLink>(computePlanetPanelNameFromIndex(index), m_planetCount, m_colors);
     }
 
     inline

@@ -17,7 +17,8 @@ namespace ogame {
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction),
       player::GeneralActionListener(model),
-      m_planetCount(planetCount)
+      m_planetCount(planetCount),
+      m_colors()
     {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
 
@@ -104,6 +105,12 @@ namespace ogame {
       layout->addItem(info, 0u, 0u, 1u, 1u);
       addChild(info);
 
+      // Color association.
+      m_colors = {
+        {StateContainer::State::Normal,       SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE}},
+        {StateContainer::State::Highlighted,  SDL_Color{14, 72, 95, SDL_ALPHA_OPAQUE}},
+        {StateContainer::State::Selected,     SDL_Color{14, 72, 95, SDL_ALPHA_OPAQUE}},
+      };
 
       // Create each planet data.
       for (unsigned indexPlanet = 0u ; indexPlanet < planets.size() ; ++indexPlanet) {
