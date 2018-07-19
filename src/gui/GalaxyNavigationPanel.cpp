@@ -16,7 +16,8 @@ namespace ogame {
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::MouseButton),
-      player::GeneralActionListener(model.get())
+      player::GeneralActionListener(model.get()),
+      view::GraphicContainerListener()
     {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
 
@@ -150,6 +151,9 @@ namespace ogame {
         throw GuiException(std::string("Could not allocate one of the informative panel for galaxy's navigation panel"));
       }
 
+      galaxySelector->addEventListener(this);
+      systemSelector->addEventListener(this);
+
       layout->addItem(galaxy,           0u, 0u, 1u, 1u);
       addChild(galaxy);
       layout->addItem(system,           1u, 0u, 1u, 1u);
@@ -171,8 +175,7 @@ namespace ogame {
       // Create a default container.
       view::GraphicContainerShPtr information = std::make_shared<view::GraphicContainer>(
         std::string("system_view_label_panel"),
-        view::utils::Area(),
-        view::EventListener::Interaction::NoInteraction
+        view::utils::Area()
       );
 
       // Create the main layout for this panel.
@@ -246,10 +249,6 @@ namespace ogame {
       information->setLayout(layout);
 
       return information;
-    }
-
-    void GalaxyNavigationPanel::connectDataModel(player::GeneralDataModelShPtr model) {
-      // TODO: Connect to value selector changed.
     }
 
   }
