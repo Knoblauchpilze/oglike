@@ -12,8 +12,7 @@ namespace ogame {
                                      const std::string& text,
                                      const Alignment& alignment):
       view::GraphicContainer(name,
-                             view::utils::Area(),
-                             view::EventListener::Interaction::NoInteraction),
+                             view::utils::Area()),
       m_alignment(alignment)
     {
       createView(font, picture, text);

@@ -9,9 +9,7 @@ namespace ogame {
                                                    const std::string& onPicture,
                                                    const std::string& offPicture):
       view::GraphicContainer(name,
-                             view::utils::Area(),
-                             view::EventListener::Interaction::NoInteraction,
-                             nullptr),
+                             view::utils::Area()),
       m_onFile(onPicture),
       m_onPicture(nullptr),
       m_offFile(offPicture),

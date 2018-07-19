@@ -10,6 +10,7 @@ namespace ogame {
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction,
+                             view::EventListener::Sensitivity::Local,
                              std::make_shared<view::LinearLayout>(
                                view::LinearLayout::Direction::Horizontal,
                                0.0f,
@@ -30,28 +31,28 @@ namespace ogame {
 
       // Update each resource.
       try {
-        const core::Planet* planet = model.getProperty<const core::Planet>(std::string("active_planet"));
-        const core::Account* account = model.getProperty<const core::Account>(std::string("active_account"));
+        const core::Planet& planet = model.getActivePlanet();
+        const core::Account& account = model.getActiveAccount();
 
         LabelledPicture* metal = getChild<LabelledPicture*>(std::string("metal_resource_panel"));
         if (checkChild(metal, std::string("Metal resource panel"))) {
-          metal->setLabel(std::to_string(static_cast<unsigned>(planet->getResourceQuantity(std::string("metal")))));
+          metal->setLabel(std::to_string(static_cast<unsigned>(planet.getResourceQuantity(std::string("metal")))));
         }
         LabelledPicture* cristal = getChild<LabelledPicture*>(std::string("cristal_resource_panel"));
         if (checkChild(cristal, std::string("Cristal resource panel"))) {
-          cristal->setLabel(std::to_string(static_cast<unsigned>(planet->getResourceQuantity(std::string("cristal")))));
+          cristal->setLabel(std::to_string(static_cast<unsigned>(planet.getResourceQuantity(std::string("cristal")))));
         }
         LabelledPicture* deut = getChild<LabelledPicture*>(std::string("deuterium_resource_panel"));
         if (checkChild(deut, std::string("Deuterium resource panel"))) {
-          deut->setLabel(std::to_string(static_cast<unsigned>(planet->getResourceQuantity(std::string("deuterium")))));
+          deut->setLabel(std::to_string(static_cast<unsigned>(planet.getResourceQuantity(std::string("deuterium")))));
         }
         LabelledPicture* antimatter = getChild<LabelledPicture*>(std::string("antimatter_resource_panel"));
         if (checkChild(antimatter, std::string("Antimatter resource panel"))) {
-          antimatter->setLabel(std::to_string(static_cast<unsigned>(account->getAntimatterQuantity())));
+          antimatter->setLabel(std::to_string(static_cast<unsigned>(account.getAntimatterQuantity())));
         }
         LabelledPicture* energy = getChild<LabelledPicture*>(std::string("energy_resource_panel"));
         if (checkChild(energy, std::string("Energy resource panel"))) {
-          energy->setLabel(std::to_string(static_cast<unsigned>(planet->getResourceQuantity(std::string("energy")))));
+          energy->setLabel(std::to_string(static_cast<unsigned>(planet.getResourceQuantity(std::string("energy")))));
         }
       }
       catch (const player::DataModelException& e) {

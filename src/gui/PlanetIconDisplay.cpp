@@ -7,9 +7,7 @@ namespace ogame {
 
     PlanetIconDisplay::PlanetIconDisplay(const unsigned& count, const std::string& name):
       view::GraphicContainer(name,
-                             view::utils::Area(),
-                             view::EventListener::Interaction::NoInteraction,
-                             nullptr),
+                             view::utils::Area()),
       m_count(count),
       m_pictures(),
       m_planetIndex(-1)

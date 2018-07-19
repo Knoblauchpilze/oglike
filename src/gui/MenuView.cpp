@@ -10,6 +10,7 @@ namespace ogame {
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction,
+                             view::EventListener::Sensitivity::Local,
                              std::make_shared<view::LinearLayout>(
                                view::LinearLayout::Direction::Vertical,
                                0.0f,
@@ -55,6 +56,8 @@ namespace ogame {
       {
         throw GuiException(std::string("Could not create one or more component for menu view"));
       }
+
+      galaxy->setState(StateContainer::State::Selected);
 
       addChild(overview);
       addChild(resources);

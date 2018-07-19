@@ -99,6 +99,7 @@ namespace ogame {
 
     void GalaxyView::connectDataModel(player::GeneralDataModelShPtr dataModel) {
       dataModel->registerForAction(player::Action::ChangeSystem, this);
+      dataModel->registerForAction(player::Action::ChangeGalaxy, this);
     }
 
   }
