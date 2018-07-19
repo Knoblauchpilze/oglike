@@ -49,11 +49,12 @@ int main(int argc, char* argv[])
 
   ogame::core::CommunityShPtr community = std::make_shared<ogame::core::Community>("FR");
   ogame::core::UniverseShPtr universe = nullptr;
-  ogame::player::PlayerShPtr player = nullptr;
   ogame::core::AccountShPtr account = nullptr;
+  ogame::player::PlayerShPtr player = nullptr;
 
-  ogame::player::PlayerShPtr player2 = nullptr;
-  ogame::core::AccountShPtr account2 = nullptr;
+  const unsigned accountsToCreate = 150u;
+  std::vector<ogame::core::AccountShPtr> accounts;
+  std::vector<ogame::player::PlayerShPtr> players;
   try {
     universe = std::make_shared<ogame::core::Universe>(
       community->createUniverse(std::string("Oberon")),
@@ -62,21 +63,24 @@ int main(int argc, char* argv[])
       planetsCount
     );
     player = std::make_shared<ogame::player::Player>(std::string("tttttttttttttttttttt"), community);
-    account = std::make_shared<ogame::core::Account>(player->getUuid(), universe->getUuid(), community);
+    account = std::make_shared<ogame::core::Account>(player->getUuid(), universe, community);
     universe->createAccount(account);
 
-    player2 = std::make_shared<ogame::player::Player>(std::string("ergerger"), community);
-    account2 = std::make_shared<ogame::core::Account>(player2->getUuid(), universe->getUuid(), community);
-    universe->createAccount(account2);
+    for (unsigned indexAccount = 0u ; indexAccount < accountsToCreate ; ++indexAccount) {
+      ogame::player::PlayerShPtr newPlayer = std::make_shared<ogame::player::Player>(std::string("Player ") + std::to_string(indexAccount), community);
+      players.push_back(newPlayer);
+      ogame::core::AccountShPtr newAccount = std::make_shared<ogame::core::Account>(newPlayer->getUuid(), universe, community);
+      accounts.push_back(newAccount);
+      universe->createAccount(newAccount);
+    }
   }
   catch (const ogame::core::OgameException& e) {
     std::cerr << "[MAIN] Caught internal exception:" << std::endl << e.what() << std::endl;
   }
 
   // Instantiate the data model.
-  std::shared_ptr<ogame::player::AbstractDataModel<ogame::player::Action>> dataModel = nullptr;
-  dataModel = std::make_shared<ogame::player::AbstractDataModel<ogame::player::Action>>(std::string("general_model"));
-  std::shared_ptr<ogame::player::View> activeView = std::make_shared<ogame::player::View>(ogame::player::View::Galaxy);
+  ogame::player::GeneralDataModelShPtr dataModel = nullptr;
+  dataModel = std::make_shared<ogame::player::GeneralDataModel>(std::string("general_model"));
 
   // Instantiate the main view.
   const unsigned screenWidth = std::stoi(parser.getOptionValue("--width"));
@@ -104,10 +108,11 @@ int main(int argc, char* argv[])
 
   // Populate the data model.
   try {
-    dataModel->addProperty(std::string("active_account"), ogame::player::Action::ChangeAccount, account.get());
-    dataModel->addProperty(std::string("active_planet"), ogame::player::Action::ChangePlanet, &account->getHomeWorld());
-    dataModel->addProperty(std::string("active_view"), ogame::player::Action::ChangeView, activeView.get());
-    dataModel->addProperty(std::string("active_system"), ogame::player::Action::ChangeSystem, &account->getHomeWorld().getSystem());
+    dataModel->setActiveAccount(account.get());
+    dataModel->setActivePlanet(&account->getHomeWorld());
+    dataModel->setActiveView(ogame::player::View::Galaxy);
+    dataModel->setActiveSystemCoordinate(account->getHomeWorld().getSystem().getIndex());
+    dataModel->setActiveGalaxyCoordinate(account->getHomeWorld().getSystem().getGalaxyIndex());
   }
   catch (const ogame::gui::GuiException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
