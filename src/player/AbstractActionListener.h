@@ -3,40 +3,48 @@
 
 #include <memory>
 #include "AbstractDataModel.h"
+#include "DataModelConstants.h"
+#include "Planet.h"
+#include "Account.h"
 
 namespace ogame {
   namespace player {
 
-    template <class Action>
     class AbstractDataModel;
 
-    template <typename Action>
     class AbstractActionListener
     {
       public:
 
-        AbstractActionListener(AbstractDataModel<Action>* model);
+        AbstractActionListener(AbstractDataModel* model);
 
         ~AbstractActionListener();
 
-        virtual void onActionTriggered(const player::AbstractDataModel<Action>& model) = 0;
+        virtual void onActionTriggered(const player::AbstractDataModel& model) = 0;
 
       public:
 
-        template <typename Property>
-        void setProperty(const std::string& name, Property* property) const;
+        void setActiveView(const View& view) const;
+
+        void setActivePlanet(core::Planet* planet) const;
+
+        void setActiveAccount(core::Account* account) const;
+
+        void setActiveSystemCoordinate(const unsigned& coordinate) const;
+
+        void setActiveGalaxyCoordinate(const unsigned& coordinate) const;
 
         void triggerAction(const Action& action) const;
 
       private:
 
-        mutable AbstractDataModel<Action>* m_model;
+        mutable AbstractDataModel* m_model;
 
     };
 
+    using AbstractActionListenerShPtr = std::shared_ptr<AbstractActionListener>;
+
   }
 }
-
-#include "AbstractActionListener.hxx"
 
 #endif // ABSTRACTACTIONLISTENER_H
