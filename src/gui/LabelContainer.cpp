@@ -9,8 +9,7 @@ namespace ogame {
                                    const std::string& text,
                                    view::ColoredFontShPtr font):
       view::GraphicContainer(name,
-                             view::utils::Area(),
-                             view::EventListener::Interaction::NoInteraction),
+                             view::utils::Area()),
       m_textChanged(true),
       m_text(text),
       

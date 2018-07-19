@@ -14,7 +14,7 @@ namespace ogame {
       // Process this action.
       try {
         // Update the main panel with the corresponding view.
-        const std::string& activeView = getViewNameFromView(*model.getProperty<const player::View>(std::string("active_view")));
+        const std::string& activeView = getViewNameFromView(model.getActiveView());
 
         m_generalView->setActiveChild(activeView);
       }

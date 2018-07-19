@@ -2,8 +2,7 @@
 #define ACTIONPROVIDERSTATECONTAINER_HXX
 
 #include "ActionProviderStateContainer.h"
-
-#include <iostream>
+#include "DataModelException.h"
 
 namespace ogame {
   namespace gui {
@@ -16,7 +15,7 @@ namespace ogame {
       // Trigger this action if needed.
       if (getStatePrivate() == StateContainer::State::Selected) {
         try {
-          setProperty<player::View>(std::string("active_view"), &m_view);
+          setActiveView(m_view);
         }
         catch (const player::DataModelException& e) {
           std::cerr << "[STATE] Could not assign view " << static_cast<int>(m_view) << " to data model:" << std::endl << e.what() << std::endl;

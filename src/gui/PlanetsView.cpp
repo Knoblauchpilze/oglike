@@ -31,22 +31,22 @@ namespace ogame {
 
       // Update each planet.
       try {
-        const core::Account* account = model.getProperty<const core::Account>(std::string("active_account"));
+        const core::Account& account = model.getActiveAccount();
 
-        m_planetCount = account->getAvailablePlanetsSlots();
+        m_planetCount = account.getAvailablePlanetsSlots();
 
         LabelContainer* planetCount = getChild<LabelContainer*>(std::string("planet_count_info_panel"));
         if (checkChild(planetCount, std::string("Planet count information"))) {
           planetCount->setText(
-            std::to_string(account->getOccupiedPlanetsSlots()) +
+            std::to_string(account.getOccupiedPlanetsSlots()) +
             "/" +
             std::to_string(m_planetCount) +
             " planet" + (m_planetCount > 1 ? "s" : "")
           );
         }
 
-        const std::vector<core::Planet*>& planets = account->getPlanets();
-        // const core::Planet* activePlanet = model.getProperty<const core::Planet>(std::string("active_planet"));
+        const std::vector<core::Planet*>& planets = account.getPlanets();
+        // const core::Planet& activePlanet = model.getActivePlanet();
         // TODO: Highlight active planet
 
         view::GridLayout* grid = getLayout<view::GridLayout*>();

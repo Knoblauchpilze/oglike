@@ -12,8 +12,7 @@ namespace ogame {
 
     PlanetViewLink::PlanetViewLink(const std::string& name, const unsigned& planetCount):
       view::GraphicContainer(name,
-                             view::utils::Area(),
-                             view::EventListener::Interaction::NoInteraction)
+                             view::utils::Area())
     {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
 

@@ -9,9 +9,7 @@ namespace ogame {
 
     PlanetGalaxyEntry::PlanetGalaxyEntry(const unsigned& index, const unsigned& count, const std::string& name):
       view::GraphicContainer(name,
-                             view::utils::Area(),
-                             view::EventListener::Interaction::NoInteraction,
-                             nullptr)
+                             view::utils::Area())
     {
       // Assign the background color.
       setBackgroundColor(SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE});

@@ -10,8 +10,7 @@ namespace ogame {
                                        const view::EventListener::Interaction::Mask& mask):
       view::GraphicContainer(name,
                              view::utils::Area(),
-                             mask,
-                             nullptr),
+                             mask),
       m_file(picture),
       m_picture(nullptr)
     {

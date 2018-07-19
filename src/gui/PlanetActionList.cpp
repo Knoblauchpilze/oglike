@@ -8,9 +8,7 @@ namespace ogame {
 
     PlanetActionList::PlanetActionList(const std::string& name):
       view::GraphicContainer(name,
-                             view::utils::Area(),
-                             view::EventListener::Interaction::NoInteraction,
-                             nullptr)
+                             view::utils::Area())
     {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
 
