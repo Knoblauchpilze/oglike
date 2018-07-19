@@ -10,12 +10,13 @@
 namespace ogame {
   namespace gui {
 
-    PlanetViewLink::PlanetViewLink(const std::string& name, const unsigned& planetCount):
-      view::GraphicContainer(name,
-                             view::utils::Area())
+    PlanetViewLink::PlanetViewLink(const std::string& name,
+                                   const unsigned& planetCount,
+                                   const StateContainer::StateAssociation& colors):
+      StateContainer(name,
+                     StateContainer::State::Normal,
+                     colors)
     {
-      setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
-
       createView(planetCount);
     }
 
