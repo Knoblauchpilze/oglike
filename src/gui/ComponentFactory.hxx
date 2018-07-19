@@ -50,7 +50,7 @@ namespace ogame {
     ComponentFactory::createStateLabelPanel(const std::string& name,
                                             const std::string& text,
                                             const player::View& view,
-                                            player::AbstractDataModel<player::Action>* model,
+                                            player::GeneralDataModel* model,
                                             view::ColoredFontShPtr font,
                                             view::ColoredFontShPtr highlightFont,
                                             const StateContainer::StateAssociation& colors,
