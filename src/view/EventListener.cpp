@@ -24,8 +24,9 @@ namespace ogame {
 
     constexpr EventListener::Interaction::Mask EventListener::Interaction::FullInteraction;
 
-    EventListener::EventListener(const Interaction::Mask& mask):
-      m_mask(mask)
+    EventListener::EventListener(const Interaction::Mask& mask, const Sensitivity& sensitivity):
+      m_mask(mask),
+      m_sensitivity(sensitivity)
     {
       // Nothing to do.
     }

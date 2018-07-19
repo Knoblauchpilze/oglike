@@ -35,9 +35,14 @@ namespace ogame {
 
         };
 
+        enum class Sensitivity {
+          Global,
+          Local
+        };
+
       public:
 
-        EventListener(const Interaction::Mask& mask);
+        EventListener(const Interaction::Mask& mask, const Sensitivity& sensitivity = Sensitivity::Local);
 
         virtual ~EventListener();
 
@@ -59,11 +64,12 @@ namespace ogame {
 
       protected:
 
-        bool isRelevant(const Interaction::Mask& event) const noexcept;
+        bool isRelevant(const Interaction::Mask& event, const bool inside) const noexcept;
 
       private:
 
         Interaction::Mask m_mask;
+        Sensitivity m_sensitivity;
 
     };
 
