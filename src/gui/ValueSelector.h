@@ -25,6 +25,8 @@ namespace ogame {
 
         void setActiveOption(const unsigned& index);
 
+        const unsigned getActiveOption();
+
         void onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) override;
 
         void onActionTriggered(const player::GeneralDataModel& model) override;
