@@ -48,7 +48,7 @@ namespace ogame {
 
         const unsigned m_index;
         Galaxy* m_parent;
-        std::vector<PlanetShPtr> m_planets;
+        std::vector<std::shared_ptr<Planet>> m_planets;
         SystemCoordinates m_coordinates;
 
 

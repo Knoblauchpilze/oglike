@@ -9,6 +9,8 @@
 namespace ogame {
   namespace core {
 
+    class System;
+
     class Galaxy
     {
       public:
@@ -39,7 +41,7 @@ namespace ogame {
       private:
 
         unsigned m_index;
-        std::vector<SystemShPtr> m_systems;
+        std::vector<std::shared_ptr<System>> m_systems;
     };
 
     using GalaxyShPtr = std::shared_ptr<Galaxy>;
