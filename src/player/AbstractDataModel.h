@@ -5,14 +5,16 @@
 #include <vector>
 #include <map>
 #include "AbstractActionListener.h"
+#include "DataModelConstants.h"
+#include "Planet.h"
+#include "Account.h"
+#include "SystemCoordinates.h"
 
 namespace ogame {
   namespace player {
 
-    template <class Action>
     class AbstractActionListener;
 
-    template <typename Action>
     class AbstractDataModel
     {
       public:
@@ -23,40 +25,46 @@ namespace ogame {
 
         const std::string& getName() const noexcept;
 
-        void registerForAction(const Action& action, AbstractActionListener<Action>* listener);
+        void registerForAction(const Action& action, AbstractActionListener* listener);
 
         void triggerAction(const Action& action);
 
-        template <typename Property>
-        void addProperty(const std::string& name, const Action& action, Property* property);
+        void setActiveView(const View& view);
 
-        template <typename Property>
-        void setProperty(const std::string& name, Property* property);
+        void setActivePlanet(core::Planet* planet);
 
-        template <typename Property>
-        const Property* getProperty(const std::string& name) const;
+        void setActiveAccount(core::Account* account);
 
-      protected:
+        void setActiveSystemCoordinate(const unsigned& coordinate);
 
-        template <typename Property>
-        void addPropertyWithNoAction(const std::string& name, Property* property);
+        void setActiveGalaxyCoordinate(const unsigned& coordinate);
+
+        const View& getActiveView() const;
+
+        const core::Planet& getActivePlanet() const;
+
+        const core::Account& getActiveAccount() const;
+
+        const unsigned& getActiveSystemCoordinate() const;
+
+        const unsigned& getActiveGalaxyCoordinate() const;
 
       private:
 
-        using ListenersByAction = std::map<Action, std::vector<AbstractActionListener<Action>*>>;
-        using Properties = std::unordered_map<std::string, const void*>;
-        using ActionByProperties = std::unordered_map<std::string, Action>;
+        using ListenersByAction = std::map<Action, std::vector<AbstractActionListener*>>;
 
         std::string m_name;
         ListenersByAction m_listeners;
-        Properties m_properties;
-        ActionByProperties m_actions;
+
+        View m_activeView;
+        core::Planet* m_activePlanet;
+        core::Account* m_activeAccount;
+        unsigned m_activeSystemCoordinate;
+        unsigned m_activeGalaxyCoordinate;
 
     };
 
   }
 }
-
-#include "AbstractDataModel.hxx"
 
 #endif // ABSTRACTDATAMODEL_H
