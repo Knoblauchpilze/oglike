@@ -4,18 +4,22 @@
 #include <memory>
 #include "Community.h"
 #include "Planet.h"
+#include "Universe.h"
+#include "SystemCoordinates.h"
 
 namespace ogame {
   namespace core {
 
     class Planet;
+    class System;
+    class Universe;
 
     class Account
     {
       public:
 
         Account(const unsigned& playerUuid,
-                const unsigned& universeUuid,
+                std::shared_ptr<Universe> universe,
                 CommunityShPtr community);
 
         ~Account();
@@ -48,11 +52,13 @@ namespace ogame {
 
         const std::vector<core::Planet*>& getPlanets() const noexcept;
 
+        const core::System& getSystem(const core::SystemCoordinates& coordinates) const;
+
       private:
 
         CommunityShPtr m_community;
         unsigned m_playerUuid;
-        unsigned m_universeUuid;
+        std::shared_ptr<Universe> m_universe;
         float m_antimatter;
         
         unsigned m_availablePlanetsSlots;

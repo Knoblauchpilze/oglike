@@ -5,11 +5,11 @@ namespace ogame {
   namespace core {
 
     Account::Account(const unsigned& playerUuid,
-                     const unsigned& universeUuid,
+                     UniverseShPtr universe,
                      CommunityShPtr community):
       m_community(community),
       m_playerUuid(playerUuid),
-      m_universeUuid(universeUuid),
+      m_universe(universe),
       m_antimatter(0.0f),
 
       m_availablePlanetsSlots(1u),
@@ -20,6 +20,25 @@ namespace ogame {
     }
 
     Account::~Account() {}
+
+    bool Account::operator==(const Account& other) const noexcept {
+      return m_playerUuid == other.m_playerUuid && m_universe->getUuid() == other.m_universe->getUuid();
+    }
+
+    const std::string& Account::getUniverseName() const noexcept {
+      if (m_community == nullptr) {
+        throw AccountException(std::string("Could not get null community for player account " + std::to_string(m_playerUuid)));
+      }
+      return m_community->getUniverseName(m_universe->getUuid());
+    }
+
+    const core::System& Account::getSystem(const core::SystemCoordinates& coordinates) const {
+      if (m_universe == nullptr) {
+        throw AccountException(std::string("Could not retrieve system for coordinates for player ") + getPlayerName() + " invalid null universe");
+      }
+
+      return (*m_universe)[coordinates.getGalaxy()][coordinates.getSystem()];
+    }
 
   }
 }
