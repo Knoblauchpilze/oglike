@@ -10,6 +10,7 @@ namespace ogame {
       ChangeView,
       ChangePlanet,
       ChangeAccount,
+      ChangeGalaxy,
       ChangeSystem
     };
 
