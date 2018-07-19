@@ -14,6 +14,7 @@ namespace ogame {
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::MouseButton,
+                             view::EventListener::Sensitivity::Local,
                              std::make_shared<view::LinearLayout>(
                                view::LinearLayout::Direction::Horizontal,
                                0.0f, 0.0f,
@@ -62,19 +63,24 @@ namespace ogame {
 
     void ValueSelector::onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) {
       if (mask == view::EventListener::Interaction::MouseButtonReleased) {
+        // Notify the new value.
+        unsigned optionToSet = 0u;
+
         // Update the value displayed in this selector.
         if (origin == std::string("left_switch")) {
           lock();
-          const unsigned optionToSet = (m_selectedOption + m_options.size() - 1u) % m_options.size();
+          optionToSet = (m_selectedOption + m_options.size() - 1u) % m_options.size();
           unlock();
           setActiveOption(optionToSet);
         }
         else if (origin == std::string("right_switch")) {
           lock();
-          const unsigned optionToSet = (m_selectedOption + 1u) % m_options.size();
+          optionToSet = (m_selectedOption + 1u) % m_options.size();
           unlock();
           setActiveOption(optionToSet);
         }
+
+        notifyGraphicListeners(view::EventListener::Interaction::MouseButtonPressed);
       }
     }
 
