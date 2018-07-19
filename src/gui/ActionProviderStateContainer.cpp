@@ -11,7 +11,7 @@ namespace ogame {
                                                                player::AbstractDataModel* model,
                                                                const FailPolicy& policy):
       StateContainer(name, initState, colors, policy),
-      player::AbstractActionListener(model),
+      player::GeneralActionListener(model),
       m_view(view)
     {
       // Nothing to do here.
