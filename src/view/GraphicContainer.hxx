@@ -56,7 +56,7 @@ namespace ogame {
       );
 
       // Process the event internally.
-      if (isRelevant(EventListener::Interaction::KeyPressed)) {
+      if (isRelevant(EventListener::Interaction::KeyPressed, true)) {
         onKeyPressedEventPrivate(keyEvent);
       }
     }
@@ -71,7 +71,7 @@ namespace ogame {
       );
 
       // Process the event internally.
-      if (isRelevant(EventListener::Interaction::KeyReleased)) {
+      if (isRelevant(EventListener::Interaction::KeyReleased, true)) {
         onKeyReleasedEventPrivate(keyEvent);
       }
     }
@@ -86,7 +86,7 @@ namespace ogame {
       );
 
       // Process the event internally.
-      if (isRelevant(EventListener::Interaction::MouseMotion)) {
+      if (isRelevant(EventListener::Interaction::MouseMotion, isInside(mouseMotionEvent.x, mouseMotionEvent.y))) {
         onMouseMotionEventPrivate(mouseMotionEvent);
       }
     }
@@ -101,9 +101,7 @@ namespace ogame {
       );
 
       // Process the event internally.
-      if (isRelevant(EventListener::Interaction::MouseButtonPressed) &&
-          isInside(mouseButtonEvent.x, mouseButtonEvent.y))
-      {
+      if (isRelevant(EventListener::Interaction::MouseButtonPressed, isInside(mouseButtonEvent.x, mouseButtonEvent.y))) {
         onMouseButtonPressedEventPrivate(mouseButtonEvent);
       }
     }
@@ -118,9 +116,7 @@ namespace ogame {
       );
 
       // Process the event internally.
-      if (isRelevant(EventListener::Interaction::MouseButtonReleased) &&
-          isInside(mouseButtonEvent.x, mouseButtonEvent.y))
-      {
+      if (isRelevant(EventListener::Interaction::MouseButtonReleased, isInside(mouseButtonEvent.x, mouseButtonEvent.y))) {
         onMouseButtonReleasedEventPrivate(mouseButtonEvent);
       }
     }
@@ -135,7 +131,7 @@ namespace ogame {
       );
 
       // Process the event internally.
-      if (isRelevant(EventListener::Interaction::MouseWheel)) {
+      if (isRelevant(EventListener::Interaction::MouseWheel, true)) {
         onMouseWheelEventPrivate(upWheel);
       }
     }
@@ -273,6 +269,15 @@ namespace ogame {
     }
 
     inline
+    void GraphicContainer::notifyGraphicListeners(const view::EventListener::Interaction::Mask& interaction) {
+      std::for_each(m_listeners.cbegin(), m_listeners.cend(),
+        [&interaction, this](const GraphicContainerListener* listener) {
+          const_cast<GraphicContainerListener*>(listener)->onInteractionPerformed(getName(), interaction);
+        }
+      );
+    }
+
+    inline
     bool GraphicContainer::childrenChanged() const noexcept {
       std::unordered_map<std::string, std::shared_ptr<GraphicContainer>>::const_iterator child = m_children.cbegin();
       while (child != m_children.cend()) {
@@ -335,15 +340,6 @@ namespace ogame {
       const utils::Vector2f par = m_parent->convertCoordinates(point);
       const utils::Vector2f thi = par - area.getCenter();
       return par - area.getCenter();
-    }
-
-    inline
-    void GraphicContainer::notifyGraphicListeners(const view::EventListener::Interaction::Mask& interaction) {
-      std::for_each(m_listeners.cbegin(), m_listeners.cend(),
-        [&interaction, this](const GraphicContainerListener* listener) {
-          const_cast<GraphicContainerListener*>(listener)->onInteractionPerformed(getName(), interaction);
-        }
-      );
     }
 
   }
