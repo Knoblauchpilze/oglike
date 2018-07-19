@@ -10,7 +10,7 @@ namespace ogame {
       m_index(index),
       m_parent(galaxy),
       m_planets(),
-      m_coordinates(galaxy == nullptr ? 0u : 1u, index)
+      m_coordinates(m_parent == nullptr ? 0u : m_parent->getIndex(), index)
     {
       create(planetsCount);
     }
