@@ -31,6 +31,7 @@ set (SOURCES
   StateContainer.cpp
   StateLabelContainer.cpp
   ActionProviderStateContainer.cpp
+  Overview.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
