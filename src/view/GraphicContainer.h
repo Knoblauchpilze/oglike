@@ -19,6 +19,13 @@ namespace ogame {
     {
       public:
 
+        GraphicContainer(const std::string& name,
+                         const utils::Area& area,
+                         const EventListener::Interaction::Mask& mask = EventListener::Interaction::NoInteraction,
+                         const EventListener::Sensitivity& sensitivity = EventListener::Sensitivity::Local,
+                         std::shared_ptr<Layout> layout = nullptr,
+                         GraphicContainer* parent = nullptr);
+
         virtual ~GraphicContainer();
 
         const std::string&
@@ -61,12 +68,6 @@ namespace ogame {
         void onMouseButtonReleasedEvent(const SDL_MouseButtonEvent& mouseButtonEvent) override;
 
         void onMouseWheelEvent(bool upWheel) override;
-
-        GraphicContainer(const std::string& name,
-                         const utils::Area& area,
-                         const EventListener::Interaction::Mask& mask = EventListener::Interaction::NoInteraction,
-                         std::shared_ptr<Layout> layout = nullptr,
-                         GraphicContainer* parent = nullptr);
 
       protected:
 
@@ -120,6 +121,8 @@ namespace ogame {
 
         virtual void clearContentPrivate(SDL_Surface* render);
 
+        void notifyGraphicListeners(const view::EventListener::Interaction::Mask& interaction);
+
       private:
 
         bool childrenChanged() const noexcept;
@@ -131,8 +134,6 @@ namespace ogame {
         void drawChild(std::shared_ptr<GraphicContainer> child);
 
         const utils::Vector2f convertCoordinates(const utils::Vector2f& point) noexcept;
-
-        void notifyGraphicListeners(const view::EventListener::Interaction::Mask& interaction);
 
       private:
 

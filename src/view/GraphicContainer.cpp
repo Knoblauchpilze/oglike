@@ -7,10 +7,11 @@ namespace ogame {
     GraphicContainer::GraphicContainer(const std::string& name,
                                        const utils::Area& area,
                                        const EventListener::Interaction::Mask& mask,
+                                       const EventListener::Sensitivity& sensitivity,
                                        LayoutShPtr layout,
                                        GraphicContainer* parent):
       Drawable(),
-      EventListener(mask),
+      EventListener(mask, sensitivity),
       m_name(name),
       m_area(area),
       m_parent(parent),
