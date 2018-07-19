@@ -17,7 +17,7 @@ namespace ogame {
 
         PlanetsView(const std::string& name,
                     player::GeneralDataModel* model = nullptr,
-                    const unsigned& planetCount = 0u,
+                    const unsigned& planetCount = 15,
                     const std::vector<core::Planet>& planets = std::vector<core::Planet>());
 
         virtual ~PlanetsView();

@@ -33,16 +33,18 @@ namespace ogame {
       try {
         const core::Account& account = model.getActiveAccount();
 
-        m_planetCount = account.getAvailablePlanetsSlots();
-
         LabelContainer* planetCount = getChild<LabelContainer*>(std::string("planet_count_info_panel"));
         if (checkChild(planetCount, std::string("Planet count information"))) {
           planetCount->setText(
             std::to_string(account.getOccupiedPlanetsSlots()) +
             "/" +
-            std::to_string(m_planetCount) +
-            " planet" + (m_planetCount > 1 ? "s" : "")
+            std::to_string(account.getAvailablePlanetsSlots()) +
+            " planet" + (account.getAvailablePlanetsSlots() > 1 ? "s" : "")
           );
+        }
+
+        if (account.getOccupiedPlanetsSlots() > m_planetCount) {
+          std::cerr << "[PLANETS] Planets view will not be able to display " << account.getOccupiedPlanetsSlots() << " planets for player " << account.getPlayerName() << std::endl;
         }
 
         const std::vector<core::Planet*>& planets = account.getPlanets();
@@ -55,7 +57,7 @@ namespace ogame {
         }
         grid->setGrid(1u, 2u * m_planetCount + 1u);
 
-        for (unsigned indexPlanet = 0u ; indexPlanet < planets.size() ; ++indexPlanet) {
+        for (unsigned indexPlanet = 0u ; indexPlanet < planets.size() && indexPlanet < m_planetCount ; ++indexPlanet) {
           PlanetViewLink* planet = getOrCreatePlanetView(indexPlanet);
           if (planet == nullptr) {
             std::cerr << "[PLANETS] Coult not render planet link " << indexPlanet << ", planets view may be incorrect" << std::endl;
