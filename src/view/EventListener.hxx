@@ -12,8 +12,8 @@ namespace ogame {
     }
 
     inline
-    bool EventListener::isRelevant(const Interaction::Mask& event) const noexcept {
-      return m_mask & event;
+    bool EventListener::isRelevant(const Interaction::Mask& event, const bool inside) const noexcept {
+      return (m_mask & event) && (inside || m_sensitivity == Sensitivity::Global);
     }
 
   }
