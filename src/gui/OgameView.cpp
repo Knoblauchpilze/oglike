@@ -110,7 +110,7 @@ namespace ogame {
                                         player::GeneralDataModelShPtr model)
     {
       // Create the views.
-      m_overView = createGraphicContainer(getViewNameFromView(player::View::Overview));
+      m_overView = std::make_shared<OverView>(getViewNameFromView(player::View::Overview), model);
       m_buildingsView = createGraphicContainer(getViewNameFromView(player::View::Resources));
       m_facilitiesView = createGraphicContainer(getViewNameFromView(player::View::Facilities));
       m_researchView = createGraphicContainer(getViewNameFromView(player::View::Research));
