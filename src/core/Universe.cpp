@@ -79,6 +79,15 @@ namespace ogame {
       }
     }
 
+    const bool Universe::checkForDuplicatedAccounts(const Account& account) const {
+      for (unsigned indexAccount = 0u ; indexAccount < m_accounts.size() ; ++indexAccount) {
+        if (*m_accounts[indexAccount] == account) {
+          return true;
+        }
+      }
+      return false;
+    }
+
     const bool Universe::findPositionForAccount(unsigned& galaxy, unsigned& system, unsigned& position) const {
       // We assume that we can only give a position between m_minStartPos and m_maxStartPos.
       bool found = false;
