@@ -12,11 +12,12 @@
 #include "System.h"
 #include "ColoredFont.h"
 #include "DataModelImplementation.h"
+#include "GraphicContainerListener.h"
 
 namespace ogame {
   namespace gui {
 
-    class GalaxyNavigationPanel: public view::GraphicContainer, public player::GeneralActionListener
+    class GalaxyNavigationPanel: public view::GraphicContainer, public player::GeneralActionListener, public view::GraphicContainerListener
     {
       public:
 
@@ -28,6 +29,8 @@ namespace ogame {
         virtual ~GalaxyNavigationPanel();
 
         void onActionTriggered(const player::GeneralDataModel& model) override;
+
+        void onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) override;
 
         void populateWithSystemData(const core::System& system);
 
@@ -49,8 +52,6 @@ namespace ogame {
                                                const std::vector<std::string>& options) const;
 
         view::GraphicContainerShPtr createLabelForSystemView() const;
-
-        void connectDataModel(player::GeneralDataModelShPtr model);
 
       private:
 
