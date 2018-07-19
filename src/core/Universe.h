@@ -12,6 +12,7 @@ namespace ogame {
   namespace core {
 
     class Galaxy;
+    class Account;
 
     class Universe
     {
@@ -34,7 +35,7 @@ namespace ogame {
 
         const Galaxy& operator[](const unsigned& index) const;
 
-        void createAccount(AccountShPtr account);
+        void createAccount(std::shared_ptr<Account> account);
 
       private:
 
@@ -49,10 +50,10 @@ namespace ogame {
       private:
 
         const unsigned m_index;
-        std::vector<GalaxyShPtr> m_galaxies;
+        std::vector<std::shared_ptr<Galaxy>> m_galaxies;
         unsigned m_minStartPos;
         unsigned m_maxStartPos;
-        std::vector<AccountShPtr> m_accounts;
+        std::vector<std::shared_ptr<Account>> m_accounts;
 
     };
 

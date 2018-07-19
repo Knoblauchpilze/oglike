@@ -21,16 +21,6 @@ namespace ogame {
       return m_index;
     }
 
-    inline
-    const bool Universe::checkForDuplicatedAccounts(const Account& account) const {
-      for (unsigned indexAccount = 0u ; indexAccount < m_accounts.size() ; ++indexAccount) {
-        if (*m_accounts[indexAccount] == account) {
-          return true;
-        }
-      }
-      return false;
-    }
-
   }
 }
 
