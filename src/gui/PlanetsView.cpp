@@ -14,11 +14,9 @@ namespace ogame {
                              const unsigned& planetCount,
                              const std::vector<core::Planet>& planets):
       view::GraphicContainer(name,
-                             view::utils::Area(),
-                             view::EventListener::Interaction::NoInteraction),
+                             view::utils::Area()),
       player::GeneralActionListener(model),
-      m_planetCount(planetCount),
-      m_colors()
+      m_planetCount(planetCount)
     {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
 
@@ -104,13 +102,6 @@ namespace ogame {
       }
       layout->addItem(info, 0u, 0u, 1u, 1u);
       addChild(info);
-
-      // Color association.
-      m_colors = {
-        {StateContainer::State::Normal,       SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE}},
-        {StateContainer::State::Highlighted,  SDL_Color{14, 72, 95, SDL_ALPHA_OPAQUE}},
-        {StateContainer::State::Selected,     SDL_Color{14, 72, 95, SDL_ALPHA_OPAQUE}},
-      };
 
       // Create each planet data.
       for (unsigned indexPlanet = 0u ; indexPlanet < planets.size() ; ++indexPlanet) {
