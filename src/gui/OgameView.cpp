@@ -133,7 +133,7 @@ namespace ogame {
       m_generalView->addChild(m_galaxyView);
       m_generalView->addChild(m_allianceView);
 
-      m_generalView->setActiveChild(m_galaxyView->getName());
+      m_generalView->setActiveChild(m_overView->getName());
     }
 
     void OgameView::connectDataModel(player::GeneralDataModelShPtr dataModel) {

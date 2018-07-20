@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
   ogame::core::AccountShPtr account = nullptr;
   ogame::player::PlayerShPtr player = nullptr;
 
-  const unsigned accountsToCreate = 150u;
+  const unsigned accountsToCreate = 5;
   std::vector<ogame::core::AccountShPtr> accounts;
   std::vector<ogame::player::PlayerShPtr> players;
   try {
@@ -110,7 +110,7 @@ int main(int argc, char* argv[])
   try {
     dataModel->setActiveAccount(account.get());
     dataModel->setActivePlanet(&account->getHomeWorld());
-    dataModel->setActiveView(ogame::player::View::Galaxy);
+    dataModel->setActiveView(ogame::player::View::Overview);
     dataModel->setActiveSystemCoordinate(account->getHomeWorld().getSystem().getIndex());
     dataModel->setActiveGalaxyCoordinate(account->getHomeWorld().getSystem().getGalaxyIndex());
   }
