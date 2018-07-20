@@ -32,6 +32,8 @@ set (SOURCES
   StateLabelContainer.cpp
   ActionProviderStateContainer.cpp
   Overview.cpp
+  PlanetDescription.cpp
+  ConditionalPictureContainer.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
