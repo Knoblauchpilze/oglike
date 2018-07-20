@@ -34,6 +34,7 @@ set (SOURCES
   Overview.cpp
   PlanetDescription.cpp
   ConditionalPictureContainer.cpp
+  BuildingsView.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
