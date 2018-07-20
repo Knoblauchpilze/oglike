@@ -4,20 +4,19 @@
 #include <memory>
 #include <vector>
 #include <SDL/SDL.h>
-#include "StateContainer.h"
+#include "GraphicContainer.h"
 #include "Planet.h"
 #include "PlanetIconDisplay.h"
 
 namespace ogame {
   namespace gui {
 
-    class PlanetViewLink: public StateContainer
+    class PlanetViewLink: public view::GraphicContainer
     {
       public:
 
         PlanetViewLink(const std::string& name,
-                       const unsigned& planetCount,
-                       const StateContainer::StateAssociation& colors);
+                       const unsigned& planetCount);
 
         virtual ~PlanetViewLink();
 
