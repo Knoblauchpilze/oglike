@@ -73,7 +73,21 @@ namespace ogame {
     }
 
     void OverView::populateWithPlanetData(const core::Planet& planet) {
-      
+      lock();
+
+      // Update each information.
+      ConditionalPictureContainer* moonLink = getChild<ConditionalPictureContainer*>(std::string("moon_link"));
+      if (checkChild(moonLink, "Planet moon link")) {
+        moonLink->setActive(planet.hasMoon());
+      }
+
+      LabelContainer* name = getChild<LabelContainer*>(std::string("planet_name"));
+      if (checkChild(name, "Planet name overview")) {
+        name->setText(std::string("Overview - ") + planet.getName());
+      }
+
+      makeDeepDirty();
+      unlock();
     }
   }
 }
