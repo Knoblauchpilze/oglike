@@ -9,6 +9,7 @@
 #include "Planet.h"
 #include "GraphicContainer.h"
 #include "Overview.h"
+#include "BuildingsView.h"
 #include "GalaxyView.h"
 #include "SelectorPanel.h"
 #include "MenuView.h"
@@ -75,7 +76,7 @@ namespace ogame {
 
         // Galaxy view display.
         OverViewShPtr m_overView;
-        view::GraphicContainerShPtr m_buildingsView;
+        BuildingsViewShPtr m_buildingsView;
         view::GraphicContainerShPtr m_facilitiesView;
         view::GraphicContainerShPtr m_researchView;
         view::GraphicContainerShPtr m_shipyardView;
