@@ -4,6 +4,7 @@
 #include "GuiException.h"
 #include "LabelledPicture.h"
 #include "ComponentFactory.h"
+#include "SystemException.h"
 
 namespace ogame {
   namespace gui {
@@ -46,7 +47,7 @@ namespace ogame {
       );
       LabelledPictureShPtr settings = createLabelledPicturePanel(
         std::string("settings_option"),
-        std::string("data/img/move_icon.bmp"),
+        std::string("data/img/settings_icon.bmp"),
         std::string("Give up/Rename")
       );
 
@@ -96,9 +97,45 @@ namespace ogame {
       setLayout(layout);
     }
 
-    void PlanetDescription::connectDataModel(player::GeneralDataModelShPtr dataModel) {}
+    void PlanetDescription::connectDataModel(player::GeneralDataModelShPtr dataModel) {
+      dataModel->registerForAction(player::Action::ChangePlanet, this);
+    }
 
-    void PlanetDescription::populateWithPlanetData(const core::Planet& planet) {}
+    void PlanetDescription::populateWithPlanetData(const core::Planet& planet) {
+      lock();
+
+      // Update each information.
+      LabelContainer* diameter = getChild<LabelContainer*>(std::string("diameter_value"));
+      if (checkChild(diameter, "Planet diameter")) {
+        diameter->setText(std::to_string(static_cast<int>(planet.getDiameter())) + " kms");
+      }
+
+      LabelContainer* temperature = getChild<LabelContainer*>(std::string("temperature_value"));
+      if (checkChild(temperature, "Planet temperature")) {
+        temperature->setText(
+          std::to_string(static_cast<int>(planet.getMinTemperature())) +
+          " to " +
+          std::to_string(static_cast<int>(planet.getMaxTemperature())) +
+          " degrees"
+        );
+      }
+
+      LabelContainer* coordinates = getChild<LabelContainer*>(std::string("coordinates_value"));
+      if (checkChild(coordinates, "Planet coordinates")) {
+        try {
+          coordinates->setText(planet.getCoordinates());
+        }
+        catch (const core::PlanetException& e) {
+          std::cerr << "[DESCRIPTION] Could not compute coordinates for planet " << planet.getName() << ": " << std::endl << e.what() << std::endl;
+        }
+        catch (const core::SystemException& e) {
+          std::cerr << "[DESCRIPTION] Could not compute coordinates for planet " << planet.getName() << ": " << std::endl << e.what() << std::endl;
+        }
+      }
+
+      makeDeepDirty();
+      unlock();
+    }
 
   }
 }
