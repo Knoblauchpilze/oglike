@@ -7,6 +7,7 @@ namespace ogame {
     GraphicContainer::GraphicContainer(const std::string& name,
                                        const utils::Area& area,
                                        const EventListener::Interaction::Mask& mask,
+                                       const bool transparent,
                                        const EventListener::Sensitivity& sensitivity,
                                        LayoutShPtr layout,
                                        GraphicContainer* parent):
@@ -21,6 +22,7 @@ namespace ogame {
       m_children(),
       m_listeners(),
       m_panel(nullptr),
+      m_transparent(transparent),
       m_color()
     {
       m_color = {

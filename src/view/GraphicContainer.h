@@ -22,6 +22,7 @@ namespace ogame {
         GraphicContainer(const std::string& name,
                          const utils::Area& area,
                          const EventListener::Interaction::Mask& mask = EventListener::Interaction::NoInteraction,
+                         const bool transparent = true,
                          const EventListener::Sensitivity& sensitivity = EventListener::Sensitivity::Local,
                          std::shared_ptr<Layout> layout = nullptr,
                          GraphicContainer* parent = nullptr);
@@ -146,6 +147,7 @@ namespace ogame {
         std::unordered_map<std::string, std::shared_ptr<GraphicContainer>> m_children;
         std::unordered_set<GraphicContainerListener*> m_listeners;
         SDL_Surface* m_panel;
+        bool m_transparent;
         SDL_Color m_color;
 
     };
