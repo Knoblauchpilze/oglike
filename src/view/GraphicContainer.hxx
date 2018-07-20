@@ -256,15 +256,20 @@ namespace ogame {
 
     inline
     SDL_Surface* GraphicContainer::createContentPrivate() {
-      // Default implementation which should be overriden by inheriting classes.
+      // Create the background surface.
       return SDL_CreateRGBSurface(0, static_cast<int>(m_area.w()), static_cast<int>(m_area.h()), 32, 0, 0, 0, 0);
     }
 
     inline
     void GraphicContainer::clearContentPrivate(SDL_Surface* render) {
-      // Default implementation which should be overriden by inheriting classes.
+      // Check whether we can apply the background color.
       if (render != nullptr) {
         SDL_FillRect(render, nullptr, SDL_MapRGB(render->format, m_color.r, m_color.g, m_color.b));
+
+        // Also perform the transparent settings if needed.
+        if (m_transparent) {
+          SDL_SetColorKey(render, SDL_SRCCOLORKEY, SDL_MapRGB(render->format, m_color.r, m_color.g, m_color.b));
+        }
       }
     }
 
