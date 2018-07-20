@@ -3,14 +3,14 @@
 
 #include <memory>
 #include <SDL/SDL.h>
-#include "GraphicContainer.h"
+#include "PictureContainer.h"
 #include "Planet.h"
 #include "DataModelImplementation.h"
 
 namespace ogame {
   namespace gui {
 
-    class OverView: public view::GraphicContainer, public player::GeneralActionListener
+    class OverView: public PictureContainer, public player::GeneralActionListener
     {
       public:
 
@@ -22,7 +22,7 @@ namespace ogame {
 
       private:
 
-        void createView();
+        void createView(player::GeneralDataModelShPtr model);
 
         void connectDataModel(player::GeneralDataModelShPtr dataModel);
 
