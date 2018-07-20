@@ -58,7 +58,7 @@ namespace ogame {
         throw GuiException(std::string("Could not create one or more component for menu view"));
       }
 
-      galaxy->setState(StateContainer::State::Selected);
+      overview->setState(StateContainer::State::Selected);
 
       addChild(overview);
       addChild(resources);
