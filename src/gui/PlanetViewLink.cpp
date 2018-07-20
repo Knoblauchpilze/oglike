@@ -39,15 +39,7 @@ namespace ogame {
       LabelContainer* coords = getChild<LabelContainer*>(std::string("planet_coords"));
       if (checkChild(coords, "Planet name")) {
         try {
-          coords->setText(
-            "[" +
-            std::to_string(planet.getGalaxyIndex()) +
-            ":" +
-            std::to_string(planet.getSystemIndex()) +
-            ":" +
-            std::to_string(planet.getPositionInSystem()) +
-            "]"
-          );
+          coords->setText(planet.getCoordinates());
         }
         catch (const core::PlanetException& e) {
           std::cerr << "[LINK] Could not compute coordinates for planet " << planet.getName() << ": " << std::endl << e.what() << std::endl;
