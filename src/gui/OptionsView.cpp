@@ -9,7 +9,9 @@ namespace ogame {
 
     OptionsView::OptionsView(const std::string& name, player::GeneralDataModel* model):
       view::GraphicContainer(name,
-                             view::utils::Area()),
+                             view::utils::Area(),
+                             view::EventListener::Interaction::NoInteraction,
+                             false),
       player::GeneralActionListener(model)
     {
       setBackgroundColor(SDL_Color{0, 0, 0, SDL_ALPHA_OPAQUE});

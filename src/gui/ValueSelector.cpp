@@ -14,6 +14,7 @@ namespace ogame {
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::MouseButton,
+                             false,
                              view::EventListener::Sensitivity::Local,
                              std::make_shared<view::LinearLayout>(
                                view::LinearLayout::Direction::Horizontal,
@@ -92,8 +93,16 @@ namespace ogame {
         std::string("data/img/switch_left.bmp"),
         view::EventListener::Interaction::MouseButtonReleased
       );
+
       // The main label.
-      LabelContainerShPtr label = ComponentFactory::createLabelPanel(std::string("current_value"), std::string(""), font);
+      LabelContainerShPtr label = ComponentFactory::createLabelPanel(
+        std::string("current_value"),
+        std::string(""),
+        font,
+        SDL_Color{255, 255, 255, SDL_ALPHA_OPAQUE},
+        false
+      );
+
       // Right switch option.
       PictureContainerShPtr right = ComponentFactory::createPicturePanel(
         std::string("right_switch"),
@@ -114,8 +123,6 @@ namespace ogame {
 
       left->addEventListener(this);
       right->addEventListener(this);
-
-      label->setBackgroundColor({255, 255, 255, SDL_ALPHA_OPAQUE});
     }
 
     void ValueSelector::buildIndicesTableFromOptions() {

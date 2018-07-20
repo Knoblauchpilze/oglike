@@ -7,9 +7,13 @@ namespace ogame {
 
     LabelContainer::LabelContainer(const std::string& name,
                                    const std::string& text,
-                                   view::ColoredFontShPtr font):
+                                   view::ColoredFontShPtr font,
+                                   const SDL_Color& bgColor,
+                                   const bool transparent):
       view::GraphicContainer(name,
-                             view::utils::Area()),
+                             view::utils::Area(),
+                             view::EventListener::Interaction::NoInteraction,
+                             transparent),
       m_textChanged(true),
       m_text(text),
       
@@ -19,7 +23,7 @@ namespace ogame {
       m_highlightChanged(true),
       m_textSurface(nullptr)
     {
-      setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
+      setBackgroundColor(bgColor);
     }
 
     LabelContainer::~LabelContainer() {

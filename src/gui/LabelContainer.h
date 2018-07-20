@@ -16,7 +16,9 @@ namespace ogame {
 
         LabelContainer(const std::string& name,
                        const std::string& text,
-                       view::ColoredFontShPtr font);
+                       view::ColoredFontShPtr font,
+                       const SDL_Color& bgColor = SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE},
+                       const bool transparent = true);
 
         virtual ~LabelContainer();
 
