@@ -37,7 +37,6 @@ namespace ogame {
       private:
 
         unsigned m_planetCount;
-        StateContainer::StateAssociation m_colors;
 
     };
 
