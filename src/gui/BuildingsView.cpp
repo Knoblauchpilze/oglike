@@ -87,6 +87,46 @@ namespace ogame {
     void BuildingsView::populateWithPlanetData(const core::Planet& planet) {
       lock();
 
+      // Update each information.
+      LabelledPicture* metal = getChild<LabelledPicture*>(std::string("metal_mine"));
+      if (checkChild(metal, "Planet metal mine")) {
+        metal->setLabel(std::to_string(planet.getPositionInSystem()));
+      }
+      LabelledPicture* crystal = getChild<LabelledPicture*>(std::string("crystal_mine"));
+      if (checkChild(crystal, "Planet crystal mine")) {
+        crystal->setLabel(std::to_string(planet.getPositionInSystem()));
+      }
+      LabelledPicture* deut = getChild<LabelledPicture*>(std::string("deut_synthesizer"));
+      if (checkChild(deut, "Planet deuterium synthesizer")) {
+        deut->setLabel(std::to_string(planet.getPositionInSystem()));
+      }
+
+      LabelledPicture* solarPlant = getChild<LabelledPicture*>(std::string("solar_plant"));
+      if (checkChild(solarPlant, "Planet solar plant")) {
+        solarPlant->setLabel(std::to_string(planet.getPositionInSystem()));
+      }
+      LabelledPicture* fusionPlant = getChild<LabelledPicture*>(std::string("fusion_plant"));
+      if (checkChild(fusionPlant, "Planet fusion plant")) {
+        fusionPlant->setLabel(std::to_string(planet.getPositionInSystem()));
+      }
+      LabelledPicture* solarSatellite = getChild<LabelledPicture*>(std::string("solar_satellite"));
+      if (checkChild(solarSatellite, "Planet solar satellite")) {
+        solarSatellite->setLabel(std::to_string(planet.getPositionInSystem()));
+      }
+
+      LabelledPicture* metalStorage = getChild<LabelledPicture*>(std::string("metal_storage"));
+      if (checkChild(metalStorage, "Planet metal storage")) {
+        metalStorage->setLabel(std::to_string(planet.getPositionInSystem()));
+      }
+      LabelledPicture* crystalStorage = getChild<LabelledPicture*>(std::string("crystal_storage"));
+      if (checkChild(crystalStorage, "Planet crystal storage")) {
+        crystalStorage->setLabel(std::to_string(planet.getPositionInSystem()));
+      }
+      LabelledPicture* deutTank = getChild<LabelledPicture*>(std::string("deut_tank"));
+      if (checkChild(deutTank, "Planet deuterium tank")) {
+        deutTank->setLabel(std::to_string(planet.getPositionInSystem()));
+      }
+
       makeDeepDirty();
       unlock();
     }
