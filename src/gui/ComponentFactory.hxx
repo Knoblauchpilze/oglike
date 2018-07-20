@@ -33,15 +33,34 @@ namespace ogame {
     }
 
     inline
+    ConditionalPictureContainerShPtr
+    ComponentFactory::createConditionalPicturePanel(const std::string& name,
+                                                    const std::string& file,
+                                                    const view::EventListener::Interaction::Mask& mask,
+                                                    const bool active)
+    {
+      return std::make_shared<ConditionalPictureContainer>(
+        name,
+        file,
+        mask,
+        active
+      );
+    }
+
+    inline
     LabelContainerShPtr
     ComponentFactory::createLabelPanel(const std::string& name,
                                        const std::string& text,
-                                       view::ColoredFontShPtr font)
+                                       view::ColoredFontShPtr font,
+                                       const SDL_Color& bgColor,
+                                       const bool transparent)
     {
       return std::make_shared<LabelContainer>(
         name,
         text,
-        font
+        font,
+        bgColor,
+        transparent
       );
     }
 
