@@ -10,6 +10,7 @@ namespace ogame {
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction,
+                             false,
                              view::EventListener::Sensitivity::Local,
                              std::make_shared<view::LinearLayout>(
                                view::LinearLayout::Direction::Vertical,

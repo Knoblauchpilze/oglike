@@ -14,7 +14,9 @@ namespace ogame {
                              const unsigned& planetCount,
                              const std::vector<core::Planet>& planets):
       view::GraphicContainer(name,
-                             view::utils::Area()),
+                             view::utils::Area(),
+                             view::EventListener::Interaction::NoInteraction,
+                             false),
       player::GeneralActionListener(model),
       m_planetCount(planetCount)
     {

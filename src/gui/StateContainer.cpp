@@ -11,6 +11,7 @@ namespace ogame {
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::Mouse,
+                             false,
                              view::EventListener::Sensitivity::Global),
       m_state(initState),
       m_policy(policy),

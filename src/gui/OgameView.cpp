@@ -88,6 +88,8 @@ namespace ogame {
         throw GuiException(std::string("Could not create one or more of the views needed for main display"));
       }
 
+      m_generalView->setBackgroundColor(SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE});
+
       // Add each one to the main layout.
       layout->addItem(m_optionsView,   0u, 0u, 12u, 1u);
       m_panel->addChild(m_optionsView);
