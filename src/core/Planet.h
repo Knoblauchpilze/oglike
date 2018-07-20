@@ -46,6 +46,14 @@ namespace ogame {
 
         const System& getSystem() const;
 
+        const float& getDiameter() const noexcept;
+
+        const float& getMinTemperature() const noexcept;
+
+        const float& getMaxTemperature() const noexcept;
+
+        const std::string getCoordinates() const;
+
       protected:
 
         void create();
@@ -61,6 +69,10 @@ namespace ogame {
         System* m_parent;
         std::vector<ResourceDepositShPtr> m_resources;
         std::shared_ptr<Account> m_account;
+
+        float m_diameter;
+        float m_minTemperature;
+        float m_maxTemperature;
     };
 
     using PlanetShPtr = std::shared_ptr<Planet>;

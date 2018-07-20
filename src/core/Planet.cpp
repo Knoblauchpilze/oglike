@@ -11,7 +11,11 @@ namespace ogame {
       m_index(index),
       m_name(name),
       m_parent(system),
-      m_account(nullptr)
+      m_account(nullptr),
+      
+      m_diameter(12346.0f),
+      m_minTemperature(-30.0f),
+      m_maxTemperature(150.0f)
     {
       create();
     }

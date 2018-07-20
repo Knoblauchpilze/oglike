@@ -67,6 +67,26 @@ namespace ogame {
       return *m_parent;
     }
 
+    inline
+    const float& Planet::getDiameter() const noexcept {
+      return m_diameter;
+    }
+
+    inline
+    const float& Planet::getMinTemperature() const noexcept {
+      return m_minTemperature;
+    }
+
+    inline
+    const float& Planet::getMaxTemperature() const noexcept {
+      return m_maxTemperature;
+    }
+
+    inline
+    const std::string Planet::getCoordinates() const  {
+      return "[" + std::to_string(getGalaxyIndex() + 1u) + ":" + std::to_string(getSystemIndex() + 1u) + ":" + std::to_string(getPositionInSystem() + 1u) + "]";
+    }
+
   }
 }
 
