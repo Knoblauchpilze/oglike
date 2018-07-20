@@ -52,11 +52,7 @@ namespace ogame {
 
     inline
     view::GraphicContainerShPtr OgameView::createGraphicContainer(const std::string& name) const {
-      return std::make_shared<view::GraphicContainer>(
-        name,
-        view::utils::Area(),
-        view::EventListener::Interaction::NoInteraction
-      );
+      return std::make_shared<view::GraphicContainer>(name, view::utils::Area());
     }
 
     inline
