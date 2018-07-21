@@ -37,6 +37,9 @@ set (SOURCES
   BuildingsView.cpp
   FacilitiesView.cpp
   ResearchView.cpp
+  ShipyardView.cpp
+  DefenseView.cpp
+  FleetView.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
