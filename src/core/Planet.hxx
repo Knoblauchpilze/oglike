@@ -87,6 +87,21 @@ namespace ogame {
       return "[" + std::to_string(getGalaxyIndex() + 1u) + ":" + std::to_string(getSystemIndex() + 1u) + ":" + std::to_string(getPositionInSystem() + 1u) + "]";
     }
 
+    inline
+    const unsigned Planet::getShipCount(const Ship::Type& type) const {
+      // Traverse the set of ships.
+      unsigned indexShip = 0u;
+      while (indexShip < m_ships.size()) {
+        if (m_ships[indexShip] != nullptr && m_ships[indexShip]->getType() == type) {
+          return m_ships[indexShip]->getCount();
+        }
+        ++indexShip;
+      }
+
+      // Ship not found, assume 0 count.
+      return 0u;
+    }
+
   }
 }
 
