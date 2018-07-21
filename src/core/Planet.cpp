@@ -12,6 +12,7 @@ namespace ogame {
       m_name(name),
       m_parent(system),
       m_account(nullptr),
+      m_ships(),
       
       m_diameter(12346.0f),
       m_minTemperature(-30.0f),
