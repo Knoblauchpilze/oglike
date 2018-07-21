@@ -109,62 +109,62 @@ namespace ogame {
       // Update each information.
       LabelledPicture* lightFighter = getChild<LabelledPicture*>(std::string("light_fighter"));
       if (checkChild(lightFighter, "Planet light fighter")) {
-        lightFighter->setLabel(std::to_string(planet.getPositionInSystem()));
+        lightFighter->setLabel(getShipCountFromType(core::Ship::Type::LightFighter, planet));
       }
       LabelledPicture* heavyFighter = getChild<LabelledPicture*>(std::string("heavy_fighter"));
       if (checkChild(heavyFighter, "Planet heavy fighter")) {
-        heavyFighter->setLabel(std::to_string(planet.getPositionInSystem()));
+        heavyFighter->setLabel(getShipCountFromType(core::Ship::Type::HeavyFighter, planet));
       }
       LabelledPicture* cruiser = getChild<LabelledPicture*>(std::string("cruiser"));
       if (checkChild(cruiser, "Planet cruiser")) {
-        cruiser->setLabel(std::to_string(planet.getPositionInSystem()));
+        cruiser->setLabel(getShipCountFromType(core::Ship::Type::Cruiser, planet));
       }
       LabelledPicture* battleship = getChild<LabelledPicture*>(std::string("battleship"));
       if (checkChild(battleship, "Planet battleship")) {
-        battleship->setLabel(std::to_string(planet.getPositionInSystem()));
+        battleship->setLabel(getShipCountFromType(core::Ship::Type::Battleship, planet));
       }
 
       LabelledPicture* smallCargo = getChild<LabelledPicture*>(std::string("small_cargo"));
       if (checkChild(smallCargo, "Planet small cargo")) {
-        smallCargo->setLabel(std::to_string(planet.getPositionInSystem()));
+        smallCargo->setLabel(getShipCountFromType(core::Ship::Type::SmallCargo, planet));
       }
       LabelledPicture* largeCargo = getChild<LabelledPicture*>(std::string("large_cargo"));
       if (checkChild(largeCargo, "Planet large cargo")) {
-        largeCargo->setLabel(std::to_string(planet.getPositionInSystem()));
+        largeCargo->setLabel(getShipCountFromType(core::Ship::Type::LargeCargo, planet));
       }
       LabelledPicture* colonyShip = getChild<LabelledPicture*>(std::string("colony_ship"));
       if (checkChild(colonyShip, "Planet colony ship")) {
-        colonyShip->setLabel(std::to_string(planet.getPositionInSystem()));
+        colonyShip->setLabel(getShipCountFromType(core::Ship::Type::ColonyShip, planet));
       }
 
       LabelledPicture* battlecruiser = getChild<LabelledPicture*>(std::string("battlecruiser"));
       if (checkChild(battlecruiser, "Planet battlecruiser")) {
-        battlecruiser->setLabel(std::to_string(planet.getPositionInSystem()));
+        battlecruiser->setLabel(getShipCountFromType(core::Ship::Type::Battlecruiser, planet));
       }
       LabelledPicture* bomber = getChild<LabelledPicture*>(std::string("bomber"));
       if (checkChild(bomber, "Planet bomber")) {
-        bomber->setLabel(std::to_string(planet.getPositionInSystem()));
+        bomber->setLabel(getShipCountFromType(core::Ship::Type::Bomber, planet));
       }
       LabelledPicture* destroyer = getChild<LabelledPicture*>(std::string("destroyer"));
       if (checkChild(destroyer, "Planet destoyer")) {
-        destroyer->setLabel(std::to_string(planet.getPositionInSystem()));
+        destroyer->setLabel(getShipCountFromType(core::Ship::Type::Destroyer, planet));
       }
       LabelledPicture* deathstar = getChild<LabelledPicture*>(std::string("deathstar"));
       if (checkChild(deathstar, "Planet deathstar")) {
-        deathstar->setLabel(std::to_string(planet.getPositionInSystem()));
+        deathstar->setLabel(getShipCountFromType(core::Ship::Type::Deathstar, planet));
       }
 
       LabelledPicture* recycler = getChild<LabelledPicture*>(std::string("recycler"));
       if (checkChild(recycler, "Planet recycler")) {
-        recycler->setLabel(std::to_string(planet.getPositionInSystem()));
+        recycler->setLabel(getShipCountFromType(core::Ship::Type::Recycler, planet));
       }
       LabelledPicture* espionageProbe = getChild<LabelledPicture*>(std::string("espionage_probe"));
       if (checkChild(espionageProbe, "Planet espionage probe")) {
-        espionageProbe->setLabel(std::to_string(planet.getPositionInSystem()));
+        espionageProbe->setLabel(getShipCountFromType(core::Ship::Type::EspionageProbe, planet));
       }
       LabelledPicture* satellite = getChild<LabelledPicture*>(std::string("solar_satellite"));
       if (checkChild(satellite, "Planet solar satellite")) {
-        satellite->setLabel(std::to_string(planet.getPositionInSystem()));
+        satellite->setLabel(getShipCountFromType(core::Ship::Type::SolarSatellite, planet));
       }
 
       makeDeepDirty();
