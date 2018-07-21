@@ -24,6 +24,8 @@ set (SOURCES
   Community.cpp
   CommunityException.cpp
   SystemCoordinates.cpp
+  Research.cpp
+  Ship.cpp
   )
 
 add_library (ogamelike_lib_core SHARED
