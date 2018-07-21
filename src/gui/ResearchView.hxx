@@ -43,6 +43,11 @@ namespace ogame {
       );
     }
 
+    inline
+    const std::string ResearchView::getDisplayForTech(const core::Research::Type& type, const core::Account& account) const noexcept {
+      return std::to_string(account.getLevelForTechnology(type));
+    }
+
   }
 }
 
