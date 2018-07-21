@@ -11,16 +11,43 @@ namespace ogame {
     {
       public:
 
-        Research(const std::string& name);
+        // Convenience define for the type of a ship.
+        enum class Type {
+          Energy,
+          Laser,
+          Ion,
+          Hyperspace,
+          Plasma,
+          CombustionDrive,
+          ImpulseDrive,
+          HyperspaceDrive,
+          Espionage,
+          Computer,
+          Astrophysics,
+          IRN,
+          Graviton,
+          Weapon,
+          Shielding,
+          Armour
+        };
+
+        Research(const Type& type);
 
         virtual ~Research();
 
-        const std::string& getName() const;
+        const Type& getType() const noexcept;
 
-      protected:
+        const std::string& getName() const noexcept;
+
+        const unsigned getLevel() const noexcept;
 
       private:
 
+        const std::string getNameFromType(const Type& type) const noexcept;
+
+      private:
+
+        Type m_type;
         std::string m_name;
     };
 
