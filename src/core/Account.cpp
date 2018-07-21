@@ -14,7 +14,8 @@ namespace ogame {
 
       m_availablePlanetsSlots(1u),
       m_occupiedPlanetsSlots(0u),
-      m_planets()
+      m_planets(),
+      m_researches()
     {
       // Nothing to do.
     }
@@ -32,7 +33,7 @@ namespace ogame {
       return m_community->getUniverseName(m_universe->getUuid());
     }
 
-    const core::System& Account::getSystem(const core::SystemCoordinates& coordinates) const {
+    const System& Account::getSystem(const SystemCoordinates& coordinates) const {
       if (m_universe == nullptr) {
         throw AccountException(std::string("Could not retrieve system for coordinates for player ") + getPlayerName() + " invalid null universe");
       }

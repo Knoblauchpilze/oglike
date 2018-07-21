@@ -6,6 +6,7 @@
 #include "Planet.h"
 #include "Universe.h"
 #include "SystemCoordinates.h"
+#include "Research.h"
 
 namespace ogame {
   namespace core {
@@ -44,15 +45,15 @@ namespace ogame {
 
         void incrementAvailablePlanetsSlots() noexcept;
 
-        const core::Planet& getHomeWorld() const;
+        const Planet& getHomeWorld() const;
 
-        core::Planet& getHomeWorld();
+        Planet& getHomeWorld();
 
-        void setHomePlanet(core::Planet* planet);
+        void setHomePlanet(Planet* planet);
 
-        const std::vector<core::Planet*>& getPlanets() const noexcept;
+        const std::vector<Planet*>& getPlanets() const noexcept;
 
-        const core::System& getSystem(const core::SystemCoordinates& coordinates) const;
+        const System& getSystem(const SystemCoordinates& coordinates) const;
 
       private:
 
@@ -63,7 +64,8 @@ namespace ogame {
         
         unsigned m_availablePlanetsSlots;
         unsigned m_occupiedPlanetsSlots;
-        std::vector<core::Planet*> m_planets;
+        std::vector<Planet*> m_planets;
+        std::vector<ResearchShPtr> m_researches;
 
     };
 
