@@ -2,6 +2,7 @@
 #define SHIP_H
 
 #include <string>
+#include <memory>
 
 namespace ogame {
   namespace core {
@@ -22,6 +23,8 @@ namespace ogame {
 
         std::string m_name;
     };
+
+    using ShipShPtr = std::shared_ptr<Ship>;
 
   }
 }
