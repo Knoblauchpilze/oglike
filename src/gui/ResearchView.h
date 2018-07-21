@@ -6,6 +6,7 @@
 #include "GraphicContainer.h"
 #include "Planet.h"
 #include "Account.h"
+#include "Research.h"
 #include "DataModelImplementation.h"
 #include "LabelledPicture.h"
 
@@ -33,6 +34,8 @@ namespace ogame {
         LabelledPictureShPtr createLabelledPictureContainer(const std::string& name,
                                                             const std::string& picture,
                                                             const std::string& text) const;
+
+        const std::string getDisplayForTech(const core::Research::Type& type, const core::Account& account) const noexcept;
 
       private:
 
