@@ -55,6 +55,8 @@ namespace ogame {
 
         const System& getSystem(const SystemCoordinates& coordinates) const;
 
+        const unsigned getLevelForTechnology(const Research::Type& type) const;
+
       private:
 
         CommunityShPtr m_community;

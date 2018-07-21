@@ -84,6 +84,21 @@ namespace ogame {
       return m_planets;
     }
 
+    inline
+    const unsigned Account::getLevelForTechnology(const Research::Type& type) const {
+      // Traverse the set of researches.
+      unsigned indexTech = 0u;
+      while (indexTech < m_researches.size()) {
+        if (m_researches[indexTech] != nullptr && m_researches[indexTech]->getType() == type) {
+          return m_researches[indexTech]->getLevel();
+        }
+        ++indexTech;
+      }
+
+      // Research not found, assume 0 level.
+      return 0u;
+    }
+
   }
 }
 
