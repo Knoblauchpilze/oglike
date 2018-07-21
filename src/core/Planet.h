@@ -7,6 +7,7 @@
 
 #include "ResourceDeposit.h"
 #include "Account.h"
+#include "Ship.h"
 
 namespace ogame {
   namespace core {
@@ -69,6 +70,7 @@ namespace ogame {
         System* m_parent;
         std::vector<ResourceDepositShPtr> m_resources;
         std::shared_ptr<Account> m_account;
+        std::vector<ShipShPtr> m_ships;
 
         float m_diameter;
         float m_minTemperature;
