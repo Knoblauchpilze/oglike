@@ -12,6 +12,9 @@
 #include "BuildingsView.h"
 #include "FacilitiesView.h"
 #include "ResearchView.h"
+#include "ShipyardView.h"
+#include "DefenseView.h"
+#include "FleetView.h"
 #include "GalaxyView.h"
 #include "SelectorPanel.h"
 #include "MenuView.h"
@@ -81,9 +84,9 @@ namespace ogame {
         BuildingsViewShPtr m_buildingsView;
         FacilitiesViewShPtr m_facilitiesView;
         ResearchViewShPtr m_researchView;
-        view::GraphicContainerShPtr m_shipyardView;
-        view::GraphicContainerShPtr m_defenseView;
-        view::GraphicContainerShPtr m_fleetView;
+        ShipyardViewShPtr m_shipyardView;
+        DefenseViewShPtr m_defenseView;
+        FleetViewShPtr m_fleetView;
         GalaxyViewShPtr m_galaxyView;
         view::GraphicContainerShPtr m_allianceView;
 

@@ -110,7 +110,7 @@ int main(int argc, char* argv[])
   try {
     dataModel->setActiveAccount(account.get());
     dataModel->setActivePlanet(&account->getHomeWorld());
-    dataModel->setActiveView(ogame::player::View::Resources);
+    dataModel->setActiveView(ogame::player::View::Overview);
     dataModel->setActiveSystemCoordinate(account->getHomeWorld().getSystem().getIndex());
     dataModel->setActiveGalaxyCoordinate(account->getHomeWorld().getSystem().getGalaxyIndex());
   }

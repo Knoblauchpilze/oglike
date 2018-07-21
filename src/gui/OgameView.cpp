@@ -116,9 +116,9 @@ namespace ogame {
       m_buildingsView = std::make_shared<BuildingsView>(getViewNameFromView(player::View::Resources), model);
       m_facilitiesView = std::make_shared<FacilitiesView>(getViewNameFromView(player::View::Facilities), model);
       m_researchView = std::make_shared<ResearchView>(getViewNameFromView(player::View::Research), model);
-      m_shipyardView = createGraphicContainer(getViewNameFromView(player::View::Shipyard));
-      m_defenseView = createGraphicContainer(getViewNameFromView(player::View::Defense));
-      m_fleetView = createGraphicContainer(getViewNameFromView(player::View::Fleet));
+      m_shipyardView = std::make_shared<ShipyardView>(getViewNameFromView(player::View::Shipyard), model);
+      m_defenseView = std::make_shared<DefenseView>(getViewNameFromView(player::View::Defense), model);
+      m_fleetView = std::make_shared<FleetView>(getViewNameFromView(player::View::Fleet), model);
       m_galaxyView = std::make_shared<GalaxyView>(getViewNameFromView(player::View::Galaxy), galaxyCount, systemCount, planetCount, model);
       m_allianceView = createGraphicContainer(getViewNameFromView(player::View::Alliance));
 
