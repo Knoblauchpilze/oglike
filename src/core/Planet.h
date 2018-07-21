@@ -55,6 +55,8 @@ namespace ogame {
 
         const std::string getCoordinates() const;
 
+        const unsigned getShipCount(const Ship::Type& type) const;
+
       protected:
 
         void create();
