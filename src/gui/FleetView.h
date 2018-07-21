@@ -33,6 +33,8 @@ namespace ogame {
                                                             const std::string& picture,
                                                             const std::string& text) const;
 
+        const std::string getShipCountFromType(const core::Ship::Type& type, const core::Planet& planet) const noexcept;
+
       private:
 
     };
