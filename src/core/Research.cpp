@@ -4,8 +4,9 @@
 namespace ogame {
   namespace core {
 
-    Research::Research(const std::string& name):
-      m_name(name)
+    Research::Research(const Type& type):
+      m_type(type),
+      m_name(getNameFromType(m_type))
     {
       // Nothing to do here.
     }
