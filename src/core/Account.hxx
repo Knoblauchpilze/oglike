@@ -54,7 +54,7 @@ namespace ogame {
     }
 
     inline
-    const core::Planet& Account::getHomeWorld() const {
+    const Planet& Account::getHomeWorld() const {
       if (m_planets.size() == 0 || m_planets[0] == nullptr) {
         throw AccountException(std::string("Could not retrieve home planet for player ") + getPlayerName() + ", no planet filled");
       }
@@ -62,7 +62,7 @@ namespace ogame {
     }
 
     inline
-    core::Planet& Account::getHomeWorld() {
+    Planet& Account::getHomeWorld() {
       if (m_planets.size() == 0 || m_planets[0] == nullptr) {
         throw AccountException(std::string("Could not retrieve home planet for player ") + getPlayerName() + ", no planet filled");
       }
@@ -70,7 +70,7 @@ namespace ogame {
     }
 
     inline
-    void Account::setHomePlanet(core::Planet* planet) {
+    void Account::setHomePlanet(Planet* planet) {
       if (planet == nullptr) {
         throw AccountException(std::string("Could not set null home planet for player " + getPlayerName()));
       }
@@ -80,7 +80,7 @@ namespace ogame {
     }
 
     inline
-    const std::vector<core::Planet*>& Account::getPlanets() const noexcept {
+    const std::vector<Planet*>& Account::getPlanets() const noexcept {
       return m_planets;
     }
 
