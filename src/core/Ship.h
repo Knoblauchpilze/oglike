@@ -11,16 +11,41 @@ namespace ogame {
     {
       public:
 
-        Ship(const std::string& name);
+        // Convenience define for the type of a ship.
+        enum class Type {
+          LightFighter,
+          HeavyFighter,
+          Cruiser,
+          Battleship,
+          Battlecruiser,
+          Bomber,
+          Destroyer,
+          Deathstar,
+          SmallCargo,
+          LargeCargo,
+          ColonyShip,
+          Recycler,
+          EspionageProbe,
+          SolarSatellite
+        };
+
+        Ship(const Type& type);
 
         virtual ~Ship();
 
-        const std::string& getName() const;
+        const Type& getType() const noexcept;
 
-      protected:
+        const std::string& getName() const noexcept;
+
+        const unsigned getCount() const noexcept;
 
       private:
 
+        const std::string getNameFromType(const Type& type) const noexcept;
+
+      private:
+
+        Type m_type;
         std::string m_name;
     };
 

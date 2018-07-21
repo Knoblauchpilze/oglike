@@ -4,8 +4,9 @@
 namespace ogame {
   namespace core {
 
-    Ship::Ship(const std::string& name):
-      m_name(name)
+    Ship::Ship(const Type& type):
+      m_type(type),
+      m_name(getNameFromType(m_type))
     {
       // Nothing to do here.
     }
