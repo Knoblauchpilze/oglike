@@ -28,6 +28,8 @@ namespace ogame {
 
         void setActiveChild(const int& index);
 
+        const std::string getActiveChild();
+
       private:
 
           // We assume that this index is valid based on the number of children in the 'm_availableChildren'.
