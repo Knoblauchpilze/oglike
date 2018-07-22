@@ -7,6 +7,7 @@
 #include "DataModelImplementation.h"
 #include "LabelledPicture.h"
 #include "GraphicContainerListener.h"
+#include "ElementDescriptionPanel.h"
 
 namespace ogame {
   namespace gui {
@@ -51,7 +52,7 @@ namespace ogame {
       private:
 
         view::EventListener::Interaction::Mask m_mask;
-        view::GraphicContainerShPtr m_buyingAction;
+        ElementDescriptionPanelShPtr m_buyingAction;
         std::string m_activeBuyingActionName;
 
     };
