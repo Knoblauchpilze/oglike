@@ -57,6 +57,8 @@ namespace ogame {
 
         const unsigned getLevelForTechnology(const Research::Type& type) const;
 
+        const core::Research& getResearchData(const Research::Type& type) const;
+
       private:
 
         CommunityShPtr m_community;
