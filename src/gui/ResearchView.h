@@ -18,6 +18,10 @@ namespace ogame {
 
         virtual ~ResearchView();
 
+      protected:
+
+        void populateActionData(const std::string& origin, ElementDescriptionPanel& action) const override;
+
       private:
 
         void createView();
@@ -25,6 +29,10 @@ namespace ogame {
         void populateWithData(const core::Planet& planet, const core::Account& account) override;
 
         const std::string getDisplayForTech(const core::Research::Type& type, const core::Account& account) const noexcept;
+
+        const core::Research::Type computeResearchFromOriginNode(const std::string& origin) const noexcept;
+
+        const std::string getPictureNameFromResearch(const core::Research::Type& type) const noexcept;
 
       private:
 

@@ -26,16 +26,56 @@ namespace ogame {
     void DefenseView::createView() {
       // Create all elements.
       std::string level0 = std::to_string(0);
-      LabelledPictureShPtr missile = createLabelledPictureContainer(std::string("missile_launcher"), std::string("data/img/missile_launcher.bmp"), level0);
-      LabelledPictureShPtr lightLaser = createLabelledPictureContainer(std::string("light_laser"), std::string("data/img/light_laser.bmp"), level0);
-      LabelledPictureShPtr heavyLaser = createLabelledPictureContainer(std::string("heavy_laser"), std::string("data/img/heavy_laser.bmp"), level0);
-      LabelledPictureShPtr gaussCannon = createLabelledPictureContainer(std::string("gauss_cannon"), std::string("data/img/gauss_cannon.bmp"), level0);
-      LabelledPictureShPtr ionCannon = createLabelledPictureContainer(std::string("ion_cannon"), std::string("data/img/ion_cannon.bmp"), level0);
-      LabelledPictureShPtr plasmaTurret = createLabelledPictureContainer(std::string("plasma_turret"), std::string("data/img/plasma_turret.bmp"), level0);
-      LabelledPictureShPtr smallShield = createLabelledPictureContainer(std::string("small_shield_dome"), std::string("data/img/small_shield_dome.bmp"), level0);
-      LabelledPictureShPtr largeShield = createLabelledPictureContainer(std::string("large_shield_dome"), std::string("data/img/large_shield_dome.bmp"), level0);
-      LabelledPictureShPtr abm = createLabelledPictureContainer(std::string("antiballistic_missile"), std::string("data/img/antiballistic_missile.bmp"), level0);
-      LabelledPictureShPtr ipm = createLabelledPictureContainer(std::string("interplanetary_missile"), std::string("data/img/interplanetary_missile.bmp"), level0);
+      LabelledPictureShPtr missile = createLabelledPictureContainer(
+        std::string("missile_launcher"),
+        getPictureNameFromDefense(core::Defense::Type::MissileLauncher),
+        level0
+      );
+      LabelledPictureShPtr lightLaser = createLabelledPictureContainer(
+        std::string("light_laser"),
+        getPictureNameFromDefense(core::Defense::Type::LightLaser),
+        level0
+      );
+      LabelledPictureShPtr heavyLaser = createLabelledPictureContainer(
+        std::string("heavy_laser"),
+        getPictureNameFromDefense(core::Defense::Type::HeavyLaser),
+        level0
+      );
+      LabelledPictureShPtr gaussCannon = createLabelledPictureContainer(
+        std::string("gauss_cannon"),
+        getPictureNameFromDefense(core::Defense::Type::GaussCannon),
+        level0
+      );
+      LabelledPictureShPtr ionCannon = createLabelledPictureContainer(
+        std::string("ion_cannon"),
+        getPictureNameFromDefense(core::Defense::Type::IonCannon),
+        level0
+      );
+      LabelledPictureShPtr plasmaTurret = createLabelledPictureContainer(
+        std::string("plasma_turret"),
+        getPictureNameFromDefense(core::Defense::Type::PlasmaTurret),
+        level0
+      );
+      LabelledPictureShPtr smallShield = createLabelledPictureContainer(
+        std::string("small_shield_dome"),
+        getPictureNameFromDefense(core::Defense::Type::SmallShieldDome),
+        level0
+      );
+      LabelledPictureShPtr largeShield = createLabelledPictureContainer(
+        std::string("large_shield_dome"),
+        getPictureNameFromDefense(core::Defense::Type::LargeShieldDome),
+        level0
+      );
+      LabelledPictureShPtr abm = createLabelledPictureContainer(
+        std::string("antiballistic_missile"),
+        getPictureNameFromDefense(core::Defense::Type::AntiballisticMissile),
+        level0
+      );
+      LabelledPictureShPtr ipm = createLabelledPictureContainer(
+        std::string("interplanetary_missile"),
+        getPictureNameFromDefense(core::Defense::Type::InterplanetaryMissile),
+        level0
+      );
 
       if (missile == nullptr ||
           lightLaser == nullptr ||

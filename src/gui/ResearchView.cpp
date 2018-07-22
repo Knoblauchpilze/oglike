@@ -27,22 +27,87 @@ namespace ogame {
     void ResearchView::createView() {
       // Create all elements.
       std::string level0 = std::to_string(0);
-      LabelledPictureShPtr energy = createLabelledPictureContainer(std::string("energy_tech"), std::string("data/img/energy_tech.bmp"), level0);
-      LabelledPictureShPtr laser = createLabelledPictureContainer(std::string("laser_tech"), std::string("data/img/laser_tech.bmp"), level0);
-      LabelledPictureShPtr ions = createLabelledPictureContainer(std::string("ions_tech"), std::string("data/img/ions_tech.bmp"), level0);
-      LabelledPictureShPtr hyperspace = createLabelledPictureContainer(std::string("hyperspace_tech"), std::string("data/img/hyperspace_tech.bmp"), level0);
-      LabelledPictureShPtr plasma = createLabelledPictureContainer(std::string("plasma_tech"), std::string("data/img/plasma_tech.bmp"), level0);
-      LabelledPictureShPtr combustionDrive = createLabelledPictureContainer(std::string("combustion_drive_tech"), std::string("data/img/combustion_drive_tech.bmp"), level0);
-      LabelledPictureShPtr impulseDrive = createLabelledPictureContainer(std::string("impulse_drive_tech"), std::string("data/img/impulse_drive_tech.bmp"), level0);
-      LabelledPictureShPtr hyperspaceDrive = createLabelledPictureContainer(std::string("hyperspace_drive_tech"), std::string("data/img/hyperspace_drive_tech.bmp"), level0);
-      LabelledPictureShPtr espionage = createLabelledPictureContainer(std::string("espionage_tech"), std::string("data/img/espionage_tech.bmp"), level0);
-      LabelledPictureShPtr computer = createLabelledPictureContainer(std::string("computer_tech"), std::string("data/img/computer_tech.bmp"), level0);
-      LabelledPictureShPtr astrophysics = createLabelledPictureContainer(std::string("astrophysics_tech"), std::string("data/img/astrophysics_tech.bmp"), level0);
-      LabelledPictureShPtr irn = createLabelledPictureContainer(std::string("irn_tech"), std::string("data/img/intergalactic_research_network_tech.bmp"), level0);
-      LabelledPictureShPtr graviton = createLabelledPictureContainer(std::string("graviton_tech"), std::string("data/img/graviton_tech.bmp"), level0);
-      LabelledPictureShPtr weapon = createLabelledPictureContainer(std::string("weapon_tech"), std::string("data/img/weapon_tech.bmp"), level0);
-      LabelledPictureShPtr shielding = createLabelledPictureContainer(std::string("shielding_tech"), std::string("data/img/shielding_tech.bmp"), level0);
-      LabelledPictureShPtr armour = createLabelledPictureContainer(std::string("armour_tech"), std::string("data/img/armour_tech.bmp"), level0);
+      LabelledPictureShPtr energy = createLabelledPictureContainer(
+        std::string("energy_tech"),
+        getPictureNameFromResearch(core::Research::Type::Energy),
+        level0
+      );
+      LabelledPictureShPtr laser = createLabelledPictureContainer(
+        std::string("laser_tech"),
+        getPictureNameFromResearch(core::Research::Type::Laser),
+        level0
+      );
+      LabelledPictureShPtr ions = createLabelledPictureContainer(
+        std::string("ions_tech"),
+        getPictureNameFromResearch(core::Research::Type::Ion),
+        level0
+      );
+      LabelledPictureShPtr hyperspace = createLabelledPictureContainer(
+        std::string("hyperspace_tech"),
+        getPictureNameFromResearch(core::Research::Type::Hyperspace),
+        level0
+      );
+      LabelledPictureShPtr plasma = createLabelledPictureContainer(
+        std::string("plasma_tech"),
+        getPictureNameFromResearch(core::Research::Type::Plasma),
+        level0
+      );
+      LabelledPictureShPtr combustionDrive = createLabelledPictureContainer(
+        std::string("combustion_drive_tech"),
+        getPictureNameFromResearch(core::Research::Type::CombustionDrive),
+        level0
+      );
+      LabelledPictureShPtr impulseDrive = createLabelledPictureContainer(
+        std::string("impulse_drive_tech"),
+        getPictureNameFromResearch(core::Research::Type::ImpulseDrive),
+        level0
+      );
+      LabelledPictureShPtr hyperspaceDrive = createLabelledPictureContainer(
+        std::string("hyperspace_drive_tech"),
+        getPictureNameFromResearch(core::Research::Type::HyperspaceDrive),
+        level0
+      );
+      LabelledPictureShPtr espionage = createLabelledPictureContainer(
+        std::string("espionage_tech"),
+        getPictureNameFromResearch(core::Research::Type::Espionage),
+        level0
+      );
+      LabelledPictureShPtr computer = createLabelledPictureContainer(
+        std::string("computer_tech"),
+        getPictureNameFromResearch(core::Research::Type::Computer),
+        level0
+      );
+      LabelledPictureShPtr astrophysics = createLabelledPictureContainer(
+        std::string("astrophysics_tech"),
+        getPictureNameFromResearch(core::Research::Type::Astrophysics),
+        level0
+      );
+      LabelledPictureShPtr irn = createLabelledPictureContainer(
+        std::string("irn_tech"),
+        getPictureNameFromResearch(core::Research::Type::IRN),
+        level0
+      );
+      LabelledPictureShPtr graviton = createLabelledPictureContainer(
+        std::string("graviton_tech"),
+        getPictureNameFromResearch(core::Research::Type::Graviton),
+        level0
+      );
+      LabelledPictureShPtr weapon =
+      createLabelledPictureContainer(
+        std::string("weapon_tech"),
+        getPictureNameFromResearch(core::Research::Type::Weapon),
+        level0
+      );
+      LabelledPictureShPtr shielding = createLabelledPictureContainer(
+        std::string("shielding_tech"),
+        getPictureNameFromResearch(core::Research::Type::Shielding),
+        level0
+      );
+      LabelledPictureShPtr armour = createLabelledPictureContainer(
+        std::string("armour_tech"),
+        getPictureNameFromResearch(core::Research::Type::Armour),
+        level0
+      );
 
       if (energy == nullptr ||
           laser == nullptr ||
