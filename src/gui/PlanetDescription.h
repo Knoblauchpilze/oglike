@@ -39,7 +39,8 @@ namespace ogame {
                                              const int& red,
                                              const int& green,
                                              const int& blue,
-                                             const int& alpha) const;
+                                             const int& alpha,
+                                             const LabelContainer::Alignment& alignment) const;
 
         LabelledPictureShPtr createLabelledPicturePanel(const std::string& name,
                                                         const std::string& picture,

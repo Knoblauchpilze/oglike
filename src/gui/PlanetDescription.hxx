@@ -26,12 +26,12 @@ namespace ogame {
 
     inline
     LabelContainerShPtr PlanetDescription::createInfoLabelPanel(const std::string& name, const std::string& text) const {
-      return createLabelPanel(name, text, 96, 159, 197, SDL_ALPHA_OPAQUE);
+      return createLabelPanel(name, text, 96, 159, 197, SDL_ALPHA_OPAQUE, LabelContainer::Alignment::Right);
     }
 
     inline
     LabelContainerShPtr PlanetDescription::createValueLabelPanel(const std::string& name, const std::string& text) const {
-      return createLabelPanel(name, text, 255, 255, 255, SDL_ALPHA_OPAQUE);
+      return createLabelPanel(name, text, 255, 255, 255, SDL_ALPHA_OPAQUE, LabelContainer::Alignment::Right);
     }
 
     inline
@@ -40,7 +40,8 @@ namespace ogame {
                                                             const int& red,
                                                             const int& green,
                                                             const int& blue,
-                                                            const int& alpha) const
+                                                            const int& alpha,
+                                                            const LabelContainer::Alignment& alignment) const
     {
       return ComponentFactory::createLabelPanel(
         name,
@@ -48,7 +49,8 @@ namespace ogame {
         view::FontFactory::getInstance().createColoredFont(
           std::string("data/fonts/angsa.ttf"),
           red, green, blue, alpha
-        )
+        ),
+        alignment
       );
     }
 
