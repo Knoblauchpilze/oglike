@@ -5,6 +5,7 @@ namespace ogame {
   namespace core {
 
     Research::Research(const Type& type):
+      Upgradable(0u),
       m_type(type),
       m_name(getNameFromType(m_type))
     {
@@ -12,6 +13,8 @@ namespace ogame {
     }
 
     Research::~Research() {}
+
+    void Research::upgrade(const std::vector<ResourceDepositShPtr>& resources) {}
 
   }
 }

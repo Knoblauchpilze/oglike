@@ -6,7 +6,6 @@ set (CMAKE_VERBOSE_MAKEFILE ON)
 set (CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 set (SOURCES
-  Building.cpp
   Galaxy.cpp
   GalaxyException.cpp
   OgameException.cpp
@@ -27,6 +26,7 @@ set (SOURCES
   Research.cpp
   Ship.cpp
   Defense.cpp
+  Upgradable.cpp
   )
 
 add_library (ogamelike_lib_core SHARED
