@@ -57,6 +57,39 @@ namespace ogame {
       return font->render(text);
     }
 
+    inline
+    SDL_Rect LabelContainer::computeBlitPosition(const unsigned& displayWidth, const unsigned& displayHeight) const noexcept {
+      SDL_Rect textBlitArea;
+      const float margin = 2.0f;
+      
+      if (m_alignment == Alignment::Left) {
+       textBlitArea = SDL_Rect{
+          static_cast<Sint16>(margin),
+          static_cast<Sint16>(displayHeight / 2.0f - m_textSurface->h / 2.0f),
+          static_cast<Uint16>(m_textSurface->w),
+          static_cast<Uint16>(m_textSurface->h)
+        };
+      }
+      else if (m_alignment == Alignment::Right) {
+       textBlitArea = SDL_Rect{
+          static_cast<Sint16>(displayWidth - margin - m_textSurface->w),
+          static_cast<Sint16>(displayHeight / 2.0f - m_textSurface->h / 2.0f),
+          static_cast<Uint16>(m_textSurface->w),
+          static_cast<Uint16>(m_textSurface->h)
+        };
+      }
+      else {
+       textBlitArea = SDL_Rect{
+          static_cast<Sint16>(displayWidth / 2.0f - m_textSurface->w / 2.0f),
+          static_cast<Sint16>(displayHeight / 2.0f - m_textSurface->h / 2.0f),
+          static_cast<Uint16>(m_textSurface->w),
+          static_cast<Uint16>(m_textSurface->h)
+        };
+      }
+
+      return textBlitArea;
+    }
+
   }
 }
 

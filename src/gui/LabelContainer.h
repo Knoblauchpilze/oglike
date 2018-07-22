@@ -14,9 +14,16 @@ namespace ogame {
     {
       public:
 
+        enum class Alignment {
+          Right,
+          Left,
+          Center
+        };
+
         LabelContainer(const std::string& name,
                        const std::string& text,
                        view::ColoredFontShPtr font,
+                       const Alignment& alignment = Alignment::Center,
                        const SDL_Color& bgColor = SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE},
                        const bool transparent = true);
 
@@ -41,7 +48,11 @@ namespace ogame {
 
         SDL_Surface* createTextFromFont(const std::string& text, view::ColoredFontShPtr font);
 
+        SDL_Rect computeBlitPosition(const unsigned& displayWidth, const unsigned& displayHeight) const noexcept;
+
       private:
+
+        Alignment m_alignment;
 
         bool m_textChanged;
         std::string m_text;
