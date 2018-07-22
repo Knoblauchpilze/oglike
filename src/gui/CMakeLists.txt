@@ -41,6 +41,7 @@ set (SOURCES
   DefenseView.cpp
   FleetView.cpp
   AbstractBuyingView.cpp
+  ElementDescriptionPanel.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
