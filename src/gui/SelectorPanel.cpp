@@ -21,7 +21,7 @@ namespace ogame {
       m_indices(),
       m_availableChildren()
     {
-      // Nothing to do.
+      setBackgroundColor(SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE});
     }
 
     SelectorPanel::~SelectorPanel() {}
