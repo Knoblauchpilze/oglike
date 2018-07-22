@@ -10,23 +10,21 @@ namespace ogame {
   namespace gui {
 
     FacilitiesView::FacilitiesView(const std::string& name, player::GeneralDataModelShPtr model):
-      AbstractBuyingView(name, model)
+      AbstractBuyingView(name,
+                         model,
+                         6u,
+                         5u,
+                         std::string("data/img/facilities_bg.bmp"))
     {
-      createView(model);
+      createView();
 
-      connectDataModel(model);
+      connectDataModel(player::Action::ChangePlanet);
     }
 
     FacilitiesView::~FacilitiesView() {}
 
-    void FacilitiesView::createView(player::GeneralDataModelShPtr model) {
-      view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(6u, 5u, 0.0f);
-      if (layout == nullptr) {
-        throw GuiException(std::string("Could not allocate memory to create facilities view"));
-      }
-
-      PictureContainerShPtr image = ComponentFactory::createPicturePanel(std::string("image_panel"), std::string("data/img/facilities_bg.bmp"));
-
+    void FacilitiesView::createView() {
+      // Create all elements.
       std::string level0 = std::to_string(0);
       LabelledPictureShPtr robotics = createLabelledPictureContainer(std::string("robotics_factory"), std::string("data/img/robotics_factory.bmp"), level0);
       LabelledPictureShPtr shipyard = createLabelledPictureContainer(std::string("shipyard"), std::string("data/img/shipyard.bmp"), level0);
@@ -37,8 +35,7 @@ namespace ogame {
       LabelledPictureShPtr terraformer = createLabelledPictureContainer(std::string("terraformer"), std::string("data/img/terraformer.bmp"), level0);
       LabelledPictureShPtr spaceDock = createLabelledPictureContainer(std::string("space_dock"), std::string("data/img/space_dock.bmp"), level0);
 
-      if (image == nullptr ||
-          robotics == nullptr ||
+      if (robotics == nullptr ||
           shipyard == nullptr ||
           research == nullptr ||
           allianceDepot == nullptr ||
@@ -50,30 +47,14 @@ namespace ogame {
         throw GuiException(std::string("Could not allocate memory to create facilities view"));
       }
 
-      layout->addItem(image,          0u, 0u, 6u, 2u);
-      addChild(image);
-      layout->addItem(robotics,       0u, 2u, 1u, 1u);
-      addChild(robotics);
-      layout->addItem(shipyard,       1u, 2u, 1u, 1u);
-      addChild(shipyard);
-      layout->addItem(research,       2u, 2u, 1u, 1u);
-      addChild(research);
-      layout->addItem(allianceDepot,  3u, 2u, 1u, 1u);
-      addChild(allianceDepot);
-      layout->addItem(missileSilo,    4u, 2u, 1u, 1u);
-      addChild(missileSilo);
-      layout->addItem(naniteFactory,  5u, 2u, 1u, 1u);
-      addChild(naniteFactory);
-      layout->addItem(terraformer,    0u, 3u, 1u, 1u);
-      addChild(terraformer);
-      layout->addItem(spaceDock,      1u, 3u, 1u, 1u);
-      addChild(spaceDock);
-
-      setLayout(layout);
-    }
-
-    void FacilitiesView::connectDataModel(player::GeneralDataModelShPtr dataModel) {
-      dataModel->registerForAction(player::Action::ChangePlanet, this);
+      addChild(robotics,      0u, 2u, 1u, 1u);
+      addChild(shipyard,      1u, 2u, 1u, 1u);
+      addChild(research,      2u, 2u, 1u, 1u);
+      addChild(allianceDepot, 3u, 2u, 1u, 1u);
+      addChild(missileSilo,   4u, 2u, 1u, 1u);
+      addChild(naniteFactory, 5u, 2u, 1u, 1u);
+      addChild(terraformer,   0u, 3u, 1u, 1u);
+      addChild(spaceDock,     1u, 3u, 1u, 1u);
     }
 
     void FacilitiesView::populateWithData(const core::Planet& planet, const core::Account& account) {

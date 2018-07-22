@@ -10,23 +10,21 @@ namespace ogame {
   namespace gui {
 
     FleetView::FleetView(const std::string& name, player::GeneralDataModelShPtr model):
-      AbstractBuyingView(name, model)
+      AbstractBuyingView(name,
+                         model,
+                         7u,
+                         5u,
+                         std::string("data/img/fleet_bg.bmp"))
     {
-      createView(model);
+      createView();
 
-      connectDataModel(model);
+      connectDataModel(player::Action::ChangePlanet);
     }
 
     FleetView::~FleetView() {}
 
-    void FleetView::createView(player::GeneralDataModelShPtr model) {
-      view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(6u, 5u, 0.0f);
-      if (layout == nullptr) {
-        throw GuiException(std::string("Could not allocate memory to create fleet view"));
-      }
-
-      PictureContainerShPtr image = ComponentFactory::createPicturePanel(std::string("image_panel"), std::string("data/img/fleet_bg.bmp"));
-
+    void FleetView::createView() {
+      // Create all elements.
       std::string level0 = std::to_string(0);
       LabelledPictureShPtr lightFighter = createLabelledPictureContainer(std::string("light_fighter"), std::string("data/img/light_fighter.bmp"), level0);
       LabelledPictureShPtr heavyFighter = createLabelledPictureContainer(std::string("heavy_fighter"), std::string("data/img/heavy_fighter.bmp"), level0);
@@ -61,42 +59,20 @@ namespace ogame {
         throw GuiException(std::string("Could not allocate memory to create fleet view"));
       }
 
-      layout->addItem(image,          0u, 0u, 6u, 2u);
-      addChild(image);
-      layout->addItem(lightFighter,   0u, 2u, 1u, 1u);
-      addChild(lightFighter);
-      layout->addItem(heavyFighter,   1u, 2u, 1u, 1u);
-      addChild(heavyFighter);
-      layout->addItem(cruiser,        2u, 2u, 1u, 1u);
-      addChild(cruiser);
-      layout->addItem(battleship,     3u, 2u, 1u, 1u);
-      addChild(battleship);
-      layout->addItem(smallCargo,     4u, 2u, 1u, 1u);
-      addChild(smallCargo);
-      layout->addItem(largeCargo,     5u, 2u, 1u, 1u);
-      addChild(largeCargo);
-      layout->addItem(colonyShip,     6u, 2u, 1u, 1u);
-      addChild(colonyShip);
-      layout->addItem(battlecruiser,  0u, 3u, 1u, 1u);
-      addChild(battlecruiser);
-      layout->addItem(bomber,         1u, 3u, 1u, 1u);
-      addChild(bomber);
-      layout->addItem(destroyer,      2u, 3u, 1u, 1u);
-      addChild(destroyer);
-      layout->addItem(deathstar,      3u, 3u, 1u, 1u);
-      addChild(deathstar);
-      layout->addItem(recycler,       4u, 3u, 1u, 1u);
-      addChild(recycler);
-      layout->addItem(espionageProbe, 5u, 3u, 1u, 1u);
-      addChild(espionageProbe);
-      layout->addItem(solarSatellite, 6u, 3u, 1u, 1u);
-      addChild(solarSatellite);
-
-      setLayout(layout);
-    }
-
-    void FleetView::connectDataModel(player::GeneralDataModelShPtr dataModel) {
-      dataModel->registerForAction(player::Action::ChangePlanet, this);
+      addChild(lightFighter,   0u, 2u, 1u, 1u);
+      addChild(heavyFighter,   1u, 2u, 1u, 1u);
+      addChild(cruiser,        2u, 2u, 1u, 1u);
+      addChild(battleship,     3u, 2u, 1u, 1u);
+      addChild(smallCargo,     4u, 2u, 1u, 1u);
+      addChild(largeCargo,     5u, 2u, 1u, 1u);
+      addChild(colonyShip,     6u, 2u, 1u, 1u);
+      addChild(battlecruiser,  0u, 3u, 1u, 1u);
+      addChild(bomber,         1u, 3u, 1u, 1u);
+      addChild(destroyer,      2u, 3u, 1u, 1u);
+      addChild(deathstar,      3u, 3u, 1u, 1u);
+      addChild(recycler,       4u, 3u, 1u, 1u);
+      addChild(espionageProbe, 5u, 3u, 1u, 1u);
+      addChild(solarSatellite, 6u, 3u, 1u, 1u);
     }
 
     void FleetView::populateWithData(const core::Planet& planet, const core::Account& account) {

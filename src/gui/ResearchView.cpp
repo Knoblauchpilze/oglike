@@ -10,23 +10,22 @@ namespace ogame {
   namespace gui {
 
     ResearchView::ResearchView(const std::string& name, player::GeneralDataModelShPtr model):
-      AbstractBuyingView(name, model)
+      AbstractBuyingView(name,
+                         model,
+                         8u,
+                         5u,
+                         std::string("data/img/research_bg.bmp"))
     {
-      createView(model);
+      createView();
 
-      connectDataModel(model);
+      connectDataModel(player::Action::ChangePlanet);
+      connectDataModel(player::Action::ChangeAccount);
     }
 
     ResearchView::~ResearchView() {}
 
-    void ResearchView::createView(player::GeneralDataModelShPtr model) {
-      view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(8u, 5u, 0.0f);
-      if (layout == nullptr) {
-        throw GuiException(std::string("Could not allocate memory to create research view"));
-      }
-
-      PictureContainerShPtr image = ComponentFactory::createPicturePanel(std::string("image_panel"), std::string("data/img/research_bg.bmp"));
-
+    void ResearchView::createView() {
+      // Create all elements.
       std::string level0 = std::to_string(0);
       LabelledPictureShPtr energy = createLabelledPictureContainer(std::string("energy_tech"), std::string("data/img/energy_tech.bmp"), level0);
       LabelledPictureShPtr laser = createLabelledPictureContainer(std::string("laser_tech"), std::string("data/img/laser_tech.bmp"), level0);
@@ -45,8 +44,7 @@ namespace ogame {
       LabelledPictureShPtr shielding = createLabelledPictureContainer(std::string("shielding_tech"), std::string("data/img/shielding_tech.bmp"), level0);
       LabelledPictureShPtr armour = createLabelledPictureContainer(std::string("armour_tech"), std::string("data/img/armour_tech.bmp"), level0);
 
-      if (image == nullptr ||
-          energy == nullptr ||
+      if (energy == nullptr ||
           laser == nullptr ||
           ions == nullptr ||
           hyperspace == nullptr ||
@@ -66,46 +64,22 @@ namespace ogame {
         throw GuiException(std::string("Could not allocate memory to create research view"));
       }
 
-      layout->addItem(image,            0u, 0u, 8u, 2u);
-      addChild(image);
-      layout->addItem(energy,           0u, 2u, 1u, 1u);
-      addChild(energy);
-      layout->addItem(laser,            1u, 2u, 1u, 1u);
-      addChild(laser);
-      layout->addItem(ions,             2u, 2u, 1u, 1u);
-      addChild(ions);
-      layout->addItem(hyperspace,       3u, 2u, 1u, 1u);
-      addChild(hyperspace);
-      layout->addItem(plasma,           4u, 2u, 1u, 1u);
-      addChild(plasma);
-      layout->addItem(combustionDrive,  5u, 2u, 1u, 1u);
-      addChild(combustionDrive);
-      layout->addItem(impulseDrive,     6u, 2u, 1u, 1u);
-      addChild(impulseDrive);
-      layout->addItem(hyperspaceDrive,  7u, 2u, 1u, 1u);
-      addChild(hyperspaceDrive);
-      layout->addItem(espionage,        0u, 3u, 1u, 1u);
-      addChild(espionage);
-      layout->addItem(computer,         1u, 3u, 1u, 1u);
-      addChild(computer);
-      layout->addItem(astrophysics,     2u, 3u, 1u, 1u);
-      addChild(astrophysics);
-      layout->addItem(irn,              3u, 3u, 1u, 1u);
-      addChild(irn);
-      layout->addItem(graviton,         4u, 3u, 1u, 1u);
-      addChild(graviton);
-      layout->addItem(weapon,           5u, 3u, 1u, 1u);
-      addChild(weapon);
-      layout->addItem(shielding,        6u, 3u, 1u, 1u);
-      addChild(shielding);
-      layout->addItem(armour,           7u, 3u, 1u, 1u);
-      addChild(armour);
-
-      setLayout(layout);
-    }
-
-    void ResearchView::connectDataModel(player::GeneralDataModelShPtr dataModel) {
-      dataModel->registerForAction(player::Action::ChangePlanet, this);
+      addChild(energy,          0u, 2u, 1u, 1u);
+      addChild(laser,           1u, 2u, 1u, 1u);
+      addChild(ions,            2u, 2u, 1u, 1u);
+      addChild(hyperspace,      3u, 2u, 1u, 1u);
+      addChild(plasma,          4u, 2u, 1u, 1u);
+      addChild(combustionDrive, 5u, 2u, 1u, 1u);
+      addChild(impulseDrive,    6u, 2u, 1u, 1u);
+      addChild(hyperspaceDrive, 7u, 2u, 1u, 1u);
+      addChild(espionage,       0u, 3u, 1u, 1u);
+      addChild(computer,        1u, 3u, 1u, 1u);
+      addChild(astrophysics,    2u, 3u, 1u, 1u);
+      addChild(irn,             3u, 3u, 1u, 1u);
+      addChild(graviton,        4u, 3u, 1u, 1u);
+      addChild(weapon,          5u, 3u, 1u, 1u);
+      addChild(shielding,       6u, 3u, 1u, 1u);
+      addChild(armour,          7u, 3u, 1u, 1u);
     }
 
     void ResearchView::populateWithData(const core::Planet& planet, const core::Account& account) {
