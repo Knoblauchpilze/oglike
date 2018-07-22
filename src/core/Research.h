@@ -3,11 +3,12 @@
 
 #include <string>
 #include <memory>
+#include "Upgradable.h"
 
 namespace ogame {
   namespace core {
 
-    class Research
+    class Research: public Upgradable
     {
       public:
 
@@ -39,7 +40,7 @@ namespace ogame {
 
         const std::string& getName() const noexcept;
 
-        const unsigned getLevel() const noexcept;
+        void upgrade(const std::vector<ResourceDepositShPtr>& resources) override;
 
       private:
 

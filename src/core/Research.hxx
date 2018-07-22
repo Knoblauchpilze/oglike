@@ -17,11 +17,6 @@ namespace ogame {
     }
 
     inline
-    const unsigned Research::getLevel() const noexcept {
-      return 0u;
-    }
-
-    inline
     const std::string Research::getNameFromType(const Type& type) const noexcept {
       std::string name = "Default technology name";
 
