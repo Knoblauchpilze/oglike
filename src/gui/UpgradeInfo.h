@@ -18,6 +18,10 @@ namespace ogame {
 
         virtual ~UpgradeInfo();
 
+        template <typename Element>
+        inline
+        void populateInformationFromElement(const Element& element);
+
       private:
 
         void createView();
@@ -26,7 +30,10 @@ namespace ogame {
                                              const std::string& text,
                                              const SDL_Color& textColor,
                                              const SDL_Color& bgColor = SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE},
-                                             const bool transparent = true) const;
+                                             const bool transparent = true,
+                                             const LabelContainer::Alignment& alignment = LabelContainer::Alignment::Left) const;
+
+        const std::string computeDisplayTime(const float& seconds) const;
 
       private:
 
