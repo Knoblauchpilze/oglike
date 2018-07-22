@@ -40,6 +40,7 @@ set (SOURCES
   ShipyardView.cpp
   DefenseView.cpp
   FleetView.cpp
+  AbstractBuyingView.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
