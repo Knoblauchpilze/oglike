@@ -10,9 +10,11 @@ namespace ogame {
                                      view::ColoredFontShPtr font,
                                      const std::string& picture,
                                      const std::string& text,
-                                     const Alignment& alignment):
+                                     const Alignment& alignment,
+                                     const EventListener::Interaction::Mask& mask):
       view::GraphicContainer(name,
-                             view::utils::Area()),
+                             view::utils::Area(),
+                             mask),
       m_alignment(alignment)
     {
       createView(font, picture, text);
