@@ -10,12 +10,8 @@ namespace ogame {
   namespace gui {
 
     FacilitiesView::FacilitiesView(const std::string& name, player::GeneralDataModelShPtr model):
-      view::GraphicContainer(name,
-                             view::utils::Area()),
-      player::GeneralActionListener(model.get())
+      AbstractBuyingView(name, model)
     {
-      setBackgroundColor(SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE});
-
       createView(model);
 
       connectDataModel(model);
@@ -80,43 +76,43 @@ namespace ogame {
       dataModel->registerForAction(player::Action::ChangePlanet, this);
     }
 
-    void FacilitiesView::populateWithPlanetData(const core::Planet& planet) {
+    void FacilitiesView::populateWithData(const core::Planet& planet, const core::Account& account) {
       lock();
 
       // Update each information.
       LabelledPicture* robotics = getChild<LabelledPicture*>(std::string("robotics_factory"));
       if (checkChild(robotics, "Planet robotics factory")) {
-        robotics->setLabel(std::to_string(planet.getPositionInSystem()));
+        robotics->setLabel(getDisplayForBuilding(core::Building::Type::ConstructionAcceleration, planet));
       }
       LabelledPicture* shipyard = getChild<LabelledPicture*>(std::string("shipyard"));
       if (checkChild(shipyard, "Planet shipyard")) {
-        shipyard->setLabel(std::to_string(planet.getPositionInSystem()));
+        shipyard->setLabel(getDisplayForBuilding(core::Building::Type::SpaceConstruction, planet));
       }
       LabelledPicture* research = getChild<LabelledPicture*>(std::string("research_lab"));
       if (checkChild(research, "Planet research laboratory")) {
-        research->setLabel(std::to_string(planet.getPositionInSystem()));
+        research->setLabel(getDisplayForBuilding(core::Building::Type::Research, planet));
       }
 
       LabelledPicture* allianceDepot = getChild<LabelledPicture*>(std::string("alliance_depot"));
       if (checkChild(allianceDepot, "Planet alliance depot")) {
-        allianceDepot->setLabel(std::to_string(planet.getPositionInSystem()));
+        allianceDepot->setLabel(getDisplayForBuilding(core::Building::Type::SpaceConstruction, planet));
       }
       LabelledPicture* missileSilo = getChild<LabelledPicture*>(std::string("missile_silo"));
       if (checkChild(missileSilo, "Planet missile silo")) {
-        missileSilo->setLabel(std::to_string(planet.getPositionInSystem()));
+        missileSilo->setLabel(getDisplayForBuilding(core::Building::Type::SpaceConstruction, planet));
       }
       LabelledPicture* naniteFactory = getChild<LabelledPicture*>(std::string("nanite_factory"));
       if (checkChild(naniteFactory, "Planet nanite factory")) {
-        naniteFactory->setLabel(std::to_string(planet.getPositionInSystem()));
+        naniteFactory->setLabel(getDisplayForBuilding(core::Building::Type::ConstructionAcceleration, planet));
       }
 
       LabelledPicture* terraformer = getChild<LabelledPicture*>(std::string("terraformer"));
       if (checkChild(terraformer, "Planet terraformer")) {
-        terraformer->setLabel(std::to_string(planet.getPositionInSystem()));
+        terraformer->setLabel(getDisplayForBuilding(core::Building::Type::Facilities, planet));
       }
       LabelledPicture* spaceDock = getChild<LabelledPicture*>(std::string("space_dock"));
       if (checkChild(spaceDock, "Planet space dock")) {
-        spaceDock->setLabel(std::to_string(planet.getPositionInSystem()));
+        spaceDock->setLabel(getDisplayForBuilding(core::Building::Type::SpaceConstruction, planet));
       }
 
       makeDeepDirty();
