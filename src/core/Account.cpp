@@ -17,7 +17,7 @@ namespace ogame {
       m_planets(),
       m_researches()
     {
-      // Nothing to do.
+      initializeResearch();
     }
 
     Account::~Account() {}

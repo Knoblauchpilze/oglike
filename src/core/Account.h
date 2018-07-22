@@ -61,6 +61,10 @@ namespace ogame {
 
       private:
 
+        void initializeResearch();
+
+      private:
+
         CommunityShPtr m_community;
         unsigned m_playerUuid;
         std::shared_ptr<Universe> m_universe;
