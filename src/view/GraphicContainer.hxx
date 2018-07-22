@@ -235,13 +235,13 @@ namespace ogame {
 
     inline
     void GraphicContainer::onMouseButtonPressedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) {
-      std::cout << "[GRAPHIC] Mouse button pressed event" << std::endl;
+      // std::cout << "[GRAPHIC] Mouse button pressed event" << std::endl;
       notifyGraphicListeners(view::EventListener::Interaction::MouseButtonPressed);
     }
 
     inline
     void GraphicContainer::onMouseButtonReleasedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) {
-      std::cout << "[GRAPHIC] Mouse button released event" << std::endl;
+      // std::cout << "[GRAPHIC] Mouse button released event" << std::endl;
       notifyGraphicListeners(view::EventListener::Interaction::MouseButtonReleased);
     }
 
