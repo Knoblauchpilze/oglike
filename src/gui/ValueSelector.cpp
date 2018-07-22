@@ -99,6 +99,7 @@ namespace ogame {
         std::string("current_value"),
         std::string(""),
         font,
+        LabelContainer::Alignment::Center,
         SDL_Color{255, 255, 255, SDL_ALPHA_OPAQUE},
         false
       );
