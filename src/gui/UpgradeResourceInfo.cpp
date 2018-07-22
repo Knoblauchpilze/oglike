@@ -2,6 +2,8 @@
 #include "UpgradeResourceInfo.h"
 #include "GridLayout.h"
 #include "GuiException.h"
+#include "ComponentFactory.h"
+#include "SwitchPictureContainer.h"
 
 namespace ogame {
   namespace gui {
@@ -41,11 +43,12 @@ namespace ogame {
         std::string("data/img/deuterium.bmp"),
         std::to_string(0u)
       );
-      LabelContainerShPtr upgrade = createLabelPanel(
+      SwitchPictureContainerShPtr upgrade = ComponentFactory::createSwitchPicturePanel(
         std::string("upgrade_label"),
-        std::string("Upgrade"),
-        SDL_Color{255, 255, 255, SDL_ALPHA_OPAQUE}
+        std::string("data/img/button_ok.bmp"),
+        std::string("data/img/button_nok.bmp")
       );
+      upgrade->updateStatus(true);
 
       if (title == nullptr ||
           metal == nullptr ||
