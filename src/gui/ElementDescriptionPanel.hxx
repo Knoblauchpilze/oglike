@@ -1,15 +1,10 @@
 #ifndef ELEMENTDESCRIPTIONPANEL_HXX
 #define ELEMENTDESCRIPTIONPANEL_HXX
 
-#include <memory>
-#include <string>
-#include <SDL/SDL.h>
-#include "GraphicContainer.h"
-#include "GuiException.h"
-#include "Research.h"
-#include "Ship.h"
-#include "Building.h"
+#include "ElementDescriptionPanel.h"
 #include "PictureContainer.h"
+#include "UpgradeInfo.h"
+#include "UpgradeResourceInfo.h"
 
 namespace ogame {
   namespace gui {
@@ -20,7 +15,6 @@ namespace ogame {
 
       PictureContainer* image = getChild<PictureContainer*>(std::string("image_panel"));
       if (checkChild(image, std::string("Element description image panel"))) {
-        std::cout << "[ELEMENT] Setting image path " << path << " for " << getName() << ", img=" << image->getName() << std::endl;
         image->setImagePath(path);
       }
 
@@ -30,26 +24,45 @@ namespace ogame {
     template <typename Element>
     inline
     void ElementDescriptionPanel::populateInformationFromElement(const Element& element) {
-      throw GuiException(std::string("Cannot populate information panel from unknown element type"));
+      lock();
+
+      // Update each panel using the dedicated handler.
+      UpgradeInfo* upgradeInfo = getChild<UpgradeInfo*>(std::string("upgrade_info"));
+      if (checkChild(upgradeInfo, std::string("Element description upgrade info"))) {
+        upgradeInfo->populateInformationFromElement(element);
+      }
+
+      UpgradeResourceInfo* neededResources = getChild<UpgradeResourceInfo*>(std::string("need_resources"));
+      if (checkChild(neededResources, std::string("Element description upgrade resource info"))) {
+        neededResources->populateInformationFromElement(element);
+      }
+
+      unlock();
     }
 
-    template <>
-    inline
-    void ElementDescriptionPanel::populateInformationFromElement(const core::Research& element) {
-      std::cout << "[ELEMENT] Populating panel from research" << std::endl;
-    }
+    // template <>
+    // inline
+    // void ElementDescriptionPanel::populateInformationFromElement(const core::Research& element) {
+    //   std::cout << "[ELEMENT] Populating panel from research " << element.getName() << std::endl;
+    // }
 
-    template <>
-    inline
-    void ElementDescriptionPanel::populateInformationFromElement(const core::Ship& element) {
-      std::cout << "[ELEMENT] Populating panel from ship" << std::endl;
-    }
+    // template <>
+    // inline
+    // void ElementDescriptionPanel::populateInformationFromElement(const core::Ship& element) {
+    //   std::cout << "[ELEMENT] Populating panel from ship " << element.getName() << std::endl;
+    // }
 
-    template <>
-    inline
-    void ElementDescriptionPanel::populateInformationFromElement(const core::Building& element) {
-      std::cout << "[ELEMENT] Populating panel from building" << std::endl;
-    }
+    // template <>
+    // inline
+    // void ElementDescriptionPanel::populateInformationFromElement(const core::Building& element) {
+    //   std::cout << "[ELEMENT] Populating panel from building " << element.getName() << std::endl;
+    // }
+
+    // template <>
+    // inline
+    // void ElementDescriptionPanel::populateInformationFromElement(const core::Defense& element) {
+    //   std::cout << "[ELEMENT] Populating panel from defense " << element.getName() << std::endl;
+    // }
 
   }
 }
