@@ -36,6 +36,10 @@ namespace ogame {
 
         void triggerAction(const Action& action) const;
 
+      protected:
+
+        AbstractDataModel& getDataModel();
+
       private:
 
         mutable AbstractDataModel* m_model;
@@ -46,5 +50,7 @@ namespace ogame {
 
   }
 }
+
+#include "AbstractActionListener.hxx"
 
 #endif // ABSTRACTACTIONLISTENER_H
