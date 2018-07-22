@@ -26,6 +26,7 @@ set (SOURCES
   SystemCoordinates.cpp
   Research.cpp
   Ship.cpp
+  Defense.cpp
   )
 
 add_library (ogamelike_lib_core SHARED

@@ -8,6 +8,7 @@
 #include "ResourceDeposit.h"
 #include "Account.h"
 #include "Ship.h"
+#include "Defense.h"
 
 namespace ogame {
   namespace core {
@@ -57,6 +58,8 @@ namespace ogame {
 
         const unsigned getShipCount(const Ship::Type& type) const;
 
+        const unsigned getDefenseCount(const Defense::Type& type) const;
+
       protected:
 
         void create();
@@ -73,6 +76,7 @@ namespace ogame {
         std::vector<ResourceDepositShPtr> m_resources;
         std::shared_ptr<Account> m_account;
         std::vector<ShipShPtr> m_ships;
+        std::vector<DefenseShPtr> m_defenses;
 
         float m_diameter;
         float m_minTemperature;
