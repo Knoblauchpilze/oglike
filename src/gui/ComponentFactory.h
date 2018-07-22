@@ -72,7 +72,8 @@ namespace ogame {
                                    view::ColoredFontShPtr font,
                                    const std::string& picture,
                                    const std::string& text = std::string(),
-                                   const LabelledPicture::Alignment& alignment = LabelledPicture::Alignment::Below);
+                                   const LabelledPicture::Alignment& alignment = LabelledPicture::Alignment::Below,
+                                   const view::EventListener::Interaction::Mask& mask = view::EventListener::Interaction::NoInteraction);
 
     };
   }
