@@ -8,12 +8,15 @@ namespace ogame {
     LabelContainer::LabelContainer(const std::string& name,
                                    const std::string& text,
                                    view::ColoredFontShPtr font,
+                                   const Alignment& alignment,
                                    const SDL_Color& bgColor,
                                    const bool transparent):
       view::GraphicContainer(name,
                              view::utils::Area(),
                              view::EventListener::Interaction::NoInteraction,
                              transparent),
+      m_alignment(alignment),
+
       m_textChanged(true),
       m_text(text),
       
@@ -43,13 +46,8 @@ namespace ogame {
 
       // Check whether some text should be displayed.
       if (m_textSurface != nullptr) {
-        // Compute the blit position of the picture so that it is centered.
-        SDL_Rect textBlitArea = {
-          static_cast<Sint16>(croppedArea->w / 2.0f - m_textSurface->w / 2.0f),
-          static_cast<Sint16>(croppedArea->h / 2.0f - m_textSurface->h / 2.0f),
-          static_cast<Uint16>(m_textSurface->w),
-          static_cast<Uint16>(m_textSurface->h)
-        };
+        // Compute the blit position of the picture so that it respects the alignment.
+        SDL_Rect textBlitArea = computeBlitPosition(croppedArea->w, croppedArea->h);
 
         // Perform the blit operation (i.e. stick the text onto the rendering area).
         SDL_BlitSurface(m_textSurface, nullptr, croppedArea, &textBlitArea);
