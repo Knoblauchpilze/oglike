@@ -19,6 +19,10 @@ namespace ogame {
 
         virtual ~UpgradeResourceInfo();
 
+        template <typename Element>
+        inline
+        void populateInformationFromElement(const Element& element);
+
       private:
 
         void createView();
