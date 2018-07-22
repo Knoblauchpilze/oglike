@@ -17,6 +17,16 @@ namespace ogame {
 
         virtual ~ElementDescriptionPanel();
 
+        void setImagePath(const std::string& path);
+
+        template <typename Element>
+        inline
+        void populateInformationFromElement(const Element& element);
+
+      private:
+
+        void createView();
+
       private:
 
     };

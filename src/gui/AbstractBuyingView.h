@@ -42,6 +42,8 @@ namespace ogame {
 
         virtual void onInteractionPerformedPrivate(const std::string& origin);
 
+        virtual void populateActionData(const std::string& origin, ElementDescriptionPanel& action) const = 0;
+
       private:
 
         void createView(player::GeneralDataModelShPtr model,
