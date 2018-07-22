@@ -99,6 +99,25 @@ namespace ogame {
       return 0u;
     }
 
+    inline
+    const core::Research& Account::getResearchData(const Research::Type& type) const {
+      // Traverse the set of researches.
+      unsigned indexTech = 0u;
+      while (indexTech < m_researches.size()) {
+        if (m_researches[indexTech] != nullptr && m_researches[indexTech]->getType() == type) {
+          return *m_researches[indexTech];
+        }
+        ++indexTech;
+      }
+
+      // Research not found, this is a problem.
+      const std::string errorMessage = std::string("Cannot retrieve data for research ") +
+        std::to_string(static_cast<int>(type)) +
+        ", data not available in account " +
+        getPlayerName();
+      throw AccountException(errorMessage);
+    }
+
   }
 }
 
