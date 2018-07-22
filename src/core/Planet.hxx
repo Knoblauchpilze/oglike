@@ -155,6 +155,42 @@ namespace ogame {
       throw PlanetException(errorMessage);
     }
 
+    inline
+    void Planet::initializeShips() {
+      // Create all ships on this planet.
+      m_ships.push_back(std::make_shared<Ship>(Ship::Type::LightFighter));
+      m_ships.push_back(std::make_shared<Ship>(Ship::Type::HeavyFighter));
+      m_ships.push_back(std::make_shared<Ship>(Ship::Type::Cruiser));
+      m_ships.push_back(std::make_shared<Ship>(Ship::Type::Battleship));
+
+      m_ships.push_back(std::make_shared<Ship>(Ship::Type::SmallCargo));
+      m_ships.push_back(std::make_shared<Ship>(Ship::Type::LargeCargo));
+      m_ships.push_back(std::make_shared<Ship>(Ship::Type::ColonyShip));
+
+      m_ships.push_back(std::make_shared<Ship>(Ship::Type::Battlecruiser));
+      m_ships.push_back(std::make_shared<Ship>(Ship::Type::Bomber));
+      m_ships.push_back(std::make_shared<Ship>(Ship::Type::Destroyer));
+      m_ships.push_back(std::make_shared<Ship>(Ship::Type::Deathstar));
+
+      m_ships.push_back(std::make_shared<Ship>(Ship::Type::Recycler));
+      m_ships.push_back(std::make_shared<Ship>(Ship::Type::EspionageProbe));
+      m_ships.push_back(std::make_shared<Ship>(Ship::Type::SolarSatellite));
+    }
+
+    inline
+    void Planet::initializeDefenses() {
+      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::MissileLauncher));
+      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::LightLaser));
+      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::HeavyLaser));
+      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::GaussCannon));
+      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::IonCannon));
+      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::PlasmaTurret));
+      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::SmallShieldDome));
+      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::LargeShieldDome));
+      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::AntiballisticMissile));
+      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::InterplanetaryMissile));
+    }
+
   }
 }
 
