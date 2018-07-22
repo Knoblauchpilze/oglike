@@ -56,6 +56,22 @@ namespace ogame {
     }
 
     inline
+    const std::string SelectorPanel::getActiveChild() {
+      lock();
+      if (m_activeChild < 0) {
+        unlock();
+        throw GuiException("Cannot retrieve name of active child for selector " + getName() + ", no such element");
+      }
+      if (m_availableChildren[m_activeChild] == nullptr) {
+        unlock();
+        throw GuiException("Cannot retrieve name of active child for selector " + getName() + ", invalid null element");
+      }
+      const std::string activeChildName = m_availableChildren[m_activeChild]->getName();
+      unlock();
+      return activeChildName;
+    }
+
+    inline
     void SelectorPanel::activateChild(const int& index) {
       // Deactivate the current active child if any.
       if (m_activeChild >= 0) {
