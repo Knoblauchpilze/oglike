@@ -47,6 +47,7 @@ namespace ogame {
           std::string("data/fonts/tahomabd.ttf"),
           128, 128, 128
         ),
+        LabelContainer::Alignment::Center,
         SDL_Color{0, 0, 0, SDL_ALPHA_OPAQUE}
       );
       PlanetDescriptionShPtr description = std::make_shared<PlanetDescription>(std::string("planet_description"), model);

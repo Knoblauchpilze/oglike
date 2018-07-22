@@ -22,6 +22,7 @@ namespace ogame {
           std::string("data/fonts/upcfb.ttf"),
           textColor.r, textColor.g, textColor.b, textColor.unused
         ),
+        LabelContainer::Alignment::Left,
         bgColor,
         transparent
       );

@@ -19,7 +19,8 @@ namespace ogame {
         view::FontFactory::getInstance().createColoredFont(
           std::string("data/fonts/upcfb.ttf"),
           color.r, color.g, color.b, color.unused
-        )
+        ),
+        LabelContainer::Alignment::Left
       );
     }
 
