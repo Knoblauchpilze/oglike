@@ -10,12 +10,8 @@ namespace ogame {
   namespace gui {
 
     DefenseView::DefenseView(const std::string& name, player::GeneralDataModelShPtr model):
-      view::GraphicContainer(name,
-                             view::utils::Area()),
-      player::GeneralActionListener(model.get())
+      AbstractBuyingView(name, model)
     {
-      setBackgroundColor(SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE});
-
       createView(model);
 
       connectDataModel(model);
@@ -88,7 +84,7 @@ namespace ogame {
       dataModel->registerForAction(player::Action::ChangePlanet, this);
     }
 
-    void DefenseView::populateWithPlanetData(const core::Planet& planet) {
+    void DefenseView::populateWithData(const core::Planet& planet, const core::Account& account) {
       lock();
 
       // Update each information.
