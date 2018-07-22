@@ -5,7 +5,7 @@ namespace ogame {
   namespace core {
 
     ResourceMine::ResourceMine(const Resource& resource, const float& factor):
-      Building(0u),
+      Upgradable(0u),
       m_resource(resource),
       m_factor(factor)
     {
