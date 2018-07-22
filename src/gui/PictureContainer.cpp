@@ -50,6 +50,11 @@ namespace ogame {
     }
 
     void PictureContainer::loadPicture() {
+      // CLear existing image if any.
+      if (m_picture != nullptr) {
+        SDL_FreeSurface(m_picture);
+      }
+
       // Load the image
       m_picture = SDL_LoadBMP(m_file.c_str());
       if (m_picture == nullptr) {

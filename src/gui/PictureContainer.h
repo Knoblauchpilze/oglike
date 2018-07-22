@@ -19,6 +19,8 @@ namespace ogame {
         
         virtual ~PictureContainer();
 
+        void setImagePath(const std::string& path);
+
       protected:
 
         SDL_Surface* createContentPrivate() override;
