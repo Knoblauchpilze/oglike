@@ -3,15 +3,14 @@
 
 #include <memory>
 #include <SDL/SDL.h>
-#include "GraphicContainer.h"
-#include "Planet.h"
+#include "AbstractBuyingView.h"
+#include "Building.h"
 #include "DataModelImplementation.h"
-#include "LabelledPicture.h"
 
 namespace ogame {
   namespace gui {
 
-    class FacilitiesView: public view::GraphicContainer, public player::GeneralActionListener
+    class FacilitiesView: public AbstractBuyingView
     {
       public:
 
@@ -19,19 +18,15 @@ namespace ogame {
 
         virtual ~FacilitiesView();
 
-        void onActionTriggered(const player::GeneralDataModel& model) override;
-
       private:
 
         void createView(player::GeneralDataModelShPtr model);
 
         void connectDataModel(player::GeneralDataModelShPtr dataModel);
 
-        void populateWithPlanetData(const core::Planet& planet);
+        void populateWithData(const core::Planet& planet, const core::Account& account) override;
 
-        LabelledPictureShPtr createLabelledPictureContainer(const std::string& name,
-                                                            const std::string& picture,
-                                                            const std::string& text) const;
+        const std::string getDisplayForBuilding(const core::Building::Type& type, const core::Planet& planet) const noexcept;
 
       private:
 
