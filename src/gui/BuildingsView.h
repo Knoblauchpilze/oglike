@@ -18,6 +18,10 @@ namespace ogame {
 
         virtual ~BuildingsView();
 
+      protected:
+
+        void populateActionData(const std::string& origin, ElementDescriptionPanel& action) const override;
+
       private:
 
         void createView();
