@@ -94,45 +94,45 @@ namespace ogame {
       // Update each information.
       LabelledPicture* missile = getChild<LabelledPicture*>(std::string("missile_launcher"));
       if (checkChild(missile, "Planet missile launcher")) {
-        missile->setLabel(std::to_string(planet.getPositionInSystem()));
+        missile->setLabel(getDefenseCountFromType(core::Defense::Type::MissileLauncher, planet));
       }
       LabelledPicture* lightLaser = getChild<LabelledPicture*>(std::string("light_laser"));
       if (checkChild(lightLaser, "Planet light laser")) {
-        lightLaser->setLabel(std::to_string(planet.getPositionInSystem()));
+        lightLaser->setLabel(getDefenseCountFromType(core::Defense::Type::LightLaser, planet));
       }
       LabelledPicture* heavyLaser = getChild<LabelledPicture*>(std::string("heavy_laser"));
       if (checkChild(heavyLaser, "Planet heavy laser")) {
-        heavyLaser->setLabel(std::to_string(planet.getPositionInSystem()));
+        heavyLaser->setLabel(getDefenseCountFromType(core::Defense::Type::HeavyLaser, planet));
       }
       LabelledPicture* gaussCannon = getChild<LabelledPicture*>(std::string("gauss_cannon"));
       if (checkChild(gaussCannon, "Planet gauss cannon")) {
-        gaussCannon->setLabel(std::to_string(planet.getPositionInSystem()));
+        gaussCannon->setLabel(getDefenseCountFromType(core::Defense::Type::GaussCannon, planet));
       }
       LabelledPicture* ionCannon = getChild<LabelledPicture*>(std::string("ion_cannon"));
       if (checkChild(ionCannon, "Planet ion cannon")) {
-        ionCannon->setLabel(std::to_string(planet.getPositionInSystem()));
+        ionCannon->setLabel(getDefenseCountFromType(core::Defense::Type::IonCannon, planet));
       }
       LabelledPicture* plasmaTurret = getChild<LabelledPicture*>(std::string("plasma_turret"));
       if (checkChild(plasmaTurret, "Planet plasma turret")) {
-        plasmaTurret->setLabel(std::to_string(planet.getPositionInSystem()));
+        plasmaTurret->setLabel(getDefenseCountFromType(core::Defense::Type::PlasmaTurret, planet));
       }
 
       LabelledPicture* smallShield = getChild<LabelledPicture*>(std::string("small_shield_dome"));
       if (checkChild(smallShield, "Planet small shield dome")) {
-        smallShield->setLabel(std::to_string(planet.getPositionInSystem()));
+        smallShield->setLabel(getDefenseCountFromType(core::Defense::Type::SmallShieldDome, planet));
       }
       LabelledPicture* largeShield = getChild<LabelledPicture*>(std::string("large_shield_dome"));
       if (checkChild(largeShield, "Planet large shield dome")) {
-        largeShield->setLabel(std::to_string(planet.getPositionInSystem()));
+        largeShield->setLabel(getDefenseCountFromType(core::Defense::Type::LargeShieldDome, planet));
       }
 
       LabelledPicture* abm = getChild<LabelledPicture*>(std::string("antiballistic_missile"));
       if (checkChild(abm, "Planet antiballistic missile")) {
-        abm->setLabel(std::to_string(planet.getPositionInSystem()));
+        abm->setLabel(getDefenseCountFromType(core::Defense::Type::AntiballisticMissile, planet));
       }
       LabelledPicture* ipm = getChild<LabelledPicture*>(std::string("interplanetary_missile"));
       if (checkChild(ipm, "Planet interplanetary missile")) {
-        ipm->setLabel(std::to_string(planet.getPositionInSystem()));
+        ipm->setLabel(getDefenseCountFromType(core::Defense::Type::InterplanetaryMissile, planet));
       }
 
       makeDeepDirty();

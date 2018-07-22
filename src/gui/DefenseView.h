@@ -7,6 +7,7 @@
 #include "Planet.h"
 #include "DataModelImplementation.h"
 #include "LabelledPicture.h"
+#include "Defense.h"
 
 namespace ogame {
   namespace gui {
@@ -32,6 +33,8 @@ namespace ogame {
         LabelledPictureShPtr createLabelledPictureContainer(const std::string& name,
                                                             const std::string& picture,
                                                             const std::string& text) const;
+
+        const std::string getDefenseCountFromType(const core::Defense::Type& type, const core::Planet& planet) const noexcept;
 
       private:
 
