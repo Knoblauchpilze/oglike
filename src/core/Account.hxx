@@ -118,6 +118,27 @@ namespace ogame {
       throw AccountException(errorMessage);
     }
 
+    inline
+    void Account::initializeResearch() {
+      // Create all research in this account.
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Energy));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Laser));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Ion));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Hyperspace));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Plasma));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::CombustionDrive));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::ImpulseDrive));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::HyperspaceDrive));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Espionage));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Computer));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Astrophysics));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::IRN));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Graviton));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Weapon));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Shielding));
+      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Armour));
+    }
+
   }
 }
 
