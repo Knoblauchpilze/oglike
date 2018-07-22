@@ -18,6 +18,10 @@ namespace ogame {
 
         virtual ~DefenseView();
 
+      protected:
+
+        void populateActionData(const std::string& origin, ElementDescriptionPanel& action) const override;
+
       private:
 
         void createView();
@@ -25,6 +29,10 @@ namespace ogame {
         void populateWithData(const core::Planet& planet, const core::Account& account) override;
 
         const std::string getDefenseCountFromType(const core::Defense::Type& type, const core::Planet& planet) const noexcept;
+
+        const core::Defense::Type computeDefenseFromOriginNode(const std::string& origin) const noexcept;
+
+        const std::string getPictureNameFromDefense(const core::Defense::Type& type) const noexcept;
 
       private:
 

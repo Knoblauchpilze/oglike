@@ -26,20 +26,76 @@ namespace ogame {
     void FleetView::createView() {
       // Create all elements.
       std::string level0 = std::to_string(0);
-      LabelledPictureShPtr lightFighter = createLabelledPictureContainer(std::string("light_fighter"), std::string("data/img/light_fighter.bmp"), level0);
-      LabelledPictureShPtr heavyFighter = createLabelledPictureContainer(std::string("heavy_fighter"), std::string("data/img/heavy_fighter.bmp"), level0);
-      LabelledPictureShPtr cruiser = createLabelledPictureContainer(std::string("cruiser"), std::string("data/img/cruiser.bmp"), level0);
-      LabelledPictureShPtr battleship = createLabelledPictureContainer(std::string("battleship"), std::string("data/img/battleship.bmp"), level0);
-      LabelledPictureShPtr smallCargo = createLabelledPictureContainer(std::string("small_cargo"), std::string("data/img/small_cargo_ship.bmp"), level0);
-      LabelledPictureShPtr largeCargo = createLabelledPictureContainer(std::string("large_cargo"), std::string("data/img/large_cargo_ship.bmp"), level0);
-      LabelledPictureShPtr colonyShip = createLabelledPictureContainer(std::string("colony_ship"), std::string("data/img/colony_ship.bmp"), level0);
-      LabelledPictureShPtr battlecruiser = createLabelledPictureContainer(std::string("battlecruiser"), std::string("data/img/battlecruiser.bmp"), level0);
-      LabelledPictureShPtr bomber = createLabelledPictureContainer(std::string("bomber"), std::string("data/img/bomber.bmp"), level0);
-      LabelledPictureShPtr destroyer = createLabelledPictureContainer(std::string("destroyer"), std::string("data/img/destroyer.bmp"), level0);
-      LabelledPictureShPtr deathstar = createLabelledPictureContainer(std::string("deathstar"), std::string("data/img/deathstar.bmp"), level0);
-      LabelledPictureShPtr recycler = createLabelledPictureContainer(std::string("recycler"), std::string("data/img/recycler.bmp"), level0);
-      LabelledPictureShPtr espionageProbe = createLabelledPictureContainer(std::string("espionage_probe"), std::string("data/img/espionage_probe.bmp"), level0);
-      LabelledPictureShPtr solarSatellite = createLabelledPictureContainer(std::string("solar_satellite"), std::string("data/img/solar_satellite.bmp"), level0);
+      LabelledPictureShPtr lightFighter = createLabelledPictureContainer(
+        std::string("light_fighter"),
+        getPictureNameFromShip(core::Ship::Type::LightFighter),
+        level0
+      );
+      LabelledPictureShPtr heavyFighter = createLabelledPictureContainer(
+        std::string("heavy_fighter"),
+        getPictureNameFromShip(core::Ship::Type::HeavyFighter),
+        level0
+      );
+      LabelledPictureShPtr cruiser = createLabelledPictureContainer(
+        std::string("cruiser"),
+        getPictureNameFromShip(core::Ship::Type::Cruiser),
+        level0
+      );
+      LabelledPictureShPtr battleship = createLabelledPictureContainer(
+        std::string("battleship"),
+        getPictureNameFromShip(core::Ship::Type::Battleship),
+        level0
+      );
+      LabelledPictureShPtr smallCargo = createLabelledPictureContainer(
+        std::string("small_cargo"),
+        getPictureNameFromShip(core::Ship::Type::SmallCargo),
+        level0
+      );
+      LabelledPictureShPtr largeCargo = createLabelledPictureContainer(
+        std::string("large_cargo"),
+        getPictureNameFromShip(core::Ship::Type::LargeCargo),
+        level0
+      );
+      LabelledPictureShPtr colonyShip = createLabelledPictureContainer(
+        std::string("colony_ship"),
+        getPictureNameFromShip(core::Ship::Type::ColonyShip),
+        level0
+      );
+      LabelledPictureShPtr battlecruiser = createLabelledPictureContainer(
+        std::string("battlecruiser"),
+        getPictureNameFromShip(core::Ship::Type::Battlecruiser),
+        level0
+      );
+      LabelledPictureShPtr bomber = createLabelledPictureContainer(
+        std::string("bomber"),
+        getPictureNameFromShip(core::Ship::Type::Bomber),
+        level0
+      );
+      LabelledPictureShPtr destroyer = createLabelledPictureContainer(
+        std::string("destroyer"),
+        getPictureNameFromShip(core::Ship::Type::Destroyer),
+        level0
+      );
+      LabelledPictureShPtr deathstar = createLabelledPictureContainer(
+        std::string("deathstar"),
+        getPictureNameFromShip(core::Ship::Type::Deathstar),
+        level0
+      );
+      LabelledPictureShPtr recycler = createLabelledPictureContainer(
+        std::string("recycler"),
+        getPictureNameFromShip(core::Ship::Type::Recycler),
+        level0
+      );
+      LabelledPictureShPtr espionageProbe = createLabelledPictureContainer(
+        std::string("espionage_probe"),
+        getPictureNameFromShip(core::Ship::Type::EspionageProbe),
+        level0
+      );
+      LabelledPictureShPtr solarSatellite = createLabelledPictureContainer(
+        std::string("solar_satellite"),
+        getPictureNameFromShip(core::Ship::Type::SolarSatellite),
+        level0
+      );
 
       if (lightFighter == nullptr ||
           heavyFighter == nullptr ||

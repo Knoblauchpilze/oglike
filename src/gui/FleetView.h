@@ -18,6 +18,10 @@ namespace ogame {
 
         virtual ~FleetView();
 
+      protected:
+
+        void populateActionData(const std::string& origin, ElementDescriptionPanel& action) const override;
+
       private:
 
         void createView();
@@ -25,6 +29,10 @@ namespace ogame {
         void populateWithData(const core::Planet& planet, const core::Account& account) override;
 
         const std::string getShipCountFromType(const core::Ship::Type& type, const core::Planet& planet) const noexcept;
+
+        const core::Ship::Type computeShipFromOriginNode(const std::string& origin) const noexcept;
+
+        const std::string getPictureNameFromShip(const core::Ship::Type& type) const noexcept;
 
       private:
 
