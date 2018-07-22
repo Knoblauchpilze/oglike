@@ -42,6 +42,8 @@ set (SOURCES
   FleetView.cpp
   AbstractBuyingView.cpp
   ElementDescriptionPanel.cpp
+  UpgradeInfo.cpp
+  UpgradeResourceInfo.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED

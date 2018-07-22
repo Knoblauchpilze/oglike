@@ -99,7 +99,7 @@ namespace ogame {
 
       // Update the buying action based on the origin of the action.
       if (m_buyingAction != nullptr && !deactivate) {
-        std::cout << "[BUYING] Should create buying action from " << origin << std::endl;
+        populateActionData(origin, *m_buyingAction);
       }
     }
 
