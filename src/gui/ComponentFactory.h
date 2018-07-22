@@ -45,6 +45,7 @@ namespace ogame {
         createLabelPanel(const std::string& name,
                          const std::string& text,
                          view::ColoredFontShPtr font,
+                         const LabelContainer::Alignment& alignment = LabelContainer::Alignment::Center,
                          const SDL_Color& bgColor = SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE},
                          const bool transparent = true);
 
