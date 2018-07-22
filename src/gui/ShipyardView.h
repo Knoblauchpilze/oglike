@@ -3,15 +3,14 @@
 
 #include <memory>
 #include <SDL/SDL.h>
-#include "GraphicContainer.h"
-#include "Planet.h"
+#include "AbstractBuyingView.h"
+#include "Ship.h"
 #include "DataModelImplementation.h"
-#include "LabelledPicture.h"
 
 namespace ogame {
   namespace gui {
 
-    class ShipyardView: public view::GraphicContainer, public player::GeneralActionListener
+    class ShipyardView: public AbstractBuyingView
     {
       public:
 
@@ -19,19 +18,13 @@ namespace ogame {
 
         virtual ~ShipyardView();
 
-        void onActionTriggered(const player::GeneralDataModel& model) override;
-
       private:
 
         void createView(player::GeneralDataModelShPtr model);
 
         void connectDataModel(player::GeneralDataModelShPtr dataModel);
 
-        void populateWithPlanetData(const core::Planet& planet);
-
-        LabelledPictureShPtr createLabelledPictureContainer(const std::string& name,
-                                                            const std::string& picture,
-                                                            const std::string& text) const;
+        void populateWithData(const core::Planet& planet, const core::Account& account) override;
 
         const std::string getShipCountFromType(const core::Ship::Type& type, const core::Planet& planet) const noexcept;
 

@@ -27,6 +27,7 @@ set (SOURCES
   Ship.cpp
   Defense.cpp
   Upgradable.cpp
+  Building.cpp
   )
 
 add_library (ogamelike_lib_core SHARED
