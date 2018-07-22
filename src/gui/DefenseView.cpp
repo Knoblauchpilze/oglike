@@ -10,23 +10,21 @@ namespace ogame {
   namespace gui {
 
     DefenseView::DefenseView(const std::string& name, player::GeneralDataModelShPtr model):
-      AbstractBuyingView(name, model)
+      AbstractBuyingView(name,
+                         model,
+                         6u,
+                         5u,
+                         std::string("data/img/defense_bg.bmp"))
     {
-      createView(model);
+      createView();
 
-      connectDataModel(model);
+      connectDataModel(player::Action::ChangePlanet);
     }
 
     DefenseView::~DefenseView() {}
 
-    void DefenseView::createView(player::GeneralDataModelShPtr model) {
-      view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(6u, 5u, 0.0f);
-      if (layout == nullptr) {
-        throw GuiException(std::string("Could not allocate memory to create defense view"));
-      }
-
-      PictureContainerShPtr image = ComponentFactory::createPicturePanel(std::string("image_panel"), std::string("data/img/defense_bg.bmp"));
-
+    void DefenseView::createView() {
+      // Create all elements.
       std::string level0 = std::to_string(0);
       LabelledPictureShPtr missile = createLabelledPictureContainer(std::string("missile_launcher"), std::string("data/img/missile_launcher.bmp"), level0);
       LabelledPictureShPtr lightLaser = createLabelledPictureContainer(std::string("light_laser"), std::string("data/img/light_laser.bmp"), level0);
@@ -39,8 +37,7 @@ namespace ogame {
       LabelledPictureShPtr abm = createLabelledPictureContainer(std::string("antiballistic_missile"), std::string("data/img/antiballistic_missile.bmp"), level0);
       LabelledPictureShPtr ipm = createLabelledPictureContainer(std::string("interplanetary_missile"), std::string("data/img/interplanetary_missile.bmp"), level0);
 
-      if (image == nullptr ||
-          missile == nullptr ||
+      if (missile == nullptr ||
           lightLaser == nullptr ||
           heavyLaser == nullptr ||
           gaussCannon == nullptr ||
@@ -54,34 +51,16 @@ namespace ogame {
         throw GuiException(std::string("Could not allocate memory to create defense view"));
       }
 
-      layout->addItem(image,        0u, 0u, 6u, 2u);
-      addChild(image);
-      layout->addItem(missile,      0u, 2u, 1u, 1u);
-      addChild(missile);
-      layout->addItem(lightLaser,   1u, 2u, 1u, 1u);
-      addChild(lightLaser);
-      layout->addItem(heavyLaser,   2u, 2u, 1u, 1u);
-      addChild(heavyLaser);
-      layout->addItem(gaussCannon,  3u, 2u, 1u, 1u);
-      addChild(gaussCannon);
-      layout->addItem(ionCannon,    4u, 2u, 1u, 1u);
-      addChild(ionCannon);
-      layout->addItem(plasmaTurret, 5u, 2u, 1u, 1u);
-      addChild(plasmaTurret);
-      layout->addItem(smallShield,  0u, 3u, 1u, 1u);
-      addChild(smallShield);
-      layout->addItem(largeShield,  1u, 3u, 1u, 1u);
-      addChild(largeShield);
-      layout->addItem(abm,          2u, 3u, 1u, 1u);
-      addChild(abm);
-      layout->addItem(ipm,          3u, 3u, 1u, 1u);
-      addChild(ipm);
-
-      setLayout(layout);
-    }
-
-    void DefenseView::connectDataModel(player::GeneralDataModelShPtr dataModel) {
-      dataModel->registerForAction(player::Action::ChangePlanet, this);
+      addChild(missile,      0u, 2u, 1u, 1u);
+      addChild(lightLaser,   1u, 2u, 1u, 1u);
+      addChild(heavyLaser,   2u, 2u, 1u, 1u);
+      addChild(gaussCannon,  3u, 2u, 1u, 1u);
+      addChild(ionCannon,    4u, 2u, 1u, 1u);
+      addChild(plasmaTurret, 5u, 2u, 1u, 1u);
+      addChild(smallShield,  0u, 3u, 1u, 1u);
+      addChild(largeShield,  1u, 3u, 1u, 1u);
+      addChild(abm,          2u, 3u, 1u, 1u);
+      addChild(ipm,          3u, 3u, 1u, 1u);
     }
 
     void DefenseView::populateWithData(const core::Planet& planet, const core::Account& account) {

@@ -10,23 +10,21 @@ namespace ogame {
   namespace gui {
 
     BuildingsView::BuildingsView(const std::string& name, player::GeneralDataModelShPtr model):
-      AbstractBuyingView(name, model)
+      AbstractBuyingView(name,
+                         model,
+                         6u,
+                         5u,
+                         std::string("data/img/resources_bg.bmp"))
     {
-      createView(model);
+      createView();
 
-      connectDataModel(model);
+      connectDataModel(player::Action::ChangePlanet);
     }
 
     BuildingsView::~BuildingsView() {}
 
-    void BuildingsView::createView(player::GeneralDataModelShPtr model) {
-      view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(6u, 5u, 0.0f);
-      if (layout == nullptr) {
-        throw GuiException(std::string("Could not allocate memory to create buildings view"));
-      }
-
-      PictureContainerShPtr image = ComponentFactory::createPicturePanel(std::string("image_panel"), std::string("data/img/resources_bg.bmp"));
-
+    void BuildingsView::createView() {
+      // Create all elements.
       std::string level0 = std::to_string(0);
       LabelledPictureShPtr metal = createLabelledPictureContainer(std::string("metal_mine"), std::string("data/img/metal_mine.bmp"), level0);
       LabelledPictureShPtr crystal = createLabelledPictureContainer(std::string("crystal_mine"), std::string("data/img/crystal_mine.bmp"), level0);
@@ -38,8 +36,7 @@ namespace ogame {
       LabelledPictureShPtr crystalStorage = createLabelledPictureContainer(std::string("crystal_storage"), std::string("data/img/crystal_storage.bmp"), level0);
       LabelledPictureShPtr deutTank = createLabelledPictureContainer(std::string("deut_tank"), std::string("data/img/deuterium_tank.bmp"), level0);
 
-      if (image == nullptr ||
-          metal == nullptr ||
+      if (metal == nullptr ||
           crystal == nullptr ||
           deut == nullptr ||
           solarPlant == nullptr ||
@@ -52,32 +49,15 @@ namespace ogame {
         throw GuiException(std::string("Could not allocate memory to create buildings view"));
       }
 
-      layout->addItem(image,          0u, 0u, 6u, 2u);
-      addChild(image);
-      layout->addItem(metal,          0u, 2u, 1u, 1u);
-      addChild(metal);
-      layout->addItem(crystal,        1u, 2u, 1u, 1u);
-      addChild(crystal);
-      layout->addItem(deut,           2u, 2u, 1u, 1u);
-      addChild(deut);
-      layout->addItem(solarPlant,     3u, 2u, 1u, 1u);
-      addChild(solarPlant);
-      layout->addItem(fusionPlant,    4u, 2u, 1u, 1u);
-      addChild(fusionPlant);
-      layout->addItem(solarSatellite, 5u, 2u, 1u, 1u);
-      addChild(solarSatellite);
-      layout->addItem(metalStorage,   0u, 3u, 1u, 1u);
-      addChild(metalStorage);
-      layout->addItem(crystalStorage, 1u, 3u, 1u, 1u);
-      addChild(crystalStorage);
-      layout->addItem(deutTank,       2u, 3u, 1u, 1u);
-      addChild(deutTank);
-
-      setLayout(layout);
-    }
-
-    void BuildingsView::connectDataModel(player::GeneralDataModelShPtr dataModel) {
-      dataModel->registerForAction(player::Action::ChangePlanet, this);
+      addChild(metal,          0u, 2u, 1u, 1u);
+      addChild(crystal,        1u, 2u, 1u, 1u);
+      addChild(deut,           2u, 2u, 1u, 1u);
+      addChild(solarPlant,     3u, 2u, 1u, 1u);
+      addChild(fusionPlant,    4u, 2u, 1u, 1u);
+      addChild(solarSatellite, 5u, 2u, 1u, 1u);
+      addChild(metalStorage,   0u, 3u, 1u, 1u);
+      addChild(crystalStorage, 1u, 3u, 1u, 1u);
+      addChild(deutTank,       2u, 3u, 1u, 1u);
     }
 
     void BuildingsView::populateWithData(const core::Planet& planet, const core::Account& account) {

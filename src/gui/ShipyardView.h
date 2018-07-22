@@ -20,9 +20,7 @@ namespace ogame {
 
       private:
 
-        void createView(player::GeneralDataModelShPtr model);
-
-        void connectDataModel(player::GeneralDataModelShPtr dataModel);
+        void createView();
 
         void populateWithData(const core::Planet& planet, const core::Account& account) override;
 
