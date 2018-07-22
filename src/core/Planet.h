@@ -58,7 +58,11 @@ namespace ogame {
 
         const unsigned getShipCount(const Ship::Type& type) const;
 
+        const Ship& getShipData(const Ship::Type& type) const;
+
         const unsigned getDefenseCount(const Defense::Type& type) const;
+
+        const Defense& getDefenseData(const Defense::Type& type) const;
 
       protected:
 
