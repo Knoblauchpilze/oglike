@@ -52,6 +52,7 @@ namespace ogame {
     ComponentFactory::createLabelPanel(const std::string& name,
                                        const std::string& text,
                                        view::ColoredFontShPtr font,
+                                       const LabelContainer::Alignment& alignment,
                                        const SDL_Color& bgColor,
                                        const bool transparent)
     {
@@ -59,6 +60,7 @@ namespace ogame {
         name,
         text,
         font,
+        alignment,
         bgColor,
         transparent
       );
