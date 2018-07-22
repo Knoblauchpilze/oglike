@@ -75,7 +75,7 @@ namespace ogame {
           name = "shipyard_view";
           break;
         case player::View::Defense:
-          name = "defens_view";
+          name = "defense_view";
           break;
         case player::View::Fleet:
           name = "fleet_view";
