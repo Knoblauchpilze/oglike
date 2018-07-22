@@ -7,6 +7,15 @@ namespace ogame {
   namespace gui {
 
     inline
+    void PictureContainer::setImagePath(const std::string& path) {
+      lock();
+      m_file = path;
+      loadPicture();
+      makeDeepDirty();
+      unlock();
+    }
+
+    inline
     void PictureContainer::clearContentPrivate(SDL_Surface* render) {
       // Nothing to do here.
     }
