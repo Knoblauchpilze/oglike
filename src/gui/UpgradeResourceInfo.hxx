@@ -4,9 +4,44 @@
 #include "UpgradeResourceInfo.h"
 #include "ComponentFactory.h"
 #include "FontFactory.h"
+#include "GuiException.h"
+#include "Research.h"
+#include "Ship.h"
+#include "Building.h"
+#include "Defense.h"
 
 namespace ogame {
   namespace gui {
+
+    template <typename Element>
+    inline
+    void UpgradeResourceInfo::populateInformationFromElement(const Element& element) {
+      throw GuiException(std::string("Cannot populate information panel from unknown element type"));
+    }
+
+    template <>
+    inline
+    void UpgradeResourceInfo::populateInformationFromElement(const core::Research& element) {
+      std::cout << "[UPGRADE] Populating panel from research " << element.getName() << std::endl;
+    }
+
+    template <>
+    inline
+    void UpgradeResourceInfo::populateInformationFromElement(const core::Ship& element) {
+      std::cout << "[UPGRADE] Populating panel from ship " << element.getName() << std::endl;
+    }
+
+    template <>
+    inline
+    void UpgradeResourceInfo::populateInformationFromElement(const core::Building& element) {
+      std::cout << "[UPGRADE] Populating panel from building " << element.getName() << std::endl;
+    }
+
+    template <>
+    inline
+    void UpgradeResourceInfo::populateInformationFromElement(const core::Defense& element) {
+      std::cout << "[UPGRADE] Populating panel from defense " << element.getName() << std::endl;
+    }
 
     inline
     LabelContainerShPtr UpgradeResourceInfo::createLabelPanel(const std::string& name,
