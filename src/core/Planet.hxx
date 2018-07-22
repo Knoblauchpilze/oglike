@@ -102,6 +102,21 @@ namespace ogame {
       return 0u;
     }
 
+    inline
+    const unsigned Planet::getDefenseCount(const Defense::Type& type) const {
+      // Traverse the set of defenses.
+      unsigned indesDefense = 0u;
+      while (indesDefense < m_defenses.size()) {
+        if (m_defenses[indesDefense] != nullptr && m_defenses[indesDefense]->getType() == type) {
+          return m_defenses[indesDefense]->getCount();
+        }
+        ++indesDefense;
+      }
+
+      // Defense not found, assume 0 count.
+      return 0u;
+    }
+
   }
 }
 
