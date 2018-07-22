@@ -40,6 +40,8 @@ namespace ogame {
 
         AbstractDataModel& getDataModel();
 
+        const AbstractDataModel& getDataModel() const;
+
       private:
 
         mutable AbstractDataModel* m_model;
