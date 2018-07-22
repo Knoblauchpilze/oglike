@@ -64,13 +64,15 @@ namespace ogame {
 
         const Defense& getDefenseData(const Defense::Type& type) const;
 
-      protected:
+      private:
 
         void create();
 
-      private:
-
         const std::string generateRandomName(const unsigned& length) const noexcept;
+
+        void initializeShips();
+
+        void initializeDefenses();
 
       private:
 
