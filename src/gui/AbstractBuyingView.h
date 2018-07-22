@@ -51,6 +51,8 @@ namespace ogame {
       private:
 
         view::EventListener::Interaction::Mask m_mask;
+        view::GraphicContainerShPtr m_buyingAction;
+        std::string m_activeBuyingActionName;
 
     };
 

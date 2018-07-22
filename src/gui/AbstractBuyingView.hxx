@@ -6,6 +6,7 @@
 #include "DataModelException.h"
 #include "ComponentFactory.h"
 #include "FontFactory.h"
+#include "SelectorPanel.h"
 
 namespace ogame {
   namespace gui {
@@ -74,8 +75,32 @@ namespace ogame {
 
     inline
     void AbstractBuyingView::onInteractionPerformedPrivate(const std::string& origin) {
-      // We need to create the description panel describing the buying action.
-      std::cout << "[BUYING] Should create buying action from " << origin << std::endl;
+      bool deactivate = false;
+
+      // Activate the buying panel action.
+      SelectorPanel* selector = getChild<SelectorPanel*>(std::string("selector_panel"));
+      if (checkChild(selector, std::string("Buying selector panel"))) {
+        try {
+          // Check whether we should deactivate this child.
+          if (m_activeBuyingActionName == origin) {
+            deactivate = true;
+            m_activeBuyingActionName = "";
+            selector->setActiveChild(std::string("image_panel"));
+          }
+          else {
+            m_activeBuyingActionName = origin;
+            selector->setActiveChild(std::string("buying_action"));
+          }
+        }
+        catch (const GuiException& e) {
+          std::cerr << "[BUYING] Could not activate description item after interaction with " << origin << " in " << getName() << ":" << std::endl << e.what() << std::endl;
+        }
+      }
+
+      // Update the buying action based on the origin of the action.
+      if (m_buyingAction != nullptr && !deactivate) {
+        std::cout << "[BUYING] Should create buying action from " << origin << std::endl;
+      }
     }
 
   }
