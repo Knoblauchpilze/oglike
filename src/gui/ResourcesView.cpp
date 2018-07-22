@@ -68,7 +68,7 @@ namespace ogame {
       // Create all the resources.
       LabelledPictureShPtr metal = createResourcePanel(std::string("metal_resource_panel"), 0.0f, std::string("metal"));
 
-      LabelledPictureShPtr cristal = createResourcePanel(std::string("cristal_resource_panel"), 0.0f, std::string("cristal"));
+      LabelledPictureShPtr cristal = createResourcePanel(std::string("cristal_resource_panel"), 0.0f, std::string("crystal"));
 
       LabelledPictureShPtr deuterium = createResourcePanel(std::string("deuterium_resource_panel"), 0.0f, std::string("deuterium"));
 
