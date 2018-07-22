@@ -66,7 +66,7 @@ namespace ogame {
       // Update each property for this panel.
       LabelContainer* title = getChild<LabelContainer*>(std::string("title"));
       if (checkChild(title, std::string("Upgrade info title"))) {
-        title->setText(std::string("Technology: ") + element.getName());
+        title->setText(element.getName());
       }
 
       LabelContainer* level = getChild<LabelContainer*>(std::string("level"));

@@ -48,7 +48,6 @@ namespace ogame {
         std::string("data/img/button_ok.bmp"),
         std::string("data/img/button_nok.bmp")
       );
-      upgrade->updateStatus(true);
 
       if (title == nullptr ||
           metal == nullptr ||
