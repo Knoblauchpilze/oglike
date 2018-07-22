@@ -11,7 +11,7 @@ namespace ogame {
     {
       public:
 
-        // Convenience define for the type of a ship.
+        // Convenience define for the type of a research.
         enum class Type {
           Energy,
           Laser,
