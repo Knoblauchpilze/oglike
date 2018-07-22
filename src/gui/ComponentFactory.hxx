@@ -108,14 +108,16 @@ namespace ogame {
                                                  view::ColoredFontShPtr font,
                                                  const std::string& picture,
                                                  const std::string& text,
-                                                 const LabelledPicture::Alignment& alignment)
+                                                 const LabelledPicture::Alignment& alignment,
+                                                 const view::EventListener::Interaction::Mask& mask)
     {
       return std::make_shared<LabelledPicture>(
         name,
         font,
         picture,
         text,
-        alignment
+        alignment,
+        mask
       );
     }
 
