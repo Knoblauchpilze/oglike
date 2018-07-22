@@ -103,18 +103,56 @@ namespace ogame {
     }
 
     inline
+    const core::Ship& Planet::getShipData(const Ship::Type& type) const {
+      // Traverse the set of ships.
+      unsigned indexShip = 0u;
+      while (indexShip < m_ships.size()) {
+        if (m_ships[indexShip] != nullptr && m_ships[indexShip]->getType() == type) {
+          return *m_ships[indexShip];
+        }
+        ++indexShip;
+      }
+
+      // Ship not found, this is a problem.
+      const std::string errorMessage = std::string("Cannot retrieve data for ship ") +
+        std::to_string(static_cast<int>(type)) +
+        ", data not available in planet " +
+        getName();
+      throw PlanetException(errorMessage);
+    }
+
+    inline
     const unsigned Planet::getDefenseCount(const Defense::Type& type) const {
       // Traverse the set of defenses.
-      unsigned indesDefense = 0u;
-      while (indesDefense < m_defenses.size()) {
-        if (m_defenses[indesDefense] != nullptr && m_defenses[indesDefense]->getType() == type) {
-          return m_defenses[indesDefense]->getCount();
+      unsigned indexDefense = 0u;
+      while (indexDefense < m_defenses.size()) {
+        if (m_defenses[indexDefense] != nullptr && m_defenses[indexDefense]->getType() == type) {
+          return m_defenses[indexDefense]->getCount();
         }
-        ++indesDefense;
+        ++indexDefense;
       }
 
       // Defense not found, assume 0 count.
       return 0u;
+    }
+
+    inline
+    const core::Defense& Planet::getDefenseData(const Defense::Type& type) const {
+      // Traverse the set of defenses.
+      unsigned indexDefenses = 0u;
+      while (indexDefenses < m_defenses.size()) {
+        if (m_defenses[indexDefenses] != nullptr && m_defenses[indexDefenses]->getType() == type) {
+          return *m_defenses[indexDefenses];
+        }
+        ++indexDefenses;
+      }
+
+      // Defense not found, this is a problem.
+      const std::string errorMessage = std::string("Cannot retrieve data for defense ") +
+        std::to_string(static_cast<int>(type)) +
+        ", data not available in planet " +
+        getName();
+      throw PlanetException(errorMessage);
     }
 
   }
