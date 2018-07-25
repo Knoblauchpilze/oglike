@@ -43,6 +43,11 @@ namespace ogame {
         std::string("data/img/deuterium.bmp"),
         std::to_string(0u)
       );
+      LabelledPictureShPtr energy = createLabelledPicturePanel(
+        std::string("energy_needed"),
+        std::string("data/img/energy.bmp"),
+        std::to_string(0u)
+      );
       SwitchPictureContainerShPtr upgrade = ComponentFactory::createSwitchPicturePanel(
         std::string("upgrade_label"),
         std::string("data/img/button_ok.bmp"),
@@ -53,6 +58,7 @@ namespace ogame {
           metal == nullptr ||
           crystal == nullptr ||
           deut == nullptr ||
+          energy == nullptr ||
           upgrade == nullptr)
       {
         throw GuiException(std::string("Could not allocate memory to create upgrade resource info panel"));
@@ -66,6 +72,8 @@ namespace ogame {
       addChild(crystal);
       layout->addItem(deut,    2u, 1u, 1u, 2u);
       addChild(deut);
+      layout->addItem(energy,  3u, 1u, 1u, 2u);
+      addChild(energy);
       layout->addItem(upgrade, 4u, 1u, 2u, 2u);
       addChild(upgrade);
 
