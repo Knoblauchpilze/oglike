@@ -5,6 +5,7 @@
 #include <string>
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
+#include "Planet.h"
 
 namespace ogame {
   namespace gui {
@@ -21,7 +22,7 @@ namespace ogame {
 
         template <typename Element>
         inline
-        void populateInformationFromElement(const Element& element);
+        void populateInformationFromElement(const Element& element, const core::Planet& planet);
 
       private:
 

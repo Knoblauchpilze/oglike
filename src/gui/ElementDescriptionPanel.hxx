@@ -23,18 +23,18 @@ namespace ogame {
 
     template <typename Element>
     inline
-    void ElementDescriptionPanel::populateInformationFromElement(const Element& element) {
+    void ElementDescriptionPanel::populateInformationFromElement(const Element& element, const core::Planet& planet) {
       lock();
 
       // Update each panel using the dedicated handler.
       UpgradeInfo* upgradeInfo = getChild<UpgradeInfo*>(std::string("upgrade_info"));
       if (checkChild(upgradeInfo, std::string("Element description upgrade info"))) {
-        upgradeInfo->populateInformationFromElement(element);
+        upgradeInfo->populateInformationFromElement(element, planet);
       }
 
       UpgradeResourceInfo* neededResources = getChild<UpgradeResourceInfo*>(std::string("need_resources"));
       if (checkChild(neededResources, std::string("Element description upgrade resource info"))) {
-        neededResources->populateInformationFromElement(element);
+        neededResources->populateInformationFromElement(element, planet);
       }
 
       unlock();
