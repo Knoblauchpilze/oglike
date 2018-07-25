@@ -14,6 +14,8 @@ namespace ogame {
 
         virtual ~Resource();
 
+        bool operator==(const Resource& other) const noexcept;
+
         const std::string& getName() const;
 
       protected:
@@ -27,5 +29,6 @@ namespace ogame {
 }
 
 #include "Resource.hxx"
+#include "ResourceHashSpecialization.hxx"
 
 #endif // RESOURCE_H
