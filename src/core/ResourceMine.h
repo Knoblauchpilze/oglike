@@ -15,7 +15,7 @@ namespace ogame {
 
         virtual ~ResourceMine();
 
-        void upgrade(const std::vector<ResourceDepositShPtr>& resources) override;
+        void upgrade(std::vector<ResourceDepositShPtr>& resources) override;
 
       private:
 
