@@ -3,6 +3,7 @@
 
 #include "Account.h"
 #include "AccountException.h"
+#include "ResearchFactory.h"
 
 namespace ogame {
   namespace core {
@@ -121,22 +122,22 @@ namespace ogame {
     inline
     void Account::initializeResearch() {
       // Create all research in this account.
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Energy));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Laser));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Ion));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Hyperspace));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Plasma));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::CombustionDrive));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::ImpulseDrive));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::HyperspaceDrive));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Espionage));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Computer));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Astrophysics));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::IRN));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Graviton));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Weapon));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Shielding));
-      m_researches.push_back(std::make_shared<core::Research>(Research::Type::Armour));
+      m_researches.push_back(core::ResearchFactory::createEnergyResearch());
+      m_researches.push_back(core::ResearchFactory::createLaserResearch());
+      m_researches.push_back(core::ResearchFactory::createIonsResearch());
+      m_researches.push_back(core::ResearchFactory::createHyperspaceResearch());
+      m_researches.push_back(core::ResearchFactory::createPlasmaResearch());
+      m_researches.push_back(core::ResearchFactory::createCombustionDriveResearch());
+      m_researches.push_back(core::ResearchFactory::createImpulseDriveResearch());
+      m_researches.push_back(core::ResearchFactory::createHyperspaceDriveResearch());
+      m_researches.push_back(core::ResearchFactory::createEspionageResearch());
+      m_researches.push_back(core::ResearchFactory::createComputerResearch());
+      m_researches.push_back(core::ResearchFactory::createAstrophysicsResearch());
+      m_researches.push_back(core::ResearchFactory::createIRNResearch());
+      m_researches.push_back(core::ResearchFactory::createGravitonResearch());
+      m_researches.push_back(core::ResearchFactory::createWeaponResearch());
+      m_researches.push_back(core::ResearchFactory::createShieldingResearch());
+      m_researches.push_back(core::ResearchFactory::createArmourResearch());
     }
 
   }
