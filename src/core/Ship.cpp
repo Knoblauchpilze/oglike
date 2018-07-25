@@ -4,9 +4,10 @@
 namespace ogame {
   namespace core {
 
-    Ship::Ship(const Type& type):
-      m_type(type),
-      m_name(getNameFromType(m_type))
+    Ship::Ship(const Type& type,
+               const std::unordered_map<Resource, float>& cost):
+      FixedCostUnit(getNameFromType(m_type), cost),
+      m_type(type)
     {
       // Nothing to do here.
     }

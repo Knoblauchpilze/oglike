@@ -12,11 +12,6 @@ namespace ogame {
     }
 
     inline
-    const std::string& Ship::getName() const noexcept {
-      return m_name;
-    }
-
-    inline
     const unsigned Ship::getCount() const noexcept {
       return 0u;
     }
