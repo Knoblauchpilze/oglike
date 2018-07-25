@@ -64,6 +64,8 @@ namespace ogame {
 
         const Defense& getDefenseData(const Defense::Type& type) const;
 
+        const std::vector<ResourceDepositShPtr>& getResourceDeposits() const noexcept;
+
       private:
 
         void create();
