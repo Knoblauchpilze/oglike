@@ -22,7 +22,7 @@ namespace ogame {
         const core::Ship& ship = planet.getShipData(shipType);
 
         // And update the corresponding element description.
-        action.populateInformationFromElement(ship);
+        action.populateInformationFromElement(ship, planet);
       }
       catch (const player::DataModelException& e) {
         std::cerr << "[SHIPYARD] Could not populate action data in " << getName() << " from origin " << origin << ":" << std::endl << e.what() << std::endl;

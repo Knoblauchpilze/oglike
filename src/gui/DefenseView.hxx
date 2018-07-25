@@ -22,7 +22,7 @@ namespace ogame {
         const core::Defense& defense = planet.getDefenseData(defenseType);
 
         // And update the corresponding element description.
-        action.populateInformationFromElement(defense);
+        action.populateInformationFromElement(defense, planet);
       }
       catch (const player::DataModelException& e) {
         std::cerr << "[DEFENSE] Could not populate action data in " << getName() << " from origin " << origin << ":" << std::endl << e.what() << std::endl;
