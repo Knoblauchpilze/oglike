@@ -2,6 +2,7 @@
 #define RESOURCEDEPOSIT_HXX_INCLUDED
 
 #include "ResourceDeposit.h"
+#include "BuildingException.h"
 
 namespace ogame {
   namespace core {
@@ -19,6 +20,18 @@ namespace ogame {
     inline
     const float& ResourceDeposit::getCapacity() const noexcept {
       return m_capacity;
+    }
+
+    inline
+    void ResourceDeposit::decreaseValue(const float& amount) {
+      if (m_value < amount) {
+        const std::string errorMessage = std::string("Cannot decrease value of deposit of ") +
+          std::to_string(amount) + " for resource " +
+          getResourceName() + ", deposit only contains " +
+          std::to_string(m_value);
+        throw BuildingException(errorMessage);
+      }
+      m_value -= amount;
     }
 
   }
