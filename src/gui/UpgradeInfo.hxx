@@ -15,13 +15,13 @@ namespace ogame {
 
     template <typename Element>
     inline
-    void UpgradeInfo::populateInformationFromElement(const Element& element) {
+    void UpgradeInfo::populateInformationFromElement(const Element& element, const core::Planet& planet) {
       throw GuiException(std::string("Cannot populate information panel from unknown element type"));
     }
 
     template <>
     inline
-    void UpgradeInfo::populateInformationFromElement(const core::Research& element) {
+    void UpgradeInfo::populateInformationFromElement(const core::Research& element, const core::Planet& planet) {
       lock();
 
       // Update each property for this panel.
@@ -37,7 +37,7 @@ namespace ogame {
 
       LabelContainer* production = getChild<LabelContainer*>(std::string("production_time"));
       if (checkChild(production, std::string("Upgrade info production time"))) {
-        production->setText(std::string("Production duration: ") + computeDisplayTime(element.getUpgradeTime()));
+        production->setText(std::string("Production duration: ") + computeDisplayTime(element.getUpgradeTime(0u)));
       }
 
       LabelContainer* energy = getChild<LabelContainer*>(std::string("energy_needed"));
@@ -60,7 +60,7 @@ namespace ogame {
 
     template <>
     inline
-    void UpgradeInfo::populateInformationFromElement(const core::Ship& element) {
+    void UpgradeInfo::populateInformationFromElement(const core::Ship& element, const core::Planet& planet) {
       lock();
 
       // Update each property for this panel.
@@ -76,7 +76,7 @@ namespace ogame {
 
       LabelContainer* production = getChild<LabelContainer*>(std::string("production_time"));
       if (checkChild(production, std::string("Upgrade info production time"))) {
-        production->setText(std::string("Production duration: ") + computeDisplayTime(45.0f));
+        production->setText(std::string("Production duration: ") + computeDisplayTime(element.getProductionTime(0u, 0u)));
       }
 
       LabelContainer* energy = getChild<LabelContainer*>(std::string("energy_needed"));
@@ -99,13 +99,13 @@ namespace ogame {
 
     template <>
     inline
-    void UpgradeInfo::populateInformationFromElement(const core::Building& element) {
+    void UpgradeInfo::populateInformationFromElement(const core::Building& element, const core::Planet& planet) {
       std::cout << "[UPGRADE] Populating panel from building " << element.getName() << std::endl;
     }
 
     template <>
     inline
-    void UpgradeInfo::populateInformationFromElement(const core::Defense& element) {
+    void UpgradeInfo::populateInformationFromElement(const core::Defense& element, const core::Planet& planet) {
       lock();
 
       // Update each property for this panel.
@@ -121,7 +121,7 @@ namespace ogame {
 
       LabelContainer* production = getChild<LabelContainer*>(std::string("production_time"));
       if (checkChild(production, std::string("Upgrade info production time"))) {
-        production->setText(std::string("Production duration: ") + computeDisplayTime(50.0f));
+        production->setText(std::string("Production duration: ") + computeDisplayTime(element.getProductionTime(0u, 0u)));
       }
 
       LabelContainer* energy = getChild<LabelContainer*>(std::string("energy_needed"));
