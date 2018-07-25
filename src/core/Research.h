@@ -3,12 +3,12 @@
 
 #include <string>
 #include <memory>
-#include "Upgradable.h"
+#include "AbstractUpgradable.h"
 
 namespace ogame {
   namespace core {
 
-    class Research: public Upgradable
+    class Research: public AbstractUpgradable
     {
       public:
 
@@ -32,15 +32,14 @@ namespace ogame {
           Armour
         };
 
-        Research(const Type& type);
+        Research(const Type& type,
+                 const std::unordered_map<Resource, float>& initResources);
 
         virtual ~Research();
 
         const Type& getType() const noexcept;
 
         const std::string& getName() const noexcept;
-
-        void upgrade(const std::vector<ResourceDepositShPtr>& resources) override;
 
       private:
 
