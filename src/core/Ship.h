@@ -3,11 +3,12 @@
 
 #include <string>
 #include <memory>
+#include "FixedCostUnit.h"
 
 namespace ogame {
   namespace core {
 
-    class Ship
+    class Ship: public FixedCostUnit
     {
       public:
 
@@ -29,13 +30,12 @@ namespace ogame {
           SolarSatellite
         };
 
-        Ship(const Type& type);
+        Ship(const Type& type,
+             const std::unordered_map<Resource, float>& cost);
 
         virtual ~Ship();
 
         const Type& getType() const noexcept;
-
-        const std::string& getName() const noexcept;
 
         const unsigned getCount() const noexcept;
 
@@ -46,7 +46,6 @@ namespace ogame {
       private:
 
         Type m_type;
-        std::string m_name;
     };
 
     using ShipShPtr = std::shared_ptr<Ship>;
