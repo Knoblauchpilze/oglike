@@ -3,11 +3,12 @@
 
 #include <string>
 #include <memory>
+#include "FixedCostUnit.h"
 
 namespace ogame {
   namespace core {
 
-    class Defense
+    class Defense: public FixedCostUnit
     {
       public:
 
@@ -25,13 +26,12 @@ namespace ogame {
           InterplanetaryMissile
         };
 
-        Defense(const Type& type);
+        Defense(const Type& type,
+                const std::unordered_map<Resource, float>& cost);
 
         virtual ~Defense();
 
         const Type& getType() const noexcept;
-
-        const std::string& getName() const noexcept;
 
         const unsigned getCount() const noexcept;
 
@@ -42,7 +42,6 @@ namespace ogame {
       private:
 
         Type m_type;
-        std::string m_name;
     };
 
     using DefenseShPtr = std::shared_ptr<Defense>;
