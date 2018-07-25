@@ -3,12 +3,12 @@
 
 #include <string>
 #include <memory>
-#include "Upgradable.h"
+#include "AbstractUpgradable.h"
 
 namespace ogame {
   namespace core {
 
-    class Building: public Upgradable
+    class Building: public AbstractUpgradable
     {
       public:
 
@@ -29,13 +29,13 @@ namespace ogame {
 
         const std::string& getName() const noexcept;
 
-        void upgrade(const std::vector<ResourceDepositShPtr>& resources) override;
-
       protected:
 
         Building() = delete;
 
-        Building(const Type& type, const std::string& name);
+        Building(const Type& type,
+                 const std::string& name,
+                 const std::unordered_map<Resource, float>& initResources);
 
       private:
 
