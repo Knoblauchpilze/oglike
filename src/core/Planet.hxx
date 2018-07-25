@@ -3,6 +3,8 @@
 
 #include "Planet.h"
 #include "PlanetException.h"
+#include "DefenseFactory.h"
+#include "ShipFactory.h"
 
 namespace ogame {
   namespace core {
@@ -156,39 +158,44 @@ namespace ogame {
     }
 
     inline
+    const std::vector<ResourceDepositShPtr>& Planet::getResourceDeposits() const noexcept {
+      return m_resources;
+    }
+
+    inline
     void Planet::initializeShips() {
       // Create all ships on this planet.
-      m_ships.push_back(std::make_shared<Ship>(Ship::Type::LightFighter));
-      m_ships.push_back(std::make_shared<Ship>(Ship::Type::HeavyFighter));
-      m_ships.push_back(std::make_shared<Ship>(Ship::Type::Cruiser));
-      m_ships.push_back(std::make_shared<Ship>(Ship::Type::Battleship));
+      m_ships.push_back(ShipFactory::createLightFighter());
+      m_ships.push_back(ShipFactory::createHeavyFighter());
+      m_ships.push_back(ShipFactory::createCruiser());
+      m_ships.push_back(ShipFactory::createBattleship());
 
-      m_ships.push_back(std::make_shared<Ship>(Ship::Type::SmallCargo));
-      m_ships.push_back(std::make_shared<Ship>(Ship::Type::LargeCargo));
-      m_ships.push_back(std::make_shared<Ship>(Ship::Type::ColonyShip));
+      m_ships.push_back(ShipFactory::createSmallCargo());
+      m_ships.push_back(ShipFactory::createLargeCargo());
+      m_ships.push_back(ShipFactory::createColony());
 
-      m_ships.push_back(std::make_shared<Ship>(Ship::Type::Battlecruiser));
-      m_ships.push_back(std::make_shared<Ship>(Ship::Type::Bomber));
-      m_ships.push_back(std::make_shared<Ship>(Ship::Type::Destroyer));
-      m_ships.push_back(std::make_shared<Ship>(Ship::Type::Deathstar));
+      m_ships.push_back(ShipFactory::createBattlecruiser());
+      m_ships.push_back(ShipFactory::createBomber());
+      m_ships.push_back(ShipFactory::createDestroyer());
+      m_ships.push_back(ShipFactory::createDeathstar());
 
-      m_ships.push_back(std::make_shared<Ship>(Ship::Type::Recycler));
-      m_ships.push_back(std::make_shared<Ship>(Ship::Type::EspionageProbe));
-      m_ships.push_back(std::make_shared<Ship>(Ship::Type::SolarSatellite));
+      m_ships.push_back(ShipFactory::createRecycler());
+      m_ships.push_back(ShipFactory::createEspionageProbe());
+      m_ships.push_back(ShipFactory::createSolarSatellite());
     }
 
     inline
     void Planet::initializeDefenses() {
-      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::MissileLauncher));
-      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::LightLaser));
-      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::HeavyLaser));
-      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::GaussCannon));
-      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::IonCannon));
-      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::PlasmaTurret));
-      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::SmallShieldDome));
-      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::LargeShieldDome));
-      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::AntiballisticMissile));
-      m_defenses.push_back(std::make_shared<Defense>(Defense::Type::InterplanetaryMissile));
+      m_defenses.push_back(DefenseFactory::createMissileLauncher());
+      m_defenses.push_back(DefenseFactory::createLightLaser());
+      m_defenses.push_back(DefenseFactory::createHeavyLaser());
+      m_defenses.push_back(DefenseFactory::createGaussCannon());
+      m_defenses.push_back(DefenseFactory::createIonCannon());
+      m_defenses.push_back(DefenseFactory::createPlasmaTurret());
+      m_defenses.push_back(DefenseFactory::createSmallShieldDome());
+      m_defenses.push_back(DefenseFactory::createLargeShieldDome());
+      m_defenses.push_back(DefenseFactory::createAntiballisticMissile());
+      m_defenses.push_back(DefenseFactory::createInterplanetaryMissile());
     }
 
   }
