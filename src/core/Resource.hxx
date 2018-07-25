@@ -7,20 +7,16 @@ namespace ogame {
   namespace core {
 
     inline
+    bool Resource::operator==(const Resource& other) const noexcept {
+      return m_name == other.m_name;
+    }
+
+    inline
     const std::string& Resource::getName() const {
       return m_name;
     }
 
   }
-}
-
-namespace std {
-
-  template <> struct hash<ogame::core::Resource> {
-    size_t operator()(const ogame::core::Resource& res) const {
-      return hash<std::string>()(res.getName());
-    }
-  };
 }
 
 
