@@ -12,11 +12,6 @@ namespace ogame {
     }
 
     inline
-    const std::string& Defense::getName() const noexcept {
-      return m_name;
-    }
-
-    inline
     const unsigned Defense::getCount() const noexcept {
       return 0u;
     }
