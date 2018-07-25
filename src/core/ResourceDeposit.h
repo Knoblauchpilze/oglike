@@ -22,6 +22,8 @@ namespace ogame {
 
         const float& getCapacity() const noexcept;
 
+        void decreaseValue(const float& amount);
+
       protected:
 
       private:
