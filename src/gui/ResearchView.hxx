@@ -23,9 +23,10 @@ namespace ogame {
         const player::GeneralDataModel& model = getDataModel();
         const core::Account& account = model.getActiveAccount();
         const core::Research& research = account.getResearchData(researchType);
+        const core::Planet& planet = model.getActivePlanet();
 
         // And update the corresponding element description.
-        action.populateInformationFromElement(research);
+        action.populateInformationFromElement(research, planet);
       }
       catch (const player::DataModelException& e) {
         std::cerr << "[RESEARCH] Could not populate action data in " << getName() << " from origin " << origin << ":" << std::endl << e.what() << std::endl;
