@@ -39,9 +39,9 @@ namespace ogame {
         if (checkChild(metal, std::string("Metal resource panel"))) {
           metal->setLabel(std::to_string(static_cast<unsigned>(planet.getResourceQuantity(std::string("metal")))));
         }
-        LabelledPicture* cristal = getChild<LabelledPicture*>(std::string("cristal_resource_panel"));
-        if (checkChild(cristal, std::string("Cristal resource panel"))) {
-          cristal->setLabel(std::to_string(static_cast<unsigned>(planet.getResourceQuantity(std::string("cristal")))));
+        LabelledPicture* crystal = getChild<LabelledPicture*>(std::string("crystal_resource_panel"));
+        if (checkChild(crystal, std::string("Crystal resource panel"))) {
+          crystal->setLabel(std::to_string(static_cast<unsigned>(planet.getResourceQuantity(std::string("crystal")))));
         }
         LabelledPicture* deut = getChild<LabelledPicture*>(std::string("deuterium_resource_panel"));
         if (checkChild(deut, std::string("Deuterium resource panel"))) {
@@ -68,7 +68,7 @@ namespace ogame {
       // Create all the resources.
       LabelledPictureShPtr metal = createResourcePanel(std::string("metal_resource_panel"), 0.0f, std::string("metal"));
 
-      LabelledPictureShPtr cristal = createResourcePanel(std::string("cristal_resource_panel"), 0.0f, std::string("crystal"));
+      LabelledPictureShPtr crystal = createResourcePanel(std::string("crystal_resource_panel"), 0.0f, std::string("crystal"));
 
       LabelledPictureShPtr deuterium = createResourcePanel(std::string("deuterium_resource_panel"), 0.0f, std::string("deuterium"));
 
@@ -77,7 +77,7 @@ namespace ogame {
       LabelledPictureShPtr energy = createResourcePanel(std::string("energy_resource_panel"), 0.0f, std::string("energy"));
 
       if (metal == nullptr ||
-          cristal == nullptr ||
+          crystal == nullptr ||
           deuterium == nullptr ||
           antimatter == nullptr ||
           energy == nullptr)
@@ -86,7 +86,7 @@ namespace ogame {
       }
 
       addChild(metal);
-      addChild(cristal);
+      addChild(crystal);
       addChild(deuterium);
       addChild(antimatter);
       addChild(energy);
