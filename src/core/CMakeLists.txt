@@ -2,7 +2,7 @@ project (ogamelike_lib_core)
 
 set (CMAKE_CXX_STANDARD 14)
 
-set (CMAKE_VERBOSE_MAKEFILE ON)
+#set (CMAKE_VERBOSE_MAKEFILE ON)
 set (CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 set (SOURCES
@@ -28,6 +28,10 @@ set (SOURCES
   Defense.cpp
   Upgradable.cpp
   Building.cpp
+  AbstractUpgradable.cpp
+  UpgradableException.cpp
+  BuildingException.cpp
+  FixedCostUnit.cpp
   )
 
 add_library (ogamelike_lib_core SHARED
