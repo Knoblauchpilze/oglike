@@ -17,6 +17,19 @@ namespace ogame {
     }
 
     inline
+    const float Research::getUpgradeTime(const unsigned& universeSpeed,
+                                         const unsigned& laboratoryLevel) const
+    {
+      const std::unordered_map<Resource, float>::const_iterator metal = m_upgradeCost.find(Resource(std::string("metal")));
+      const std::unordered_map<Resource, float>::const_iterator crystal = m_upgradeCost.find(Resource(std::string("crystal")));
+
+      const float metalValue = (metal != m_upgradeCost.cend() ? metal->second : 0.0f);
+      const float crystalValue = (crystal != m_upgradeCost.cend() ? crystal->second : 0.0f);
+
+      return std::max(1.0f, 3600.0f * (metalValue + crystalValue) / (universeSpeed * 1000.0f * (1.0f + laboratoryLevel)));
+    }
+
+    inline
     const std::string Research::getNameFromType(const Type& type) const noexcept {
       std::string name = "Default technology name";
 

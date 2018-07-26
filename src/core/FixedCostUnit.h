@@ -20,7 +20,9 @@ namespace ogame {
         const std::string& getName() const noexcept;
 
         // Time in seconds.
-        const float getProductionTime(const unsigned& shipyardLevel, const unsigned& naniteLevel) const;
+        const float getProductionTime(const unsigned& universeSpeed,
+                                      const unsigned& shipyardLevel,
+                                      const unsigned& naniteLevel) const;
 
         const std::unordered_map<Resource, float>& getCost() const;
 
