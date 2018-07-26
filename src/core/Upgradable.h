@@ -10,6 +10,8 @@
 namespace ogame {
   namespace core {
 
+    class ResourceDeposit;
+
     class Upgradable
     {
       public:
@@ -18,14 +20,11 @@ namespace ogame {
 
         const unsigned& getLevel() const noexcept;
 
-        virtual void upgrade(std::vector<ResourceDepositShPtr>& resources) = 0;
-
-        // Time in seconds.
-        const float getUpgradeTime(const unsigned& laboratoryLevel) const;
+        virtual void upgrade(std::vector<std::shared_ptr<ResourceDeposit>>& resources) = 0;
 
         const std::unordered_map<Resource, float>& getUpgradeCost() const;
 
-        const bool canUpgrade(const std::vector<ResourceDepositShPtr>& resources) const;
+        const bool canUpgrade(const std::vector<std::shared_ptr<ResourceDeposit>>& resources) const;
 
       protected:
 
