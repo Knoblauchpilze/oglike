@@ -31,6 +31,12 @@ namespace ogame {
       return std::max(1.0f, 3600.0f * (metalValue + crystalValue) / (universeSpeed * 2500.0f * (1.0f + roboticsLevel) * std::pow(2.0f, 1.0f * naniteLevel)));
     }
 
+    template <typename ChildClass>
+    inline
+    const ChildClass* Building::asType() const {
+      return dynamic_cast<const ChildClass*>(this);
+    }
+
   }
 }
 

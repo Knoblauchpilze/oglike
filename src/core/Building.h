@@ -48,6 +48,9 @@ namespace ogame {
                                    const unsigned& roboticsLevel,
                                    const unsigned& naniteLevel) const;
 
+        template <typename ChildClass>
+        const ChildClass* asType() const;
+
       protected:
 
         Building() = delete;
