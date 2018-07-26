@@ -15,19 +15,37 @@ namespace ogame {
 
     template <typename Element>
     inline
-    void UpgradeInfo::populateInformationFromElement(const Element& element, const core::Planet& planet) {
+    void UpgradeInfo::populateInformationFromElement(const Element& element,
+                                                     const core::Planet& planet,
+                                                     const core::Account& account)
+    {
       throw GuiException(std::string("Cannot populate information panel from unknown element type"));
     }
 
     template <>
     inline
-    void UpgradeInfo::populateInformationFromElement(const core::Research& element, const core::Planet& planet) {
+    void UpgradeInfo::populateInformationFromElement(const core::Building& element,
+                                                     const core::Planet& planet,
+                                                     const core::Account& account)
+    {
       lock();
 
       // Update each property for this panel.
+      unsigned universeSpeed = 1u;
+      unsigned roboticsLevel = 0u;
+      unsigned naniteLevel = 0u;
+      try {
+        universeSpeed = account.getUniverseSpeed();
+        roboticsLevel = planet.getBuildingLevel(core::Building::Type::RoboticsFactory);
+        naniteLevel = planet.getBuildingLevel(core::Building::Type::NaniteFactory);
+      }
+      catch (const core::AccountException& e) {
+        std::cerr << "[UPGRADE] Could not retrieve speed of universe, duration may be wrong:" << std::endl << e.what() << std::endl;
+      }
+
       LabelContainer* title = getChild<LabelContainer*>(std::string("title"));
       if (checkChild(title, std::string("Upgrade info title"))) {
-        title->setText(std::string("Technology: ") + element.getName());
+        title->setText(element.getName());
       }
 
       LabelContainer* level = getChild<LabelContainer*>(std::string("level"));
@@ -37,7 +55,7 @@ namespace ogame {
 
       LabelContainer* production = getChild<LabelContainer*>(std::string("production_time"));
       if (checkChild(production, std::string("Upgrade info production time"))) {
-        production->setText(std::string("Production duration: ") + computeDisplayTime(element.getUpgradeTime(0u)));
+        production->setText(std::string("Production duration: ") + computeDisplayTime(element.getUpgradeTime(universeSpeed, roboticsLevel, naniteLevel)));
       }
 
       LabelContainer* energy = getChild<LabelContainer*>(std::string("energy_needed"));
@@ -60,23 +78,36 @@ namespace ogame {
 
     template <>
     inline
-    void UpgradeInfo::populateInformationFromElement(const core::Ship& element, const core::Planet& planet) {
+    void UpgradeInfo::populateInformationFromElement(const core::Research& element,
+                                                     const core::Planet& planet,
+                                                     const core::Account& account)
+    {
       lock();
 
       // Update each property for this panel.
+      unsigned universeSpeed = 1u;
+      unsigned laboratoryLevel = 0u;
+      try {
+        universeSpeed = account.getUniverseSpeed();
+        laboratoryLevel = planet.getBuildingLevel(core::Building::Type::ResearchLab);
+      }
+      catch (const core::AccountException& e) {
+        std::cerr << "[UPGRADE] Could not retrieve speed of universe, duration may be wrong:" << std::endl << e.what() << std::endl;
+      }
+
       LabelContainer* title = getChild<LabelContainer*>(std::string("title"));
       if (checkChild(title, std::string("Upgrade info title"))) {
-        title->setText(element.getName());
+        title->setText(std::string("Technology: ") + element.getName());
       }
 
       LabelContainer* level = getChild<LabelContainer*>(std::string("level"));
       if (checkChild(level, std::string("Upgrade info title"))) {
-        level->setText(std::string("Number: ") + std::to_string(element.getCount()));
+        level->setText(std::string("Level ") + std::to_string(element.getLevel()));
       }
 
       LabelContainer* production = getChild<LabelContainer*>(std::string("production_time"));
       if (checkChild(production, std::string("Upgrade info production time"))) {
-        production->setText(std::string("Production duration: ") + computeDisplayTime(element.getProductionTime(0u, 0u)));
+        production->setText(std::string("Production duration: ") + computeDisplayTime(element.getUpgradeTime(universeSpeed, laboratoryLevel)));
       }
 
       LabelContainer* energy = getChild<LabelContainer*>(std::string("energy_needed"));
@@ -86,7 +117,7 @@ namespace ogame {
 
       LabelContainer* number = getChild<LabelContainer*>(std::string("number"));
       if (checkChild(number, std::string("Upgrade info number"))) {
-        number->setText(std::string("Number:"));
+        number->setText(std::string(""));
       }
 
       LabelContainer* unitcount = getChild<LabelContainer*>(std::string("unit_number"));
@@ -99,16 +130,25 @@ namespace ogame {
 
     template <>
     inline
-    void UpgradeInfo::populateInformationFromElement(const core::Building& element, const core::Planet& planet) {
-      std::cout << "[UPGRADE] Populating panel from building " << element.getName() << std::endl;
-    }
-
-    template <>
-    inline
-    void UpgradeInfo::populateInformationFromElement(const core::Defense& element, const core::Planet& planet) {
+    void UpgradeInfo::populateInformationFromElement(const core::Ship& element,
+                                                     const core::Planet& planet,
+                                                     const core::Account& account)
+    {
       lock();
 
       // Update each property for this panel.
+      unsigned universeSpeed = 1u;
+      unsigned shipyardLevel = 0u;
+      unsigned naniteLevel = 0u;
+      try {
+        universeSpeed = account.getUniverseSpeed();
+        shipyardLevel = planet.getBuildingLevel(core::Building::Type::Shipyard);
+        naniteLevel = planet.getBuildingLevel(core::Building::Type::NaniteFactory);
+      }
+      catch (const core::AccountException& e) {
+        std::cerr << "[UPGRADE] Could not retrieve speed of universe, duration may be wrong:" << std::endl << e.what() << std::endl;
+      }
+
       LabelContainer* title = getChild<LabelContainer*>(std::string("title"));
       if (checkChild(title, std::string("Upgrade info title"))) {
         title->setText(element.getName());
@@ -121,7 +161,57 @@ namespace ogame {
 
       LabelContainer* production = getChild<LabelContainer*>(std::string("production_time"));
       if (checkChild(production, std::string("Upgrade info production time"))) {
-        production->setText(std::string("Production duration: ") + computeDisplayTime(element.getProductionTime(0u, 0u)));
+        production->setText(std::string("Production duration: ") + computeDisplayTime(element.getProductionTime(universeSpeed, shipyardLevel, naniteLevel)));
+      }
+
+      LabelContainer* energy = getChild<LabelContainer*>(std::string("energy_needed"));
+      if (checkChild(energy, std::string("Upgrade info energy label"))) {
+        energy->setText(std::string(""));
+      }
+
+      LabelContainer* number = getChild<LabelContainer*>(std::string("number"));
+      if (checkChild(number, std::string("Upgrade info number"))) {
+        number->setText(std::string("Number:"));
+      }
+
+      LabelContainer* unitCount = getChild<LabelContainer*>(std::string("unit_number"));
+      if (checkChild(unitCount, std::string("Upgrade info unit count"))) {
+        // TODO.
+      }
+
+      unlock();
+    }
+
+    template <>
+    inline
+    void UpgradeInfo::populateInformationFromElement(const core::Defense& element,
+                                                     const core::Planet& planet,
+                                                     const core::Account& account)
+    {
+      lock();
+
+      // Update each property for this panel.
+      unsigned universeSpeed = 1u;
+      try {
+        universeSpeed = account.getUniverseSpeed();
+      }
+      catch (const core::AccountException& e) {
+        std::cerr << "[UPGRADE] Could not retrieve speed of universe, duration may be wrong:" << std::endl << e.what() << std::endl;
+      }
+
+      LabelContainer* title = getChild<LabelContainer*>(std::string("title"));
+      if (checkChild(title, std::string("Upgrade info title"))) {
+        title->setText(element.getName());
+      }
+
+      LabelContainer* level = getChild<LabelContainer*>(std::string("level"));
+      if (checkChild(level, std::string("Upgrade info title"))) {
+        level->setText(std::string("Number: ") + std::to_string(element.getCount()));
+      }
+
+      LabelContainer* production = getChild<LabelContainer*>(std::string("production_time"));
+      if (checkChild(production, std::string("Upgrade info production time"))) {
+        production->setText(std::string("Production duration: ") + computeDisplayTime(element.getProductionTime(universeSpeed, 0u, 0u)));
       }
 
       LabelContainer* energy = getChild<LabelContainer*>(std::string("energy_needed"));
