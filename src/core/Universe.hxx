@@ -21,6 +21,11 @@ namespace ogame {
       return m_index;
     }
 
+    inline
+    const unsigned& Universe::getSpeed() const noexcept {
+      return m_speed;
+    }
+
   }
 }
 

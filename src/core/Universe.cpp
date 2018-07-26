@@ -10,8 +10,10 @@ namespace ogame {
                        const unsigned& systemsCount,
                        const unsigned& planetsCount,
                        const unsigned& minStartingPosition,
-                       const unsigned& maxStartingPosition):
+                       const unsigned& maxStartingPosition,
+                       const unsigned& speed):
       m_index(index),
+      m_speed(speed),
       m_galaxies(),
       m_minStartPos(minStartingPosition),
       m_maxStartPos(maxStartingPosition),
