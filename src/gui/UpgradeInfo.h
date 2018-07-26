@@ -7,6 +7,7 @@
 #include "GraphicContainer.h"
 #include "LabelContainer.h"
 #include "Planet.h"
+#include "ResourceMine.h"
 
 namespace ogame {
   namespace gui {
@@ -37,6 +38,8 @@ namespace ogame {
                                              const LabelContainer::Alignment& alignment = LabelContainer::Alignment::Left) const;
 
         const std::string computeDisplayTime(const float& seconds) const;
+
+        const std::string computeEnergyDisplay(const core::Building& building) const;
 
       private:
 
