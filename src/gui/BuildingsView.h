@@ -30,6 +30,10 @@ namespace ogame {
 
         const std::string getDisplayForBuilding(const core::Building::Type& type, const core::Planet& planet) const noexcept;
 
+        const core::Building::Type computeBuildingFromOriginNode(const std::string& origin) const noexcept;
+
+        const std::string getPictureNameFromBuilding(const core::Building::Type& type) const noexcept;
+
       private:
 
     };
