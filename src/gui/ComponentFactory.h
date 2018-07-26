@@ -31,7 +31,8 @@ namespace ogame {
         SwitchPictureContainerShPtr
         createSwitchPicturePanel(const std::string& name,
                                  const std::string& onPicture,
-                                 const std::string& offPicture);
+                                 const std::string& offPicture,
+                                 const view::EventListener::Interaction::Mask& mask = view::EventListener::Interaction::NoInteraction);
 
         static
         ConditionalPictureContainerShPtr

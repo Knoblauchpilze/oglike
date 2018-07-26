@@ -23,12 +23,14 @@ namespace ogame {
     SwitchPictureContainerShPtr
     ComponentFactory::createSwitchPicturePanel(const std::string& name,
                                                const std::string& onPicture,
-                                               const std::string& offPicture)
+                                               const std::string& offPicture,
+                                               const view::EventListener::Interaction::Mask& mask)
     {
       return std::make_shared<SwitchPictureContainer>(
         name,
         onPicture,
-        offPicture
+        offPicture,
+        mask
       );
     }
 
