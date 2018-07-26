@@ -18,6 +18,16 @@ namespace ogame {
     }
 
     inline
+    const float ResourceMine::getProduction(const float& maxTemperature) const {
+      return getProductionForLevel(getLevel(), maxTemperature);
+    }
+
+    inline
+    const float ResourceMine::getProductionIncrease(const float& maxTemperature) const {
+      return getProductionForLevel(getLevel() + 1u, maxTemperature) - getProductionForLevel(getLevel(), maxTemperature);
+    }
+
+    inline
     const std::string ResourceMine::generateNameFromResource(const Resource& resource) const noexcept {
       if (resource.getName() == std::string("metal")) {
         return std::string("Metal mine");
@@ -48,6 +58,11 @@ namespace ogame {
     inline
     const float ResourceMine::getEnergyForLevel(const unsigned& level) const {
       return m_energyConsumptionFactor * level * std::pow(1.1f, 1.0f * level);
+    }
+
+    inline
+    const float ResourceMine::getProductionForLevel(const unsigned& level, const float& maxTemperature) const {
+      return m_productionFactor * level * std::pow(1.1f, 1.0f * level) * (m_sensibleToTemperature ? (0.64f - 0.001f * maxTemperature) : 1.0f);
     }
 
   }

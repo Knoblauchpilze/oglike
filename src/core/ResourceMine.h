@@ -14,13 +14,19 @@ namespace ogame {
 
         ResourceMine(const Resource& resource,
                      const std::unordered_map<Resource, float>& initResources,
-                     const float& energyConsumptionFactor);
+                     const float& energyConsumptionFactor,
+                     const float& productionFactor,
+                     const bool sensibleToTemperature = false);
 
         virtual ~ResourceMine();
 
         const float getEnergyUsed() const;
 
         const float getEnergyNeeded() const;
+
+        const float getProduction(const float& maxTemperature) const;
+
+        const float getProductionIncrease(const float& maxTemperature) const;
 
       private:
 
@@ -30,10 +36,14 @@ namespace ogame {
 
         const float getEnergyForLevel(const unsigned& level) const;
 
+        const float getProductionForLevel(const unsigned& level, const float& maxTemperature) const;
+
       private:
 
         Resource m_resource;
         float m_energyConsumptionFactor;
+        float m_productionFactor;
+        bool m_sensibleToTemperature;
     };
 
     using ResourceMineShPtr = std::shared_ptr<ResourceMine>;
