@@ -65,7 +65,6 @@ namespace ogame {
         return core::Building::Type::Terraformer;
       }
       else {
-        // TODO: Update
         return core::Building::Type::SpaceDock;
       }
     }
