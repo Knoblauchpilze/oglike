@@ -10,12 +10,19 @@ namespace ogame {
 
     UpgradeResourceInfo::UpgradeResourceInfo(const std::string& name):
       view::GraphicContainer(name,
-                             view::utils::Area())
+                             view::utils::Area()),
+      view::GraphicContainerListener()
     {
       createView();
     }
 
     UpgradeResourceInfo::~UpgradeResourceInfo() {}
+
+    void UpgradeResourceInfo::onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) {
+      if (mask == view::EventListener::Interaction::MouseButtonReleased) {
+        std::cout << "[UPGRADE] Clicked on upgrade " << origin << std::endl;
+      }
+    }
 
     void UpgradeResourceInfo::createView() {
       view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(6u, 4u, 0.0f);
@@ -51,7 +58,8 @@ namespace ogame {
       SwitchPictureContainerShPtr upgrade = ComponentFactory::createSwitchPicturePanel(
         std::string("upgrade_label"),
         std::string("data/img/button_ok.bmp"),
-        std::string("data/img/button_nok.bmp")
+        std::string("data/img/button_nok.bmp"),
+        view::EventListener::Interaction::MouseButtonReleased
       );
 
       if (title == nullptr ||
@@ -78,6 +86,8 @@ namespace ogame {
       addChild(upgrade);
 
       setLayout(layout);
+
+      upgrade->addEventListener(this);
     }
 
   }
