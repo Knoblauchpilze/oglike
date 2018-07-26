@@ -30,6 +30,16 @@ namespace ogame {
     }
 
     inline
+    void GraphicContainer::setEnabled(const bool enabled) {
+      lock();
+      if (enabled != m_enabled) {
+        m_enabled = enabled;
+        makeDeepDirty();
+      }
+      unlock();
+    }
+
+    inline
     utils::Area GraphicContainer::getRenderingArea() {
       utils::Area area;
       lock();
@@ -271,6 +281,28 @@ namespace ogame {
           SDL_SetColorKey(render, SDL_SRCCOLORKEY, SDL_MapRGB(render->format, m_color.r, m_color.g, m_color.b));
         }
       }
+    }
+
+    inline
+    void GraphicContainer::disableContentPrivate(SDL_Surface* render) {
+      // Create a black mask.
+      SDL_Surface* disableArea = SDL_CreateRGBSurface(0, static_cast<int>(m_area.w()), static_cast<int>(m_area.h()), 32, 0, 0, 0, 0);
+      if (disableArea == nullptr) {
+        const std::string errorMessage = std::string("Cannot create graphic container with dimensions ") +
+          std::to_string(m_area.w()) + "x" + std::to_string(m_area.h());
+        throw GraphicContainerException(errorMessage);
+      }
+      SDL_FillRect(disableArea, nullptr, SDL_MapRGB(disableArea->format, 0, 0, 0));
+
+      // Make it half opaque.
+      SDL_SetAlpha(disableArea, SDL_SRCALPHA, SDL_ALPHA_OPAQUE / 2u);
+
+      // Blit it over the rendering for this container.
+      SDL_Rect blitArea{0, 0, 0, 0};
+      SDL_BlitSurface(disableArea, nullptr, render, &blitArea);
+
+      // Release the mask.
+      SDL_FreeSurface(disableArea);
     }
 
     inline

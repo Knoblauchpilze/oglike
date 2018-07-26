@@ -23,6 +23,7 @@ namespace ogame {
       m_listeners(),
       m_panel(nullptr),
       m_transparent(transparent),
+      m_enabled(true),
       m_color()
     {
       m_color = {
@@ -129,6 +130,28 @@ namespace ogame {
           }
           catch (const ViewException& e) {
             std::cerr << "[CONTAINER] Caught view exception while repainting child container " << child->first << " for container " << getName() << std::endl << e.what() << std::endl;
+          }
+        }
+
+        if (!m_enabled) {
+          try {
+            disableContentPrivate(m_panel);
+          }
+          catch (const GraphicContainerException& e) {
+            std::cerr << "[GRAPHIC] Caught internal exception while disabling container " << getName() << ":" << std::endl << e.what() << std::endl;
+            // Release the locker on this object.
+            unlock();
+
+            // Propagate the exception.
+            throw;
+          }
+          catch (const ViewException& e) {
+            std::cerr << "[GRAPHIC] Caught view exception while disabling container " << getName() << ":" << std::endl << e.what() << std::endl;
+            // Release the locker on this object.
+            unlock();
+
+            // Propagate the exception.
+            throw;
           }
         }
 
