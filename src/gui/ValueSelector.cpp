@@ -21,6 +21,7 @@ namespace ogame {
                                0.0f, 0.0f,
                                this
                              )),
+      view::GraphicContainerListener(),
       player::GeneralActionListener(model),
       m_selectedOption(0u),
       m_options(options)
