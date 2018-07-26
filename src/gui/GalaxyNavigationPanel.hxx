@@ -13,8 +13,10 @@ namespace ogame {
         const unsigned& galaxyCoord = model.getActiveGalaxyCoordinate();
         const unsigned& systemCoord = model.getActiveSystemCoordinate();
         const core::Account& account = model.getActiveAccount();
+        const core::Planet& planet = model.getActivePlanet();
         const core::System& activeSystem = account.getSystem(core::SystemCoordinates(galaxyCoord, systemCoord));
         populateWithSystemData(activeSystem);
+        populateWithPlanetData(planet);
       }
       catch (const player::DataModelException& e) {
         std::cerr << "[NAVIGATION] Caught exception while setting up galaxy navigation panel:" << std::endl << e.what() << std::endl;
