@@ -41,5 +41,12 @@ namespace ogame {
       return (*m_universe)[coordinates.getGalaxy()][coordinates.getSystem()];
     }
 
+    const unsigned& Account::getUniverseSpeed() const {
+      if (m_universe == nullptr) {
+        throw AccountException(std::string("Could not retrieve universe speed for player ") + getPlayerName() + " invalid null universe");
+      }
+      return m_universe->getSpeed();
+    }
+
   }
 }
