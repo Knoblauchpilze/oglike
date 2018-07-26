@@ -24,24 +24,24 @@ namespace ogame {
 
     GalaxyPlayerData::~GalaxyPlayerData() {}
 
-    void GalaxyPlayerData::populateWithPlayerData(/* TODO */) {
+    void GalaxyPlayerData::populateWithPlanetData(const core::Planet& planet) {
       lock();
       
       LabelContainer* spyProbes = getChild<LabelContainer*>(std::string("spy_probes"));
       if (checkChild(spyProbes, std::string("Spy probes"))) {
-        // TODO: Update probes
-        spyProbes->setText(std::to_string(0) + " spy probe" + (false ? "s" : ""));
+        const unsigned probesCount = planet.getShipCount(core::Ship::Type::EspionageProbe);
+        spyProbes->setText(std::to_string(probesCount) + " spy probe" + (probesCount > 1 ? "s" : ""));
       }
       
       LabelContainer* recyclers = getChild<LabelContainer*>(std::string("recyclers"));
       if (checkChild(recyclers, std::string("Recyclers"))) {
-        // TODO: Update recyclers
-        recyclers->setText(std::to_string(0) + " recycler" + (false ? "s" : ""));
+        const unsigned recyclersCount = planet.getShipCount(core::Ship::Type::Recycler);
+        recyclers->setText(std::to_string(recyclersCount) + " recycler" + (recyclersCount > 1 ? "s" : ""));
       }
       
       LabelContainer* mips = getChild<LabelContainer*>(std::string("interplanetary_missiles"));
       if (checkChild(mips, std::string("Interplanetary missiles"))) {
-        // TODO: Update mips
+        // TODO: Update interplanetary missiles.
         mips->setText(std::to_string(0) + " interplanetary missile" + (false ? "s" : ""));
       }
       

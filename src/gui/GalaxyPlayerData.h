@@ -6,6 +6,7 @@
 #include "GraphicContainer.h"
 #include "LabelContainer.h"
 #include "ColoredFont.h"
+#include "Planet.h"
 
 namespace ogame {
   namespace gui {
@@ -18,7 +19,7 @@ namespace ogame {
 
         virtual ~GalaxyPlayerData();
 
-        void populateWithPlayerData(/* TODO */);
+        void populateWithPlanetData(const core::Planet& planet);
 
       private:
 
