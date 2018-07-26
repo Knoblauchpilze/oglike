@@ -14,14 +14,28 @@ namespace ogame {
 
         // Convenience define for the type of a building.
         enum class Type {
-          ResourceMine,
-          Plant,
-          Storage,
-          ConstructionAcceleration,
-          SpaceConstruction,
-          Research,
-          Facilities
+          MetalMine,
+          CrystalMine,
+          DeuteriumMine,
+          SolarPlant,
+          FusionPlant,
+          MetalStorage,
+          CrystalStorage,
+          DeuteriumStorage,
+          RoboticsFactory,
+          NaniteFactory,
+          Shipyard,
+          SpaceDock,
+          MissileSilo,
+          AllianceDepot,
+          ResearchLab,
+          Terraformer
         };
+
+        Building(const Type& type,
+                 const std::string& name,
+                 const std::unordered_map<Resource, float>& initResources,
+                 const float& factor);
 
         virtual ~Building();
 
@@ -29,13 +43,14 @@ namespace ogame {
 
         const std::string& getName() const noexcept;
 
+        // Time in seconds.
+        const float getUpgradeTime(const unsigned& universeSpeed,
+                                   const unsigned& roboticsLevel,
+                                   const unsigned& naniteLevel) const;
+
       protected:
 
         Building() = delete;
-
-        Building(const Type& type,
-                 const std::string& name,
-                 const std::unordered_map<Resource, float>& initResources);
 
       private:
 
