@@ -18,11 +18,12 @@ namespace ogame {
 
         // Now retrieve information about this research using the active planet.
         const player::GeneralDataModel& model = getDataModel();
+        const core::Account& account = model.getActiveAccount();
         const core::Planet& planet = model.getActivePlanet();
         const core::Defense& defense = planet.getDefenseData(defenseType);
 
         // And update the corresponding element description.
-        action.populateInformationFromElement(defense, planet);
+        action.populateInformationFromElement(defense, planet, account);
       }
       catch (const player::DataModelException& e) {
         std::cerr << "[DEFENSE] Could not populate action data in " << getName() << " from origin " << origin << ":" << std::endl << e.what() << std::endl;
