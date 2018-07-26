@@ -9,6 +9,7 @@
 #include "Ship.h"
 #include "Building.h"
 #include "Defense.h"
+#include "ResourceMine.h"
 
 namespace ogame {
   namespace gui {
@@ -28,6 +29,7 @@ namespace ogame {
                                                      const core::Planet& planet,
                                                      const core::Account& account)
     {
+      std::cout << "[UPGRADE] Fail" << std::endl;
       lock();
 
       // Update each property for this panel.
@@ -60,7 +62,7 @@ namespace ogame {
 
       LabelContainer* energy = getChild<LabelContainer*>(std::string("energy_needed"));
       if (checkChild(energy, std::string("Upgrade info energy label"))) {
-        energy->setText(std::string(""));
+        energy->setText(computeEnergyDisplay(element));
       }
 
       LabelContainer* unitCount = getChild<LabelContainer*>(std::string("unit_number"));
@@ -282,6 +284,17 @@ namespace ogame {
       }
 
       return duration;
+    }
+
+    inline
+    const std::string UpgradeInfo::computeEnergyDisplay(const core::Building& mine) const {
+      if (mine.getType() == core::Building::Type::MetalMine ||
+          mine.getType() == core::Building::Type::CrystalMine ||
+          mine.getType() == core::Building::Type::DeuteriumMine)
+      {
+        return std::string("Energy needed: ") + std::to_string(static_cast<int>(mine.asType<core::ResourceMine>()->getEnergyNeeded()));
+      }
+      return std::string("");
     }
 
   }
