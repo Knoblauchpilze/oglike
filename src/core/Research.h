@@ -41,6 +41,10 @@ namespace ogame {
 
         const std::string& getName() const noexcept;
 
+        // Time in seconds.
+        const float getUpgradeTime(const unsigned& universeSpeed,
+                                   const unsigned& laboratoryLevel) const;
+
       private:
 
         const std::string getNameFromType(const Type& type) const noexcept;
