@@ -14,6 +14,7 @@ namespace ogame {
       m_account(nullptr),
       m_ships(),
       m_defenses(),
+      m_buildings(),
       
       m_diameter(12346.0f),
       m_minTemperature(-30.0f),
@@ -79,15 +80,18 @@ namespace ogame {
 
     void Planet::create() {
       // Push initial resources.
-      m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("metal"), 500.0f, 10000.0f));
-      m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("crystal"), 500.0f, 10000.0f));
-      m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("deuterium"), 0.0f, 10000.0f));
+      m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("metal"), 500.0f));
+      m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("crystal"), 500.0f));
+      m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("deuterium"), 0.0f));
 
       // Create ships.
       initializeShips();
 
       // And defenses.
       initializeDefenses();
+
+      // And buildings.
+      initializeBuildings();
     }
 
   }

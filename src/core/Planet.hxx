@@ -5,6 +5,7 @@
 #include "PlanetException.h"
 #include "DefenseFactory.h"
 #include "ShipFactory.h"
+#include "BuildingFactory.h"
 
 namespace ogame {
   namespace core {
@@ -158,6 +159,40 @@ namespace ogame {
     }
 
     inline
+    const unsigned Planet::getBuildingLevel(const Building::Type& type) const {
+      // Traverse the set of buildings.
+      unsigned indexBuildings = 0u;
+      while (indexBuildings < m_buildings.size()) {
+        if (m_buildings[indexBuildings] != nullptr && m_buildings[indexBuildings]->getType() == type) {
+          return m_buildings[indexBuildings]->getLevel();
+        }
+        ++indexBuildings;
+      }
+
+      // Building not found, assume 0 level.
+      return 0u;
+    }
+
+    inline
+    const Building& Planet::getBuildingData(const Building::Type& type) const {
+      // Traverse the set of buildings.
+      unsigned indexBuildings = 0u;
+      while (indexBuildings < m_buildings.size()) {
+        if (m_buildings[indexBuildings] != nullptr && m_buildings[indexBuildings]->getType() == type) {
+          return *m_buildings[indexBuildings];
+        }
+        ++indexBuildings;
+      }
+
+      // Building not found, this is a problem.
+      const std::string errorMessage = std::string("Cannot retrieve data for building ") +
+        std::to_string(static_cast<int>(type)) +
+        ", data not available in planet " +
+        getName();
+      throw PlanetException(errorMessage);
+    }
+
+    inline
     const std::vector<ResourceDepositShPtr>& Planet::getResourceDeposits() const noexcept {
       return m_resources;
     }
@@ -196,6 +231,29 @@ namespace ogame {
       m_defenses.push_back(DefenseFactory::createLargeShieldDome());
       m_defenses.push_back(DefenseFactory::createAntiballisticMissile());
       m_defenses.push_back(DefenseFactory::createInterplanetaryMissile());
+    }
+
+    inline
+    void Planet::initializeBuildings() {
+      m_buildings.push_back(BuildingFactory::createMetalMine());
+      m_buildings.push_back(BuildingFactory::createCrystalMine());
+      m_buildings.push_back(BuildingFactory::createDeuteriumMine());
+
+      m_buildings.push_back(BuildingFactory::createMetalStorage());
+      m_buildings.push_back(BuildingFactory::createCrystalStorage());
+      m_buildings.push_back(BuildingFactory::createDeuteriumStorage());
+
+      m_buildings.push_back(BuildingFactory::createSolarPlant());
+      m_buildings.push_back(BuildingFactory::createFusionPlant());
+
+      m_buildings.push_back(BuildingFactory::createRoboticsFactory());
+      m_buildings.push_back(BuildingFactory::createShipyard());
+      m_buildings.push_back(BuildingFactory::createResearchLab());
+      m_buildings.push_back(BuildingFactory::createAllianceDepot());
+      m_buildings.push_back(BuildingFactory::createMissileSilo());
+      m_buildings.push_back(BuildingFactory::createNaniteFactory());
+      m_buildings.push_back(BuildingFactory::createTerraformer());
+      m_buildings.push_back(BuildingFactory::createSpaceDock());
     }
 
   }
