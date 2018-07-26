@@ -59,6 +59,8 @@ namespace ogame {
 
         const core::Research& getResearchData(const Research::Type& type) const;
 
+        const unsigned& getUniverseSpeed() const;
+
       private:
 
         void initializeResearch();
