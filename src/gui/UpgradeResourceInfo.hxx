@@ -127,6 +127,12 @@ namespace ogame {
 
     template <>
     inline
+    void UpgradeResourceInfo::populateInformationFromElement(const core::Building& element, const core::Planet& planet) {
+      populateInformationFromElement<core::AbstractUpgradable>(element, planet);
+    }
+
+    template <>
+    inline
     void UpgradeResourceInfo::populateInformationFromElement(const core::Research& element, const core::Planet& planet) {
       populateInformationFromElement<core::AbstractUpgradable>(element, planet);
     }
