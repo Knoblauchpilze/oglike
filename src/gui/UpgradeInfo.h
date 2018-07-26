@@ -41,6 +41,8 @@ namespace ogame {
 
         const std::string computeEnergyDisplay(const core::Building& building) const;
 
+        const std::string computeProductionDisplay(const core::Building& building, const core::Planet& planet) const;
+
       private:
 
     };

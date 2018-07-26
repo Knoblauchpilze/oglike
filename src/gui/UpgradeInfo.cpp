@@ -44,6 +44,11 @@ namespace ogame {
         std::string("Energy needed: 0"),
         SDL_Color{255, 255, 255, SDL_ALPHA_OPAQUE}
       );
+      LabelContainerShPtr productionIncrease = createLabelPanel(
+        std::string("production_increase"),
+        std::string("Production increase: 0"),
+        SDL_Color{255, 255, 255, SDL_ALPHA_OPAQUE}
+      );
       LabelContainerShPtr number = createLabelPanel(
         std::string("number"),
         std::string("Number:"),
@@ -65,23 +70,26 @@ namespace ogame {
           level == nullptr ||
           productionTime == nullptr ||
           energyNeeded == nullptr ||
+          productionIncrease == nullptr ||
           number == nullptr ||
           unitNumber == nullptr)
       {
         throw GuiException(std::string("Could not allocate memory to create upgrade info panel"));
       }
 
-      layout->addItem(title,          0u, 0u, 2u, 1u);
+      layout->addItem(title,              0u, 0u, 2u, 1u);
       addChild(title);
-      layout->addItem(level,          3u, 0u, 1u, 1u);
+      layout->addItem(level,              3u, 0u, 1u, 1u);
       addChild(level);
-      layout->addItem(productionTime, 0u, 1u, 3u, 1u);
+      layout->addItem(productionTime,     0u, 1u, 3u, 1u);
       addChild(productionTime);
-      layout->addItem(energyNeeded,   0u, 2u, 3u, 1u);
+      layout->addItem(energyNeeded,       0u, 2u, 3u, 1u);
       addChild(energyNeeded);
-      layout->addItem(number,         3u, 1u, 1u, 1u);
+      layout->addItem(productionIncrease, 0u, 3u, 3u, 1u);
+      addChild(productionIncrease);
+      layout->addItem(number,             3u, 1u, 1u, 1u);
       addChild(number);
-      layout->addItem(unitNumber,     3u, 2u, 1u, 2u);
+      layout->addItem(unitNumber,         3u, 2u, 1u, 2u);
       addChild(unitNumber);
 
       setLayout(layout);
