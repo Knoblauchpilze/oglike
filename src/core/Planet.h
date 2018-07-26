@@ -9,6 +9,7 @@
 #include "Account.h"
 #include "Ship.h"
 #include "Defense.h"
+#include "Building.h"
 
 namespace ogame {
   namespace core {
@@ -64,6 +65,10 @@ namespace ogame {
 
         const Defense& getDefenseData(const Defense::Type& type) const;
 
+        const unsigned getBuildingLevel(const Building::Type& type) const;
+
+        const Building& getBuildingData(const Building::Type& type) const;
+
         const std::vector<ResourceDepositShPtr>& getResourceDeposits() const noexcept;
 
       private:
@@ -76,6 +81,8 @@ namespace ogame {
 
         void initializeDefenses();
 
+        void initializeBuildings();
+
       private:
 
         unsigned m_index;
@@ -85,6 +92,7 @@ namespace ogame {
         std::shared_ptr<Account> m_account;
         std::vector<ShipShPtr> m_ships;
         std::vector<DefenseShPtr> m_defenses;
+        std::vector<BuildingShPtr> m_buildings;
 
         float m_diameter;
         float m_minTemperature;
