@@ -15,7 +15,7 @@ namespace ogame {
     inline
     void UpgradeResourceInfo::populateInformationFromElement(const Element& element, const core::Planet& planet) {
       // throw GuiException(std::string("Cannot populate information panel from unknown element type"));
-      std::cout << std::string("Cannot populate information panel from unknown element type") << std::endl;
+      std::cerr << std::string("Cannot populate information panel from unknown element type") << std::endl;
     }
 
     template <>
