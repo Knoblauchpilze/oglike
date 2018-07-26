@@ -29,7 +29,6 @@ namespace ogame {
                                                      const core::Planet& planet,
                                                      const core::Account& account)
     {
-      std::cout << "[UPGRADE] Fail" << std::endl;
       lock();
 
       // Update each property for this panel.
@@ -63,6 +62,11 @@ namespace ogame {
       LabelContainer* energy = getChild<LabelContainer*>(std::string("energy_needed"));
       if (checkChild(energy, std::string("Upgrade info energy label"))) {
         energy->setText(computeEnergyDisplay(element));
+      }
+
+      LabelContainer* gain = getChild<LabelContainer*>(std::string("production_increase"));
+      if (checkChild(gain, std::string("Upgrade info production label"))) {
+        gain->setText(computeProductionDisplay(element, planet));
       }
 
       LabelContainer* unitCount = getChild<LabelContainer*>(std::string("unit_number"));
@@ -111,6 +115,11 @@ namespace ogame {
       LabelContainer* energy = getChild<LabelContainer*>(std::string("energy_needed"));
       if (checkChild(energy, std::string("Upgrade info energy label"))) {
         energy->setText(std::string(""));
+      }
+
+      LabelContainer* gain = getChild<LabelContainer*>(std::string("production_increase"));
+      if (checkChild(gain, std::string("Upgrade info production label"))) {
+        gain->setText(std::string(""));
       }
 
       LabelContainer* unitCount = getChild<LabelContainer*>(std::string("unit_number"));
@@ -163,6 +172,11 @@ namespace ogame {
         energy->setText(std::string(""));
       }
 
+      LabelContainer* gain = getChild<LabelContainer*>(std::string("production_increase"));
+      if (checkChild(gain, std::string("Upgrade info production label"))) {
+        gain->setText(std::string(""));
+      }
+
       LabelContainer* number = getChild<LabelContainer*>(std::string("number"));
       if (checkChild(number, std::string("Upgrade info number"))) {
         number->setText(std::string("Number:"));
@@ -213,6 +227,11 @@ namespace ogame {
       LabelContainer* energy = getChild<LabelContainer*>(std::string("energy_needed"));
       if (checkChild(energy, std::string("Upgrade info energy label"))) {
         energy->setText(std::string(""));
+      }
+
+      LabelContainer* gain = getChild<LabelContainer*>(std::string("production_increase"));
+      if (checkChild(gain, std::string("Upgrade info production label"))) {
+        gain->setText(std::string(""));
       }
 
       LabelContainer* number = getChild<LabelContainer*>(std::string("number"));
@@ -293,6 +312,18 @@ namespace ogame {
           mine.getType() == core::Building::Type::DeuteriumMine)
       {
         return std::string("Energy needed: ") + std::to_string(static_cast<int>(mine.asType<core::ResourceMine>()->getEnergyNeeded()));
+      }
+      return std::string("");
+    }
+
+    inline
+    const std::string UpgradeInfo::computeProductionDisplay(const core::Building& mine, const core::Planet& planet) const {
+      if (mine.getType() == core::Building::Type::MetalMine ||
+          mine.getType() == core::Building::Type::CrystalMine ||
+          mine.getType() == core::Building::Type::DeuteriumMine)
+      {
+        return std::string("Production increase: ") +
+               std::to_string(static_cast<int>(mine.asType<core::ResourceMine>()->getProductionIncrease(planet.getMaxTemperature())));
       }
       return std::string("");
     }
