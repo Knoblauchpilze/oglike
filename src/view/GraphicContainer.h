@@ -48,9 +48,12 @@ namespace ogame {
 
         void removeEventListener(GraphicContainerListener* listener);
 
+        void setEnabled(const bool enabled);
+
         utils::Area getRenderingArea() override;
 
         void setRenderingArea(const utils::Area& area) override;
+
 
         SDL_Surface* draw() override;
 
@@ -122,6 +125,8 @@ namespace ogame {
 
         virtual void clearContentPrivate(SDL_Surface* render);
 
+        virtual void disableContentPrivate(SDL_Surface* render);
+
         void notifyGraphicListeners(const view::EventListener::Interaction::Mask& interaction);
 
       private:
@@ -148,6 +153,7 @@ namespace ogame {
         std::unordered_set<GraphicContainerListener*> m_listeners;
         SDL_Surface* m_panel;
         bool m_transparent;
+        bool m_enabled;
         SDL_Color m_color;
 
     };
