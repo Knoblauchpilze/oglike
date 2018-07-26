@@ -13,9 +13,14 @@ namespace ogame {
       public:
 
         ResourceMine(const Resource& resource,
-                     const std::unordered_map<Resource, float>& initResources);
+                     const std::unordered_map<Resource, float>& initResources,
+                     const float& energyConsumptionFactor);
 
         virtual ~ResourceMine();
+
+        const float getEnergyUsed() const;
+
+        const float getEnergyNeeded() const;
 
       private:
 
@@ -23,9 +28,12 @@ namespace ogame {
 
         const Building::Type getTypeFromResource(const Resource& resource) const;
 
+        const float getEnergyForLevel(const unsigned& level) const;
+
       private:
 
         Resource m_resource;
+        float m_energyConsumptionFactor;
     };
 
     using ResourceMineShPtr = std::shared_ptr<ResourceMine>;

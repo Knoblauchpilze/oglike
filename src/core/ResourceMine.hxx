@@ -8,6 +8,16 @@ namespace ogame {
   namespace core {
 
     inline
+    const float ResourceMine::getEnergyUsed() const {
+      return getEnergyForLevel(getLevel());
+    }
+
+    inline
+    const float ResourceMine::getEnergyNeeded() const {
+      return getEnergyForLevel(getLevel() + 1u);
+    }
+
+    inline
     const std::string ResourceMine::generateNameFromResource(const Resource& resource) const noexcept {
       if (resource.getName() == std::string("metal")) {
         return std::string("Metal mine");
@@ -33,6 +43,11 @@ namespace ogame {
         return Building::Type::DeuteriumMine;
       }
       throw BuildingException(std::string("Could not determine kind of mine producing resource ") + resource.getName());
+    }
+
+    inline
+    const float ResourceMine::getEnergyForLevel(const unsigned& level) const {
+      return m_energyConsumptionFactor * level * std::pow(1.1f, 1.0f * level);
     }
 
   }
