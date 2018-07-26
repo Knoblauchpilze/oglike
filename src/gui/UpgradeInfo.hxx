@@ -63,14 +63,10 @@ namespace ogame {
         energy->setText(std::string(""));
       }
 
-      LabelContainer* number = getChild<LabelContainer*>(std::string("number"));
-      if (checkChild(number, std::string("Upgrade info number"))) {
-        number->setText(std::string(""));
-      }
-
-      LabelContainer* unitcount = getChild<LabelContainer*>(std::string("unit_number"));
-      if (checkChild(unitcount, std::string("Upgrade info unit count"))) {
-        // TODO
+      LabelContainer* unitCount = getChild<LabelContainer*>(std::string("unit_number"));
+      if (checkChild(unitCount, std::string("Upgrade info unit count"))) {
+        unitCount->setEnabled(false);
+        unitCount->setText("");
       }
 
       unlock();
@@ -115,14 +111,10 @@ namespace ogame {
         energy->setText(std::string(""));
       }
 
-      LabelContainer* number = getChild<LabelContainer*>(std::string("number"));
-      if (checkChild(number, std::string("Upgrade info number"))) {
-        number->setText(std::string(""));
-      }
-
-      LabelContainer* unitcount = getChild<LabelContainer*>(std::string("unit_number"));
-      if (checkChild(unitcount, std::string("Upgrade info unit count"))) {
-        // TODO
+      LabelContainer* unitCount = getChild<LabelContainer*>(std::string("unit_number"));
+      if (checkChild(unitCount, std::string("Upgrade info unit count"))) {
+        unitCount->setEnabled(false);
+        unitCount->setText("");
       }
 
       unlock();
@@ -177,6 +169,8 @@ namespace ogame {
       LabelContainer* unitCount = getChild<LabelContainer*>(std::string("unit_number"));
       if (checkChild(unitCount, std::string("Upgrade info unit count"))) {
         // TODO.
+        unitCount->setEnabled(true);
+        unitCount->setText(std::to_string(0));
       }
 
       unlock();
@@ -224,9 +218,11 @@ namespace ogame {
         number->setText(std::string("Number:"));
       }
 
-      LabelContainer* unitcount = getChild<LabelContainer*>(std::string("unit_number"));
-      if (checkChild(unitcount, std::string("Upgrade info unit count"))) {
-        // TODO
+      LabelContainer* unitCount = getChild<LabelContainer*>(std::string("unit_number"));
+      if (checkChild(unitCount, std::string("Upgrade info unit count"))) {
+        // TODO.
+        unitCount->setEnabled(true);
+        unitCount->setText(std::to_string(0));
       }
 
       unlock();
