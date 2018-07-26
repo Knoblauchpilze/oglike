@@ -23,7 +23,8 @@ namespace ogame {
                  const unsigned& systemsCount,
                  const unsigned& planetsCount,
                  const unsigned& minStartingPosition = 5u,
-                 const unsigned& maxStartingPosition = 9u);
+                 const unsigned& maxStartingPosition = 9u,
+                 const unsigned& speed = 1u);
 
         virtual ~Universe();
 
@@ -32,6 +33,8 @@ namespace ogame {
         bool operator<(const Universe& other) const;
 
         const unsigned& getUuid() const noexcept;
+
+        const unsigned& getSpeed() const noexcept;
 
         const Galaxy& operator[](const unsigned& index) const;
 
@@ -50,6 +53,9 @@ namespace ogame {
       private:
 
         const unsigned m_index;
+
+        const unsigned m_speed;
+
         std::vector<std::shared_ptr<Galaxy>> m_galaxies;
         unsigned m_minStartPos;
         unsigned m_maxStartPos;
