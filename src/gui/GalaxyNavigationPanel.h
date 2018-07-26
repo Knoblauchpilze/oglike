@@ -34,13 +34,15 @@ namespace ogame {
 
         void populateWithSystemData(const core::System& system);
 
-        void populateWithPlayerData(/* TODO */);
+        void populateWithPlanetData(const core::Planet& planet);
 
       private:
 
         void createView(const unsigned& galaxyCount,
                         const unsigned& systemCount,
                         player::GeneralDataModelShPtr model);
+
+        void connectDataModel(player::GeneralDataModelShPtr model);
 
         LabelContainerShPtr createLabelPanel(const std::string& name,
                                              const std::string& text,

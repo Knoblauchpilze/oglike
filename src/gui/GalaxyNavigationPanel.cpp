@@ -22,6 +22,8 @@ namespace ogame {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
 
       createView(galaxyCount, systemCount, model);
+
+      connectDataModel(model);
     }
 
     GalaxyNavigationPanel::~GalaxyNavigationPanel() {
@@ -61,12 +63,12 @@ namespace ogame {
       unlock();
     }
 
-    void GalaxyNavigationPanel::populateWithPlayerData(/* TODO */) {
+    void GalaxyNavigationPanel::populateWithPlanetData(const core::Planet& planet) {
       lock();
       
-      GalaxyNavigationPanel* playerData = getChild<GalaxyNavigationPanel*>(std::string("player_data"));
+      GalaxyPlayerData* playerData = getChild<GalaxyPlayerData*>(std::string("player_data"));
       if (checkChild(playerData, std::string("Player data"))) {
-        playerData->populateWithPlayerData(/* TODO */);
+        playerData->populateWithPlanetData(planet);
       }
 
       makeDeepDirty();
@@ -169,6 +171,10 @@ namespace ogame {
 
       // Now assign the layout to this container.
       setLayout(layout);
+    }
+
+    void GalaxyNavigationPanel::connectDataModel(player::GeneralDataModelShPtr model) {
+      model->registerForAction(player::Action::ChangePlanet, this);
     }
 
     view::GraphicContainerShPtr GalaxyNavigationPanel::createLabelForSystemView() const {
