@@ -18,11 +18,6 @@ namespace ogame {
     }
 
     inline
-    const float& ResourceDeposit::getCapacity() const noexcept {
-      return m_capacity;
-    }
-
-    inline
     void ResourceDeposit::decreaseValue(const float& amount) {
       if (m_value < amount) {
         const std::string errorMessage = std::string("Cannot decrease value of deposit of ") +

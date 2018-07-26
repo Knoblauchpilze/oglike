@@ -2,7 +2,6 @@
 #define RESOURCEDEPOSIT_H
 
 #include <memory>
-
 #include "Resource.h"
 
 namespace ogame {
@@ -12,15 +11,13 @@ namespace ogame {
     {
       public:
 
-        ResourceDeposit(const Resource& resource, const float& value, const float& capacity);
+        ResourceDeposit(const Resource& resource, const float& value);
 
         virtual ~ResourceDeposit();
 
         const std::string& getResourceName() const noexcept;
 
         const float& getValue() const noexcept;
-
-        const float& getCapacity() const noexcept;
 
         void decreaseValue(const float& amount);
 
@@ -30,7 +27,6 @@ namespace ogame {
 
         Resource m_resource;
         float m_value;
-        float m_capacity;
     };
 
     using ResourceDepositShPtr = std::shared_ptr<ResourceDeposit>;

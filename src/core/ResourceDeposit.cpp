@@ -4,10 +4,9 @@
 namespace ogame {
   namespace core {
 
-    ResourceDeposit::ResourceDeposit(const Resource& resource, const float& value, const float& capacity):
+    ResourceDeposit::ResourceDeposit(const Resource& resource, const float& value):
       m_resource(resource),
-      m_value(value),
-      m_capacity(capacity)
+      m_value(value)
     {
       //ctor
     }
