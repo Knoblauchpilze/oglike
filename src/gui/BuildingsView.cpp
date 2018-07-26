@@ -26,15 +26,51 @@ namespace ogame {
     void BuildingsView::createView() {
       // Create all elements.
       std::string level0 = std::to_string(0);
-      LabelledPictureShPtr metal = createLabelledPictureContainer(std::string("metal_mine"), std::string("data/img/metal_mine.bmp"), level0);
-      LabelledPictureShPtr crystal = createLabelledPictureContainer(std::string("crystal_mine"), std::string("data/img/crystal_mine.bmp"), level0);
-      LabelledPictureShPtr deut = createLabelledPictureContainer(std::string("deut_synthesizer"), std::string("data/img/deuterium_synthesizer.bmp"), level0);
-      LabelledPictureShPtr solarPlant = createLabelledPictureContainer(std::string("solar_plant"), std::string("data/img/solar_plant.bmp"), level0);
-      LabelledPictureShPtr fusionPlant = createLabelledPictureContainer(std::string("fusion_plant"), std::string("data/img/fusion_plant.bmp"), level0);
-      LabelledPictureShPtr solarSatellite = createLabelledPictureContainer(std::string("solar_satellite"), std::string("data/img/solar_satellite.bmp"), level0);
-      LabelledPictureShPtr metalStorage = createLabelledPictureContainer(std::string("metal_storage"), std::string("data/img/metal_storage.bmp"), level0);
-      LabelledPictureShPtr crystalStorage = createLabelledPictureContainer(std::string("crystal_storage"), std::string("data/img/crystal_storage.bmp"), level0);
-      LabelledPictureShPtr deutTank = createLabelledPictureContainer(std::string("deut_tank"), std::string("data/img/deuterium_tank.bmp"), level0);
+      LabelledPictureShPtr metal = createLabelledPictureContainer(
+        std::string("metal_mine"),
+        getPictureNameFromBuilding(core::Building::Type::MetalMine),
+        level0
+      );
+      LabelledPictureShPtr crystal = createLabelledPictureContainer(
+        std::string("crystal_mine"),
+        getPictureNameFromBuilding(core::Building::Type::CrystalMine),
+        level0
+      );
+      LabelledPictureShPtr deut = createLabelledPictureContainer(
+        std::string("deut_synthesizer"),
+        getPictureNameFromBuilding(core::Building::Type::DeuteriumMine),
+        level0
+      );
+      LabelledPictureShPtr solarPlant = createLabelledPictureContainer(
+        std::string("solar_plant"),
+        getPictureNameFromBuilding(core::Building::Type::SolarPlant),
+        level0
+      );
+      LabelledPictureShPtr fusionPlant = createLabelledPictureContainer(
+        std::string("fusion_plant"),
+        getPictureNameFromBuilding(core::Building::Type::FusionPlant),
+        level0
+      );
+      LabelledPictureShPtr solarSatellite = createLabelledPictureContainer(
+        std::string("solar_satellite"),
+        getPictureNameFromBuilding(core::Building::Type::SolarPlant),
+        level0
+      );
+      LabelledPictureShPtr metalStorage = createLabelledPictureContainer(
+        std::string("metal_storage"),
+        getPictureNameFromBuilding(core::Building::Type::MetalStorage),
+        level0
+      );
+      LabelledPictureShPtr crystalStorage = createLabelledPictureContainer(
+        std::string("crystal_storage"),
+        getPictureNameFromBuilding(core::Building::Type::CrystalStorage),
+        level0
+      );
+      LabelledPictureShPtr deutTank = createLabelledPictureContainer(
+        std::string("deut_tank"),
+        getPictureNameFromBuilding(core::Building::Type::DeuteriumStorage),
+        level0
+      );
 
       if (metal == nullptr ||
           crystal == nullptr ||
@@ -66,41 +102,41 @@ namespace ogame {
       // Update each information.
       LabelledPicture* metal = getChild<LabelledPicture*>(std::string("metal_mine"));
       if (checkChild(metal, "Planet metal mine")) {
-        metal->setLabel(getDisplayForBuilding(core::Building::Type::ResourceMine, planet));
+        metal->setLabel(getDisplayForBuilding(core::Building::Type::MetalMine, planet));
       }
       LabelledPicture* crystal = getChild<LabelledPicture*>(std::string("crystal_mine"));
       if (checkChild(crystal, "Planet crystal mine")) {
-        crystal->setLabel(getDisplayForBuilding(core::Building::Type::ResourceMine, planet));
+        crystal->setLabel(getDisplayForBuilding(core::Building::Type::CrystalMine, planet));
       }
       LabelledPicture* deut = getChild<LabelledPicture*>(std::string("deut_synthesizer"));
       if (checkChild(deut, "Planet deuterium synthesizer")) {
-        deut->setLabel(getDisplayForBuilding(core::Building::Type::ResourceMine, planet));
+        deut->setLabel(getDisplayForBuilding(core::Building::Type::DeuteriumMine, planet));
       }
 
       LabelledPicture* solarPlant = getChild<LabelledPicture*>(std::string("solar_plant"));
       if (checkChild(solarPlant, "Planet solar plant")) {
-        solarPlant->setLabel(getDisplayForBuilding(core::Building::Type::Plant, planet));
+        solarPlant->setLabel(getDisplayForBuilding(core::Building::Type::SolarPlant, planet));
       }
       LabelledPicture* fusionPlant = getChild<LabelledPicture*>(std::string("fusion_plant"));
       if (checkChild(fusionPlant, "Planet fusion plant")) {
-        fusionPlant->setLabel(getDisplayForBuilding(core::Building::Type::Plant, planet));
+        fusionPlant->setLabel(getDisplayForBuilding(core::Building::Type::FusionPlant, planet));
       }
       LabelledPicture* solarSatellite = getChild<LabelledPicture*>(std::string("solar_satellite"));
       if (checkChild(solarSatellite, "Planet solar satellite")) {
-        solarSatellite->setLabel(getDisplayForBuilding(core::Building::Type::Plant, planet));
+        solarSatellite->setLabel(getDisplayForBuilding(core::Building::Type::SolarPlant, planet));
       }
 
       LabelledPicture* metalStorage = getChild<LabelledPicture*>(std::string("metal_storage"));
       if (checkChild(metalStorage, "Planet metal storage")) {
-        metalStorage->setLabel(getDisplayForBuilding(core::Building::Type::Storage, planet));
+        metalStorage->setLabel(getDisplayForBuilding(core::Building::Type::MetalStorage, planet));
       }
       LabelledPicture* crystalStorage = getChild<LabelledPicture*>(std::string("crystal_storage"));
       if (checkChild(crystalStorage, "Planet crystal storage")) {
-        crystalStorage->setLabel(getDisplayForBuilding(core::Building::Type::Storage, planet));
+        crystalStorage->setLabel(getDisplayForBuilding(core::Building::Type::CrystalStorage, planet));
       }
       LabelledPicture* deutTank = getChild<LabelledPicture*>(std::string("deut_tank"));
       if (checkChild(deutTank, "Planet deuterium tank")) {
-        deutTank->setLabel(getDisplayForBuilding(core::Building::Type::Storage, planet));
+        deutTank->setLabel(getDisplayForBuilding(core::Building::Type::DeuteriumStorage, planet));
       }
 
       makeDeepDirty();
