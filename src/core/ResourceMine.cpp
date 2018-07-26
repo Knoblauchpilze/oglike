@@ -4,10 +4,13 @@
 namespace ogame {
   namespace core {
 
-    ResourceMine::ResourceMine(const Resource& resource, const float& factor):
-      Upgradable(0u, std::unordered_map<Resource, float>()),
-      m_resource(resource),
-      m_factor(factor)
+    ResourceMine::ResourceMine(const Resource& resource,
+                               const std::unordered_map<Resource, float>& initResources):
+      Building(getTypeFromResource(resource),
+               generateNameFromResource(resource),
+               initResources,
+               1.5f),
+      m_resource(resource)
     {
       //ctor
     }
@@ -15,10 +18,6 @@ namespace ogame {
     ResourceMine::~ResourceMine()
     {
       //dtor
-    }
-
-    void ResourceMine::upgrade(std::vector<ResourceDepositShPtr>& resources) {
-      // Remove as many resources as needed.
     }
 
   }
