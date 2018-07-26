@@ -26,14 +26,45 @@ namespace ogame {
     void FacilitiesView::createView() {
       // Create all elements.
       std::string level0 = std::to_string(0);
-      LabelledPictureShPtr robotics = createLabelledPictureContainer(std::string("robotics_factory"), std::string("data/img/robotics_factory.bmp"), level0);
-      LabelledPictureShPtr shipyard = createLabelledPictureContainer(std::string("shipyard"), std::string("data/img/shipyard.bmp"), level0);
-      LabelledPictureShPtr research = createLabelledPictureContainer(std::string("research_lab"), std::string("data/img/research_laboratory.bmp"), level0);
-      LabelledPictureShPtr allianceDepot = createLabelledPictureContainer(std::string("alliance_depot"), std::string("data/img/alliance_depot.bmp"), level0);
-      LabelledPictureShPtr missileSilo = createLabelledPictureContainer(std::string("missile_silo"), std::string("data/img/missile_silo.bmp"), level0);
-      LabelledPictureShPtr naniteFactory = createLabelledPictureContainer(std::string("nanite_factory"), std::string("data/img/nanite_factory.bmp"), level0);
-      LabelledPictureShPtr terraformer = createLabelledPictureContainer(std::string("terraformer"), std::string("data/img/terraformer.bmp"), level0);
-      LabelledPictureShPtr spaceDock = createLabelledPictureContainer(std::string("space_dock"), std::string("data/img/space_dock.bmp"), level0);
+      LabelledPictureShPtr robotics = createLabelledPictureContainer(
+        std::string("robotics_factory"),
+        getPictureNameFromBuilding(core::Building::Type::RoboticsFactory),
+        level0
+      );
+      LabelledPictureShPtr shipyard = createLabelledPictureContainer(
+        std::string("shipyard"),
+        getPictureNameFromBuilding(core::Building::Type::Shipyard),
+        level0);
+      LabelledPictureShPtr research = createLabelledPictureContainer(
+        std::string("research_lab"),
+        getPictureNameFromBuilding(core::Building::Type::ResearchLab),
+        level0
+      );
+      LabelledPictureShPtr allianceDepot = createLabelledPictureContainer(
+        std::string("alliance_depot"),
+        getPictureNameFromBuilding(core::Building::Type::AllianceDepot),
+        level0
+      );
+      LabelledPictureShPtr missileSilo = createLabelledPictureContainer(
+        std::string("missile_silo"),
+        getPictureNameFromBuilding(core::Building::Type::MissileSilo),
+        level0
+      );
+      LabelledPictureShPtr naniteFactory = createLabelledPictureContainer(
+        std::string("nanite_factory"),
+        getPictureNameFromBuilding(core::Building::Type::NaniteFactory),
+        level0
+      );
+      LabelledPictureShPtr terraformer = createLabelledPictureContainer(
+        std::string("terraformer"),
+        getPictureNameFromBuilding(core::Building::Type::Terraformer),
+        level0
+      );
+      LabelledPictureShPtr spaceDock = createLabelledPictureContainer(
+        std::string("space_dock"),
+        getPictureNameFromBuilding(core::Building::Type::SpaceDock),
+        level0
+      );
 
       if (robotics == nullptr ||
           shipyard == nullptr ||
@@ -63,37 +94,37 @@ namespace ogame {
       // Update each information.
       LabelledPicture* robotics = getChild<LabelledPicture*>(std::string("robotics_factory"));
       if (checkChild(robotics, "Planet robotics factory")) {
-        robotics->setLabel(getDisplayForBuilding(core::Building::Type::ConstructionAcceleration, planet));
+        robotics->setLabel(getDisplayForBuilding(core::Building::Type::RoboticsFactory, planet));
       }
       LabelledPicture* shipyard = getChild<LabelledPicture*>(std::string("shipyard"));
       if (checkChild(shipyard, "Planet shipyard")) {
-        shipyard->setLabel(getDisplayForBuilding(core::Building::Type::SpaceConstruction, planet));
+        shipyard->setLabel(getDisplayForBuilding(core::Building::Type::Shipyard, planet));
       }
       LabelledPicture* research = getChild<LabelledPicture*>(std::string("research_lab"));
       if (checkChild(research, "Planet research laboratory")) {
-        research->setLabel(getDisplayForBuilding(core::Building::Type::Research, planet));
+        research->setLabel(getDisplayForBuilding(core::Building::Type::ResearchLab, planet));
       }
 
       LabelledPicture* allianceDepot = getChild<LabelledPicture*>(std::string("alliance_depot"));
       if (checkChild(allianceDepot, "Planet alliance depot")) {
-        allianceDepot->setLabel(getDisplayForBuilding(core::Building::Type::SpaceConstruction, planet));
+        allianceDepot->setLabel(getDisplayForBuilding(core::Building::Type::AllianceDepot, planet));
       }
       LabelledPicture* missileSilo = getChild<LabelledPicture*>(std::string("missile_silo"));
       if (checkChild(missileSilo, "Planet missile silo")) {
-        missileSilo->setLabel(getDisplayForBuilding(core::Building::Type::SpaceConstruction, planet));
+        missileSilo->setLabel(getDisplayForBuilding(core::Building::Type::MissileSilo, planet));
       }
       LabelledPicture* naniteFactory = getChild<LabelledPicture*>(std::string("nanite_factory"));
       if (checkChild(naniteFactory, "Planet nanite factory")) {
-        naniteFactory->setLabel(getDisplayForBuilding(core::Building::Type::ConstructionAcceleration, planet));
+        naniteFactory->setLabel(getDisplayForBuilding(core::Building::Type::NaniteFactory, planet));
       }
 
       LabelledPicture* terraformer = getChild<LabelledPicture*>(std::string("terraformer"));
       if (checkChild(terraformer, "Planet terraformer")) {
-        terraformer->setLabel(getDisplayForBuilding(core::Building::Type::Facilities, planet));
+        terraformer->setLabel(getDisplayForBuilding(core::Building::Type::Terraformer, planet));
       }
       LabelledPicture* spaceDock = getChild<LabelledPicture*>(std::string("space_dock"));
       if (checkChild(spaceDock, "Planet space dock")) {
-        spaceDock->setLabel(getDisplayForBuilding(core::Building::Type::SpaceConstruction, planet));
+        spaceDock->setLabel(getDisplayForBuilding(core::Building::Type::SpaceDock, planet));
       }
 
       makeDeepDirty();
