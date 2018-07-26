@@ -7,9 +7,11 @@ namespace ogame {
 
     SwitchPictureContainer::SwitchPictureContainer(const std::string& name,
                                                    const std::string& onPicture,
-                                                   const std::string& offPicture):
+                                                   const std::string& offPicture,
+                                                   const view::EventListener::Interaction::Mask& mask):
       view::GraphicContainer(name,
-                             view::utils::Area()),
+                             view::utils::Area(),
+                             mask),
       m_onFile(onPicture),
       m_onPicture(nullptr),
       m_offFile(offPicture),

@@ -15,7 +15,8 @@ namespace ogame {
 
         SwitchPictureContainer(const std::string& name,
                                const std::string& onPicture,
-                               const std::string& offPicture);
+                               const std::string& offPicture,
+                               const view::EventListener::Interaction::Mask& mask = view::EventListener::Interaction::NoInteraction);
         
         virtual ~SwitchPictureContainer();
 
@@ -26,6 +27,8 @@ namespace ogame {
         SDL_Surface* createContentPrivate() override;
 
         void clearContentPrivate(SDL_Surface* render) override;
+
+        void onMouseButtonReleasedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) override;
 
       private:
 

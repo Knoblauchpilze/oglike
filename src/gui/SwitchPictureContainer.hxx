@@ -19,6 +19,14 @@ namespace ogame {
       // Nothing to do here.
     }
 
+    inline
+    void SwitchPictureContainer::onMouseButtonReleasedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) {
+      // React only if this container is active.
+      if (m_status) {
+        GraphicContainer::onMouseButtonReleasedEventPrivate(mouseButtonEvent);
+      }
+    }
+
   }
 }
 
