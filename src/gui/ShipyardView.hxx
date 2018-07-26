@@ -18,11 +18,12 @@ namespace ogame {
 
         // Now retrieve information about this ship using the active planet.
         const player::GeneralDataModel& model = getDataModel();
+        const core::Account& account = model.getActiveAccount();
         const core::Planet& planet = model.getActivePlanet();
         const core::Ship& ship = planet.getShipData(shipType);
 
         // And update the corresponding element description.
-        action.populateInformationFromElement(ship, planet);
+        action.populateInformationFromElement(ship, planet, account);
       }
       catch (const player::DataModelException& e) {
         std::cerr << "[SHIPYARD] Could not populate action data in " << getName() << " from origin " << origin << ":" << std::endl << e.what() << std::endl;

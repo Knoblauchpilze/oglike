@@ -13,7 +13,6 @@ namespace ogame {
         const unsigned& galaxyCoord = model.getActiveGalaxyCoordinate();
         const unsigned& systemCoord = model.getActiveSystemCoordinate();
         const core::Account& activeAccount = model.getActiveAccount();
-        std::cout << "[GALAXY] Triggered change system on model " << model.getName() << ", setting system data with coords G" << galaxyCoord << " S" << systemCoord << std::endl;
         const core::System& activeSystem = activeAccount.getSystem(core::SystemCoordinates(galaxyCoord, systemCoord));
         populateWithSystemData(activeSystem);
       }
