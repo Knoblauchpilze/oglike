@@ -11,7 +11,8 @@ namespace ogame {
       return std::make_shared<ResourceMine>(
         Resource(std::string("metal")),
         constructFromResources(60.0f, 15.0f, 0.0f, 0.0f),
-        10.0f
+        10.0f,
+        30.0f
       );
     }
 
@@ -20,7 +21,8 @@ namespace ogame {
       return std::make_shared<ResourceMine>(
         Resource(std::string("crystal")),
         constructFromResources(48.0f, 24.0f, 0.0f, 0.0f),
-        10.0f
+        10.0f,
+        20.0f
       );
     }
 
@@ -29,7 +31,9 @@ namespace ogame {
       return std::make_shared<ResourceMine>(
         Resource(std::string("deuterium")),
         constructFromResources(225.0f, 75.0f, 0.0f, 0.0f),
-        20.0f
+        20.0f,
+        20.0f,
+        true
       );
     }
 
