@@ -10,7 +10,8 @@ namespace ogame {
     ResourceMineShPtr BuildingFactory::createMetalMine() {
       return std::make_shared<ResourceMine>(
         Resource(std::string("metal")),
-        constructFromResources(60.0f, 15.0f, 0.0f, 0.0f)
+        constructFromResources(60.0f, 15.0f, 0.0f, 0.0f),
+        10.0f
       );
     }
 
@@ -18,7 +19,8 @@ namespace ogame {
     ResourceMineShPtr BuildingFactory::createCrystalMine() {
       return std::make_shared<ResourceMine>(
         Resource(std::string("crystal")),
-        constructFromResources(48.0f, 24.0f, 0.0f, 0.0f)
+        constructFromResources(48.0f, 24.0f, 0.0f, 0.0f),
+        10.0f
       );
     }
 
@@ -26,7 +28,8 @@ namespace ogame {
     ResourceMineShPtr BuildingFactory::createDeuteriumMine() {
       return std::make_shared<ResourceMine>(
         Resource(std::string("deuterium")),
-        constructFromResources(225.0f, 75.0f, 0.0f, 0.0f)
+        constructFromResources(225.0f, 75.0f, 0.0f, 0.0f),
+        20.0f
       );
     }
 
