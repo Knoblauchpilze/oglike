@@ -61,6 +61,8 @@ namespace ogame {
 
         const unsigned& getUniverseSpeed() const;
 
+        void createUpgradeAction(const Research::Type& type);
+
       private:
 
         void initializeResearch();

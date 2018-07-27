@@ -71,6 +71,12 @@ namespace ogame {
 
         const std::vector<ResourceDepositShPtr>& getResourceDeposits() const noexcept;
 
+        void createUpgradeAction(const Building::Type& type);
+
+        void createUpgradeAction(const Ship::Type& type);
+
+        void createUpgradeAction(const Defense::Type& type);
+
       private:
 
         void create();
