@@ -7,6 +7,7 @@
 #include "GraphicContainer.h"
 #include "Planet.h"
 #include "Account.h"
+#include "DataModelImplementation.h"
 
 namespace ogame {
   namespace gui {
@@ -15,7 +16,8 @@ namespace ogame {
     {
       public:
 
-        ElementDescriptionPanel(const std::string& name);
+        ElementDescriptionPanel(const std::string& name,
+                                player::GeneralDataModelShPtr model);
 
         virtual ~ElementDescriptionPanel();
 
@@ -29,7 +31,7 @@ namespace ogame {
 
       private:
 
-        void createView();
+        void createView(player::GeneralDataModelShPtr model);
 
       private:
 

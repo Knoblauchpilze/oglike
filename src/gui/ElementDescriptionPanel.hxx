@@ -43,30 +43,6 @@ namespace ogame {
       unlock();
     }
 
-    // template <>
-    // inline
-    // void ElementDescriptionPanel::populateInformationFromElement(const core::Research& element) {
-    //   std::cout << "[ELEMENT] Populating panel from research " << element.getName() << std::endl;
-    // }
-
-    // template <>
-    // inline
-    // void ElementDescriptionPanel::populateInformationFromElement(const core::Ship& element) {
-    //   std::cout << "[ELEMENT] Populating panel from ship " << element.getName() << std::endl;
-    // }
-
-    // template <>
-    // inline
-    // void ElementDescriptionPanel::populateInformationFromElement(const core::Building& element) {
-    //   std::cout << "[ELEMENT] Populating panel from building " << element.getName() << std::endl;
-    // }
-
-    // template <>
-    // inline
-    // void ElementDescriptionPanel::populateInformationFromElement(const core::Defense& element) {
-    //   std::cout << "[ELEMENT] Populating panel from defense " << element.getName() << std::endl;
-    // }
-
   }
 }
 
