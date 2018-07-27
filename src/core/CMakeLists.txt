@@ -33,6 +33,7 @@ set (SOURCES
   BuildingException.cpp
   FixedCostUnit.cpp
   ResourceStorage.cpp
+  UpgradeAction.cpp
   )
 
 add_library (ogamelike_lib_core SHARED
