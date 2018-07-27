@@ -6,6 +6,7 @@
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
 #include "GraphicContainerListener.h"
+#include "DataModelImplementation.h"
 #include "LabelContainer.h"
 #include "LabelledPicture.h"
 #include "Planet.h"
@@ -13,15 +14,18 @@
 namespace ogame {
   namespace gui {
 
-    class UpgradeResourceInfo: public view::GraphicContainer, public view::GraphicContainerListener
+    class UpgradeResourceInfo: public view::GraphicContainer, public view::GraphicContainerListener, public player::GeneralActionListener
     {
       public:
 
-        UpgradeResourceInfo(const std::string& name);
+        UpgradeResourceInfo(const std::string& name,
+                            player::GeneralDataModelShPtr model);
 
         virtual ~UpgradeResourceInfo();
 
         void onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) override;
+
+        void onActionTriggered(const player::AbstractDataModel& model) override;
 
         template <typename Element>
         inline
@@ -38,6 +42,14 @@ namespace ogame {
         LabelledPictureShPtr createLabelledPicturePanel(const std::string& name,
                                                         const std::string& picture,
                                                         const std::string& text) const;
+
+        void createUpgradeResearchAction(core::Account& account, const player::GeneralDataModel& model) const;
+
+        void createUpgradeBuildingAction(core::Planet& planet, const player::GeneralDataModel& model) const;
+
+        void createUpgradeShipAction(core::Planet& planet, const player::GeneralDataModel& model) const;
+
+        void createUpgradeDefenseAction(core::Planet& planet, const player::GeneralDataModel& model) const;
 
       private:
 

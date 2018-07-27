@@ -8,10 +8,12 @@
 namespace ogame {
   namespace gui {
 
-    UpgradeResourceInfo::UpgradeResourceInfo(const std::string& name):
+    UpgradeResourceInfo::UpgradeResourceInfo(const std::string& name,
+                                             player::GeneralDataModelShPtr model):
       view::GraphicContainer(name,
                              view::utils::Area()),
-      view::GraphicContainerListener()
+      view::GraphicContainerListener(),
+      player::GeneralActionListener(model.get())
     {
       createView();
     }
@@ -20,7 +22,39 @@ namespace ogame {
 
     void UpgradeResourceInfo::onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) {
       if (mask == view::EventListener::Interaction::MouseButtonReleased) {
-        std::cout << "[UPGRADE] Clicked on upgrade " << origin << std::endl;
+        // We need to trigger an upgrade action or a construction action.
+        player::GeneralDataModel& dataModel = getDataModel();
+        // Retrieve the active view: this way we can determine which element we should use to perform upgrade.
+        const player::View& activeView = dataModel.getActiveView();
+        core::Planet& planet = dataModel.getActivePlanet();
+        core::Account& account = dataModel.getActiveAccount();
+
+        // Create the correct upgrade action.
+        try {
+          switch (activeView) {
+            case player::View::Resources:
+              createUpgradeBuildingAction(planet, dataModel);
+              break;
+            case player::View::Facilities:
+              createUpgradeBuildingAction(planet, dataModel);
+              break;
+            case player::View::Research:
+              createUpgradeResearchAction(account, dataModel);
+              break;
+            case player::View::Shipyard:
+              createUpgradeShipAction(planet, dataModel);
+              break;
+            case player::View::Defense:
+              createUpgradeDefenseAction(planet, dataModel);
+              break;
+            case player::View::Fleet:
+            default:
+              break;
+          }
+        }
+        catch (const GuiException& e) {
+          std::cerr << "[UPGRADE] Could not process upgrade request from " << origin << ":" << std::endl << e.what() << std::endl;
+        }
       }
     }
 
