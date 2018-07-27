@@ -11,6 +11,9 @@
 namespace ogame {
   namespace gui {
 
+    inline
+    void UpgradeResourceInfo::onActionTriggered(const player::AbstractDataModel& model) {}
+
     template <typename Element>
     inline
     void UpgradeResourceInfo::populateInformationFromElement(const Element& element, const core::Planet& planet) {
@@ -181,6 +184,30 @@ namespace ogame {
         text,
         LabelledPicture::Alignment::Above
       );
+    }
+
+    inline
+    void UpgradeResourceInfo::createUpgradeResearchAction(core::Account& account, const player::GeneralDataModel& model) const {
+      account.createUpgradeAction(model.getActiveResearch());
+      triggerAction(player::Action::ChangePlanet);
+    }
+
+    inline
+    void UpgradeResourceInfo::createUpgradeBuildingAction(core::Planet& planet, const player::GeneralDataModel& model) const {
+      planet.createUpgradeAction(model.getActiveBuilding());
+      triggerAction(player::Action::ChangePlanet);
+    }
+
+    inline
+    void UpgradeResourceInfo::createUpgradeShipAction(core::Planet& planet, const player::GeneralDataModel& model) const {
+      planet.createUpgradeAction(model.getActiveShip());
+      triggerAction(player::Action::ChangePlanet);
+    }
+
+    inline
+    void UpgradeResourceInfo::createUpgradeDefenseAction(core::Planet& planet, const player::GeneralDataModel& model) const {
+      planet.createUpgradeAction(model.getActiveDefense());
+      triggerAction(player::Action::ChangePlanet);
     }
 
   }
