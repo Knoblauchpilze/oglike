@@ -45,7 +45,7 @@ namespace ogame {
 
       // Create both the picture and the buying action.
       PictureContainerShPtr image = ComponentFactory::createPicturePanel(std::string("image_panel"), mainImageFile);
-      m_buyingAction = std::make_shared<ElementDescriptionPanel>(std::string("buying_action"));
+      m_buyingAction = std::make_shared<ElementDescriptionPanel>(std::string("buying_action"), model);
 
       // Check whether this container is valid.
       if (selector == nullptr ||
