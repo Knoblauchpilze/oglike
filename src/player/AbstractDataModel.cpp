@@ -1,6 +1,5 @@
 
 #include "AbstractDataModel.h"
-#include "DataModelException.h"
 
 namespace ogame {
   namespace player {
@@ -12,7 +11,11 @@ namespace ogame {
       m_activePlanet(nullptr),
       m_activeAccount(nullptr),
       m_activeSystemCoordinate(0u),
-      m_activeGalaxyCoordinate(0u)
+      m_activeGalaxyCoordinate(0u),
+      m_research(core::Research::Type::Energy),
+      m_building(core::Building::Type::MetalMine),
+      m_ship(core::Ship::Type::LightFighter),
+      m_defense(core::Defense::Type::MissileLauncher)
     {
       // Nothing to do.
     }
@@ -48,63 +51,6 @@ namespace ogame {
           }
         }
       }
-    }
-
-    void AbstractDataModel::setActiveView(const View& view) {
-      m_activeView = view;
-      triggerAction(Action::ChangeView);
-    }
-
-    void AbstractDataModel::setActivePlanet(core::Planet* planet) {
-      if (planet == nullptr) {
-        throw DataModelException(std::string("Cannot set active planet for model ") + getName() + ", invalid null pointer");
-      }
-      m_activePlanet = planet;
-      triggerAction(Action::ChangePlanet);
-    }
-
-    void AbstractDataModel::setActiveAccount(core::Account* account) {
-      if (account == nullptr) {
-        throw DataModelException(std::string("Cannot set active account for model ") + getName() + ", invalid null pointer");
-      }
-      m_activeAccount = account;
-      triggerAction(Action::ChangeAccount);
-    }
-
-    void AbstractDataModel::setActiveSystemCoordinate(const unsigned& coordinate) {
-      m_activeSystemCoordinate = coordinate;
-      triggerAction(Action::ChangeSystem);
-    }
-
-    void AbstractDataModel::setActiveGalaxyCoordinate(const unsigned& coordinate) {
-      m_activeGalaxyCoordinate = coordinate;
-      triggerAction(Action::ChangeGalaxy);
-    }
-
-    const View& AbstractDataModel::getActiveView() const {
-      return m_activeView;
-    }
-
-    const core::Planet& AbstractDataModel::getActivePlanet() const {
-      if (m_activePlanet == nullptr) {
-        throw DataModelException(std::string("Cannot retrieve active planet for model ") + getName() + ", invalid null pointer");
-      }
-      return *m_activePlanet;
-    }
-
-    const core::Account& AbstractDataModel::getActiveAccount() const {
-      if (m_activeAccount == nullptr) {
-        throw DataModelException(std::string("Cannot retrieve active account for model ") + getName() + ", invalid null pointer");
-      }
-      return *m_activeAccount;
-    }
-
-    const unsigned& AbstractDataModel::getActiveSystemCoordinate() const {
-      return m_activeSystemCoordinate;
-    }
-
-    const unsigned& AbstractDataModel::getActiveGalaxyCoordinate() const {
-      return m_activeGalaxyCoordinate;
     }
 
   }
