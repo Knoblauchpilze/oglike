@@ -92,104 +92,32 @@ namespace ogame {
 
     inline
     const unsigned Planet::getShipCount(const Ship::Type& type) const {
-      // Traverse the set of ships.
-      unsigned indexShip = 0u;
-      while (indexShip < m_ships.size()) {
-        if (m_ships[indexShip] != nullptr && m_ships[indexShip]->getType() == type) {
-          return m_ships[indexShip]->getCount();
-        }
-        ++indexShip;
-      }
-
-      // Ship not found, assume 0 count.
-      return 0u;
+      return getShipData(type).getCount();
     }
 
     inline
     const core::Ship& Planet::getShipData(const Ship::Type& type) const {
-      // Traverse the set of ships.
-      unsigned indexShip = 0u;
-      while (indexShip < m_ships.size()) {
-        if (m_ships[indexShip] != nullptr && m_ships[indexShip]->getType() == type) {
-          return *m_ships[indexShip];
-        }
-        ++indexShip;
-      }
-
-      // Ship not found, this is a problem.
-      const std::string errorMessage = std::string("Cannot retrieve data for ship ") +
-        std::to_string(static_cast<int>(type)) +
-        ", data not available in planet " +
-        getName();
-      throw PlanetException(errorMessage);
+      return *getDataOrThrow<Ship, Ship::Type>(type, m_ships);
     }
 
     inline
     const unsigned Planet::getDefenseCount(const Defense::Type& type) const {
-      // Traverse the set of defenses.
-      unsigned indexDefense = 0u;
-      while (indexDefense < m_defenses.size()) {
-        if (m_defenses[indexDefense] != nullptr && m_defenses[indexDefense]->getType() == type) {
-          return m_defenses[indexDefense]->getCount();
-        }
-        ++indexDefense;
-      }
-
-      // Defense not found, assume 0 count.
-      return 0u;
+      return getDefenseData(type).getCount();
     }
 
     inline
     const core::Defense& Planet::getDefenseData(const Defense::Type& type) const {
-      // Traverse the set of defenses.
-      unsigned indexDefenses = 0u;
-      while (indexDefenses < m_defenses.size()) {
-        if (m_defenses[indexDefenses] != nullptr && m_defenses[indexDefenses]->getType() == type) {
-          return *m_defenses[indexDefenses];
-        }
-        ++indexDefenses;
-      }
-
-      // Defense not found, this is a problem.
-      const std::string errorMessage = std::string("Cannot retrieve data for defense ") +
-        std::to_string(static_cast<int>(type)) +
-        ", data not available in planet " +
-        getName();
-      throw PlanetException(errorMessage);
+      return *getDataOrThrow<Defense, Defense::Type>(type, m_defenses);
     }
 
     inline
     const unsigned Planet::getBuildingLevel(const Building::Type& type) const {
-      // Traverse the set of buildings.
-      unsigned indexBuildings = 0u;
-      while (indexBuildings < m_buildings.size()) {
-        if (m_buildings[indexBuildings] != nullptr && m_buildings[indexBuildings]->getType() == type) {
-          return m_buildings[indexBuildings]->getLevel();
-        }
-        ++indexBuildings;
-      }
-
-      // Building not found, assume 0 level.
-      return 0u;
+      return getBuildingData(type).getLevel();
     }
 
     inline
     const Building& Planet::getBuildingData(const Building::Type& type) const {
-      // Traverse the set of buildings.
-      unsigned indexBuildings = 0u;
-      while (indexBuildings < m_buildings.size()) {
-        if (m_buildings[indexBuildings] != nullptr && m_buildings[indexBuildings]->getType() == type) {
-          return *m_buildings[indexBuildings];
-        }
-        ++indexBuildings;
-      }
-
-      // Building not found, this is a problem.
-      const std::string errorMessage = std::string("Cannot retrieve data for building ") +
-        std::to_string(static_cast<int>(type)) +
-        ", data not available in planet " +
-        getName();
-      throw PlanetException(errorMessage);
+      return *getDataOrThrow<Building, Building::Type>(type, m_buildings);
     }
 
     inline
@@ -254,6 +182,48 @@ namespace ogame {
       m_buildings.push_back(BuildingFactory::createNaniteFactory());
       m_buildings.push_back(BuildingFactory::createTerraformer());
       m_buildings.push_back(BuildingFactory::createSpaceDock());
+    }
+
+    template<typename Data, typename EnumClass>
+    inline
+    const unsigned Planet::getIndexForData(const EnumClass& type, const std::vector<std::shared_ptr<Data>>& elements) const noexcept {
+      // Traverse the input vector.
+      bool dataFound = false;
+      unsigned indexData = 0u;
+      while (indexData < elements.size() && !dataFound) {
+        if (elements[indexData] != nullptr && elements[indexData]->getType() == type) {
+          dataFound = true;
+        }
+        else {
+          ++indexData;
+        }
+      }
+
+      return indexData;
+    }
+
+    template<typename Data, typename EnumClass>
+    inline
+    std::shared_ptr<Data> Planet::getDataOrThrow(const EnumClass& type, const std::vector<std::shared_ptr<Data>>& elements) const {
+      const unsigned indexData = getIndexForData(type, elements);
+
+      if (indexData >= elements.size()) {
+        const std::string errorMessage = std::string("Cannot retrieve data for value ") +
+          std::to_string(static_cast<int>(type)) +
+          ", data not available in planet " +
+          getName();
+        throw PlanetException(errorMessage);
+      }
+
+      if (elements[indexData] == nullptr) {
+        const std::string errorMessage = std::string("Cannot retrieve data for value ") +
+          std::to_string(static_cast<int>(type)) +
+          ", invalid null data in planet " +
+          getName();
+        throw PlanetException(errorMessage);
+      }
+
+      return elements[indexData];
     }
 
   }
