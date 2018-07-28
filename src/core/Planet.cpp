@@ -83,69 +83,42 @@ namespace ogame {
     }
 
     void Planet::createUpgradeAction(const Building::Type& type) {
-      // Traverse the set of buildings.
-      BuildingShPtr building = nullptr;
-      unsigned indexBuildings = 0u;
-      while (indexBuildings < m_buildings.size() && building == nullptr) {
-        if (m_buildings[indexBuildings] != nullptr && m_buildings[indexBuildings]->getType() == type) {
-          building = m_buildings[indexBuildings];
-        }
-        ++indexBuildings;
-      }
+      BuildingShPtr building = getDataOrThrow<Building, Building::Type>(type, m_buildings);
 
-      if (indexBuildings >= m_buildings.size() && building == nullptr) {
-        const std::string errorMessage = std::string("Cannot create upgrade for buildings ") +
-          std::to_string(static_cast<int>(type)) +
-          ", data not available in planet " +
-          getName();
+      if (m_account == nullptr) {
+        const std::string errorMessage = std::string("Cannot upgrade building ") + std::to_string(static_cast<int>(type)) +
+          " for planet " + getName() +
+          " no associated account";
         throw PlanetException(errorMessage);
       }
 
-      //
+      m_buildingUpgrades.push_back(std::make_shared<BuildingUpgradeAction>(building.get(), *this, *m_account));
     }
 
     void Planet::createUpgradeAction(const Ship::Type& type) {
-      // Traverse the set of ships.
-      ShipShPtr ship = nullptr;
-      unsigned indexShip = 0u;
-      while (indexShip < m_ships.size() && ship == nullptr) {
-        if (m_ships[indexShip] != nullptr && m_ships[indexShip]->getType() == type) {
-          ship = m_ships[indexShip];
-        }
-        ++indexShip;
-      }
+      ShipShPtr ship = getDataOrThrow<Ship, Ship::Type>(type, m_ships);
 
-      if (indexShip >= m_ships.size() && ship == nullptr) {
-        const std::string errorMessage = std::string("Cannot create upgrade for ship ") +
-          std::to_string(static_cast<int>(type)) +
-          ", data not available in planet " +
-          getName();
+      if (m_account == nullptr) {
+        const std::string errorMessage = std::string("Cannot upgrade ship ") + std::to_string(static_cast<int>(type)) +
+          " for planet " + getName() +
+          " no associated account";
         throw PlanetException(errorMessage);
       }
 
-      //
+      m_shipUpgrades.push_back(std::make_shared<ShipUpgradeAction>(ship.get(), *this, *m_account));
     }
 
     void Planet::createUpgradeAction(const Defense::Type& type) {
-      // Traverse the set of defenses.
-      DefenseShPtr defense = nullptr;
-      unsigned indexDefenses = 0u;
-      while (indexDefenses < m_defenses.size() && defense == nullptr) {
-        if (m_defenses[indexDefenses] != nullptr && m_defenses[indexDefenses]->getType() == type) {
-          defense = m_defenses[indexDefenses];
-        }
-        ++indexDefenses;
-      }
+      DefenseShPtr defense = getDataOrThrow<Defense, Defense::Type>(type, m_defenses);
 
-      if (indexDefenses >= m_defenses.size() || defense == nullptr) {
-        const std::string errorMessage = std::string("Cannot create upgrade for defense ") +
-          std::to_string(static_cast<int>(type)) +
-          ", data not available in planet " +
-          getName();
+      if (m_account == nullptr) {
+        const std::string errorMessage = std::string("Cannot upgrade defense ") + std::to_string(static_cast<int>(type)) +
+          " for planet " + getName() +
+          " no associated account";
         throw PlanetException(errorMessage);
       }
 
-      //
+      m_defenseUpgrades.push_back(std::make_shared<DefenseUpgradeAction>(defense.get(), *this, *m_account));
     }
 
     void Planet::create() {
