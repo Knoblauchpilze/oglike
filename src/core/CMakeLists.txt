@@ -34,6 +34,10 @@ set (SOURCES
   FixedCostUnit.cpp
   ResourceStorage.cpp
   UpgradeAction.cpp
+  BuildingUpgradeAction.cpp
+  ResearchUpgradeAction.cpp
+  ShipUpgradeAction.cpp
+  DefenseUpgradeAction.cpp
   )
 
 add_library (ogamelike_lib_core SHARED
