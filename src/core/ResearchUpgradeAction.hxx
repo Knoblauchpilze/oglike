@@ -13,12 +13,12 @@ namespace ogame {
     }
 
     inline
-    float ResearchUpgradeAction::computeTotalDuration() const {
+    void ResearchUpgradeAction::assignTotalDuration(float& totalDuration) {
       if (m_research == nullptr) {
         throw UpgradableException(std::string("Cannot compute total duration for research upgrade action, invalid null research"));
       }
 
-      return m_research->getUpgradeTime(
+      totalDuration = m_research->getUpgradeTime(
         getUniverseSpeed(),
         getLaboratoryLevel()
       );

@@ -13,12 +13,12 @@ namespace ogame {
     }
 
     inline
-    float ShipUpgradeAction::computeTotalDuration() const {
+    void ShipUpgradeAction::assignTotalDuration(float& totalDuration) {
       if (m_ship == nullptr) {
         throw UpgradableException(std::string("Cannot compute total duration for ship upgrade action, invalid null ship"));
       }
 
-      return m_ship->getProductionTime(
+      totalDuration = m_ship->getProductionTime(
         getUniverseSpeed(),
         getShipyardLevel(),
         getNaniteLevel()

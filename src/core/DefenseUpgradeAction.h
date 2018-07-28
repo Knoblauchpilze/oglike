@@ -25,7 +25,7 @@ namespace ogame {
 
       protected:
 
-        float computeTotalDuration() const override;
+        void assignTotalDuration(float& totalDuration) override;
 
       private:
 

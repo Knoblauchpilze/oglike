@@ -13,12 +13,12 @@ namespace ogame {
     }
 
     inline
-    float BuildingUpgradeAction::computeTotalDuration() const {
+    void BuildingUpgradeAction::assignTotalDuration(float& totalDuration) {
       if (m_building == nullptr) {
         throw UpgradableException(std::string("Cannot compute total duration for building upgrade action, invalid null building"));
       }
 
-      return m_building->getUpgradeTime(
+      totalDuration =  m_building->getUpgradeTime(
         getUniverseSpeed(),
         getRoboticsLevel(),
         getNaniteLevel()
