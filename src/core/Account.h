@@ -62,7 +62,7 @@ namespace ogame {
 
         const unsigned& getUniverseSpeed() const;
 
-        void createUpgradeAction(const Research::Type& type);
+        void createUpgradeAction(const Research::Type& type, const Planet& planet);
 
       private:
 

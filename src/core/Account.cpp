@@ -49,26 +49,9 @@ namespace ogame {
       return m_universe->getSpeed();
     }
 
-    void Account::createUpgradeAction(const Research::Type& type) {
-      // 
-      ResearchShPtr research = nullptr;
-      unsigned indexTech = 0u;
-      while (indexTech < m_researches.size() && research == nullptr) {
-        if (m_researches[indexTech] != nullptr && m_researches[indexTech]->getType() == type) {
-          research = m_researches[indexTech];
-        }
-        ++indexTech;
-      }
-
-      if (indexTech >= m_researches.size() || research == nullptr) {
-        const std::string errorMessage = std::string("Cannot create upgrade for research ") +
-          std::to_string(static_cast<int>(type)) +
-          ", data not available in account " +
-          getPlayerName();
-        throw PlanetException(errorMessage);
-      }
-
-      
+    void Account::createUpgradeAction(const Research::Type& type, const Planet& planet) {
+      ResearchShPtr research = getResearchOrThrow(type);
+      m_researchUpgrades.push_back(std::make_shared<ResearchUpgradeAction>(research.get(), planet, *this));
     }
 
   }
