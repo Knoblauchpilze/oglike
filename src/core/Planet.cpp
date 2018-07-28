@@ -18,7 +18,11 @@ namespace ogame {
       
       m_diameter(12346.0f),
       m_minTemperature(-30.0f),
-      m_maxTemperature(150.0f)
+      m_maxTemperature(150.0f),
+
+      m_buildingUpgrades(),
+      m_shipUpgrades(),
+      m_defenseUpgrades()
     {
       create();
     }

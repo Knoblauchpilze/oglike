@@ -10,12 +10,18 @@
 #include "Ship.h"
 #include "Defense.h"
 #include "Building.h"
+#include "BuildingUpgradeAction.h"
+#include "ResearchUpgradeAction.h"
+#include "ShipUpgradeAction.h"
+#include "DefenseUpgradeAction.h"
 
 namespace ogame {
   namespace core {
 
     class System;
     class Account;
+
+    class ShipUpgradeAction;
 
     class Planet
     {
@@ -89,6 +95,12 @@ namespace ogame {
 
         void initializeBuildings();
 
+        template<typename Data, typename EnumClass>
+        const unsigned getIndexForData(const EnumClass& type, const std::vector<std::shared_ptr<Data>>& elements) const noexcept;
+
+        template<typename Data, typename EnumClass>
+        std::shared_ptr<Data> getDataOrThrow(const EnumClass& type, const std::vector<std::shared_ptr<Data>>& elements) const;
+
       private:
 
         unsigned m_index;
@@ -103,6 +115,10 @@ namespace ogame {
         float m_diameter;
         float m_minTemperature;
         float m_maxTemperature;
+
+        std::vector<std::shared_ptr<BuildingUpgradeAction>> m_buildingUpgrades;
+        std::vector<std::shared_ptr<ShipUpgradeAction>> m_shipUpgrades;
+        std::vector<std::shared_ptr<DefenseUpgradeAction>> m_defenseUpgrades;
     };
 
     using PlanetShPtr = std::shared_ptr<Planet>;
