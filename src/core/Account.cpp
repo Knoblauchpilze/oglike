@@ -15,7 +15,8 @@ namespace ogame {
       m_availablePlanetsSlots(1u),
       m_occupiedPlanetsSlots(0u),
       m_planets(),
-      m_researches()
+      m_researches(),
+      m_researchUpgrades()
     {
       initializeResearch();
     }
@@ -49,7 +50,7 @@ namespace ogame {
     }
 
     void Account::createUpgradeAction(const Research::Type& type) {
-      // Traverse the set of defenses.
+      // 
       ResearchShPtr research = nullptr;
       unsigned indexTech = 0u;
       while (indexTech < m_researches.size() && research == nullptr) {
@@ -67,7 +68,7 @@ namespace ogame {
         throw PlanetException(errorMessage);
       }
 
-      //
+      
     }
 
   }
