@@ -113,6 +113,10 @@ int main(int argc, char* argv[])
     dataModel->setActiveView(ogame::player::View::Overview);
     dataModel->setActiveSystemCoordinate(account->getHomeWorld().getSystem().getIndex());
     dataModel->setActiveGalaxyCoordinate(account->getHomeWorld().getSystem().getGalaxyIndex());
+    dataModel->setActiveResearch(ogame::core::Research::Type::Energy);
+    dataModel->setActiveBuilding(ogame::core::Building::Type::MetalMine);
+    dataModel->setActiveShip(ogame::core::Ship::Type::LightFighter);
+    dataModel->setActiveDefense(ogame::core::Defense::Type::MissileLauncher);
   }
   catch (const ogame::gui::GuiException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
