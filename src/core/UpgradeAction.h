@@ -37,7 +37,7 @@ namespace ogame {
                       const unsigned& roboticsLevel,
                       const unsigned& naniteLevel);
 
-        virtual float computeTotalDuration() const = 0;
+        virtual void assignTotalDuration(float& totalDuration);
 
         const unsigned& getUniverseSpeed() const noexcept;
 
@@ -48,10 +48,6 @@ namespace ogame {
         const unsigned& getRoboticsLevel() const noexcept;
 
         const unsigned& getNaniteLevel() const noexcept;
-
-      private:
-
-        void computeTotalDurationPrivate();
 
       private:
 
