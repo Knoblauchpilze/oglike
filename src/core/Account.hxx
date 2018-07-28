@@ -87,36 +87,12 @@ namespace ogame {
 
     inline
     const unsigned Account::getLevelForTechnology(const Research::Type& type) const {
-      // Traverse the set of researches.
-      unsigned indexTech = 0u;
-      while (indexTech < m_researches.size()) {
-        if (m_researches[indexTech] != nullptr && m_researches[indexTech]->getType() == type) {
-          return m_researches[indexTech]->getLevel();
-        }
-        ++indexTech;
-      }
-
-      // Research not found, assume 0 level.
-      return 0u;
+      return getResearchData(type).getLevel();
     }
 
     inline
     const core::Research& Account::getResearchData(const Research::Type& type) const {
-      // Traverse the set of researches.
-      unsigned indexTech = 0u;
-      while (indexTech < m_researches.size()) {
-        if (m_researches[indexTech] != nullptr && m_researches[indexTech]->getType() == type) {
-          return *m_researches[indexTech];
-        }
-        ++indexTech;
-      }
-
-      // Research not found, this is a problem.
-      const std::string errorMessage = std::string("Cannot retrieve data for research ") +
-        std::to_string(static_cast<int>(type)) +
-        ", data not available in account " +
-        getPlayerName();
-      throw AccountException(errorMessage);
+      return *getResearchOrThrow(type);
     }
 
     inline
@@ -138,6 +114,46 @@ namespace ogame {
       m_researches.push_back(core::ResearchFactory::createWeaponResearch());
       m_researches.push_back(core::ResearchFactory::createShieldingResearch());
       m_researches.push_back(core::ResearchFactory::createArmourResearch());
+    }
+
+    inline
+    const unsigned Account::getIndexForResearch(const Research::Type& type) const noexcept {
+      // Traverse the set of research.
+      bool researchFound = false;
+      unsigned indexTech = 0u;
+      while (indexTech < m_researches.size() && !researchFound) {
+        if (m_researches[indexTech] != nullptr && m_researches[indexTech]->getType() == type) {
+          researchFound = true;
+        }
+        else {
+          ++indexTech;
+        }
+      }
+
+      return indexTech;
+    }
+
+    inline
+    ResearchShPtr Account::getResearchOrThrow(const Research::Type& type) const {
+      const unsigned indexResearch = getIndexForResearch(type);
+
+      if (indexResearch >= m_researches.size()) {
+        const std::string errorMessage = std::string("Cannot retrieve data for research ") +
+          std::to_string(static_cast<int>(type)) +
+          ", data not available in account " +
+          getPlayerName();
+        throw AccountException(errorMessage);
+      }
+
+      if (m_researches[indexResearch] == nullptr) {
+        const std::string errorMessage = std::string("Cannot retrieve data for research ") +
+          std::to_string(static_cast<int>(type)) +
+          ", invalid null data in account " +
+          getPlayerName();
+        throw AccountException(errorMessage);
+      }
+
+      return m_researches[indexResearch];
     }
 
   }

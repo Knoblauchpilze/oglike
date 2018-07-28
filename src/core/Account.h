@@ -7,6 +7,7 @@
 #include "Universe.h"
 #include "SystemCoordinates.h"
 #include "Research.h"
+#include "ResearchUpgradeAction.h"
 
 namespace ogame {
   namespace core {
@@ -67,6 +68,10 @@ namespace ogame {
 
         void initializeResearch();
 
+        const unsigned getIndexForResearch(const Research::Type& type) const noexcept;
+
+        ResearchShPtr getResearchOrThrow(const Research::Type& type) const;
+
       private:
 
         CommunityShPtr m_community;
@@ -78,6 +83,8 @@ namespace ogame {
         unsigned m_occupiedPlanetsSlots;
         std::vector<Planet*> m_planets;
         std::vector<ResearchShPtr> m_researches;
+
+        std::vector<std::shared_ptr<ResearchUpgradeAction>> m_researchUpgrades;
 
     };
 
