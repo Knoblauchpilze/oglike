@@ -20,14 +20,10 @@ namespace ogame {
       m_roboticsLevel(roboticsLevel),
       m_naniteLevel(naniteLevel)
     {
-      computeTotalDurationPrivate();
+      assignTotalDuration(m_duration);
     }
 
     UpgradeAction::~UpgradeAction() {}
-
-    void UpgradeAction::computeTotalDurationPrivate() {
-      m_duration = computeTotalDuration();
-    }
 
   }
 }

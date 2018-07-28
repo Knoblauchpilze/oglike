@@ -28,6 +28,11 @@ namespace ogame {
     }
 
     inline
+    void UpgradeAction::assignTotalDuration(float& totalDuration) {
+      // Nothing to do here, inheriting classes can specialize this method.
+    }
+
+    inline
     const unsigned& UpgradeAction::getUniverseSpeed() const noexcept {
       return m_universeSpeed;
     }
