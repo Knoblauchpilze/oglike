@@ -4,6 +4,7 @@
 #include "GuiException.h"
 #include "ComponentFactory.h"
 #include "SwitchPictureContainer.h"
+#include "PlanetException.h"
 
 namespace ogame {
   namespace gui {
@@ -52,8 +53,11 @@ namespace ogame {
               break;
           }
         }
+        catch (const core::PlanetException& e) {
+          std::cerr << "[UPGRADE] Could not process upgrade request from " << origin << " on planet " << planet.getName() << ":" << std::endl << e.what() << std::endl;
+        }
         catch (const GuiException& e) {
-          std::cerr << "[UPGRADE] Could not process upgrade request from " << origin << ":" << std::endl << e.what() << std::endl;
+          std::cerr << "[UPGRADE] Could not process upgrade request from " << origin << " on planet " << planet.getName() << ":" << std::endl << e.what() << std::endl;
         }
       }
     }
