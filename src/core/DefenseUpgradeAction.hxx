@@ -13,12 +13,12 @@ namespace ogame {
     }
 
     inline
-    float DefenseUpgradeAction::computeTotalDuration() const {
+    void DefenseUpgradeAction::assignTotalDuration(float& totalDuration) {
       if (m_defense == nullptr) {
         throw UpgradableException(std::string("Cannot compute total duration for defense upgrade action, invalid null defense"));
       }
 
-      return m_defense->getProductionTime(
+      totalDuration = m_defense->getProductionTime(
         getUniverseSpeed(),
         getShipyardLevel(),
         getNaniteLevel()
