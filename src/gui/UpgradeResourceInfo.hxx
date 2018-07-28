@@ -188,7 +188,8 @@ namespace ogame {
 
     inline
     void UpgradeResourceInfo::createUpgradeResearchAction(core::Account& account, const player::GeneralDataModel& model) const {
-      account.createUpgradeAction(model.getActiveResearch());
+      account.createUpgradeAction(model.getActiveResearch(),
+                                  model.getActivePlanet());
       triggerAction(player::Action::ChangePlanet);
     }
 
