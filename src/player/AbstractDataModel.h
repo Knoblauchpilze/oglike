@@ -45,11 +45,11 @@ namespace ogame {
 
         void setActiveResearch(const core::Research::Type& research);
 
-        void setActiveBuilding(const core::Building::Type& research);
+        void setActiveBuilding(const core::Building::Type& building);
 
-        void setActiveShip(const core::Ship::Type& research);
+        void setActiveShip(const core::Ship::Type& ship);
 
-        void setActiveDefense(const core::Defense::Type& research);
+        void setActiveDefense(const core::Defense::Type& defense);
 
         const View& getActiveView() const;
 
