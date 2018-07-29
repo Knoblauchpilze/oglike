@@ -14,7 +14,8 @@ namespace ogame {
                                                             const SDL_Color& textColor,
                                                             const LabelContainer::Alignment& alignment,
                                                             const SDL_Color& bgColor,
-                                                            const bool transparent) const
+                                                            const bool transparent,
+                                                            const int& policeSize) const
     {
       return ComponentFactory::createLabelPanel(
         name,
@@ -22,7 +23,7 @@ namespace ogame {
         view::FontFactory::getInstance().createColoredFont(
           std::string("data/fonts/tahomabd.ttf"),
           textColor.r, textColor.g, textColor.b, textColor.unused,
-          15
+          policeSize
         ),
         alignment,
         bgColor,
