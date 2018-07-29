@@ -131,24 +131,28 @@ namespace ogame {
     template <>
     inline
     void UpgradeResourceInfo::populateInformationFromElement(const core::Building& element, const core::Planet& planet) {
+      setActiveBuilding(element.getType());
       populateInformationFromElement<core::AbstractUpgradable>(element, planet);
     }
 
     template <>
     inline
     void UpgradeResourceInfo::populateInformationFromElement(const core::Research& element, const core::Planet& planet) {
+      setActiveResearch(element.getType());
       populateInformationFromElement<core::AbstractUpgradable>(element, planet);
     }
     
     template <>
     inline
     void UpgradeResourceInfo::populateInformationFromElement(const core::Ship& element, const core::Planet& planet) {
+      setActiveShip(element.getType());
       populateInformationFromElement<core::FixedCostUnit>(element, planet);
     }
     
     template <>
     inline
     void UpgradeResourceInfo::populateInformationFromElement(const core::Defense& element, const core::Planet& planet) {
+      setActiveDefense(element.getType());
       populateInformationFromElement<core::FixedCostUnit>(element, planet);
     }
 
@@ -190,7 +194,7 @@ namespace ogame {
     void UpgradeResourceInfo::createUpgradeResearchAction(core::Account& account, const player::GeneralDataModel& model) const {
       account.createUpgradeAction(model.getActiveResearch(),
                                   model.getActivePlanet());
-      triggerAction(player::Action::ChangePlanet);
+      triggerAction(player::Action::ChangeAccount);
     }
 
     inline
