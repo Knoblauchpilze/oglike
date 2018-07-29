@@ -16,6 +16,11 @@ namespace ogame {
     }
 
     inline
+    void PictureContainer::clear() {
+      setImagePath(std::string(""));
+    }
+
+    inline
     void PictureContainer::clearContentPrivate(SDL_Surface* render) {
       // Nothing to do here.
     }

@@ -35,15 +35,17 @@ namespace ogame {
       GraphicContainer::clearContentPrivate(croppedArea);
 
       // Compute the blit position of the picture so that it is centered.
-      SDL_Rect pictureBlitArea = {
-        static_cast<Sint16>(croppedArea->w / 2.0f - m_picture->w / 2.0f),
-        static_cast<Sint16>(croppedArea->h / 2.0f - m_picture->h / 2.0f),
-        static_cast<Uint16>(m_picture->w),
-        static_cast<Uint16>(m_picture->h)
-      };
+      if (m_picture != nullptr) {
+        SDL_Rect pictureBlitArea = {
+          static_cast<Sint16>(croppedArea->w / 2.0f - m_picture->w / 2.0f),
+          static_cast<Sint16>(croppedArea->h / 2.0f - m_picture->h / 2.0f),
+          static_cast<Uint16>(m_picture->w),
+          static_cast<Uint16>(m_picture->h)
+        };
 
-      // Perform the blit operation (i.e. stick the picture onto the rendering area).
-      SDL_BlitSurface(m_picture, nullptr, croppedArea, &pictureBlitArea);
+        // Perform the blit operation (i.e. stick the picture onto the rendering area).
+        SDL_BlitSurface(m_picture, nullptr, croppedArea, &pictureBlitArea);
+      }
 
       // This is the final image for this container.
       return croppedArea;
@@ -53,12 +55,15 @@ namespace ogame {
       // CLear existing image if any.
       if (m_picture != nullptr) {
         SDL_FreeSurface(m_picture);
+        m_picture = nullptr;
       }
 
       // Load the image
-      m_picture = SDL_LoadBMP(m_file.c_str());
-      if (m_picture == nullptr) {
-        throw GuiException(std::string("Unable to create picture container using file ") + m_file);
+      if (!m_file.empty()) {
+        m_picture = SDL_LoadBMP(m_file.c_str());
+        if (m_picture == nullptr) {
+          throw GuiException(std::string("Unable to create picture container using file ") + m_file);
+        }
       }
     }
 
