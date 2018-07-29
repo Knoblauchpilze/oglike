@@ -27,6 +27,8 @@ namespace ogame {
 
         const std::string getDescription() const override;
 
+        const Defense::Type getType() const;
+
       protected:
 
         void assignTotalDuration(float& totalDuration) override;
