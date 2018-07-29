@@ -7,7 +7,7 @@ namespace ogame {
   namespace gui {
 
     inline
-    void GalaxyView::onActionTriggered(const player::GeneralDataModel& model) {
+    void GalaxyView::onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) {
       // Process this action.
       try {
         const unsigned& galaxyCoord = model.getActiveGalaxyCoordinate();

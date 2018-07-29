@@ -19,7 +19,7 @@ namespace ogame {
 
         virtual ~OptionsView();
 
-        void onActionTriggered(const player::GeneralDataModel& model) override;
+        void onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) override;
 
       private:
 

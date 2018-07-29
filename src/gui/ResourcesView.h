@@ -19,7 +19,7 @@ namespace ogame {
 
         virtual ~ResourcesView();
 
-        void onActionTriggered(const player::GeneralDataModel& model);
+        void onActionTriggered(const player::GeneralDataModel& model, const player::Action& action);
 
       private:
 

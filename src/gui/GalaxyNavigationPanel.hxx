@@ -8,7 +8,7 @@ namespace ogame {
   namespace gui {
 
     inline
-    void GalaxyNavigationPanel::onActionTriggered(const player::GeneralDataModel& model) {
+    void GalaxyNavigationPanel::onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) {
       try {
         const unsigned& galaxyCoord = model.getActiveGalaxyCoordinate();
         const unsigned& systemCoord = model.getActiveSystemCoordinate();

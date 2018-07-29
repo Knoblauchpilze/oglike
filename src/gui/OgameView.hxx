@@ -10,7 +10,7 @@ namespace ogame {
   namespace gui {
 
     inline
-    void OgameView::onActionTriggered(const player::GeneralDataModel& model) {
+    void OgameView::onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) {
       // Process this action.
       try {
         // Update the main panel with the corresponding view.

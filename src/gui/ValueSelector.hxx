@@ -15,7 +15,7 @@ namespace ogame {
     }
 
     inline
-    void ValueSelector::onActionTriggered(const player::GeneralDataModel& model) {}
+    void ValueSelector::onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) {}
 
   }
 }

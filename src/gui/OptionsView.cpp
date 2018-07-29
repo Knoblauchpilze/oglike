@@ -21,7 +21,7 @@ namespace ogame {
 
     OptionsView::~OptionsView() {}
 
-    void OptionsView::onActionTriggered(const player::GeneralDataModel& model) {
+    void OptionsView::onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) {
       lock();
 
       // Update information.

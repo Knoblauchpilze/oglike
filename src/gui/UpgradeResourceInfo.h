@@ -25,7 +25,7 @@ namespace ogame {
 
         void onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) override;
 
-        void onActionTriggered(const player::AbstractDataModel& model) override;
+        void onActionTriggered(const player::AbstractDataModel& model, const player::Action& action) override;
 
         template <typename Element>
         inline

@@ -12,7 +12,7 @@ namespace ogame {
   namespace gui {
 
     inline
-    void UpgradeResourceInfo::onActionTriggered(const player::AbstractDataModel& model) {}
+    void UpgradeResourceInfo::onActionTriggered(const player::AbstractDataModel& model, const player::Action& action) {}
 
     template <typename Element>
     inline
