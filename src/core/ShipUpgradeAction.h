@@ -25,6 +25,10 @@ namespace ogame {
 
         bool operator==(const ShipUpgradeAction& other) const noexcept;
 
+        const std::string getName() const override;
+
+        const std::string getDescription() const override;
+
       protected:
 
         void assignTotalDuration(float& totalDuration) override;
