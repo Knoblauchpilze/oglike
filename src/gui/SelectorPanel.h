@@ -16,7 +16,9 @@ namespace ogame {
     {
       public:
 
-        SelectorPanel(const std::string& name);
+        SelectorPanel(const std::string& name,
+                      const view::EventListener::Interaction::Mask& mask = view::EventListener::Interaction::NoInteraction,
+                      const bool transparent = false);
 
         virtual ~SelectorPanel();
 
