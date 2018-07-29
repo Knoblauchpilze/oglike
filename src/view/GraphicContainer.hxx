@@ -239,7 +239,7 @@ namespace ogame {
 
     inline
     void GraphicContainer::onMouseMotionEventPrivate(const SDL_MouseMotionEvent& mouseMotionEvent) {
-      std::cout << "[GRAPHIC] Mouse motion event" << std::endl;
+      // std::cout << "[GRAPHIC] Mouse motion event" << std::endl;
       notifyGraphicListeners(view::EventListener::Interaction::MouseMotion);
     }
 
