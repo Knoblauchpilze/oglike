@@ -27,7 +27,7 @@ namespace ogame {
 
     ResourcesView::~ResourcesView() {}
 
-    void ResourcesView::onActionTriggered(const player::GeneralDataModel& model) {
+    void ResourcesView::onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) {
       lock();
 
       // Update each resource.

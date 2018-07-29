@@ -12,7 +12,7 @@ namespace ogame {
   namespace gui {
 
     inline
-    void AbstractBuyingView::onActionTriggered(const player::GeneralDataModel& model) {
+    void AbstractBuyingView::onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) {
       // Process this action.
       try {
         const core::Planet& planet = model.getActivePlanet();

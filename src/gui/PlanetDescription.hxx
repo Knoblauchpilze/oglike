@@ -11,7 +11,7 @@ namespace ogame {
   namespace gui {
 
     inline
-    void PlanetDescription::onActionTriggered(const player::GeneralDataModel& model) {
+    void PlanetDescription::onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) {
       try {
         const core::Planet& planet = model.getActivePlanet();
         populateWithPlanetData(planet);

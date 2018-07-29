@@ -8,7 +8,7 @@ namespace ogame {
   namespace gui {
 
     inline
-    void ActionProviderStateContainer::onActionTriggered(const player::GeneralDataModel& model) {}
+    void ActionProviderStateContainer::onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) {}
 
     inline
     void ActionProviderStateContainer::onStateModified() {

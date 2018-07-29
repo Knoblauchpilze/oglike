@@ -28,7 +28,7 @@ namespace ogame {
 
         virtual ~GalaxyNavigationPanel();
 
-        void onActionTriggered(const player::GeneralDataModel& model) override;
+        void onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) override;
 
         void onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) override;
 
