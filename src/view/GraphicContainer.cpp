@@ -80,12 +80,20 @@ namespace ogame {
       }
     }
 
+    void GraphicContainer::removeChild(const std::string& name) {
+      const std::unordered_map<std::string, GraphicContainerShPtr>::const_iterator child = m_children.find(name);
+      if (child != m_children.cend()) {
+        removeChild(child->second);
+      }
+    }
+
     SDL_Surface* GraphicContainer::draw() {
       SDL_Surface* rendering = nullptr;
       lock();
       if (hasChanged()) {
         // Render this container.
         if (m_deepDirty) {
+
           try {
             createContent();
           }

@@ -42,6 +42,8 @@ namespace ogame {
 
         virtual void removeChild(std::shared_ptr<GraphicContainer> child);
 
+        virtual void removeChild(const std::string& name);
+
         template <typename ContainerPtr>
         ContainerPtr getChild(const std::string& name) const;
 
