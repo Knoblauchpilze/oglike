@@ -71,6 +71,16 @@ namespace ogame {
       return activeChildName;
     }
 
+    template <typename ContainerPtr>
+    inline
+    ContainerPtr SelectorPanel::getChildFromCompleteList(const std::string& name) const {
+      std::unordered_map<std::string, int>::const_iterator child = m_indices.find(name);
+      if (child == m_indices.cend()) {
+        return nullptr;
+      }
+      return dynamic_cast<ContainerPtr>(m_availableChildren[child->second].get());
+    }
+
     inline
     void SelectorPanel::activateChild(const int& index) {
       // Deactivate the current active child if any.
