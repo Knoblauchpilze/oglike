@@ -22,7 +22,7 @@ namespace ogame {
 
         virtual void onActionTriggered(const AbstractDataModel& model, const Action& action) = 0;
 
-      public:
+      protected:
 
         void setActiveView(const View& view) const;
 
@@ -33,6 +33,14 @@ namespace ogame {
         void setActiveSystemCoordinate(const unsigned& coordinate) const;
 
         void setActiveGalaxyCoordinate(const unsigned& coordinate) const;
+
+        void setActiveResearch(const core::Research::Type& research) const;
+
+        void setActiveBuilding(const core::Building::Type& building) const;
+
+        void setActiveShip(const core::Ship::Type& ship) const;
+
+        void setActiveDefense(const core::Defense::Type& defense) const;
 
         void triggerAction(const Action& action) const;
 
