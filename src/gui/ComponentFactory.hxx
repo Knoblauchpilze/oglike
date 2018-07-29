@@ -125,6 +125,19 @@ namespace ogame {
       );
     }
 
+    inline
+    PhotoGalleryShPtr
+    ComponentFactory::createPhotoGalleryPanel(const std::string& name,
+                                              const unsigned& picturesCount,
+                                              const view::LinearLayout::Direction& alignment)
+    {
+      return std::make_shared<PhotoGallery>(
+        name,
+        picturesCount,
+        alignment
+      );
+    }
+
   }
 }
 
