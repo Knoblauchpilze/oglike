@@ -28,6 +28,8 @@ namespace ogame {
 
         void populateWithPlanetData(const core::Planet& planet);
 
+        void populateWithAccountData(const core::Account& account);
+
       private:
 
     };
