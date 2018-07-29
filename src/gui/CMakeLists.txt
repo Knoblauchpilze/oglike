@@ -45,6 +45,7 @@ set (SOURCES
   UpgradeInfo.cpp
   UpgradeResourceInfo.cpp
   UpgradeActionContainer.cpp
+  PhotoGallery.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
