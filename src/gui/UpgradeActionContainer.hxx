@@ -30,6 +30,16 @@ namespace ogame {
         transparent
       );
     }
+
+    inline
+    PhotoGalleryShPtr UpgradeActionContainer::createPhotoGallery(const std::string& name,
+                                                                 const unsigned& picturesCount) const
+    {
+      return ComponentFactory::createPhotoGalleryPanel(
+        name,
+        picturesCount
+      );
+    }
     
     inline
     const std::string UpgradeActionContainer::computeDisplayTime(const float& seconds) const {

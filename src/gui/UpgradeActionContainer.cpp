@@ -8,10 +8,12 @@
 namespace ogame {
   namespace gui {
 
-    UpgradeActionContainer::UpgradeActionContainer(const std::string& name):
+    UpgradeActionContainer::UpgradeActionContainer(const std::string& name,
+                                                   const bool multivalued):
       SelectorPanel(name,
                     view::EventListener::Interaction::NoInteraction,
-                    false)
+                    false),
+      m_multivalued(multivalued)
     {
       setBackgroundColor(SDL_Color{28, 33, 38, SDL_ALPHA_OPAQUE});
 
@@ -89,29 +91,58 @@ namespace ogame {
     void UpgradeActionContainer::populateWithShipyardData(const core::Planet& planet) {
       try {
         // Retrieve the building upgrades action and display the first one.
-        const std::vector<core::ShipUpgradeActionShPtr>& upgrades = planet.getShipUpgrades();
-        bool hasShipUpgrade = !upgrades.empty();
-        const core::ShipUpgradeAction* upgrade = nullptr;
+        const std::vector<core::ShipUpgradeActionShPtr>& ships = planet.getShipUpgrades();
+        const std::vector<core::DefenseUpgradeActionShPtr>& defenses = planet.getDefenseUpgrades();
+        bool hasShipUpgrade = !ships.empty();
+        bool hasDefenseUpgrade = !defenses.empty();
+
+        const core::ShipUpgradeAction* shipUpgrade = nullptr;
         if (hasShipUpgrade) {
-          upgrade = upgrades[0u].get();
+          shipUpgrade = ships[0u].get();
         }
+
+        const core::DefenseUpgradeAction* defenseUpgrade = nullptr;
+        if (hasDefenseUpgrade) {
+          defenseUpgrade = defenses[0u].get();
+        }
+
+        const bool hasMoreThanOneUpgrade = ships.size() + defenses.size() > 1;
 
         if (hasShipUpgrade) {
           populatePanel(
             std::string("Shipyard"),
-            upgrade->getName(),
-            getPictureNameFromShip(upgrade->getType()),
-            upgrade->getDescription(),
+            shipUpgrade->getName(),
+            getPictureNameFromShip(shipUpgrade->getType()),
+            shipUpgrade->getDescription(),
             (
-              upgrade->isFinished() ?
+              shipUpgrade->isFinished() ?
               std::string("done") :
-              computeDisplayTime(upgrade->getRemainingTime())
+              computeDisplayTime(shipUpgrade->getRemainingTime())
+            )
+          );
+        }
+        else if (hasDefenseUpgrade) {
+          populatePanel(
+            std::string("Shipyard"),
+            defenseUpgrade->getName(),
+            getPictureNameFromDefense(defenseUpgrade->getType()),
+            defenseUpgrade->getDescription(),
+            (
+              defenseUpgrade->isFinished() ?
+              std::string("done") :
+              computeDisplayTime(defenseUpgrade->getRemainingTime())
             )
           );
         }
         else {
           clearPanel(std::string("Shipyard"),
                      std::string("No ships/defence in construction"));
+        }
+
+        if (hasMoreThanOneUpgrade && m_multivalued) {
+          // Populate the photo gallery with the rest of the upgrades.
+          addToPhotoGallery(ships, hasShipUpgrade, true);
+          addToPhotoGallery(defenses, !hasShipUpgrade, false);
         }
       }
       catch (const core::PlanetException& e) {
@@ -120,11 +151,6 @@ namespace ogame {
     }
 
     void UpgradeActionContainer::createView() {
-      view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(4u, 5u, 0.0f);
-      if (layout == nullptr) {
-        throw GuiException(std::string("Could not allocate memory to create upgrade action container"));
-      }
-
       // Create each element.
       const std::string withUpdateContainerName("update_container");
       const std::string noUpdateContainerName("no_update_container");
@@ -146,7 +172,7 @@ namespace ogame {
         view::EventListener::Interaction::NoInteraction,
         true,
         view::EventListener::Sensitivity::Local,
-        std::make_shared<view::GridLayout>(4u, 5u, 0.0f)
+        std::make_shared<view::GridLayout>(4u, 6u, 0.0f)
       );
 
       LabelContainerShPtr title = createLabel(
@@ -184,13 +210,16 @@ namespace ogame {
         SDL_Color{156, 102, 28, SDL_ALPHA_OPAQUE}
       );
 
+      PhotoGalleryShPtr gallery = (m_multivalued ? createPhotoGallery(std::string("gallery"), 5u) : nullptr);
+
       if (title == nullptr ||
           upgradeName == nullptr ||
           picture== nullptr ||
           upgradeDescription == nullptr ||
           durationLabel == nullptr ||
           duration == nullptr ||
-          withUpdateContainer == nullptr)
+          withUpdateContainer == nullptr,
+          (gallery == nullptr && m_multivalued))
       {
         throw GuiException(std::string("Could not allocate memory to create upgrade action container"));
       }
@@ -201,6 +230,9 @@ namespace ogame {
       withUpdateContainer->addChild(upgradeDescription, 1u, 2u, 3u, 1u);
       withUpdateContainer->addChild(durationLabel,      1u, 3u, 3u, 1u);
       withUpdateContainer->addChild(duration,           1u, 4u, 3u, 1u);
+      if (m_multivalued) {
+        withUpdateContainer->addChild(gallery,          0u, 5u, 4u, 1u);
+      }
 
       return withUpdateContainer;
     }
@@ -213,7 +245,7 @@ namespace ogame {
         view::EventListener::Interaction::NoInteraction,
         true,
         view::EventListener::Sensitivity::Local,
-        std::make_shared<view::GridLayout>(4u, 5u, 0.0f)
+        std::make_shared<view::GridLayout>(4u, 6u, 0.0f)
       );
 
       LabelContainerShPtr title = createLabel(
@@ -243,7 +275,7 @@ namespace ogame {
       }
 
       noUpdateContainer->addChild(title,      0u, 0u, 4u, 1u);
-      noUpdateContainer->addChild(noUpgrades, 0u, 1u, 4u, 4u);
+      noUpdateContainer->addChild(noUpgrades, 0u, 1u, 4u, 5u);
 
       return noUpdateContainer;
     }
@@ -312,6 +344,106 @@ namespace ogame {
         unlock();
 
         setActiveChild("no_update_container");
+      }
+    }
+
+    void UpgradeActionContainer::addToPhotoGallery(const std::vector<core::BuildingUpgradeActionShPtr>& buildings,
+                                                   const bool excludeFirst,
+                                                   const bool clear)
+    {
+      view::GraphicContainer* upgradeContainer = getChildFromCompleteList<view::GraphicContainer*>(std::string("update_container"));
+
+      if (checkChild(upgradeContainer, "Upgrade action container main container")) {
+        lock();
+        // Update each information.
+        PhotoGallery* gallery = upgradeContainer->getChild<PhotoGallery*>(std::string("gallery"));
+        if (checkChild(gallery, "Upgrade action container photo gallery")) {
+          if (clear) {
+            gallery->clear();
+          }
+
+          for (unsigned index = (excludeFirst ? 1u : 0u) ; index < buildings.size() ; ++index) {
+            gallery->addImage(getPictureNameFromBuilding(buildings[index]->getType()));
+          }
+        }
+
+        makeDeepDirty();
+        unlock();
+      }
+    }
+
+    void UpgradeActionContainer::addToPhotoGallery(const std::vector<core::ResearchUpgradeActionShPtr>& researches,
+                                                   const bool excludeFirst,
+                                                   const bool clear)
+    {
+      view::GraphicContainer* upgradeContainer = getChildFromCompleteList<view::GraphicContainer*>(std::string("update_container"));
+
+      if (checkChild(upgradeContainer, "Upgrade action container main container")) {
+        lock();
+        // Update each information.
+        PhotoGallery* gallery = upgradeContainer->getChild<PhotoGallery*>(std::string("gallery"));
+        if (checkChild(gallery, "Upgrade action container photo gallery")) {
+          if (clear) {
+            gallery->clear();
+          }
+
+          for (unsigned index = (excludeFirst ? 1u : 0u) ; index < researches.size() ; ++index) {
+            gallery->addImage(getPictureNameFromResearch(researches[index]->getType()));
+          }
+        }
+
+        makeDeepDirty();
+        unlock();
+      }
+    }
+
+    void UpgradeActionContainer::addToPhotoGallery(const std::vector<core::ShipUpgradeActionShPtr>& ships,
+                                                   const bool excludeFirst,
+                                                   const bool clear)
+    {
+      view::GraphicContainer* upgradeContainer = getChildFromCompleteList<view::GraphicContainer*>(std::string("update_container"));
+
+      if (checkChild(upgradeContainer, "Upgrade action container main container")) {
+        lock();
+        // Update each information.
+        PhotoGallery* gallery = upgradeContainer->getChild<PhotoGallery*>(std::string("gallery"));
+        if (checkChild(gallery, "Upgrade action container photo gallery")) {
+          if (clear) {
+            gallery->clear();
+          }
+
+          for (unsigned index = (excludeFirst ? 1u : 0u) ; index < ships.size() ; ++index) {
+            gallery->addImage(getPictureNameFromShip(ships[index]->getType()));
+          }
+        }
+
+        makeDeepDirty();
+        unlock();
+      }
+    }
+
+    void UpgradeActionContainer::addToPhotoGallery(const std::vector<core::DefenseUpgradeActionShPtr>& defenses,
+                                                   const bool excludeFirst,
+                                                   const bool clear)
+    {
+      view::GraphicContainer* upgradeContainer = getChildFromCompleteList<view::GraphicContainer*>(std::string("update_container"));
+
+      if (checkChild(upgradeContainer, "Upgrade action container main container")) {
+        lock();
+        // Update each information.
+        PhotoGallery* gallery = upgradeContainer->getChild<PhotoGallery*>(std::string("gallery"));
+        if (checkChild(gallery, "Upgrade action container photo gallery")) {
+          if (clear) {
+            gallery->clear();
+          }
+
+          for (unsigned index = (excludeFirst ? 1u : 0u) ; index < defenses.size() ; ++index) {
+            gallery->addImage(getPictureNameFromDefense(defenses[index]->getType()));
+          }
+        }
+
+        makeDeepDirty();
+        unlock();
       }
     }
 
