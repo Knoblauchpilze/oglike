@@ -13,6 +13,24 @@ namespace ogame {
     }
 
     inline
+    const std::string ResearchUpgradeAction::getName() const {
+      if (m_research == nullptr) {
+        throw UpgradableException(std::string("Could not retrieve name for research upgrade action, invalid null research"));
+      }
+
+      return m_research->getName();
+    }
+
+    inline
+    const std::string ResearchUpgradeAction::getDescription() const {
+      if (m_research == nullptr) {
+        throw UpgradableException(std::string("Could not retrieve description for research upgrade action, invalid null research"));
+      }
+
+      return std::string("Research to level ") + std::to_string(m_research->getLevel() + 1u);
+    }
+
+    inline
     void ResearchUpgradeAction::assignTotalDuration(float& totalDuration) {
       if (m_research == nullptr) {
         throw UpgradableException(std::string("Cannot compute total duration for research upgrade action, invalid null research"));

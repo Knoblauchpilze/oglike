@@ -13,6 +13,20 @@ namespace ogame {
     }
 
     inline
+    const std::string ShipUpgradeAction::getName() const {
+      if (m_ship == nullptr) {
+        throw UpgradableException(std::string("Could not retrieve name for ship upgrade action, invalid null ship"));
+      }
+
+      return m_ship->getName();
+    }
+
+    inline
+    const std::string ShipUpgradeAction::getDescription() const {
+      return std::string("Assembling ship");
+    }
+
+    inline
     void ShipUpgradeAction::assignTotalDuration(float& totalDuration) {
       if (m_ship == nullptr) {
         throw UpgradableException(std::string("Cannot compute total duration for ship upgrade action, invalid null ship"));

@@ -13,6 +13,20 @@ namespace ogame {
     }
 
     inline
+    const std::string DefenseUpgradeAction::getName() const {
+      if (m_defense == nullptr) {
+        throw UpgradableException(std::string("Could not retrieve name for defense upgrade action, invalid null defense"));
+      }
+
+      return m_defense->getName();
+    }
+
+    inline
+    const std::string DefenseUpgradeAction::getDescription() const {
+      return std::string("Assembling defense");
+    }
+
+    inline
     void DefenseUpgradeAction::assignTotalDuration(float& totalDuration) {
       if (m_defense == nullptr) {
         throw UpgradableException(std::string("Cannot compute total duration for defense upgrade action, invalid null defense"));

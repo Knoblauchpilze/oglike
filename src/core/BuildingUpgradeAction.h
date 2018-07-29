@@ -23,6 +23,12 @@ namespace ogame {
 
         bool operator==(const BuildingUpgradeAction& other) const noexcept;
 
+        const std::string getName() const override;
+
+        const std::string getDescription() const override;
+
+        const Building::Type getType() const;
+
       protected:
 
         void assignTotalDuration(float& totalDuration) override;
