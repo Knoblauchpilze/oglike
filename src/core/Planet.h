@@ -83,6 +83,12 @@ namespace ogame {
 
         void createUpgradeAction(const Defense::Type& type);
 
+        const std::vector<std::shared_ptr<BuildingUpgradeAction>>& getBuildingUpgrades() const noexcept;
+
+        const std::vector<std::shared_ptr<ShipUpgradeAction>>& getShipUpgrades() const noexcept;
+
+        const std::vector<std::shared_ptr<DefenseUpgradeAction>>& getDefenseUpgrades() const noexcept;
+
       private:
 
         void create();

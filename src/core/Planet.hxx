@@ -126,6 +126,21 @@ namespace ogame {
     }
 
     inline
+    const std::vector<std::shared_ptr<BuildingUpgradeAction>>& Planet::getBuildingUpgrades() const noexcept {
+      return m_buildingUpgrades;
+    }
+
+    inline
+    const std::vector<std::shared_ptr<ShipUpgradeAction>>& Planet::getShipUpgrades() const noexcept {
+      return m_shipUpgrades;
+    }
+
+    inline
+    const std::vector<std::shared_ptr<DefenseUpgradeAction>>& Planet::getDefenseUpgrades() const noexcept {
+      return m_defenseUpgrades;
+    }
+
+    inline
     void Planet::initializeShips() {
       // Create all ships on this planet.
       m_ships.push_back(ShipFactory::createLightFighter());
