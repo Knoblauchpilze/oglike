@@ -4,6 +4,8 @@
 #include "UpgradeAction.h"
 #include "UpgradableException.h"
 
+#include <iostream>
+
 namespace ogame {
   namespace core {
 
@@ -24,7 +26,14 @@ namespace ogame {
         m_start
       ).count();
 
+      std::cout << "[UPGRADE] Upgrade for " << getName() << " should take " << m_duration << "s and remaining is " << elapsedTime << std::endl;
+
       return m_duration - elapsedTime;
+    }
+
+    inline
+    float& UpgradeAction::getDuration() {
+      return m_duration;
     }
 
     inline
