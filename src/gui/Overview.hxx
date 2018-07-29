@@ -14,6 +14,9 @@ namespace ogame {
       try {
         const core::Planet& planet = model.getActivePlanet();
         populateWithPlanetData(planet);
+
+        const core::Account& account = model.getActiveAccount();
+        populateWithAccountData(account);
       }
       catch (const core::PlanetException& e) {
         std::cerr << "[OVERVIEW] Caught exception while setting up overview:" << std::endl << e.what() << std::endl;
