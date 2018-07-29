@@ -16,7 +16,7 @@ namespace ogame {
                     planet.getBuildingLevel(Building::Type::NaniteFactory)),
       m_ship(ship)
     {
-      // Nothing to do here.
+      assignTotalDuration(getDuration());
     }
 
     ShipUpgradeAction::~ShipUpgradeAction() {}

@@ -17,7 +17,7 @@ namespace ogame {
                     planet.getBuildingLevel(Building::Type::NaniteFactory)),
       m_defense(defense)
     {
-      // Nothing to do here.
+      assignTotalDuration(getDuration());
     }
 
     DefenseUpgradeAction::~DefenseUpgradeAction() {}

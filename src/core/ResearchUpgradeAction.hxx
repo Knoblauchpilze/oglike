@@ -31,6 +31,15 @@ namespace ogame {
     }
 
     inline
+    const Research::Type ResearchUpgradeAction::getType() const {
+      if (m_research == nullptr) {
+        throw UpgradableException(std::string("Could not retrieve type for research upgrade action, invalid null research"));
+      }
+
+      return m_research->getType();
+    }
+
+    inline
     void ResearchUpgradeAction::assignTotalDuration(float& totalDuration) {
       if (m_research == nullptr) {
         throw UpgradableException(std::string("Cannot compute total duration for research upgrade action, invalid null research"));

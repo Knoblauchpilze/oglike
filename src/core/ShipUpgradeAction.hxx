@@ -27,6 +27,15 @@ namespace ogame {
     }
 
     inline
+    const Ship::Type ShipUpgradeAction::getType() const {
+      if (m_ship == nullptr) {
+        throw UpgradableException(std::string("Could not retrieve type for ship upgrade action, invalid null ship"));
+      }
+
+      return m_ship->getType();
+    }
+
+    inline
     void ShipUpgradeAction::assignTotalDuration(float& totalDuration) {
       if (m_ship == nullptr) {
         throw UpgradableException(std::string("Cannot compute total duration for ship upgrade action, invalid null ship"));

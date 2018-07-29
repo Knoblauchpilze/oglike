@@ -27,6 +27,15 @@ namespace ogame {
     }
 
     inline
+    const Defense::Type DefenseUpgradeAction::getType() const {
+      if (m_defense == nullptr) {
+        throw UpgradableException(std::string("Could not retrieve type for defense upgrade action, invalid null defense"));
+      }
+
+      return m_defense->getType();
+    }
+
+    inline
     void DefenseUpgradeAction::assignTotalDuration(float& totalDuration) {
       if (m_defense == nullptr) {
         throw UpgradableException(std::string("Cannot compute total duration for defense upgrade action, invalid null defense"));
