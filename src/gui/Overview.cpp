@@ -55,7 +55,7 @@ namespace ogame {
 
       UpgradeActionContainerShPtr building = std::make_shared<UpgradeActionContainer>(std::string("building_upgrade"));
       UpgradeActionContainerShPtr research = std::make_shared<UpgradeActionContainer>(std::string("research_upgrade"));
-      UpgradeActionContainerShPtr shipyard = std::make_shared<UpgradeActionContainer>(std::string("shipyard_upgrade"));
+      UpgradeActionContainerShPtr shipyard = std::make_shared<UpgradeActionContainer>(std::string("shipyard_upgrade"), true);
 
       if (moonLink == nullptr ||
           name == nullptr ||
@@ -94,7 +94,7 @@ namespace ogame {
       // Update each information.
       ConditionalPictureContainer* moonLink = getChild<ConditionalPictureContainer*>(std::string("moon_link"));
       if (checkChild(moonLink, "Planet moon link")) {
-        moonLink->setActive(true || planet.hasMoon());
+        moonLink->setActive(planet.hasMoon());
       }
 
       LabelContainer* name = getChild<LabelContainer*>(std::string("planet_name"));
