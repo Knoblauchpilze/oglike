@@ -4,8 +4,6 @@
 #include "UpgradeAction.h"
 #include "UpgradableException.h"
 
-#include <iostream>
-
 namespace ogame {
   namespace core {
 
@@ -25,8 +23,6 @@ namespace ogame {
         std::chrono::system_clock::now() -
         m_start
       ).count();
-
-      std::cout << "[UPGRADE] Upgrade for " << getName() << " should take " << m_duration << "s and remaining is " << elapsedTime << std::endl;
 
       return m_duration - elapsedTime;
     }
