@@ -28,12 +28,17 @@ namespace ogame {
 
         void createView();
 
+        view::GraphicContainerShPtr createUpgradeContainer(const std::string& name);
+
+        view::GraphicContainerShPtr createEmptyContainer(const std::string& name);
+
         LabelContainerShPtr createLabel(const std::string& name,
                                         const std::string& text,
                                         const SDL_Color& textColor,
                                         const LabelContainer::Alignment& alignment = LabelContainer::Alignment::Left,
                                         const SDL_Color& bgColor = SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE},
-                                        const bool transparent = true) const;
+                                        const bool transparent = true,
+                                        const int& policeSize = 15) const;
 
         const std::string computeDisplayTime(const float& seconds) const;
 
@@ -51,7 +56,8 @@ namespace ogame {
                            const std::string& upgradeDesc,
                            const std::string& upgradeDuration);
 
-        void clearPanel();
+        void clearPanel(const std::string& upgradeType,
+                        const std::string& upgradeDesc);
 
       private:
 
