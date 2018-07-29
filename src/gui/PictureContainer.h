@@ -16,7 +16,7 @@ namespace ogame {
         PictureContainer(const std::string& name,
                          const std::string& picture,
                          const view::EventListener::Interaction::Mask& mask = view::EventListener::Interaction::NoInteraction);
-        
+
         virtual ~PictureContainer();
 
         void setImagePath(const std::string& path);
