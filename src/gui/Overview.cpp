@@ -109,7 +109,7 @@ namespace ogame {
 
       UpgradeActionContainer* shipyard = getChild<UpgradeActionContainer*>(std::string("shipyard_upgrade"));
       if (checkChild(shipyard, "Shipyard upgrade container")) {
-        building->populateWithShipyardData(planet);
+        shipyard->populateWithShipyardData(planet);
       }
 
       makeDeepDirty();
