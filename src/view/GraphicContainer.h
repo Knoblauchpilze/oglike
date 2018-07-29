@@ -42,6 +42,9 @@ namespace ogame {
 
         virtual void removeChild(std::shared_ptr<GraphicContainer> child);
 
+        template <typename ContainerPtr>
+        ContainerPtr getChild(const std::string& name) const;
+
         const unsigned getChildCount() const noexcept;
 
         void addEventListener(GraphicContainerListener* listener);
@@ -53,7 +56,6 @@ namespace ogame {
         utils::Area getRenderingArea() override;
 
         void setRenderingArea(const utils::Area& area) override;
-
 
         SDL_Surface* draw() override;
 
@@ -74,10 +76,6 @@ namespace ogame {
         void onMouseWheelEvent(bool upWheel) override;
 
       protected:
-
-        template <typename ContainerPtr>
-        inline
-        ContainerPtr getChild(const std::string& name) const;
 
         template <typename Type>
         bool checkChild(const Type* child, const std::string& name) const noexcept;

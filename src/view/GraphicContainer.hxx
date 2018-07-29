@@ -14,6 +14,16 @@ namespace ogame {
       return m_name;
     }
 
+    template <typename ContainerPtr>
+    inline
+    ContainerPtr GraphicContainer::getChild(const std::string& name) const {
+      std::unordered_map<std::string, std::shared_ptr<GraphicContainer>>::const_iterator child = m_children.find(name);
+      if (child == m_children.cend()) {
+        return nullptr;
+      }
+      return dynamic_cast<ContainerPtr>(child->second.get());
+    }
+
     inline
     const unsigned GraphicContainer::getChildCount() const noexcept {
       return m_children.size();
@@ -144,16 +154,6 @@ namespace ogame {
       if (isRelevant(EventListener::Interaction::MouseWheel, true)) {
         onMouseWheelEventPrivate(upWheel);
       }
-    }
-
-    template <typename ContainerPtr>
-    inline
-    ContainerPtr GraphicContainer::getChild(const std::string& name) const {
-      std::unordered_map<std::string, std::shared_ptr<GraphicContainer>>::const_iterator child = m_children.find(name);
-      if (child == m_children.cend()) {
-        return nullptr;
-      }
-      return dynamic_cast<ContainerPtr>(child->second.get());
     }
 
     template <typename Type>
