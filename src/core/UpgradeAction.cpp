@@ -20,7 +20,7 @@ namespace ogame {
       m_roboticsLevel(roboticsLevel),
       m_naniteLevel(naniteLevel)
     {
-      assignTotalDuration(m_duration);
+      // Nothing to do here.
     }
 
     UpgradeAction::~UpgradeAction() {}
