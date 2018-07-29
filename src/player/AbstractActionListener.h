@@ -20,7 +20,7 @@ namespace ogame {
 
         ~AbstractActionListener();
 
-        virtual void onActionTriggered(const player::AbstractDataModel& model) = 0;
+        virtual void onActionTriggered(const AbstractDataModel& model, const Action& action) = 0;
 
       public:
 
