@@ -96,6 +96,11 @@ namespace ogame {
     }
 
     inline
+    const std::vector<std::shared_ptr<ResearchUpgradeAction>>& Account::getResearchUpgrades() const noexcept {
+      return m_researchUpgrades;
+    }
+
+    inline
     void Account::initializeResearch() {
       // Create all research in this account.
       m_researches.push_back(core::ResearchFactory::createEnergyResearch());

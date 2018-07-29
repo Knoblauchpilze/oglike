@@ -64,6 +64,8 @@ namespace ogame {
 
         void createUpgradeAction(const Research::Type& type, const Planet& planet);
 
+        const std::vector<std::shared_ptr<ResearchUpgradeAction>>& getResearchUpgrades() const noexcept;
+
       private:
 
         void initializeResearch();
