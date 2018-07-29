@@ -21,6 +21,8 @@ namespace ogame {
 
         void setImagePath(const std::string& path);
 
+        void clear();
+
       protected:
 
         SDL_Surface* createContentPrivate() override;
