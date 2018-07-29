@@ -11,18 +11,22 @@ namespace ogame {
     inline
     LabelContainerShPtr UpgradeActionContainer::createLabel(const std::string& name,
                                                             const std::string& text,
-                                                            const SDL_Color& color,
-                                                            const LabelContainer::Alignment& alignment) const
+                                                            const SDL_Color& textColor,
+                                                            const LabelContainer::Alignment& alignment,
+                                                            const SDL_Color& bgColor,
+                                                            const bool transparent) const
     {
       return ComponentFactory::createLabelPanel(
         name,
         text,
         view::FontFactory::getInstance().createColoredFont(
           std::string("data/fonts/tahomabd.ttf"),
-          color.r, color.g, color.b, color.unused,
+          textColor.r, textColor.g, textColor.b, textColor.unused,
           15
         ),
-        alignment
+        alignment,
+        bgColor,
+        transparent
       );
     }
     
@@ -181,6 +185,105 @@ namespace ogame {
         case core::Research::Type::Energy:
         default:
           image = std::string("energy");
+          break;
+      }
+
+      return path + image + extension;
+    }
+
+    inline
+    const std::string UpgradeActionContainer::getPictureNameFromShip(const core::Ship::Type& type) const noexcept {
+      const std::string path("data/img/");
+      std::string image;
+      const std::string extension("_small.bmp");
+
+      switch (type) {
+        case core::Ship::Type::LightFighter:
+          image = std::string("light_fighter");
+          break;
+        case core::Ship::Type::HeavyFighter:
+          image = std::string("heavy_fighter");
+          break;
+        case core::Ship::Type::Cruiser:
+          image = std::string("cruiser");
+          break;
+        case core::Ship::Type::Battleship:
+          image = std::string("battleship");
+          break;
+        case core::Ship::Type::Battlecruiser:
+          image = std::string("battlecruiser");
+          break;
+        case core::Ship::Type::Bomber:
+          image = std::string("bomber");
+          break;
+        case core::Ship::Type::Destroyer:
+          image = std::string("destroyer");
+          break;
+        case core::Ship::Type::Deathstar:
+          image = std::string("deathstar");
+          break;
+        case core::Ship::Type::SmallCargo:
+          image = std::string("small_cargo_ship");
+          break;
+        case core::Ship::Type::LargeCargo:
+          image = std::string("large_cargo_ship");
+          break;
+        case core::Ship::Type::ColonyShip:
+          image = std::string("colony_ship");
+          break;
+        case core::Ship::Type::Recycler:
+          image = std::string("recycler");
+          break;
+        case core::Ship::Type::EspionageProbe:
+          image = std::string("espionage_probe");
+          break;
+        case core::Ship::Type::SolarSatellite:
+        default:
+          image = std::string("solar_satellite");
+          break;
+      }
+
+      return path + image + extension;
+    }
+
+
+    inline
+    const std::string UpgradeActionContainer::getPictureNameFromDefense(const core::Defense::Type& type) const noexcept {
+      const std::string path("data/img/");
+      std::string image;
+      const std::string extension("_small.bmp");
+
+      switch (type) {
+        case core::Defense::Type::MissileLauncher:
+          image = std::string("missile_launcher");
+          break;
+        case core::Defense::Type::LightLaser:
+          image = std::string("light_laser");
+          break;
+        case core::Defense::Type::HeavyLaser:
+          image = std::string("heavy_laser");
+          break;
+        case core::Defense::Type::GaussCannon:
+          image = std::string("gauss_cannon");
+          break;
+        case core::Defense::Type::IonCannon:
+          image = std::string("ion_cannon");
+          break;
+        case core::Defense::Type::PlasmaTurret:
+          image = std::string("plasma_turret");
+          break;
+        case core::Defense::Type::SmallShieldDome:
+          image = std::string("small_shield_dome");
+          break;
+        case core::Defense::Type::LargeShieldDome:
+          image = std::string("large_shield_dome");
+          break;
+        case core::Defense::Type::AntiballisticMissile:
+          image = std::string("antiballistic_missile");
+          break;
+        case core::Defense::Type::InterplanetaryMissile:
+        default:
+          image = std::string("interplanetary_missile");
           break;
       }
 
