@@ -5,11 +5,13 @@
 namespace ogame {
   namespace gui {
 
-    SelectorPanel::SelectorPanel(const std::string& name):
+    SelectorPanel::SelectorPanel(const std::string& name,
+                                 const view::EventListener::Interaction::Mask& mask,
+                                 const bool transparent):
       view::GraphicContainer(name,
                              view::utils::Area(),
-                             view::EventListener::Interaction::NoInteraction,
-                             false,
+                             mask,
+                             transparent,
                              view::EventListener::Sensitivity::Local,
                              std::make_shared<view::LinearLayout>(
                                view::LinearLayout::Direction::Horizontal,
