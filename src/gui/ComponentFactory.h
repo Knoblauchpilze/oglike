@@ -9,6 +9,7 @@
 #include "ValueSelector.h"
 #include "LabelledPicture.h"
 #include "ConditionalPictureContainer.h"
+#include "PhotoGallery.h"
 
 namespace ogame {
   namespace gui {
@@ -76,6 +77,12 @@ namespace ogame {
                                    const std::string& text = std::string(),
                                    const LabelledPicture::Alignment& alignment = LabelledPicture::Alignment::Below,
                                    const view::EventListener::Interaction::Mask& mask = view::EventListener::Interaction::NoInteraction);
+
+        static
+        PhotoGalleryShPtr
+        createPhotoGalleryPanel(const std::string& name,
+                                const unsigned& picturesCount,
+                                const view::LinearLayout::Direction& alignment = view::LinearLayout::Direction::Horizontal);
 
     };
   }
