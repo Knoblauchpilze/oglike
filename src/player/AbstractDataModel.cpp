@@ -47,7 +47,7 @@ namespace ogame {
         for (unsigned listenerIndex = 0u ; listenerIndex < listenersForAction->second.size() ; ++listenerIndex) {
           AbstractActionListener* listener = listenersForAction->second[listenerIndex];
           if (listener != nullptr) {
-            listener->onActionTriggered(*this);
+            listener->onActionTriggered(*this, action);
           }
         }
       }
