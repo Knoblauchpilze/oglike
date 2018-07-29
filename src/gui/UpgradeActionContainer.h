@@ -6,6 +6,7 @@
 #include "SelectorPanel.h"
 #include "LabelContainer.h"
 #include "Planet.h"
+#include "PhotoGallery.h"
 
 namespace ogame {
   namespace gui {
@@ -14,7 +15,8 @@ namespace ogame {
     {
       public:
 
-        UpgradeActionContainer(const std::string& name);
+        UpgradeActionContainer(const std::string& name,
+                               const bool multivalued = false);
 
         virtual ~UpgradeActionContainer();
 
@@ -40,6 +42,9 @@ namespace ogame {
                                         const bool transparent = true,
                                         const int& policeSize = 15) const;
 
+        PhotoGalleryShPtr createPhotoGallery(const std::string& name,
+                                             const unsigned& picturesCount) const;
+
         const std::string computeDisplayTime(const float& seconds) const;
 
         const std::string getPictureNameFromBuilding(const core::Building::Type& type) const noexcept;
@@ -59,7 +64,25 @@ namespace ogame {
         void clearPanel(const std::string& upgradeType,
                         const std::string& upgradeDesc);
 
+        void addToPhotoGallery(const std::vector<core::BuildingUpgradeActionShPtr>& buildings,
+                               const bool excludeFirst,
+                               const bool clear);
+
+        void addToPhotoGallery(const std::vector<core::ResearchUpgradeActionShPtr>& researches,
+                               const bool excludeFirst,
+                               const bool clear);
+
+        void addToPhotoGallery(const std::vector<core::ShipUpgradeActionShPtr>& ships,
+                               const bool excludeFirst,
+                               const bool clear);
+
+        void addToPhotoGallery(const std::vector<core::DefenseUpgradeActionShPtr>& defenses,
+                               const bool excludeFirst,
+                               const bool clear);
+
       private:
+
+        bool m_multivalued;
 
     };
 
