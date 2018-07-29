@@ -32,6 +32,11 @@ namespace ogame {
 
         const std::string getActiveChild();
 
+      protected:
+
+        template <typename ContainerPtr>
+        ContainerPtr getChildFromCompleteList(const std::string& name) const;
+
       private:
 
           // We assume that this index is valid based on the number of children in the 'm_availableChildren'.
