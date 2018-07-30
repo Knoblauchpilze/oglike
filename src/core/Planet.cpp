@@ -16,9 +16,10 @@ namespace ogame {
       m_defenses(),
       m_buildings(),
       
-      m_diameter(12346.0f),
-      m_minTemperature(-30.0f),
-      m_maxTemperature(150.0f),
+      m_diameter(0.0f),
+      m_fields(0u),
+      m_minTemperature(0.0f),
+      m_maxTemperature(0.0f),
 
       m_buildingUpgrades(),
       m_shipUpgrades(),
@@ -131,14 +132,20 @@ namespace ogame {
       m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("crystal"), 25500.0f));
       m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("deuterium"), 3000.0f));
 
-      // Create ships.
       initializeShips();
 
-      // And defenses.
       initializeDefenses();
 
-      // And buildings.
       initializeBuildings();
+
+      initializePhysicalCharacteristics();
+    }
+
+    void Planet::initializePhysicalCharacteristics() {
+      m_fields = 96u + std::rand() % (262u - 96u);
+      m_diameter = 12742.0f * m_fields / 163.0f;
+      m_minTemperature = -150.0f + (200.0f + 150.0f) / std::max(1.0f, 1.0f * (m_parent->getPlanetsCount() - m_index));
+      m_maxTemperature = -110.0f + (240.0f + 110.0f) / std::max(1.0f, 1.0f * (m_parent->getPlanetsCount() - m_index));
     }
 
   }

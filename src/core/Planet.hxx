@@ -86,6 +86,22 @@ namespace ogame {
     }
 
     inline
+    const unsigned& Planet::getFields() const noexcept {
+      return m_fields;
+    }
+
+    inline
+    const unsigned Planet::getUsedFields() const noexcept {
+      unsigned usedFields = 0u;
+      for (unsigned indexBuilding = 0u ; indexBuilding < m_buildings.size() ; ++indexBuilding) {
+        if (m_buildings[indexBuilding] && m_buildings[indexBuilding]->getLevel() > 0u) {
+          ++usedFields;
+        }
+      }
+      return usedFields;
+    }
+
+    inline
     const std::string Planet::getCoordinates() const  {
       return "[" + std::to_string(getGalaxyIndex() + 1u) + ":" + std::to_string(getSystemIndex() + 1u) + ":" + std::to_string(getPositionInSystem() + 1u) + "]";
     }
