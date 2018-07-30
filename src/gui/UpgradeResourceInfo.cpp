@@ -52,6 +52,15 @@ namespace ogame {
             default:
               break;
           }
+
+          lock();
+
+          SwitchPictureContainer* upgrade = getChild<SwitchPictureContainer*>(std::string("upgrade_label"));
+          if (checkChild(upgrade, std::string("Upgrade resource info upgrade button"))) {
+            upgrade->updateStatus(false);
+          }
+
+          unlock();
         }
         catch (const core::PlanetException& e) {
           std::cerr << "[UPGRADE] Could not process upgrade request from " << origin << " on planet " << planet.getName() << ":" << std::endl << e.what() << std::endl;

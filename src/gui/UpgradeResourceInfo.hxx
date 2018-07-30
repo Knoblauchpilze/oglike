@@ -66,11 +66,6 @@ namespace ogame {
         );
       }
 
-      SwitchPictureContainer* upgrade = getChild<SwitchPictureContainer*>(std::string("upgrade_label"));
-      if (checkChild(upgrade, std::string("Upgrade resource info upgrade button"))) {
-        upgrade->updateStatus(element.canUpgrade(planet.getResourceDeposits()));
-      }
-
       unlock();
     }
 
@@ -122,7 +117,7 @@ namespace ogame {
 
       SwitchPictureContainer* upgrade = getChild<SwitchPictureContainer*>(std::string("upgrade_label"));
       if (checkChild(upgrade, std::string("Upgrade resource info upgrade button"))) {
-        upgrade->updateStatus(element.canBuy(planet.getResourceDeposits()));
+        upgrade->updateStatus(planet.canBuy(element));
       }
 
       unlock();
@@ -133,6 +128,15 @@ namespace ogame {
     void UpgradeResourceInfo::populateInformationFromElement(const core::Building& element, const core::Planet& planet) {
       setActiveBuilding(element.getType());
       populateInformationFromElement<core::AbstractUpgradable>(element, planet);
+
+      lock();
+
+      SwitchPictureContainer* upgrade = getChild<SwitchPictureContainer*>(std::string("upgrade_label"));
+      if (checkChild(upgrade, std::string("Upgrade resource info upgrade button"))) {
+        upgrade->updateStatus(planet.canUpgrade(element));
+      }
+
+      unlock();
     }
 
     template <>
@@ -140,6 +144,15 @@ namespace ogame {
     void UpgradeResourceInfo::populateInformationFromElement(const core::Research& element, const core::Planet& planet) {
       setActiveResearch(element.getType());
       populateInformationFromElement<core::AbstractUpgradable>(element, planet);
+
+      lock();
+
+      SwitchPictureContainer* upgrade = getChild<SwitchPictureContainer*>(std::string("upgrade_label"));
+      if (checkChild(upgrade, std::string("Upgrade resource info upgrade button"))) {
+        upgrade->updateStatus(planet.canResearch(element));
+      }
+
+      unlock();
     }
     
     template <>
