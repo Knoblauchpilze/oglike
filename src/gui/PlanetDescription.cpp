@@ -107,16 +107,18 @@ namespace ogame {
       // Update each information.
       LabelContainer* diameter = getChild<LabelContainer*>(std::string("diameter_value"));
       if (checkChild(diameter, "Planet diameter")) {
-        diameter->setText(std::to_string(static_cast<int>(planet.getDiameter())) + " kms");
+        diameter->setText(
+          std::to_string(static_cast<int>(planet.getDiameter())) + " kms" +
+          " (" + std::to_string(planet.getUsedFields()) + "/" + std::to_string(planet.getFields()) + ")"
+        );
       }
 
       LabelContainer* temperature = getChild<LabelContainer*>(std::string("temperature_value"));
       if (checkChild(temperature, "Planet temperature")) {
         temperature->setText(
-          std::to_string(static_cast<int>(planet.getMinTemperature())) +
+          std::to_string(static_cast<int>(planet.getMinTemperature())) + "°C"
           " to " +
-          std::to_string(static_cast<int>(planet.getMaxTemperature())) +
-          " degrees"
+          std::to_string(static_cast<int>(planet.getMaxTemperature())) + "°C"
         );
       }
 
