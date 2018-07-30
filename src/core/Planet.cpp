@@ -121,11 +121,15 @@ namespace ogame {
       m_defenseUpgrades.push_back(std::make_shared<DefenseUpgradeAction>(defense.get(), *this, *m_account));
     }
 
+    const bool Planet::canResearch(const Research& research) const {
+      return research.canUpgrade(getResourceDeposits()) && (!m_account || m_account->canResearch(research));
+    }
+
     void Planet::create() {
       // Push initial resources.
-      m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("metal"), 500.0f));
-      m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("crystal"), 500.0f));
-      m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("deuterium"), 0.0f));
+      m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("metal"), 15500.0f));
+      m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("crystal"), 25500.0f));
+      m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("deuterium"), 3000.0f));
 
       // Create ships.
       initializeShips();
