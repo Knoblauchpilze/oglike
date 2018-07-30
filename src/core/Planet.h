@@ -61,6 +61,10 @@ namespace ogame {
 
         const float& getMaxTemperature() const noexcept;
 
+        const unsigned& getFields() const noexcept;
+
+        const unsigned getUsedFields() const noexcept;
+
         const std::string getCoordinates() const;
 
         const unsigned getShipCount(const Ship::Type& type) const;
@@ -107,6 +111,8 @@ namespace ogame {
 
         void initializeBuildings();
 
+        void initializePhysicalCharacteristics();
+
         template<typename Data, typename EnumClass>
         const unsigned getIndexForData(const EnumClass& type, const std::vector<std::shared_ptr<Data>>& elements) const noexcept;
 
@@ -125,6 +131,7 @@ namespace ogame {
         std::vector<BuildingShPtr> m_buildings;
 
         float m_diameter;
+        unsigned m_fields;
         float m_minTemperature;
         float m_maxTemperature;
 
