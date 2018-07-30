@@ -141,6 +141,16 @@ namespace ogame {
     }
 
     inline
+    const bool Planet::canUpgrade(const Building& building) const {
+      return building.canUpgrade(getResourceDeposits()) && m_buildingUpgrades.empty();
+    }
+
+    inline
+    const bool Planet::canBuy(const FixedCostUnit& unit) const {
+      return unit.canBuy(getResourceDeposits());
+    }
+
+    inline
     void Planet::initializeShips() {
       // Create all ships on this planet.
       m_ships.push_back(ShipFactory::createLightFighter());

@@ -89,6 +89,12 @@ namespace ogame {
 
         const std::vector<std::shared_ptr<DefenseUpgradeAction>>& getDefenseUpgrades() const noexcept;
 
+        const bool canUpgrade(const Building& building) const;
+
+        const bool canResearch(const Research& research) const;
+
+        const bool canBuy(const FixedCostUnit& unit) const;
+
       private:
 
         void create();
