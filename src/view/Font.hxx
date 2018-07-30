@@ -37,7 +37,7 @@ namespace ogame {
       }
 
       // Proceed to rendering.
-      SDL_Surface* textSurface = TTF_RenderText_Blended(m_font, text.c_str(), color);
+      SDL_Surface* textSurface = TTF_RenderUTF8_Blended(m_font, text.c_str(), color);
       if (textSurface == nullptr) {
         throw FontException(std::string("Could not render text ") + text + " with font " + m_name);
       }
