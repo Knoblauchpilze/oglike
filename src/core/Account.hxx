@@ -101,6 +101,11 @@ namespace ogame {
     }
 
     inline
+    const bool Account::canResearch(const Research& research) const {
+      return m_researchUpgrades.empty();
+    }
+
+    inline
     void Account::initializeResearch() {
       // Create all research in this account.
       m_researches.push_back(core::ResearchFactory::createEnergyResearch());

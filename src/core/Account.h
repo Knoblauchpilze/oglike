@@ -66,6 +66,8 @@ namespace ogame {
 
         const std::vector<std::shared_ptr<ResearchUpgradeAction>>& getResearchUpgrades() const noexcept;
 
+        const bool canResearch(const Research& research) const;
+
       private:
 
         void initializeResearch();
