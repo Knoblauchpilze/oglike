@@ -80,7 +80,7 @@ namespace ogame {
     const std::string UpgradeActionContainer::getPictureNameFromBuilding(const core::Building::Type& type) const noexcept {
       const std::string path("data/img/");
       std::string image;
-      const std::string extension("_small.bmp");
+      const std::string extension("_mini.bmp");
 
       switch (type) {
         case core::Building::Type::MetalMine:
@@ -145,7 +145,7 @@ namespace ogame {
     const std::string UpgradeActionContainer::getPictureNameFromResearch(const core::Research::Type& type) const noexcept {
       const std::string path("data/img/");
       std::string image;
-      const std::string extension("_tech_small.bmp");
+      const std::string extension("_tech_mini.bmp");
 
       switch (type) {
         case core::Research::Type::Laser:
@@ -206,7 +206,7 @@ namespace ogame {
     const std::string UpgradeActionContainer::getPictureNameFromShip(const core::Ship::Type& type) const noexcept {
       const std::string path("data/img/");
       std::string image;
-      const std::string extension("_small.bmp");
+      const std::string extension("_mini.bmp");
 
       switch (type) {
         case core::Ship::Type::LightFighter:
@@ -262,7 +262,7 @@ namespace ogame {
     const std::string UpgradeActionContainer::getPictureNameFromDefense(const core::Defense::Type& type) const noexcept {
       const std::string path("data/img/");
       std::string image;
-      const std::string extension("_small.bmp");
+      const std::string extension("_mini.bmp");
 
       switch (type) {
         case core::Defense::Type::MissileLauncher:
