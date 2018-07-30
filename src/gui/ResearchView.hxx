@@ -16,7 +16,7 @@ namespace ogame {
         const core::Research::Type researchType = computeResearchFromOriginNode(origin);
 
         // Assign the corresponding image into the panel.
-        const std::string image = getPictureNameFromResearch(researchType);
+        const std::string image = getPictureNameFromResearch(researchType, false);
         action.setImagePath(image);
 
         // Now retrieve information about this research using the active account.
@@ -97,10 +97,10 @@ namespace ogame {
     }
 
     inline
-    const std::string ResearchView::getPictureNameFromResearch(const core::Research::Type& type) const noexcept {
+    const std::string ResearchView::getPictureNameFromResearch(const core::Research::Type& type, const bool reduced) const noexcept {
       const std::string path("data/img/");
       std::string image;
-      const std::string extension("_tech.bmp");
+      const std::string extension(reduced ? "_tech_small.bmp" : "_tech.bmp");
 
       switch (type) {
         case core::Research::Type::Laser:

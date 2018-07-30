@@ -13,7 +13,7 @@ namespace ogame {
         const core::Defense::Type defenseType = computeDefenseFromOriginNode(origin);
 
         // Assign the corresponding image into the panel.
-        const std::string image = getPictureNameFromDefense(defenseType);
+        const std::string image = getPictureNameFromDefense(defenseType, false);
         action.setImagePath(image);
 
         // Now retrieve information about this research using the active planet.
@@ -76,10 +76,10 @@ namespace ogame {
     }
 
     inline
-    const std::string DefenseView::getPictureNameFromDefense(const core::Defense::Type& type) const noexcept {
+    const std::string DefenseView::getPictureNameFromDefense(const core::Defense::Type& type, const bool reduced) const noexcept {
       const std::string path("data/img/");
       std::string image;
-      const std::string extension(".bmp");
+      const std::string extension(reduced ? "_small.bmp" : ".bmp");
 
       switch (type) {
         case core::Defense::Type::MissileLauncher:

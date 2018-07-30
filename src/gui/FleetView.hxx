@@ -13,7 +13,7 @@ namespace ogame {
         const core::Ship::Type shipType = computeShipFromOriginNode(origin);
 
         // Assign the corresponding image into the panel.
-        const std::string image = getPictureNameFromShip(shipType);
+        const std::string image = getPictureNameFromShip(shipType, false);
         action.setImagePath(image);
 
         // Now retrieve information about this ship using the active planet.
@@ -88,10 +88,10 @@ namespace ogame {
     }
 
     inline
-    const std::string FleetView::getPictureNameFromShip(const core::Ship::Type& type) const noexcept {
+    const std::string FleetView::getPictureNameFromShip(const core::Ship::Type& type, const bool reduced) const noexcept {
       const std::string path("data/img/");
       std::string image;
-      const std::string extension(".bmp");
+      const std::string extension(reduced ? "_small.bmp" : ".bmp");
 
       switch (type) {
         case core::Ship::Type::LightFighter:

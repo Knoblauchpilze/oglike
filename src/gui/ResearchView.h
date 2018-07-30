@@ -32,7 +32,7 @@ namespace ogame {
 
         const core::Research::Type computeResearchFromOriginNode(const std::string& origin) const noexcept;
 
-        const std::string getPictureNameFromResearch(const core::Research::Type& type) const noexcept;
+        const std::string getPictureNameFromResearch(const core::Research::Type& type, const bool reduced = true) const noexcept;
 
       private:
 
