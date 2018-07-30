@@ -13,7 +13,7 @@ namespace ogame {
         const core::Building::Type buildingType = computeBuildingFromOriginNode(origin);
 
         // Assign the corresponding image into the panel.
-        const std::string image = getPictureNameFromBuilding(buildingType);
+        const std::string image = getPictureNameFromBuilding(buildingType, false);
         action.setImagePath(image);
 
         // Now retrieve information about this building using the active planet.
@@ -70,10 +70,10 @@ namespace ogame {
     }
 
     inline
-    const std::string FacilitiesView::getPictureNameFromBuilding(const core::Building::Type& type) const noexcept {
+    const std::string FacilitiesView::getPictureNameFromBuilding(const core::Building::Type& type, const bool reduced) const noexcept {
       const std::string path("data/img/");
       std::string image;
-      const std::string extension(".bmp");
+      const std::string extension(reduced ? "_small.bmp" : ".bmp");
 
       switch (type) {
         case core::Building::Type::RoboticsFactory:
