@@ -37,6 +37,10 @@ namespace ogame {
 
         void onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) override;
 
+      protected:
+
+        void onMouseButtonReleasedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) override;
+
       private:
 
         void createView(view::ColoredFontShPtr font, const Alignment& alignment);

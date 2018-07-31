@@ -73,8 +73,8 @@ namespace ogame {
           unlock();
           setActiveOption(optionToSet);
         }
-        std::cout << "[VS] Notifying for value " << m_selectedOption << " mask is " << static_cast<int>(mask) << std::endl;
-        notifyGraphicListeners(view::EventListener::Interaction::MouseButtonPressed);
+
+        notifyGraphicListeners(view::EventListener::Interaction::MouseButtonReleased);
       }
     }
 
