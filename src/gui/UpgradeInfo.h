@@ -5,20 +5,27 @@
 #include <string>
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
+#include "GraphicContainerListener.h"
 #include "LabelContainer.h"
 #include "Planet.h"
 #include "ResourceMine.h"
+#include "DataModelImplementation.h"
 
 namespace ogame {
   namespace gui {
 
-    class UpgradeInfo: public view::GraphicContainer
+    class UpgradeInfo: public view::GraphicContainer, public player::GeneralActionListener, view::GraphicContainerListener
     {
       public:
 
-        UpgradeInfo(const std::string& name);
+        UpgradeInfo(const std::string& name,
+                    player::GeneralDataModelShPtr model);
 
         virtual ~UpgradeInfo();
+
+        void onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) override;
+
+        void onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) override;
 
         template <typename Element>
         inline
