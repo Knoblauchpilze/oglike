@@ -39,7 +39,8 @@ namespace ogame {
                       const unsigned& shipyardLevel,
                       const unsigned& laboratoryLevel,
                       const unsigned& roboticsLevel,
-                      const unsigned& naniteLevel);
+                      const unsigned& naniteLevel,
+                      const unsigned& number = 1u);
 
         float& getDuration();
 
@@ -59,6 +60,7 @@ namespace ogame {
 
         std::chrono::system_clock::time_point m_start;
         Type m_type;
+        unsigned m_number;
         float m_duration;
         unsigned m_universeSpeed;
         unsigned m_shipyardLevel;
