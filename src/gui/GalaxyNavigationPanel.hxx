@@ -55,11 +55,10 @@ namespace ogame {
 
     inline
     ValueSelectorShPtr GalaxyNavigationPanel::createValueSelector(const std::string& name,
-                                                                  player::GeneralDataModel* model,
                                                                   view::ColoredFontShPtr font,
                                                                   const std::vector<std::string>& options) const
     {
-      return ComponentFactory::createValueSelectorPanel(name, model, font, options);
+      return ComponentFactory::createValueSelectorPanel(name, font, options);
     }
 
   }

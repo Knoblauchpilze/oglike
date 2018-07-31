@@ -21,7 +21,7 @@ namespace ogame {
     {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
 
-      createView(galaxyCount, systemCount, model);
+      createView(galaxyCount, systemCount);
 
       connectDataModel(model);
     }
@@ -76,8 +76,7 @@ namespace ogame {
     }
 
     void GalaxyNavigationPanel::createView(const unsigned& galaxyCount,
-                                           const unsigned& systemCount,
-                                           player::GeneralDataModelShPtr model)
+                                           const unsigned& systemCount)
     {
       // Create the main layout for this panel.
       view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(4u, 4u, 0.0f);
@@ -106,7 +105,6 @@ namespace ogame {
         galaxies.push_back(std::to_string(galaxy + 1));
       }
       ValueSelectorShPtr galaxySelector = createValueSelector(std::string("galaxy_selector"),
-                                                              model.get(),
                                                               view::FontFactory::getInstance().createColoredFont(
                                                                 std::string("data/fonts/ARLRDBD.ttf"),
                                                                 0, 0, 0
@@ -118,7 +116,6 @@ namespace ogame {
         systems.push_back(std::to_string(system + 1));
       }
       ValueSelectorShPtr systemSelector = createValueSelector(std::string("system_selector"),
-                                                              model.get(),
                                                               view::FontFactory::getInstance().createColoredFont(
                                                                 std::string("data/fonts/ARLRDBD.ttf"),
                                                                 0, 0, 0
