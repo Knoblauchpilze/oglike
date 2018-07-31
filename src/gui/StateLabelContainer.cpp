@@ -7,27 +7,19 @@ namespace ogame {
 
     StateLabelContainer::StateLabelContainer(const std::string& name,
                                              const std::string& text,
-                                             const player::View& view,
-                                             player::GeneralDataModel* model,
-                                             view::ColoredFontShPtr font,
-                                             view::ColoredFontShPtr highlightFont,
-                                             const StateContainer::StateAssociation& colors,
+                                             const FontAssociation& colors,
+                                             const LabelContainer::Alignment& alignment,
                                              const StateContainer::FailPolicy& policy):
-      ActionProviderStateContainer(name,
-                                   StateContainer::State::Normal,
-                                   colors,
-                                   view,
-                                   model,
-                                   policy),
-      m_textChanged(true),
-      m_text(text),
-      
-      m_fontChanged(true),
-      m_font(font),
-      
-      m_hFontChanged(true),
-      m_hFont(highlightFont),
+      view::GraphicContainer(name,
+                             view::utils::Area()),
+      m_state(StateContainer::State::Normal),
+      m_policy(policy),
+      m_colors(colors),
+      m_alignment(alignment),
 
+      m_text(text),
+      m_textChanged(true),
+      m_highlightChanged(true),
       m_textSurface(nullptr)
     {
       // Nothing to do here.
@@ -42,11 +34,11 @@ namespace ogame {
       createText();
 
       // Create the surface based on the dimensions of this container.
-      SDL_Surface* croppedArea = StateContainer::createContentPrivate();
+      SDL_Surface* croppedArea = view::GraphicContainer::createContentPrivate();
       if (croppedArea == nullptr) {
         throw GuiException(std::string("Unable to create perform rendering for state label container ") + getName() + " using text " + m_text);
       }
-      StateContainer::clearContentPrivate(croppedArea);
+      view::GraphicContainer::clearContentPrivate(croppedArea);
 
       // Check whether some text should be displayed.
       if (m_textSurface != nullptr) {
@@ -63,9 +55,8 @@ namespace ogame {
       }
 
       // Reset flags.
-      m_fontChanged = false;
-      m_hFontChanged = false;
       m_textChanged = false;
+      m_highlightChanged = false;
 
       // This is the final image for this container.
       return croppedArea;
