@@ -19,7 +19,8 @@ namespace ogame {
 
         ShipUpgradeAction(const Ship* ship,
                           const Planet& planet,
-                          const Account& account);
+                          const Account& account,
+                          const unsigned& number);
 
         virtual ~ShipUpgradeAction();
 
