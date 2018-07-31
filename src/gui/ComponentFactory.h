@@ -74,9 +74,9 @@ namespace ogame {
         static
         ValueSelectorShPtr
         createValueSelectorPanel(const std::string& name,
-                                 player::GeneralDataModel* model,
                                  view::ColoredFontShPtr font,
-                                 const std::vector<std::string>& options = std::vector<std::string>());
+                                 const std::vector<std::string>& options = std::vector<std::string>(),
+                                 const ValueSelector::Alignment& alignment = ValueSelector::Alignment::Horizontal);
 
         static
         LabelledPictureShPtr
