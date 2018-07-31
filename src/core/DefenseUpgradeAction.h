@@ -17,7 +17,8 @@ namespace ogame {
 
         DefenseUpgradeAction(const Defense* defense,
                              const Planet& planet,
-                             const Account& account);
+                             const Account& account,
+                             const unsigned& number);
 
         virtual ~DefenseUpgradeAction();
 
