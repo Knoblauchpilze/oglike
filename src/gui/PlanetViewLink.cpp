@@ -11,9 +11,11 @@ namespace ogame {
   namespace gui {
 
     PlanetViewLink::PlanetViewLink(const std::string& name,
-                                   const unsigned& planetCount):
-      view::GraphicContainer(name,
-                             view::utils::Area())
+                                   const unsigned& planetCount,
+                                   const StateContainer::StateAssociation& colors):
+      StateContainer(name,
+                     StateContainer::State::Normal,
+                     colors)
     {
       setBackgroundColor(SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE});
 
@@ -31,12 +33,12 @@ namespace ogame {
         picture->populateWithPlanetData(planet);
       }
 
-      LabelContainer* name = getChild<LabelContainer*>(std::string("planet_name"));
+      StateLabelContainer* name = getChild<StateLabelContainer*>(std::string("planet_name"));
       if (checkChild(name, "Planet name")) {
         name->setText(planet.getName());
       }
 
-      LabelContainer* coords = getChild<LabelContainer*>(std::string("planet_coords"));
+      StateLabelContainer* coords = getChild<StateLabelContainer*>(std::string("planet_coords"));
       if (checkChild(coords, "Planet name")) {
         try {
           coords->setText(planet.getCoordinates());
@@ -58,34 +60,44 @@ namespace ogame {
       unlock();
     }
 
-    void PlanetViewLink::createView(const unsigned& planetCount) {
+    void PlanetViewLink::createView(const unsigned& planetCount)
+    {
       // Create the main layout.
       view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(4u, 2u, 0.0f);
       if (layout == nullptr) {
         throw GuiException(std::string("Could not create layout for container" ) + getName());
       }
 
+      StateLabelContainer::FontAssociation textColors;
+      textColors[StateContainer::State::Normal]      = view::FontFactory::getInstance().createColoredFont(
+        std::string("data/fonts/times.ttf"),
+        85, 126, 148, SDL_ALPHA_OPAQUE,
+        13
+      );
+      textColors[StateContainer::State::Highlighted] = view::FontFactory::getInstance().createColoredFont(
+        std::string("data/fonts/times.ttf"),
+        0, 64, 0, SDL_ALPHA_OPAQUE,
+        13
+      );
+      textColors[StateContainer::State::Selected]    = view::FontFactory::getInstance().createColoredFont(
+        std::string("data/fonts/times.ttf"),
+        0, 32, 0, SDL_ALPHA_OPAQUE,
+        13
+      );
+
       // Create the planet info.
       PlanetIconDisplayShPtr planet = std::make_shared<PlanetIconDisplay>(planetCount, std::string("planet_picture"));
 
-      LabelContainerShPtr name = ComponentFactory::createLabelPanel(
+      StateLabelContainerShPtr name = ComponentFactory::createStateLabelPanel(
         std::string("planet_name"),
         std::string("Default planet name"),
-        view::FontFactory::getInstance().createColoredFont(
-          std::string("data/fonts/times.ttf"),
-          97, 154, 191, SDL_ALPHA_OPAQUE,
-          10
-        )
+        textColors
       );
 
-      LabelContainerShPtr coord = ComponentFactory::createLabelPanel(
+      StateLabelContainerShPtr coord = ComponentFactory::createStateLabelPanel(
         std::string("planet_coords"),
         std::string("[X:YYY:ZZ]"),
-        view::FontFactory::getInstance().createColoredFont(
-          std::string("data/fonts/times.ttf"),
-          97, 154, 191, SDL_ALPHA_OPAQUE,
-          10
-        )
+        textColors
       );
 
       SwitchPictureContainerShPtr moon = ComponentFactory::createSwitchPicturePanel(
