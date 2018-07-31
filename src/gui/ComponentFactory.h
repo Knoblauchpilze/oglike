@@ -6,6 +6,7 @@
 #include "ColoredFont.h"
 #include "LabelContainer.h"
 #include "StateLabelContainer.h"
+#include "ActionProviderLabelStateContainer.h"
 #include "ValueSelector.h"
 #include "LabelledPicture.h"
 #include "ConditionalPictureContainer.h"
@@ -55,12 +56,20 @@ namespace ogame {
         StateLabelContainerShPtr
         createStateLabelPanel(const std::string& name,
                               const std::string& text,
-                              const player::View& view,
-                              player::GeneralDataModel* model,
-                              view::ColoredFontShPtr font,
-                              view::ColoredFontShPtr highlightFont = nullptr,
-                              const StateContainer::StateAssociation& colors = StateContainer::StateAssociation(),
+                              const StateLabelContainer::FontAssociation& fonts,
+                              const LabelContainer::Alignment& alignment = LabelContainer::Alignment::Center,
                               const StateContainer::FailPolicy& policy = StateContainer::FailPolicy::Aggressive);
+
+        static
+        ActionProviderLabelStateContainerShPtr
+        createActionProviderLabelStatePanel(const std::string& name,
+                                            const std::string& text,
+                                            const player::View& view,
+                                            player::GeneralDataModel* model,
+                                            view::ColoredFontShPtr font,
+                                            view::ColoredFontShPtr highlightFont = nullptr,
+                                            const StateContainer::StateAssociation& colors = StateContainer::StateAssociation(),
+                                            const StateContainer::FailPolicy& policy = StateContainer::FailPolicy::Aggressive);
 
         static
         ValueSelectorShPtr
