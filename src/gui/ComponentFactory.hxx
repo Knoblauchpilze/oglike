@@ -115,15 +115,15 @@ namespace ogame {
     inline
     ValueSelectorShPtr
     ComponentFactory::createValueSelectorPanel(const std::string& name,
-                                               player::GeneralDataModel* model,
                                                view::ColoredFontShPtr font,
-                                               const std::vector<std::string>& options)
+                                               const std::vector<std::string>& options,
+                                               const ValueSelector::Alignment& alignment)
     {
       return std::make_shared<ValueSelector>(
         name,
-        model,
         font,
-        options
+        options,
+        alignment
       );
     }
 
