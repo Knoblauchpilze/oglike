@@ -1,6 +1,7 @@
 
 #include "ValueSelector.h"
 #include "LinearLayout.h"
+#include "GridLayout.h"
 #include "GuiException.h"
 #include "ComponentFactory.h"
 
@@ -8,30 +9,21 @@ namespace ogame {
   namespace gui {
 
     ValueSelector::ValueSelector(const std::string& name,
-                                 player::GeneralDataModel* model,
                                  view::ColoredFontShPtr font,
-                                 const std::vector<std::string>& options):
+                                 const std::vector<std::string>& options,
+                                 const Alignment& alignment):
       view::GraphicContainer(name,
                              view::utils::Area(),
-                             view::EventListener::Interaction::MouseButton,
-                             false,
-                             view::EventListener::Sensitivity::Local,
-                             std::make_shared<view::LinearLayout>(
-                               view::LinearLayout::Direction::Horizontal,
-                               0.0f, 0.0f,
-                               this
-                             )),
+                             view::EventListener::Interaction::MouseButtonReleased,
+                             true),
       view::GraphicContainerListener(),
-      player::GeneralActionListener(model),
       m_selectedOption(0u),
       m_options(options)
     {
       // Assign the background color.
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
 
-      createView(font);
-
-      buildIndicesTableFromOptions();
+      createView(font, alignment);
     }
 
     ValueSelector::~ValueSelector() {
@@ -81,17 +73,20 @@ namespace ogame {
           unlock();
           setActiveOption(optionToSet);
         }
-
+        std::cout << "[VS] Notifying for value " << m_selectedOption << " mask is " << static_cast<int>(mask) << std::endl;
         notifyGraphicListeners(view::EventListener::Interaction::MouseButtonPressed);
       }
     }
 
-    void ValueSelector::createView(view::ColoredFontShPtr font)
+    void ValueSelector::createView(view::ColoredFontShPtr font, const Alignment& alignment)
     {
       // Left switch option.
-      PictureContainerShPtr left = ComponentFactory::createPicturePanel(
+      PictureContainerShPtr inferior = ComponentFactory::createPicturePanel(
         std::string("left_switch"),
-        std::string("data/img/switch_left.bmp"),
+        alignment == Alignment::Horizontal ?
+          std::string("data/img/switch_left.bmp") :
+          std::string("data/img/switch_down.bmp")
+        ,
         view::EventListener::Interaction::MouseButtonReleased
       );
 
@@ -106,30 +101,77 @@ namespace ogame {
       );
 
       // Right switch option.
-      PictureContainerShPtr right = ComponentFactory::createPicturePanel(
+      PictureContainerShPtr superior = ComponentFactory::createPicturePanel(
         std::string("right_switch"),
-        std::string("data/img/switch_right.bmp"),
+        alignment == Alignment::Horizontal ?
+          std::string("data/img/switch_right.bmp") :
+          std::string("data/img/switch_up.bmp")
+        ,
         view::EventListener::Interaction::MouseButtonReleased
       );
 
-      if (left == nullptr ||
+      if (inferior == nullptr ||
           label == nullptr ||
-          right == nullptr)
+          superior == nullptr)
       {
         throw GuiException(std::string("Could not allocate one of the panel needed for selector ") + getName());
       }
 
-      addChild(left);
-      addChild(label);
-      addChild(right);
+      if (alignment == Alignment::Horizontal) {
+        createHorizontalAlignment(inferior, superior, label);
+      }
+      else {
+        createVerticalAlignment(inferior, superior, label, alignment);
+      }
 
-      left->addEventListener(this);
-      right->addEventListener(this);
+      inferior->addEventListener(this);
+      superior->addEventListener(this);
+
     }
 
-    void ValueSelector::buildIndicesTableFromOptions() {
-      for (unsigned indexOption = 0u ; indexOption < m_options.size() ; ++indexOption) {
-        m_indices[m_options[indexOption]] = indexOption;
+    void ValueSelector::createHorizontalAlignment(PictureContainerShPtr inferior,
+                                                  PictureContainerShPtr superior,
+                                                  LabelContainerShPtr value)
+    {
+      view:: LinearLayoutShPtr layout = std::make_shared<view::LinearLayout>(
+        view::LinearLayout::Direction::Horizontal,
+        0.0f, 0.0f,
+        this
+      );
+
+      if (layout == nullptr) {
+        throw GuiException(std::string("Could not allocate layout needed for selector ") + getName());
+      }
+
+      setLayout(layout);
+
+      addChild(inferior);
+      addChild(value);
+      addChild(superior);
+    }
+
+    void ValueSelector::createVerticalAlignment(PictureContainerShPtr inferior,
+                                                PictureContainerShPtr superior,
+                                                LabelContainerShPtr value,
+                                                const Alignment& alignment)
+    {
+      view:: GridLayoutShPtr layout = std::make_shared<view::GridLayout>(4u, 2u, 0.0f, this);
+
+      if (layout == nullptr) {
+        throw GuiException(std::string("Could not allocate layout needed for selector ") + getName());
+      }
+
+      setLayout(layout);
+
+      if (alignment == Alignment::VerticalLeft) {
+        addChild(superior, 0u, 0u, 1u, 1u);
+        addChild(inferior, 0u, 1u, 1u, 1u);
+        addChild(value,    1u, 0u, 3u, 2u);
+      }
+      else {
+        addChild(superior, 3u, 0u, 1u, 1u);
+        addChild(inferior, 3u, 1u, 1u, 1u);
+        addChild(value,    0u, 0u, 3u, 2u);
       }
     }
 

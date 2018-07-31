@@ -7,19 +7,27 @@
 #include "GraphicContainer.h"
 #include "GraphicContainerListener.h"
 #include "ColoredFont.h"
-#include "DataModelImplementation.h"
+#include "PictureContainer.h"
+#include "LabelContainer.h"
 
 namespace ogame {
   namespace gui {
 
-    class ValueSelector: public view::GraphicContainer, public view::GraphicContainerListener, public player::GeneralActionListener
+    class ValueSelector: public view::GraphicContainer, public view::GraphicContainerListener
     {
       public:
 
+        // Specify the position of the selector buttons respectively to the value.
+        enum class Alignment {
+          VerticalLeft,
+          VerticalRight,
+          Horizontal
+        };
+
         ValueSelector(const std::string& name,
-                      player::GeneralDataModel* model,
                       view::ColoredFontShPtr font,
-                      const std::vector<std::string>& options = std::vector<std::string>());
+                      const std::vector<std::string>& options = std::vector<std::string>(),
+                      const Alignment& alignment = Alignment::Horizontal);
 
         virtual ~ValueSelector();
 
@@ -29,19 +37,23 @@ namespace ogame {
 
         void onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) override;
 
-        void onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) override;
-
       private:
 
-        void createView(view::ColoredFontShPtr font);
+        void createView(view::ColoredFontShPtr font, const Alignment& alignment);
 
-        void buildIndicesTableFromOptions();
+        void createHorizontalAlignment(PictureContainerShPtr inferior,
+                                       PictureContainerShPtr superior,
+                                       LabelContainerShPtr value);
+
+        void createVerticalAlignment(PictureContainerShPtr inferior,
+                                     PictureContainerShPtr superior,
+                                     LabelContainerShPtr value,
+                                     const Alignment& alignment);
 
       private:
 
         unsigned m_selectedOption;
         std::vector<std::string> m_options;
-        std::unordered_map<std::string, unsigned> m_indices;
 
     };
 
