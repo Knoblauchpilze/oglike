@@ -36,13 +36,23 @@ namespace ogame {
       }
 
       if (maxIndex >= 0) {
+        removeAndDestroy(childToRemove);
         removeChild(childToRemove);
       }
     }
 
     inline
     const std::string PhotoGallery::generateNameFromImage(const std::string& imageName) const {
-      return imageName + std::string("_child");
+      unsigned indexImage = 0u;
+      const std::string childNamedImage = imageName + std::string("_child_");
+      std::string generated = childNamedImage + std::to_string(indexImage);
+      std::unordered_map<std::string, int>::const_iterator existing = m_indices.find(generated);
+      while (existing != m_indices.cend()) {
+        ++indexImage;
+        generated = childNamedImage + std::to_string(indexImage);
+        existing = m_indices.find(generated);
+      }
+      return generated;
     }
 
   }
