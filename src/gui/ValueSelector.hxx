@@ -14,6 +14,11 @@ namespace ogame {
       return option;
     }
 
+    inline
+    void ValueSelector::onMouseButtonReleasedEventPrivate(const SDL_MouseButtonEvent& mouseButtonEvent) {
+      // Avoid sending twice this signal as it is already handled by the onInteractionPerformed method.
+    }
+
   }
 }
 
