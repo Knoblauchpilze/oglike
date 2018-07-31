@@ -18,7 +18,8 @@ namespace ogame {
                              view::EventListener::Interaction::NoInteraction,
                              false),
       player::GeneralActionListener(model),
-      m_planetCount(planetCount)
+      m_planetCount(planetCount),
+      m_colors()
     {
       setBackgroundColor({14, 57, 83, SDL_ALPHA_OPAQUE});
 
@@ -87,6 +88,10 @@ namespace ogame {
       if (layout == nullptr) {
         throw GuiException(std::string("Could not create layout for container" ) + getName());
       }
+
+      m_colors[StateContainer::State::Normal]      = SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE};
+      m_colors[StateContainer::State::Highlighted] = SDL_Color{85, 126, 148, SDL_ALPHA_OPAQUE};
+      m_colors[StateContainer::State::Selected]    = SDL_Color{85, 126, 148, SDL_ALPHA_OPAQUE};
 
       // Informative panel.
       LabelContainerShPtr info = ComponentFactory::createLabelPanel(
