@@ -55,9 +55,14 @@ namespace ogame {
 
           lock();
 
-          SwitchPictureContainer* upgrade = getChild<SwitchPictureContainer*>(std::string("upgrade_label"));
-          if (checkChild(upgrade, std::string("Upgrade resource info upgrade button"))) {
-            upgrade->updateStatus(false);
+          if (activeView == player::View::Resources ||
+              activeView == player::View::Facilities ||
+              activeView == player::View::Research)
+          {
+            SwitchPictureContainer* upgrade = getChild<SwitchPictureContainer*>(std::string("upgrade_label"));
+            if (checkChild(upgrade, std::string("Upgrade resource info upgrade button"))) {
+              upgrade->updateStatus(false);
+            }
           }
 
           unlock();
