@@ -14,6 +14,25 @@
 namespace ogame {
   namespace gui {
 
+    inline
+    void UpgradeInfo::onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) {}
+
+    inline
+    void UpgradeInfo::onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) {
+      // Determine the origin of the event (either galaxy or system selector) and update the corresponding value in the data model.
+      if (origin == std::string("unit_number")) {
+        // Retrieve the value from the galaxy selector
+        ValueSelector* unitCount = getChild<ValueSelector*>(std::string("unit_number"));
+        if (checkChild(unitCount, std::string("Upgrade info unit count"))) {
+          std::cout << "[UI] Setting unit count to " << unitCount->getActiveOption() << " mask=" << static_cast<int>(mask) << std::endl;
+          setUnitCount(unitCount->getActiveOption());
+        }
+      }
+      else {
+        std::cerr << "[NAVIGATION] Caught interaction in " << getName() << " from unknown origin " << origin << std::endl;
+      }
+    }
+
     template <typename Element>
     inline
     void UpgradeInfo::populateInformationFromElement(const Element& element,
@@ -69,10 +88,10 @@ namespace ogame {
         gain->setText(computeProductionDisplay(element, planet));
       }
 
-      LabelContainer* unitCount = getChild<LabelContainer*>(std::string("unit_number"));
+      ValueSelector* unitCount = getChild<ValueSelector*>(std::string("unit_number"));
       if (checkChild(unitCount, std::string("Upgrade info unit count"))) {
         unitCount->setEnabled(false);
-        unitCount->setText("");
+        unitCount->setActiveOption(0u);
       }
 
       unlock();
@@ -122,10 +141,10 @@ namespace ogame {
         gain->setText(std::string(""));
       }
 
-      LabelContainer* unitCount = getChild<LabelContainer*>(std::string("unit_number"));
+      ValueSelector* unitCount = getChild<ValueSelector*>(std::string("unit_number"));
       if (checkChild(unitCount, std::string("Upgrade info unit count"))) {
         unitCount->setEnabled(false);
-        unitCount->setText("");
+        unitCount->setActiveOption(0u);
       }
 
       unlock();
@@ -182,11 +201,11 @@ namespace ogame {
         number->setText(std::string("Number:"));
       }
 
-      LabelContainer* unitCount = getChild<LabelContainer*>(std::string("unit_number"));
+      ValueSelector* unitCount = getChild<ValueSelector*>(std::string("unit_number"));
       if (checkChild(unitCount, std::string("Upgrade info unit count"))) {
         // TODO.
         unitCount->setEnabled(true);
-        unitCount->setText(std::to_string(0));
+        unitCount->setActiveOption(0u);
       }
 
       unlock();
@@ -239,11 +258,11 @@ namespace ogame {
         number->setText(std::string("Number:"));
       }
 
-      LabelContainer* unitCount = getChild<LabelContainer*>(std::string("unit_number"));
+      ValueSelector* unitCount = getChild<ValueSelector*>(std::string("unit_number"));
       if (checkChild(unitCount, std::string("Upgrade info unit count"))) {
         // TODO.
         unitCount->setEnabled(true);
-        unitCount->setText(std::to_string(0));
+        unitCount->setActiveOption(0u);
       }
 
       unlock();

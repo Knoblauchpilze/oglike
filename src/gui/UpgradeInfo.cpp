@@ -2,13 +2,17 @@
 #include "UpgradeInfo.h"
 #include "GridLayout.h"
 #include "GuiException.h"
+#include "ComponentFactory.h"
+#include "FontFactory.h"
 
 namespace ogame {
   namespace gui {
 
-    UpgradeInfo::UpgradeInfo(const std::string& name):
+    UpgradeInfo::UpgradeInfo(const std::string& name,
+                             player::GeneralDataModelShPtr model):
       view::GraphicContainer(name,
-                             view::utils::Area())
+                             view::utils::Area()),
+      player::GeneralActionListener(model.get())
     {
       createView();
     }
@@ -19,6 +23,11 @@ namespace ogame {
       view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(4u, 5u, 0.0f);
       if (layout == nullptr) {
         throw GuiException(std::string("Could not allocate memory to create upgrade info panel"));
+      }
+
+      std::vector<std::string> options(1000);
+      for (unsigned value = 0u ; value < 1000u ; ++value) {
+        options[value] = std::to_string(value);
       }
 
       LabelContainerShPtr title = createLabelPanel(
@@ -57,13 +66,14 @@ namespace ogame {
         true,
         LabelContainer::Alignment::Left
       );
-      LabelContainerShPtr unitNumber = createLabelPanel(
+      ValueSelectorShPtr unitNumber = ComponentFactory::createValueSelectorPanel(
         std::string("unit_number"),
-        std::string(""),
-        SDL_Color{0, 0, 0, SDL_ALPHA_OPAQUE},
-        SDL_Color{255, 255, 255, SDL_ALPHA_OPAQUE},
-        false,
-        LabelContainer::Alignment::Right
+        view::FontFactory::getInstance().createColoredFont(
+          std::string("data/fonts/upcfb.ttf"),
+          0, 0, 0, SDL_ALPHA_OPAQUE
+        ),
+        options,
+        ValueSelector::Alignment::VerticalRight
       );
 
       if (title == nullptr ||
@@ -93,6 +103,8 @@ namespace ogame {
       addChild(unitNumber);
 
       setLayout(layout);
+
+      unitNumber->addEventListener(this);
     }
 
   }
