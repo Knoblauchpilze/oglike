@@ -35,15 +35,60 @@ namespace ogame {
       };
 
       // Add each option.
-      StateLabelContainerShPtr overview = createStateLabelPanel(player::View::Overview, std::string("Overview"), colors, model);
-      StateLabelContainerShPtr resources = createStateLabelPanel(player::View::Resources, std::string("Resources"), colors, model);
-      StateLabelContainerShPtr facilities = createStateLabelPanel(player::View::Facilities, std::string("Facilities"), colors, model);
-      StateLabelContainerShPtr research = createStateLabelPanel(player::View::Research, std::string("Research"), colors, model);
-      StateLabelContainerShPtr shipyard = createStateLabelPanel(player::View::Shipyard, std::string("Shipyard"), colors, model);
-      StateLabelContainerShPtr defense = createStateLabelPanel(player::View::Defense, std::string("Defense"), colors, model);
-      StateLabelContainerShPtr fleet = createStateLabelPanel(player::View::Fleet, std::string("Fleet"), colors, model);
-      StateLabelContainerShPtr galaxy = createStateLabelPanel(player::View::Galaxy, std::string("Galaxy"), colors, model);
-      StateLabelContainerShPtr alliance = createStateLabelPanel(player::View::Alliance, std::string("Alliance"), colors, model);
+      ActionProviderLabelStateContainerShPtr overview = createActionStateLabelPanel(
+        player::View::Overview,
+        std::string("Overview"),
+        colors,
+        model
+      );
+      ActionProviderLabelStateContainerShPtr resources = createActionStateLabelPanel(
+        player::View::Resources,
+        std::string("Resources"),
+        colors,
+        model
+      );
+      ActionProviderLabelStateContainerShPtr facilities = createActionStateLabelPanel(
+        player::View::Facilities,
+        std::string("Facilities"),
+        colors,
+        model
+      );
+      ActionProviderLabelStateContainerShPtr research = createActionStateLabelPanel(
+        player::View::Research,
+        std::string("Research"),
+        colors,
+        model
+      );
+      ActionProviderLabelStateContainerShPtr shipyard = createActionStateLabelPanel(
+        player::View::Shipyard,
+        std::string("Shipyard"),
+        colors,
+        model
+      );
+      ActionProviderLabelStateContainerShPtr defense = createActionStateLabelPanel(
+        player::View::Defense,
+        std::string("Defense"),
+        colors,
+        model
+      );
+      ActionProviderLabelStateContainerShPtr fleet = createActionStateLabelPanel(
+        player::View::Fleet,
+        std::string("Fleet"),
+        colors,
+        model
+      );
+      ActionProviderLabelStateContainerShPtr galaxy = createActionStateLabelPanel(
+        player::View::Galaxy,
+        std::string("Galaxy"),
+        colors,
+        model
+      );
+      ActionProviderLabelStateContainerShPtr alliance = createActionStateLabelPanel(
+        player::View::Alliance,
+        std::string("Alliance"),
+        colors,
+        model
+      );
 
       if (overview == nullptr ||
           resources == nullptr ||

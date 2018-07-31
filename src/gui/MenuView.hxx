@@ -10,12 +10,12 @@ namespace ogame {
   namespace gui {
 
     inline
-    StateLabelContainerShPtr MenuView::createStateLabelPanel(const player::View& view,
-                                                             const std::string& text,
-                                                             const StateContainer::StateAssociation& colors,
-                                                             player::GeneralDataModel* model) const
+    ActionProviderLabelStateContainerShPtr MenuView::createActionStateLabelPanel(const player::View& view,
+                                                                                 const std::string& text,
+                                                                                 const StateContainer::StateAssociation& colors,
+                                                                                 player::GeneralDataModel* model) const
     {
-      return ComponentFactory::createStateLabelPanel(
+      return ComponentFactory::createActionProviderLabelStatePanel(
         getChildNameFromView(view),
         text,
         view,
