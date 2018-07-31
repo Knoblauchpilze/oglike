@@ -79,7 +79,7 @@ namespace ogame {
     }
 
     inline
-    const SDL_Color StateContainer::getColorFromState(const State& state) const noexcept {
+    const SDL_Color StateContainer::getColorFromState(const State& state) const {
       const StateAssociation::const_iterator color = m_colors.find(state);
       if (color != m_colors.cend()) {
           return color->second;
