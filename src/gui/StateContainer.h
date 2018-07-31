@@ -53,7 +53,7 @@ namespace ogame {
 
       private:
 
-        const SDL_Color getColorFromState(const State& state) const noexcept;
+        const SDL_Color getColorFromState(const State& state) const;
 
         void assignColorFromState(const State& state);
 
@@ -64,7 +64,6 @@ namespace ogame {
         State m_state;
         FailPolicy m_policy;
         StateAssociation m_colors;
-        std::map<State, int> m_toto;
 
     };
 
