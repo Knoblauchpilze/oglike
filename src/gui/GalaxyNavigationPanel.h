@@ -39,8 +39,7 @@ namespace ogame {
       private:
 
         void createView(const unsigned& galaxyCount,
-                        const unsigned& systemCount,
-                        player::GeneralDataModelShPtr model);
+                        const unsigned& systemCount);
 
         void connectDataModel(player::GeneralDataModelShPtr model);
 
@@ -49,7 +48,6 @@ namespace ogame {
                                              view::ColoredFontShPtr font) const;
 
         ValueSelectorShPtr createValueSelector(const std::string& name,
-                                               player::GeneralDataModel* model,
                                                view::ColoredFontShPtr font,
                                                const std::vector<std::string>& options) const;
 
