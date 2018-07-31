@@ -218,13 +218,15 @@ namespace ogame {
 
     inline
     void UpgradeResourceInfo::createUpgradeShipAction(core::Planet& planet, const player::GeneralDataModel& model) const {
-      planet.createUpgradeAction(model.getActiveShip());
+      planet.createUpgradeAction(model.getActiveShip(),
+                                 model.getUnitCount());
       triggerAction(player::Action::ChangePlanet);
     }
 
     inline
     void UpgradeResourceInfo::createUpgradeDefenseAction(core::Planet& planet, const player::GeneralDataModel& model) const {
-      planet.createUpgradeAction(model.getActiveDefense());
+      planet.createUpgradeAction(model.getActiveDefense(),
+                                 model.getUnitCount());
       triggerAction(player::Action::ChangePlanet);
     }
 
