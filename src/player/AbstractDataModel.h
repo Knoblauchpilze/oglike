@@ -51,6 +51,8 @@ namespace ogame {
 
         void setActiveDefense(const core::Defense::Type& defense);
 
+        void setUnitCount(const unsigned& value);
+
         const View& getActiveView() const;
 
         const core::Planet& getActivePlanet() const;
@@ -73,6 +75,8 @@ namespace ogame {
 
         const core::Defense::Type& getActiveDefense() const noexcept;
 
+        const unsigned& getUnitCount() const noexcept;
+
       private:
 
         using ListenersByAction = std::map<Action, std::vector<AbstractActionListener*>>;
@@ -89,6 +93,7 @@ namespace ogame {
         core::Building::Type m_building;
         core::Ship::Type m_ship;
         core::Defense::Type m_defense;
+        unsigned m_unitCount;
 
     };
 

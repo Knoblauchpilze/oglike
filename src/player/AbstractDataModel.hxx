@@ -64,6 +64,11 @@ namespace ogame {
     }
 
     inline
+    void AbstractDataModel::setUnitCount(const unsigned& value) {
+      m_unitCount = value;
+    }
+
+    inline
     const View& AbstractDataModel::getActiveView() const {
       return m_activeView;
     }
@@ -128,6 +133,11 @@ namespace ogame {
     inline
     const core::Defense::Type& AbstractDataModel::getActiveDefense() const noexcept {
       return m_defense;
+    }
+
+    inline
+    const unsigned& AbstractDataModel::getUnitCount() const noexcept {
+      return m_unitCount;
     }
 
   }
