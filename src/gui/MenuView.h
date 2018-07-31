@@ -4,7 +4,7 @@
 #include <memory>
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
-#include "StateLabelContainer.h"
+#include "ActionProviderLabelStateContainer.h"
 #include "DataModelImplementation.h"
 
 namespace ogame {
@@ -22,10 +22,10 @@ namespace ogame {
 
         void createView(player::GeneralDataModel* model);
 
-        StateLabelContainerShPtr createStateLabelPanel(const player::View& view,
-                                                       const std::string& text,
-                                                       const StateContainer::StateAssociation& colors,
-                                                       player::GeneralDataModel* model) const;
+        ActionProviderLabelStateContainerShPtr createActionStateLabelPanel(const player::View& view,
+                                                                           const std::string& text,
+                                                                           const StateContainer::StateAssociation& colors,
+                                                                           player::GeneralDataModel* model) const;
 
         std::string getChildNameFromView(const player::View& view) const noexcept;
 
