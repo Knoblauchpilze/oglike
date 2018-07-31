@@ -42,6 +42,8 @@ namespace ogame {
 
         void setActiveDefense(const core::Defense::Type& defense) const;
 
+        void setUnitCount(const unsigned& count) const;
+
         void triggerAction(const Action& action) const;
 
       protected:
