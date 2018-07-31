@@ -28,7 +28,7 @@ namespace ogame {
 
       // Create both the picture and the buying action.
       PictureContainerShPtr image = ComponentFactory::createPicturePanel(std::string("image_panel"), std::string("data/img/crystal_mine.bmp"));
-      UpgradeInfoShPtr upgradeInfo = std::make_shared<UpgradeInfo>(std::string("upgrade_info"));
+      UpgradeInfoShPtr upgradeInfo = std::make_shared<UpgradeInfo>(std::string("upgrade_info"), model);
       UpgradeResourceInfoShPtr neededResources = std::make_shared<UpgradeResourceInfo>(std::string("need_resources"), model);
       view::GraphicContainerShPtr info = std::make_shared<view::GraphicContainer>(std::string("info_panel"), view::utils::Area());
 
