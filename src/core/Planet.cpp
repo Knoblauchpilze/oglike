@@ -96,7 +96,7 @@ namespace ogame {
       m_buildingUpgrades.push_back(std::make_shared<BuildingUpgradeAction>(building.get(), *this, *m_account));
     }
 
-    void Planet::createUpgradeAction(const Ship::Type& type) {
+    void Planet::createUpgradeAction(const Ship::Type& type, const unsigned& number) {
       ShipShPtr ship = getDataOrThrow<Ship, Ship::Type>(type, m_ships);
 
       if (m_account == nullptr) {
@@ -106,10 +106,15 @@ namespace ogame {
         throw PlanetException(errorMessage);
       }
 
-      m_shipUpgrades.push_back(std::make_shared<ShipUpgradeAction>(ship.get(), *this, *m_account));
+      m_shipUpgrades.push_back(std::make_shared<ShipUpgradeAction>(
+        ship.get(),
+        *this,
+        *m_account,
+        number
+      ));
     }
 
-    void Planet::createUpgradeAction(const Defense::Type& type) {
+    void Planet::createUpgradeAction(const Defense::Type& type, const unsigned& number) {
       DefenseShPtr defense = getDataOrThrow<Defense, Defense::Type>(type, m_defenses);
 
       if (m_account == nullptr) {
@@ -119,7 +124,12 @@ namespace ogame {
         throw PlanetException(errorMessage);
       }
 
-      m_defenseUpgrades.push_back(std::make_shared<DefenseUpgradeAction>(defense.get(), *this, *m_account));
+      m_defenseUpgrades.push_back(std::make_shared<DefenseUpgradeAction>(
+        defense.get(),
+        *this,
+        *m_account,
+        number
+      ));
     }
 
     const bool Planet::canResearch(const Research& research) const {
