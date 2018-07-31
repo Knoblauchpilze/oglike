@@ -307,9 +307,9 @@ namespace ogame {
 
     inline
     void GraphicContainer::notifyGraphicListeners(const view::EventListener::Interaction::Mask& interaction) {
-      std::for_each(m_listeners.cbegin(), m_listeners.cend(),
-        [&interaction, this](const GraphicContainerListener* listener) {
-          const_cast<GraphicContainerListener*>(listener)->onInteractionPerformed(getName(), interaction);
+      std::for_each(m_listeners.begin(), m_listeners.end(),
+        [&interaction, this](GraphicContainerListener* listener) {
+          listener->onInteractionPerformed(getName(), interaction);
         }
       );
     }
