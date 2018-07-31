@@ -4,38 +4,37 @@
 #include <memory>
 #include <vector>
 #include <SDL/SDL.h>
-#include "ActionProviderStateContainer.h"
+#include "StateContainer.h"
+#include "LabelContainer.h"
+#include "GraphicContainer.h"
 #include "ColoredFont.h"
 
 namespace ogame {
   namespace gui {
 
-    class StateLabelContainer: public ActionProviderStateContainer
+    class StateLabelContainer: public view::GraphicContainer
     {
       public:
 
+        using FontAssociation = std::map<StateContainer::State, view::ColoredFontShPtr>;
+
         StateLabelContainer(const std::string& name,
                             const std::string& text,
-                            const player::View& view,
-                            player::GeneralDataModel* model,
-                            view::ColoredFontShPtr font,
-                            view::ColoredFontShPtr highlightFont,
-                            const StateContainer::StateAssociation& colors = StateContainer::StateAssociation(),
+                            const FontAssociation& colors = FontAssociation(),
+                            const LabelContainer::Alignment& alignment = LabelContainer::Alignment::Center,
                             const StateContainer::FailPolicy& policy = StateContainer::FailPolicy::Aggressive);
 
         virtual ~StateLabelContainer();
 
-        const std::string getText() const noexcept;
-
         void setText(const std::string& text);
+
+        void setState(const StateContainer::State& state);
 
       protected:
 
         SDL_Surface* createContentPrivate() override;
 
         void clearContentPrivate(SDL_Surface* render) override;
-
-        void onStateModified() override;
 
       private:
 
@@ -46,17 +45,19 @@ namespace ogame {
 
         SDL_Surface* createTextFromFont(const std::string& text, view::ColoredFontShPtr font);
 
+        SDL_Rect computeBlitPosition(const unsigned& displayWidth, const unsigned& displayHeight) const noexcept;
+
+        view::ColoredFontShPtr getFontFromState() const;
+
       private:
 
-        bool m_textChanged;
+        StateContainer::State m_state;
+        StateContainer::FailPolicy m_policy;
+        FontAssociation m_colors;
+        LabelContainer::Alignment m_alignment;
+
         std::string m_text;
-
-        bool m_fontChanged;
-        view::ColoredFontShPtr m_font;
-
-        bool m_hFontChanged;
-        view::ColoredFontShPtr m_hFont;
-
+        bool m_textChanged;
         bool m_highlightChanged;
         SDL_Surface* m_textSurface;
 
