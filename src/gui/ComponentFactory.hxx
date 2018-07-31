@@ -68,18 +68,39 @@ namespace ogame {
       );
     }
 
+  static
+        StateLabelContainerShPtr
+        createStateLabelPanel();
+
     inline
     StateLabelContainerShPtr
     ComponentFactory::createStateLabelPanel(const std::string& name,
                                             const std::string& text,
-                                            const player::View& view,
-                                            player::GeneralDataModel* model,
-                                            view::ColoredFontShPtr font,
-                                            view::ColoredFontShPtr highlightFont,
-                                            const StateContainer::StateAssociation& colors,
+                                            const StateLabelContainer::FontAssociation& fonts,
+                                            const LabelContainer::Alignment& alignment,
                                             const StateContainer::FailPolicy& policy)
     {
       return std::make_shared<StateLabelContainer>(
+        name,
+        text,
+        fonts,
+        alignment,
+        policy
+      );
+    }
+
+    inline
+    ActionProviderLabelStateContainerShPtr
+    ComponentFactory::createActionProviderLabelStatePanel(const std::string& name,
+                                                          const std::string& text,
+                                                          const player::View& view,
+                                                          player::GeneralDataModel* model,
+                                                          view::ColoredFontShPtr font,
+                                                          view::ColoredFontShPtr highlightFont,
+                                                          const StateContainer::StateAssociation& colors,
+                                                          const StateContainer::FailPolicy& policy)
+    {
+      return std::make_shared<ActionProviderLabelStateContainer>(
         name,
         text,
         view,
