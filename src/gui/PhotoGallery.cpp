@@ -47,10 +47,10 @@ namespace ogame {
       }
 
       const int imageIndex = m_pictures.size();
-      m_indices[generatedImageName] = imageIndex;
-      m_pictures.push_back(picture);
 
       if (imageIndex < m_picturesCount) {
+        m_indices[generatedImageName] = imageIndex;
+        m_pictures.push_back(picture);
         addChild(picture);
         makeDeepDirty();
       }
