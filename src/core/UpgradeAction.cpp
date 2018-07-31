@@ -10,9 +10,11 @@ namespace ogame {
                                  const unsigned& shipyardLevel,
                                  const unsigned& laboratoryLevel,
                                  const unsigned& roboticsLevel,
-                                 const unsigned& naniteLevel):
+                                 const unsigned& naniteLevel,
+                                 const unsigned& number):
       m_start(start),
       m_type(type),
+      m_number(number),
       m_duration(0.0f),
       m_universeSpeed(universeSpeed),
       m_shipyardLevel(shipyardLevel),
