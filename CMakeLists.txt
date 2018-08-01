@@ -31,4 +31,5 @@ target_link_libraries(ogamelike
   ogamelike_lib_view
   ogamelike_lib_gui
   ogamelike_lib_player
+  ogamelike_lib_server
   )

@@ -46,5 +46,7 @@ add_library (ogamelike_lib_core SHARED
 
 set(CORE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" PARENT_SCOPE)
 
-target_include_directories (ogamelike_lib_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories (ogamelike_lib_core PUBLIC
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  )
 
