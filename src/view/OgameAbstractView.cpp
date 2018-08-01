@@ -9,8 +9,8 @@ namespace ogame {
     OgameAbstractView::OgameAbstractView(const std::string& title, const std::string& icon, const unsigned& width, const unsigned& height):
       m_title(title),
       m_icon(icon),
-      m_framerate(60.0),
-      m_frameDuration(1000.0 / m_framerate),
+      m_framerate(60.0f),
+      m_frameDuration(1000.0f / m_framerate),
       m_screen(nullptr),
       m_processing(false),
       m_listeners(),

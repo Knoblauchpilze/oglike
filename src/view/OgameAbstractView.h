@@ -64,8 +64,8 @@ namespace ogame {
 
         std::string m_title;
         std::string m_icon;
-        double m_framerate;
-        double m_frameDuration;
+        float m_framerate;
+        float m_frameDuration;
         SDL_Surface* m_screen;
         bool m_processing;
         std::vector<EventListener*> m_listeners;
