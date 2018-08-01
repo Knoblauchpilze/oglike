@@ -19,6 +19,9 @@
 #include "AbstractDataModel.h"
 #include "AbstractActionListener.h"
 
+#include "ServerLauncher.h"
+#include "UniverseRunnable.h"
+
 int main(int argc, char* argv[])
 {
   // Parse input arguments.
@@ -127,9 +130,39 @@ int main(int argc, char* argv[])
     return 1;
   }
 
+  // Create the server.
+  ogame::server::ServerLauncherShPtr launcher = nullptr;
+  ogame::server::UniverseRunnableShPtr universeLauncher = nullptr;
+  try {
+    launcher = std::make_shared<ogame::server::ServerLauncher>(
+      5.0f,
+      500.0f,
+      ogame::server::time::Unit::Millisecond
+    );
+    universeLauncher = std::make_shared<ogame::server::UniverseRunnable>(universe);
+
+    launcher->addRunnable(universeLauncher.get());
+  }
+  catch (const ogame::server::ServerException& e) {
+    std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
+    return 1;
+  }
+  catch (const ogame::core::OgameException& e) {
+    std::cerr << "[MAIN] Caught internal exception:" << std::endl << e.what() << std::endl;
+    return 1;
+  }
+
   // Run the application.
   try {
+    launcher->start();
     view->run();
+    launcher->stop();
+  }
+  catch (const ogame::server::ServerException& e) {
+    std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
+  }
+  catch (const ogame::gui::GuiException& e) {
+    std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
   }
   catch (const ogame::view::ViewException& e) {
     std::cerr << "[MAIN] Caught exception:" << std::endl << e.what() << std::endl;
