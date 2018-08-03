@@ -15,7 +15,7 @@ namespace ogame {
 
         virtual ~AbstractUpgradable();
 
-        void upgrade(std::vector<std::shared_ptr<ResourceDeposit>>& resources) override;
+        void upgrade() override;
 
       protected:
 
