@@ -28,6 +28,14 @@ namespace ogame {
     }
 
     inline
+    void UpgradeAction::decreaseCount() {
+      --m_number;
+      if (m_number > 0u) {
+        m_start = std::chrono::system_clock::now();
+      }
+    }
+
+    inline
     float& UpgradeAction::getDuration() {
       return m_duration;
     }
