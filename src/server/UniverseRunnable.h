@@ -20,9 +20,19 @@ namespace ogame {
 
       private:
 
-        void updateResourcesForUniverse(const float& hoursDuration);
+        void updatePlanetsForUniverse(const float& hoursDuration);
 
         void updateResourcesForPlanet(core::Planet& planet, const float& hoursDuration);
+
+        void updateUpgradeActionsForPlanet(core::Planet& planet);
+
+        void upgradeBuildingActionsForPlanet(core::Planet& planet);
+
+        void upgradeShipActionsForPlanet(core::Planet& planet);
+
+        void upgradeDefenseActionsForPlanet(core::Planet& planet);
+
+        void updateAccountsForUniverse();
 
       private:
 
