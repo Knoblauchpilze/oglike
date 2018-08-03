@@ -12,11 +12,6 @@ namespace ogame {
     }
 
     inline
-    const unsigned Defense::getCount() const noexcept {
-      return 0u;
-    }
-
-    inline
     const std::string Defense::getNameFromType(const Type& type) const noexcept {
       std::string name = "Default defense name";
 
