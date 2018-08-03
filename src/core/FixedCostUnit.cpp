@@ -7,6 +7,7 @@ namespace ogame {
     FixedCostUnit::FixedCostUnit(const std::string& name,
                                  const std::unordered_map<Resource, float>& cost):
       m_name(name),
+      m_count(0u),
       m_cost(cost)
     {
       // Nothing to do here.
