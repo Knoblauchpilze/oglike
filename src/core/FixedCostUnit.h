@@ -28,6 +28,10 @@ namespace ogame {
 
         const bool canBuy(const std::vector<ResourceDepositShPtr>& resources) const;
 
+        const unsigned& getCount() const noexcept;
+
+        void launchUnit();
+
       protected:
 
         FixedCostUnit() = delete;
@@ -38,6 +42,7 @@ namespace ogame {
       private:
 
         std::string m_name;
+        unsigned m_count;
         std::unordered_map<Resource, float> m_cost;
     };
 
