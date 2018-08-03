@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
   ogame::core::AccountShPtr account = nullptr;
   ogame::player::PlayerShPtr player = nullptr;
 
-  const unsigned accountsToCreate = 5;
+  const unsigned accountsToCreate = 0;
   std::vector<ogame::core::AccountShPtr> accounts;
   std::vector<ogame::player::PlayerShPtr> players;
   try {
