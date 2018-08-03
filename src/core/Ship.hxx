@@ -12,11 +12,6 @@ namespace ogame {
     }
 
     inline
-    const unsigned Ship::getCount() const noexcept {
-      return 0u;
-    }
-
-    inline
     const std::string Ship::getNameFromType(const Type& type) const noexcept {
       std::string name = "Default ship name";
 
