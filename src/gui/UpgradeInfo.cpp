@@ -25,9 +25,9 @@ namespace ogame {
         throw GuiException(std::string("Could not allocate memory to create upgrade info panel"));
       }
 
-      std::vector<std::string> options(1000);
-      for (unsigned value = 0u ; value < 1000u ; ++value) {
-        options[value] = std::to_string(value);
+      std::vector<std::string> options(999);
+      for (unsigned value = 1u ; value < 1000u ; ++value) {
+        options[value - 1u] = std::to_string(value);
       }
 
       LabelContainerShPtr title = createLabelPanel(
