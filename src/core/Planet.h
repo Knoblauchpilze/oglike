@@ -53,6 +53,8 @@ namespace ogame {
 
         const float getResourceQuantity(const std::string& name) const;
 
+        const float getProductionForResource(const std::string& resource, const float& hoursDuration) const;
+
         const System& getSystem() const;
 
         const float& getDiameter() const noexcept;
@@ -118,6 +120,12 @@ namespace ogame {
 
         template<typename Data, typename EnumClass>
         std::shared_ptr<Data> getDataOrThrow(const EnumClass& type, const std::vector<std::shared_ptr<Data>>& elements) const;
+
+        void decreaseResourceDepositFromCost(const std::unordered_map<Resource, float>& costs);
+
+        const float getBasicProductionForMine(const Building::Type& mine) const noexcept;
+
+        ResourceDeposit* getDepositOrNullFromResource(const Resource& resource);
 
       private:
 
