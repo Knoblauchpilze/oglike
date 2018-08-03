@@ -178,6 +178,49 @@ namespace ogame {
     }
 
     inline
+    void Planet::upgrade(const Building::Type& building) {
+      // Retrieve the corresponding building and upgrade it.
+      Building& buildingElement = getBuildingDataPrivate(building);
+      buildingElement.upgrade();
+
+      // Remove it from the list of upgrade action: we assume there is only one such upgrade at most.
+      unsigned indexBuilding = 0u;
+      while (indexBuilding < m_buildingUpgrades.size() && m_buildingUpgrades[indexBuilding]->getType() != building) {
+        ++indexBuilding;
+      }
+
+      if (indexBuilding < m_buildingUpgrades.size()) {
+        m_buildingUpgrades.erase(m_buildingUpgrades.cbegin() + indexBuilding);
+      }
+      else {
+        throw PlanetException(std::string("Cannot upgrade building ") + std::to_string(static_cast<int>(building)) + " not found in planet " + getName() + " upgrade actions");
+      }
+    }
+
+    inline
+    void Planet::launchDefense(const Defense::Type& defense) {
+      // Retrieve the corresponding defense and upgrade it.
+      Defense& defenseElement = getDefenseDataPrivate(defense);
+      defenseElement.launchUnit();
+
+      // Find the first occurrence of this upgrade action and handle the upgrade.
+      unsigned indexDefense = 0u;
+      while (indexDefense < m_defenseUpgrades.size() && m_defenseUpgrades[indexDefense]->getType() != defense) {
+        ++indexDefense;
+      }
+
+      if (indexDefense < m_defenseUpgrades.size()) {
+        m_defenseUpgrades[indexDefense]->decreaseCount();
+        if (m_defenseUpgrades[indexDefense]->isFinished()) {
+          m_defenseUpgrades.erase(m_defenseUpgrades.cbegin() + indexDefense);
+        }
+      }
+      else {
+        throw PlanetException(std::string("Cannot upgrade defense ") + std::to_string(static_cast<int>(defense)) + " not found in planet " + getName() + " upgrade actions");
+      }
+    }
+
+    inline
     void Planet::initializeShips() {
       // Create all ships on this planet.
       m_ships.push_back(ShipFactory::createLightFighter());
@@ -318,6 +361,21 @@ namespace ogame {
         ++indexDeposit;
       }
       return nullptr;
+    }
+
+    inline
+    Ship& Planet::getShipDataPrivate(const Ship::Type& type) {
+      return *getDataOrThrow<Ship, Ship::Type>(type, m_ships);
+    }
+
+    inline
+    Defense& Planet::getDefenseDataPrivate(const Defense::Type& type) {
+      return *getDataOrThrow<Defense, Defense::Type>(type, m_defenses);
+    }
+
+    inline
+    Building& Planet::getBuildingDataPrivate(const Building::Type& type) {
+      return *getDataOrThrow<Building, Building::Type>(type, m_buildings);
     }
 
   }

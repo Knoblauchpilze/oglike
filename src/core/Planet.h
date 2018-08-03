@@ -101,6 +101,12 @@ namespace ogame {
 
         const bool canBuy(const FixedCostUnit& unit) const;
 
+        void upgrade(const Building::Type& building);
+
+        void launchShip(const Ship::Type& ship);
+
+        void launchDefense(const Defense::Type& defense);
+
       private:
 
         void create();
@@ -126,6 +132,12 @@ namespace ogame {
         const float getBasicProductionForMine(const Building::Type& mine) const noexcept;
 
         ResourceDeposit* getDepositOrNullFromResource(const Resource& resource);
+
+        Ship& getShipDataPrivate(const Ship::Type& type);
+
+        Defense& getDefenseDataPrivate(const Defense::Type& type);
+
+        Building& getBuildingDataPrivate(const Building::Type& type);
 
       private:
 
