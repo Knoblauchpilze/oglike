@@ -24,6 +24,8 @@ namespace ogame {
 
         const unsigned& getIndex() const noexcept;
 
+        const unsigned getSystemsCount() const noexcept;
+
         const System& operator[](const unsigned& index) const;
 
         System& operator[](const unsigned& index);

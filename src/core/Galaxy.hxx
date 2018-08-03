@@ -14,6 +14,11 @@ namespace ogame {
       return m_index;
     }
 
+    inline
+    const unsigned Galaxy::getSystemsCount() const noexcept {
+      return m_systems.size();
+    }
+
   }
 }
 
