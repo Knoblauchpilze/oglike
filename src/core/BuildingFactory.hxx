@@ -2,6 +2,7 @@
 #define BUILDINGFACTORY_HXX
 
 #include "BuildingFactory.h"
+#include "BuildingException.h"
 
 namespace ogame {
   namespace core {
@@ -162,6 +163,22 @@ namespace ogame {
         constructFromResources(0.0f, 50000.0f, 100000.0f, 0.0f),
         2.0f
       );
+    }
+
+    inline
+    const Building::Type BuildingFactory::getMineTypeFromResource(const std::string& resource) {
+      if (resource == std::string("metal")) {
+        return Building::Type::MetalMine;
+      }
+      else if (resource == std::string("crystal")) {
+        return Building::Type::CrystalMine;
+      }
+      else if (resource == std::string("deuterium")) {
+        return Building::Type::DeuteriumMine;
+      }
+      else {
+        throw BuildingException(std::string("Could not retrieve resource mine from resource \"") + resource + "\"");
+      }
     }
 
     inline

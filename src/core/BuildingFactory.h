@@ -64,6 +64,9 @@ namespace ogame {
         static
         BuildingShPtr createTerraformer();
 
+        static
+        const Building::Type getMineTypeFromResource(const std::string& resource);
+
       private:
 
         static
