@@ -73,7 +73,7 @@ namespace ogame {
       std::vector<core::BuildingUpgradeActionShPtr> finished;
       for (unsigned indexBuildingUpgrade = 0u ; indexBuildingUpgrade < buildings.size() ; ++indexBuildingUpgrade) {
         core::BuildingUpgradeActionShPtr buildingUpgrade = buildings[indexBuildingUpgrade];
-        std::cout << "[BUILDING] Still " << buildingUpgrade->getRemainingTime() << "s remaining for upgrade " << std::endl;
+        std::cout << "[BUILDING] Still " << buildingUpgrade->getRemainingTime() << "s remaining for building upgrade " << std::endl;
         if (buildingUpgrade && buildingUpgrade->isFinished()) {
           finished.push_back(buildingUpgrade);
         }
@@ -91,6 +91,7 @@ namespace ogame {
       std::vector<core::ShipUpgradeActionShPtr> finished;
       for (unsigned indexShipUpgrade = 0u ; indexShipUpgrade < ships.size() ; ++indexShipUpgrade) {
         core::ShipUpgradeActionShPtr shipUpgrade = ships[indexShipUpgrade];
+        std::cout << "[BUILDING] Still " << shipUpgrade->getRemainingTime() << "s remaining for ship upgrade " << std::endl;
         if (shipUpgrade && shipUpgrade->isFinished()) {
           finished.push_back(shipUpgrade);
         }
@@ -108,6 +109,7 @@ namespace ogame {
       std::vector<core::DefenseUpgradeActionShPtr> finished;
       for (unsigned indexDefenseUpgrade = 0u ; indexDefenseUpgrade < defenses.size() ; ++indexDefenseUpgrade) {
         core::DefenseUpgradeActionShPtr defenseUpgrade = defenses[indexDefenseUpgrade];
+        std::cout << "[BUILDING] Still " << defenseUpgrade->getRemainingTime() << "s remaining for defense upgrade " << std::endl;
         if (defenseUpgrade && defenseUpgrade->isFinished()) {
           finished.push_back(defenseUpgrade);
         }
