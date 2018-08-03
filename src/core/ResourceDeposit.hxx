@@ -29,6 +29,16 @@ namespace ogame {
       m_value -= amount;
     }
 
+    inline
+    void ResourceDeposit::increase(const float& amount) {
+      m_value += amount;
+    }
+
+    inline
+    const bool ResourceDeposit::isOfResource(const Resource& resource) const noexcept {
+      return resource == m_resource;
+    }
+
   }
 }
 
