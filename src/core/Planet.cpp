@@ -93,6 +93,10 @@ namespace ogame {
         throw PlanetException(errorMessage);
       }
 
+      // Decrease the amount of resources in the deposit of this planet.
+      decreaseResourceDepositFromCost(building->getUpgradeCost());
+
+      // Add the building upgrade action.
       m_buildingUpgrades.push_back(std::make_shared<BuildingUpgradeAction>(building.get(), *this, *m_account));
     }
 
@@ -106,6 +110,10 @@ namespace ogame {
         throw PlanetException(errorMessage);
       }
 
+      // Decrease the amount of resources in the deposit of this planet.
+      decreaseResourceDepositFromCost(ship->getCost());
+
+      // Add the ship upgrade action.
       m_shipUpgrades.push_back(std::make_shared<ShipUpgradeAction>(
         ship.get(),
         *this,
@@ -124,6 +132,10 @@ namespace ogame {
         throw PlanetException(errorMessage);
       }
 
+      // Decrease the amount of resources in the deposit of this planet.
+      decreaseResourceDepositFromCost(defense->getCost());
+
+      // Add the defense upgrade action.
       m_defenseUpgrades.push_back(std::make_shared<DefenseUpgradeAction>(
         defense.get(),
         *this,

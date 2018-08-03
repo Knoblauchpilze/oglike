@@ -1,6 +1,9 @@
 #ifndef PLANET_HXX
 #define PLANET_HXX
 
+#include <algorithm>
+#include <iostream>
+
 #include "Planet.h"
 #include "PlanetException.h"
 #include "DefenseFactory.h"
@@ -60,6 +63,14 @@ namespace ogame {
 
       // If no deposit for this resource exists on this planet, assume the quantity is 0.
       return 0.0f;
+    }
+
+    inline
+    const float Planet::getProductionForResource(const std::string& resource, const float& hoursDuration) const {
+      const Building::Type mineType = BuildingFactory::getMineTypeFromResource(resource);
+      const Building& genericMineData = getBuildingData(mineType);
+      const ResourceMine* mineData = genericMineData.asType<ResourceMine>();
+      return hoursDuration * (getBasicProductionForMine(mineType) + mineData->getProduction(getMaxTemperature()));
     }
 
     inline
@@ -265,6 +276,48 @@ namespace ogame {
       }
 
       return elements[indexData];
+    }
+
+    inline
+    void Planet::decreaseResourceDepositFromCost(const std::unordered_map<Resource, float>& costs) {
+      // Traverse the input map of resources.
+      std::for_each(costs.cbegin(), costs.cend(),
+        [this](const std::pair<Resource, float>& cost) {
+          // Try to retrieve the corresponding resource deposit.
+          ResourceDeposit* deposit = getDepositOrNullFromResource(cost.first);
+          if (deposit == nullptr) {
+            std::cerr << "[PLANET] Could not remove " << cost.second << " " << cost.first.getName() << " from planet " << getName() << std::endl;
+          }
+          else {
+            deposit->decreaseValue(cost.second);
+          }
+        }
+      );
+    }
+
+    inline
+    const float Planet::getBasicProductionForMine(const Building::Type& mine) const noexcept {
+      if (mine == Building::Type::MetalMine) {
+        return 30.0f;
+      }
+      else if (mine == Building::Type::CrystalMine) {
+        return 15.0f;
+      }
+      else {
+        return 0.0f;
+      }
+    }
+
+    inline
+    ResourceDeposit* Planet::getDepositOrNullFromResource(const Resource& resource) {
+      unsigned indexDeposit = 0u;
+      while (indexDeposit < m_resources.size()) {
+        if (m_resources[indexDeposit]->isOfResource(resource)) {
+          return m_resources[indexDeposit].get();
+        }
+        ++indexDeposit;
+      }
+      return nullptr;
     }
 
   }
