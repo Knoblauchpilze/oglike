@@ -20,6 +20,12 @@ namespace ogame {
 
       private:
 
+        void updateResourcesForUniverse(const float& hoursDuration);
+
+        void updateResourcesForPlanet(core::Planet& planet, const float& hoursDuration);
+
+      private:
+
         core::UniverseShPtr m_universe;
 
     };
