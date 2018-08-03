@@ -9,11 +9,9 @@ namespace ogame {
 
     inline
     void UniverseRunnable::simulate(const time::TimeManager& manager) {
-      // Retrieve the time delta since last frame.
       const float lastStepDuration = manager.getLastStepDuration(time::Unit::Hour);
-
-      // Updated resources for each planet.
-      updateResourcesForUniverse(lastStepDuration);
+      updatePlanetsForUniverse(lastStepDuration);
+      updateAccountsForUniverse();
     }
 
   }
