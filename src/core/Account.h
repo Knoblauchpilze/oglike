@@ -68,6 +68,8 @@ namespace ogame {
 
         const bool canResearch(const Research& research) const;
 
+        void upgrade(const Research::Type& research);
+
       private:
 
         void initializeResearch();
@@ -75,6 +77,8 @@ namespace ogame {
         const unsigned getIndexForResearch(const Research::Type& type) const noexcept;
 
         ResearchShPtr getResearchOrThrow(const Research::Type& type) const;
+
+        core::Research& getResearchDataPrivate(const Research::Type& type);
 
       private:
 
