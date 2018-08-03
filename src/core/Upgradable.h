@@ -20,7 +20,7 @@ namespace ogame {
 
         const unsigned& getLevel() const noexcept;
 
-        virtual void upgrade(std::vector<std::shared_ptr<ResourceDeposit>>& resources) = 0;
+        virtual void upgrade() = 0;
 
         const std::unordered_map<Resource, float>& getUpgradeCost() const;
 
