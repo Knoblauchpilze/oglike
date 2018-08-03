@@ -26,6 +26,11 @@ namespace ogame {
       return m_speed;
     }
 
+    inline
+    const unsigned Universe::getGalaxiesCount() const noexcept {
+      return m_galaxies.size();
+    }
+
   }
 }
 

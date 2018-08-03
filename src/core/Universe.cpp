@@ -37,6 +37,16 @@ namespace ogame {
       return *m_galaxies[index];
     }
 
+    Galaxy& Universe::operator[](const unsigned& index) {
+      if (index >= m_galaxies.size()) {
+        throw UniverseException("Cannot access out of bounds galaxy " + std::to_string(index) + " in universe " + std::to_string(m_index));
+      }
+      else if (m_galaxies[index] == nullptr) {
+        throw UniverseException("Cannot retrieve invalid galaxy " + std::to_string(index) + " in universe " + std::to_string(m_index));
+      }
+      return *m_galaxies[index];
+    }
+
     void Universe::createAccount(AccountShPtr account) {
       // Check whether this account is valid.
       if (account == nullptr) {

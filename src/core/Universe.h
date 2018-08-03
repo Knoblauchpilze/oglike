@@ -36,7 +36,11 @@ namespace ogame {
 
         const unsigned& getSpeed() const noexcept;
 
+        const unsigned getGalaxiesCount() const noexcept;
+
         const Galaxy& operator[](const unsigned& index) const;
+
+        Galaxy& operator[](const unsigned& index);
 
         void createAccount(std::shared_ptr<Account> account);
 
