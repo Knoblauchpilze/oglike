@@ -23,7 +23,7 @@ namespace ogame {
       const float metalValue = (metal != m_cost.cend() ? metal->second : 0.0f);
       const float crystalValue = (crystal != m_cost.cend() ? crystal->second : 0.0f);
 
-      return std::max(1.0f, 36.0f * (metalValue + crystalValue) / (universeSpeed * 25000.0f * (1.0f + shipyardLevel) * std::pow(2.0f, 1.0f * naniteLevel)));
+      return std::max(1.0f, 3600.0f * (metalValue + crystalValue) / (universeSpeed * 2500.0f * (1.0f + shipyardLevel) * std::pow(2.0f, 1.0f * naniteLevel)));
     }
 
     inline
@@ -31,6 +31,7 @@ namespace ogame {
       return m_cost;
     }
 
+    inline
     const unsigned& FixedCostUnit::getCount() const noexcept {
       return m_count;
     }
