@@ -55,13 +55,38 @@ namespace ogame {
 
           lock();
 
-          if (activeView == player::View::Resources ||
-              activeView == player::View::Facilities ||
-              activeView == player::View::Research)
-          {
-            SwitchPictureContainer* upgrade = getChild<SwitchPictureContainer*>(std::string("upgrade_label"));
-            if (checkChild(upgrade, std::string("Upgrade resource info upgrade button"))) {
-              upgrade->updateStatus(false);
+          SwitchPictureContainer* upgrade = getChild<SwitchPictureContainer*>(std::string("upgrade_label"));
+          if (checkChild(upgrade, std::string("Upgrade resource info upgrade button"))) {
+            switch (activeView) {
+              case player::View::Resources:
+                upgrade->updateStatus(false);
+                break;
+              case player::View::Facilities:
+                upgrade->updateStatus(false);
+                break;
+              case player::View::Research:
+                upgrade->updateStatus(false);
+                break;
+              case player::View::Shipyard:
+                upgrade->updateStatus(
+                  planet.canBuy(
+                    planet.getShipData(
+                      dataModel.getActiveShip()
+                    )
+                  )
+                );
+                break;
+              case player::View::Defense:
+                upgrade->updateStatus(
+                  planet.canBuy(
+                    planet.getDefenseData(
+                      dataModel.getActiveDefense()
+                    )
+                  )
+                );
+                break;
+              default:
+                break;
             }
           }
 
