@@ -106,6 +106,26 @@ namespace ogame {
     }
 
     inline
+    void Account::upgrade(const Research::Type& research) {
+      // Retrieve the corresponding research and upgrade it.
+      Research& researchElement = getResearchDataPrivate(research);
+      researchElement.upgrade();
+
+      // Remove it from the list of upgrade action: we assume there is only one such upgrade at most.
+      unsigned indexResearch = 0u;
+      while (indexResearch < m_researchUpgrades.size() && m_researchUpgrades[indexResearch]->getType() != research) {
+        ++indexResearch;
+      }
+
+      if (indexResearch < m_researchUpgrades.size()) {
+        m_researchUpgrades.erase(m_researchUpgrades.cbegin() + indexResearch);
+      }
+      else {
+        throw AccountException(std::string("Cannot upgrade research ") + std::to_string(static_cast<int>(research)) + " not found in account " + getPlayerName() + " upgrade actions");
+      }
+    }
+
+    inline
     void Account::initializeResearch() {
       // Create all research in this account.
       m_researches.push_back(core::ResearchFactory::createEnergyResearch());
@@ -164,6 +184,11 @@ namespace ogame {
       }
 
       return m_researches[indexResearch];
+    }
+
+    inline
+    core::Research& Account::getResearchDataPrivate(const Research::Type& type) {
+      return *getResearchOrThrow(type);
     }
 
   }
