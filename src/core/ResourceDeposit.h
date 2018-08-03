@@ -21,6 +21,10 @@ namespace ogame {
 
         void decreaseValue(const float& amount);
 
+        void increase(const float& amount);
+
+        const bool isOfResource(const Resource& resource) const noexcept;
+
       protected:
 
       private:
