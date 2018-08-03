@@ -148,6 +148,28 @@ namespace ogame {
       return research.canUpgrade(getResourceDeposits()) && (!m_account || m_account->canResearch(research));
     }
 
+    void Planet::launchShip(const Ship::Type& ship) {
+      // Retrieve the corresponding ship and upgrade it.
+      Ship& shipElement = getShipDataPrivate(ship);
+      shipElement.launchUnit();
+
+      // Find the first occurrence of this upgrade action and handle the upgrade.
+      unsigned indexShip = 0u;
+      while (indexShip < m_shipUpgrades.size() && m_shipUpgrades[indexShip]->getType() != ship) {
+        ++indexShip;
+      }
+
+      if (indexShip < m_shipUpgrades.size()) {
+        m_shipUpgrades[indexShip]->decreaseCount();
+        if (m_shipUpgrades[indexShip]->isFinished()) {
+          m_shipUpgrades.erase(m_shipUpgrades.cbegin() + indexShip);
+        }
+      }
+      else {
+        throw PlanetException(std::string("Cannot upgrade ship ") + std::to_string(static_cast<int>(ship)) + " not found in planet " + getName() + " upgrade actions");
+      }
+    }
+
     void Planet::create() {
       // Push initial resources.
       m_resources.push_back(std::make_shared<ResourceDeposit>(std::string("metal"), 15500.0f));
