@@ -22,6 +22,8 @@ namespace ogame {
 
         virtual ~Galaxy();
 
+        bool operator==(const Galaxy& other) const noexcept;
+
         const unsigned& getIndex() const noexcept;
 
         const unsigned getSystemsCount() const noexcept;
