@@ -38,7 +38,7 @@ namespace ogame {
     inline
     void AbstractBuyingView::connectDataModel(const player::Action& action) noexcept {
       try {
-        getDataModel().registerForAction(player::Action::ChangePlanet, this);
+        getDataModel().registerForAction(action, this);
       }
       catch (const player::DataModelException& e) {
         std::cerr << "[BUYING] Could not connect container " << getName() << " for action " << static_cast<int>(action) << ":" << std::endl << e.what() << std::endl;
