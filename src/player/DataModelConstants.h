@@ -11,7 +11,9 @@ namespace ogame {
       ChangePlanet,
       ChangeAccount,
       ChangeGalaxy,
-      ChangeSystem
+      ChangeSystem,
+      ChangeResources,
+      ChangeUpgrade
     };
 
     // Enumeration to describe available views.
