@@ -10,6 +10,11 @@ namespace ogame {
   namespace core {
 
     inline
+    bool Galaxy::operator==(const Galaxy& other) const noexcept {
+      return other.m_index == m_index;
+    }
+
+    inline
     const unsigned& Galaxy::getIndex() const noexcept {
       return m_index;
     }
