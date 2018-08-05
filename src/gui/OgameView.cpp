@@ -142,6 +142,7 @@ namespace ogame {
       dataModel->registerForAction(player::Action::ChangeAccount, m_optionsView.get());
 
       dataModel->registerForAction(player::Action::ChangePlanet, m_resourcesView.get());
+      dataModel->registerForAction(player::Action::ChangeResources, m_resourcesView.get());
 
       dataModel->registerForAction(player::Action::ChangeView, this);
     }
