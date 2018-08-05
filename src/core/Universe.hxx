@@ -31,6 +31,11 @@ namespace ogame {
       return m_galaxies.size();
     }
 
+    inline
+    const std::vector<std::shared_ptr<Account>>& Universe::getAccounts() const noexcept {
+      return m_accounts;
+    }
+
   }
 }
 
