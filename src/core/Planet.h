@@ -53,7 +53,9 @@ namespace ogame {
 
         const float getResourceQuantity(const std::string& name) const;
 
-        const float getProductionForResource(const std::string& resource, const float& hoursDuration) const;
+        const float getProductionForResource(const std::string& resource,
+                                             const float& hoursDuration,
+                                             const unsigned& universeSpeed) const;
 
         const System& getSystem() const;
 
@@ -129,7 +131,7 @@ namespace ogame {
 
         void decreaseResourceDepositFromCost(const std::unordered_map<Resource, float>& costs);
 
-        const float getBasicProductionForMine(const Building::Type& mine) const noexcept;
+        const float getBasicProductionForMine(const Building::Type& mine, const unsigned& universeSpeed) const noexcept;
 
         ResourceDeposit* getDepositOrNullFromResource(const Resource& resource);
 

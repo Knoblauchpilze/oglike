@@ -33,6 +33,13 @@ namespace ogame {
       //dtor
     }
 
+    bool Planet::operator==(const Planet& other) const noexcept {
+      return other.m_index == m_index && (
+        (m_parent == nullptr && other.m_parent == nullptr) ||
+        (m_parent != nullptr && other.m_parent != nullptr && *m_parent == *other.m_parent)
+      );
+    }
+
     const unsigned Planet::getPositionInSystem() const {
       return m_parent->getPositionOf(*this);
     }
