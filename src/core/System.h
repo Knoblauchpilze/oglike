@@ -22,6 +22,8 @@ namespace ogame {
 
         virtual ~System();
 
+        bool operator==(const System& other) const noexcept;
+
         const Planet& operator[](const unsigned& index) const;
 
         Planet& operator[](const unsigned& index);
