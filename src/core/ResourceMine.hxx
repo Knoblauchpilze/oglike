@@ -18,13 +18,15 @@ namespace ogame {
     }
 
     inline
-    const float ResourceMine::getProduction(const float& maxTemperature) const {
-      return getProductionForLevel(getLevel(), maxTemperature);
+    const float ResourceMine::getProduction(const float& maxTemperature, const unsigned& universeSpeed) const {
+      return getProductionForLevel(getLevel(), maxTemperature, universeSpeed);
     }
 
     inline
-    const float ResourceMine::getProductionIncrease(const float& maxTemperature) const {
-      return getProductionForLevel(getLevel() + 1u, maxTemperature) - getProductionForLevel(getLevel(), maxTemperature);
+    const float ResourceMine::getProductionIncrease(const float& maxTemperature, const unsigned& universeSpeed) const {
+      return getProductionForLevel(getLevel() + 1u, maxTemperature, universeSpeed) -
+             getProductionForLevel(getLevel(), maxTemperature, universeSpeed)
+      ;
     }
 
     inline
@@ -61,8 +63,8 @@ namespace ogame {
     }
 
     inline
-    const float ResourceMine::getProductionForLevel(const unsigned& level, const float& maxTemperature) const {
-      return m_productionFactor * level * std::pow(1.1f, 1.0f * level) * (m_sensibleToTemperature ? (0.64f - 0.001f * maxTemperature) : 1.0f);
+    const float ResourceMine::getProductionForLevel(const unsigned& level, const float& maxTemperature, const unsigned& universeSpeed) const {
+      return m_productionFactor * universeSpeed * level * std::pow(1.1f, 1.0f * level) * (m_sensibleToTemperature ? (0.64f - 0.001f * maxTemperature) : 1.0f);
     }
 
   }

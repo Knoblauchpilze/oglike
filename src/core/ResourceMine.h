@@ -24,9 +24,9 @@ namespace ogame {
 
         const float getEnergyNeeded() const;
 
-        const float getProduction(const float& maxTemperature) const;
+        const float getProduction(const float& maxTemperature, const unsigned& universeSpeed) const;
 
-        const float getProductionIncrease(const float& maxTemperature) const;
+        const float getProductionIncrease(const float& maxTemperature, const unsigned& universeSpeed) const;
 
       private:
 
@@ -36,7 +36,7 @@ namespace ogame {
 
         const float getEnergyForLevel(const unsigned& level) const;
 
-        const float getProductionForLevel(const unsigned& level, const float& maxTemperature) const;
+        const float getProductionForLevel(const unsigned& level, const float& maxTemperature, const unsigned& universeSpeed) const;
 
       private:
 
