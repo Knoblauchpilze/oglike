@@ -20,6 +20,13 @@ namespace ogame {
       //dtor
     }
 
+    bool System::operator==(const System& other) const noexcept {
+      return other.m_index == m_index && (
+        (m_parent == nullptr && other.m_parent == nullptr) ||
+        (m_parent != nullptr && other.m_parent != nullptr && *m_parent == *other.m_parent)
+      );
+    }
+
     const Planet& System::operator[](const unsigned& index) const {
       if (index >= m_planets.size()) {
         throw SystemException("Cannot access out of bounds planet " + std::to_string(index) + " in system " + std::to_string(m_index));
