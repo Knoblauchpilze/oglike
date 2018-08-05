@@ -135,11 +135,11 @@ int main(int argc, char* argv[])
   ogame::server::UniverseRunnableShPtr universeLauncher = nullptr;
   try {
     launcher = std::make_shared<ogame::server::ServerLauncher>(
-      5.0f,
+      2.0f,
       500.0f,
       ogame::server::time::Unit::Millisecond
     );
-    universeLauncher = std::make_shared<ogame::server::UniverseRunnable>(universe);
+    universeLauncher = std::make_shared<ogame::server::UniverseRunnable>(universe, dataModel);
 
     launcher->addRunnable(universeLauncher.get());
   }
