@@ -24,7 +24,7 @@ namespace ogame {
                  const unsigned& planetsCount,
                  const unsigned& minStartingPosition = 5u,
                  const unsigned& maxStartingPosition = 9u,
-                 const unsigned& speed = 1u);
+                 const unsigned& speed = 2u);
 
         virtual ~Universe();
 
@@ -43,6 +43,8 @@ namespace ogame {
         Galaxy& operator[](const unsigned& index);
 
         void createAccount(std::shared_ptr<Account> account);
+
+        const std::vector<std::shared_ptr<Account>>& getAccounts() const noexcept;
 
       private:
 
