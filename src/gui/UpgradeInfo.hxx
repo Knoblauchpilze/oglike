@@ -84,7 +84,7 @@ namespace ogame {
 
       LabelContainer* gain = getChild<LabelContainer*>(std::string("production_increase"));
       if (checkChild(gain, std::string("Upgrade info production label"))) {
-        gain->setText(computeProductionDisplay(element, planet));
+        gain->setText(computeProductionDisplay(element, planet, universeSpeed));
       }
 
       ValueSelector* unitCount = getChild<ValueSelector*>(std::string("unit_number"));
@@ -335,13 +335,16 @@ namespace ogame {
     }
 
     inline
-    const std::string UpgradeInfo::computeProductionDisplay(const core::Building& mine, const core::Planet& planet) const {
+    const std::string UpgradeInfo::computeProductionDisplay(const core::Building& mine,
+                                                            const core::Planet& planet,
+                                                            const unsigned& universeSpeed) const
+    {
       if (mine.getType() == core::Building::Type::MetalMine ||
           mine.getType() == core::Building::Type::CrystalMine ||
           mine.getType() == core::Building::Type::DeuteriumMine)
       {
         return std::string("Production increase: ") +
-               std::to_string(static_cast<int>(mine.asType<core::ResourceMine>()->getProductionIncrease(planet.getMaxTemperature())));
+               std::to_string(static_cast<int>(mine.asType<core::ResourceMine>()->getProductionIncrease(planet.getMaxTemperature(), universeSpeed)));
       }
       return std::string("");
     }
