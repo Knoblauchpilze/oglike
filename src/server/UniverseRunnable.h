@@ -4,6 +4,7 @@
 #include <memory>
 #include "Runnable.h"
 #include "Universe.h"
+#include "DataModelImplementation.h"
 
 namespace ogame {
   namespace server {
@@ -12,7 +13,8 @@ namespace ogame {
     {
       public:
 
-        UniverseRunnable(core::UniverseShPtr universe);
+        UniverseRunnable(core::UniverseShPtr universe,
+                         player::GeneralDataModelShPtr model);
 
         virtual ~UniverseRunnable();
 
@@ -22,21 +24,26 @@ namespace ogame {
 
         void updatePlanetsForUniverse(const float& hoursDuration);
 
-        void updateResourcesForPlanet(core::Planet& planet, const float& hoursDuration);
+        const bool updateResourcesForPlanet(core::Planet& planet, const float& hoursDuration);
 
-        void updateUpgradeActionsForPlanet(core::Planet& planet);
+        const bool updateUpgradeActionsForPlanet(core::Planet& planet, bool* actionFinished);
 
-        void upgradeBuildingActionsForPlanet(core::Planet& planet);
+        const bool updateBuildingActionsForPlanet(core::Planet& planet, bool* actionFinished);
 
-        void upgradeShipActionsForPlanet(core::Planet& planet);
+        const bool updateShipActionsForPlanet(core::Planet& planet, bool* actionFinished);
 
-        void upgradeDefenseActionsForPlanet(core::Planet& planet);
+        const bool updateDefenseActionsForPlanet(core::Planet& planet, bool* actionFinished);
+
+        const bool updateFleetsForPlanet(core::Planet& planet, bool* actionFinished);
 
         void updateAccountsForUniverse();
+
+        const bool updateUpgradeActionsForAccount(core::Account& account, bool* actionFinished);
 
       private:
 
         core::UniverseShPtr m_universe;
+        player::GeneralDataModelShPtr m_model;
 
     };
 
