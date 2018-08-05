@@ -14,11 +14,6 @@ namespace ogame {
   namespace core {
 
     inline
-    bool Planet::operator==(const Planet& other) const noexcept {
-      return other.m_index == m_index;
-    }
-
-    inline
     const std::string& Planet::getName() const noexcept {
       return m_name;
     }
@@ -66,11 +61,14 @@ namespace ogame {
     }
 
     inline
-    const float Planet::getProductionForResource(const std::string& resource, const float& hoursDuration) const {
+    const float Planet::getProductionForResource(const std::string& resource,
+                                                 const float& hoursDuration,
+                                                 const unsigned& universeSpeed) const
+    {
       const Building::Type mineType = BuildingFactory::getMineTypeFromResource(resource);
       const Building& genericMineData = getBuildingData(mineType);
       const ResourceMine* mineData = genericMineData.asType<ResourceMine>();
-      return hoursDuration * (getBasicProductionForMine(mineType) + mineData->getProduction(getMaxTemperature()));
+      return hoursDuration * (getBasicProductionForMine(mineType, universeSpeed) + mineData->getProduction(getMaxTemperature(), universeSpeed));
     }
 
     inline
@@ -339,12 +337,12 @@ namespace ogame {
     }
 
     inline
-    const float Planet::getBasicProductionForMine(const Building::Type& mine) const noexcept {
+    const float Planet::getBasicProductionForMine(const Building::Type& mine, const unsigned& universeSpeed) const noexcept {
       if (mine == Building::Type::MetalMine) {
-        return 30.0f;
+        return 30.0f * universeSpeed;
       }
       else if (mine == Building::Type::CrystalMine) {
-        return 15.0f;
+        return 15.0f * universeSpeed;
       }
       else {
         return 0.0f;
