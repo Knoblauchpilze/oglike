@@ -86,6 +86,7 @@ namespace ogame {
     void OverView::connectDataModel(player::GeneralDataModelShPtr dataModel) {
       dataModel->registerForAction(player::Action::ChangePlanet, this);
       dataModel->registerForAction(player::Action::ChangeAccount, this);
+      dataModel->registerForAction(player::Action::ChangeUpgrade, this);
     }
 
     void OverView::populateWithPlanetData(const core::Planet& planet) {
