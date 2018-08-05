@@ -81,8 +81,6 @@ namespace ogame {
 
       // Start a timer to track the duration of the simulation.
       std::chrono::system_clock::time_point startingSimulationTime = std::chrono::system_clock::now();
-      
-      std::cout << "[LAUNCHER] Simulating " << m_runnables.size() << " runnables..." << std::endl;
 
       // Simulate the current step on each runnable.
       std::for_each(m_runnables.begin(),  m_runnables.end(),
