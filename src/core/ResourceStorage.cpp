@@ -5,14 +5,14 @@ namespace ogame {
   namespace core {
 
     ResourceStorage::ResourceStorage(const Resource& resource,
-                                     const float& value,
+                                     const float& initStorage,
                                      const std::unordered_map<Resource, float>& initCost):
       Building(getTypeFromResource(resource),
                generateNameFromResource(resource),
                initCost,
                2.0f),
       m_resource(resource),
-      m_value(value)
+      m_basicStorage(initStorage)
     {
       //ctor
     }
