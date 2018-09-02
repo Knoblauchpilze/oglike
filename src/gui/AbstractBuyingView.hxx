@@ -15,15 +15,20 @@ namespace ogame {
     void AbstractBuyingView::onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) {
       // Process this action.
       try {
-        const core::Planet& planet = model.getActivePlanet();
-        const core::Account& account = model.getActiveAccount();
-        populateWithData(planet, account);
+        if (action == player::Action::ChangePlanet) {
+          const core::Planet& planet = model.getActivePlanet();
+          populateWithPlanetData(planet);
+        }
+        if (action == player::Action::ChangeAccount) {
+          const core::Account& account = model.getActiveAccount();
+          populateWithAccountData(account);
+        }
       }
       catch (const core::PlanetException& e) {
-        std::cerr << "[DEFENSE] Caught exception while setting up defense view:" << std::endl << e.what() << std::endl;
+        std::cerr << "[DEFENSE] Caught exception while setting up view " << getName() << ":" << std::endl << e.what() << std::endl;
       }
       catch (const player::DataModelException& e) {
-        std::cerr << "[DEFENSE] Caught exception while setting up defense view:" << std::endl << e.what() << std::endl;
+        std::cerr << "[DEFENSE] Caught exception while setting up view " << getName() << ":" << std::endl << e.what() << std::endl;
       }
     }
 
@@ -72,6 +77,12 @@ namespace ogame {
       // Return this value.
       return label;
     }
+
+    inline
+    void AbstractBuyingView::populateWithPlanetData(const core::Planet& planet) {}
+
+    inline
+    void AbstractBuyingView::populateWithAccountData(const core::Account& account) {}
 
     inline
     void AbstractBuyingView::onInteractionPerformedPrivate(const std::string& origin) {
