@@ -96,7 +96,7 @@ namespace ogame {
       addChild(deutTank,       2u, 3u, 1u, 1u);
     }
 
-    void BuildingsView::populateWithData(const core::Planet& planet, const core::Account& account) {
+    void BuildingsView::populateWithPlanetData(const core::Planet& planet) {
       lock();
 
       // Update each information.
