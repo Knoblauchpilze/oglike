@@ -1,8 +1,6 @@
 
 #include "Upgradable.h"
 
-#include <iostream>
-
 namespace ogame {
   namespace core {
 
