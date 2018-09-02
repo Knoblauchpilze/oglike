@@ -38,7 +38,9 @@ namespace ogame {
                                                             const std::string& text,
                                                             const bool registerForInteraction = true);
 
-        virtual void populateWithData(const core::Planet& planet, const core::Account& account) = 0;
+        virtual void populateWithPlanetData(const core::Planet& planet);
+
+        virtual void populateWithAccountData(const core::Account& account);
 
         virtual void onInteractionPerformedPrivate(const std::string& origin);
 
