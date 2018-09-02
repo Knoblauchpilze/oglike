@@ -131,7 +131,7 @@ namespace ogame {
       addChild(solarSatellite, 6u, 3u, 1u, 1u);
     }
 
-    void ShipyardView::populateWithData(const core::Planet& planet, const core::Account& account) {
+    void ShipyardView::populateWithPlanetData(const core::Planet& planet) {
       lock();
 
       // Update each information.

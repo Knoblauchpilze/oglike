@@ -26,7 +26,7 @@ namespace ogame {
 
         void createView();
 
-        void populateWithData(const core::Planet& planet, const core::Account& account) override;
+        void populateWithAccountData(const core::Account& account) override;
 
         const std::string getDisplayForTech(const core::Research::Type& type, const core::Account& account) const noexcept;
 

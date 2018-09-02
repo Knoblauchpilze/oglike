@@ -103,7 +103,7 @@ namespace ogame {
       addChild(ipm,          3u, 3u, 1u, 1u);
     }
 
-    void DefenseView::populateWithData(const core::Planet& planet, const core::Account& account) {
+    void DefenseView::populateWithPlanetData(const core::Planet& planet) {
       lock();
 
       // Update each information.

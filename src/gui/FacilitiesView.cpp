@@ -88,7 +88,7 @@ namespace ogame {
       addChild(spaceDock,     1u, 3u, 1u, 1u);
     }
 
-    void FacilitiesView::populateWithData(const core::Planet& planet, const core::Account& account) {
+    void FacilitiesView::populateWithPlanetData(const core::Planet& planet) {
       lock();
 
       // Update each information.
