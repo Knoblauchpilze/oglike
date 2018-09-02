@@ -2,6 +2,7 @@
 #define BUILDINGFACTORY_H
 
 #include "Building.h"
+#include "PowerPlant.h"
 #include "ResourceMine.h"
 #include "ResourceStorage.h"
 
@@ -35,10 +36,10 @@ namespace ogame {
         ResourceStorageShPtr createDeuteriumStorage();
 
         static
-        BuildingShPtr createSolarPlant();
+        PowerPlantShPtr createSolarPlant();
 
         static
-        BuildingShPtr createFusionPlant();
+        PowerPlantShPtr createFusionPlant();
 
         static
         BuildingShPtr createRoboticsFactory();

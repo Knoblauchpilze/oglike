@@ -66,22 +66,26 @@ namespace ogame {
     }
 
     inline
-    BuildingShPtr BuildingFactory::createSolarPlant() {
-      return std::make_shared<Building>(
+    PowerPlantShPtr BuildingFactory::createSolarPlant() {
+      return std::make_shared<PowerPlant>(
         Building::Type::SolarPlant,
         std::string("Solar plant"),
         constructFromResources(75.0f, 30.0f, 0.0f, 0.0f),
-        1.5f
+        constructFromResources(0.0f, 0.0f, 0.0f, 0.0f),
+        1.5f,
+        20.0f
       );
     }
 
     inline
-    BuildingShPtr BuildingFactory::createFusionPlant() {
-      return std::make_shared<Building>(
+    PowerPlantShPtr BuildingFactory::createFusionPlant() {
+      return std::make_shared<PowerPlant>(
         Building::Type::FusionPlant,
         std::string("Fusion plant"),
         constructFromResources(900.0f, 360.0f, 180.0f, 0.0f),
-        1.8f
+        constructFromResources(0.0f, 0.0f, 10.0f, 0.0f),
+        1.8f,
+        30.0f
       );
     }
 
@@ -188,10 +192,18 @@ namespace ogame {
                                                                                 const float& energy)
     {
       std::unordered_map<Resource, float> resources;
-      createResourceFromQuantityAndName(resources, std::string("metal"), metal);
-      createResourceFromQuantityAndName(resources, std::string("crystal"), crystal);
-      createResourceFromQuantityAndName(resources, std::string("deuterium"), deuterium);
-      createResourceFromQuantityAndName(resources, std::string("energy"), energy);
+      if (metal > 0.0f) {
+        createResourceFromQuantityAndName(resources, std::string("metal"), metal);
+      }
+      if (crystal > 0.0f) {
+        createResourceFromQuantityAndName(resources, std::string("crystal"), crystal);
+      }
+      if (deuterium > 0.0f) {
+        createResourceFromQuantityAndName(resources, std::string("deuterium"), deuterium);
+      }
+      if (energy > 0.0f) {
+        createResourceFromQuantityAndName(resources, std::string("energy"), energy);
+      }
       return resources;
     }
 
