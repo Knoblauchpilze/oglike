@@ -53,7 +53,9 @@ namespace ogame {
         }
         LabelledPicture* energy = getChild<LabelledPicture*>(std::string("energy_resource_panel"));
         if (checkChild(energy, std::string("Energy resource panel"))) {
-          energy->setLabel(std::to_string(static_cast<unsigned>(planet.getResourceQuantity(std::string("energy")))));
+          const float energyProduced = planet.getEnergyProduction();
+          const float energyNeeded = planet.getEnergyNeeded();
+          energy->setLabel(std::to_string(static_cast<int>(energyProduced - energyNeeded)));
         }
       }
       catch (const player::DataModelException& e) {
