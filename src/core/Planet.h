@@ -57,6 +57,14 @@ namespace ogame {
                                              const float& hoursDuration,
                                              const unsigned& universeSpeed) const;
 
+        const float getConsumptionForResource(const std::string& resource,
+                                              const float& hoursDuration,
+                                              const unsigned& universeSpeed) const;
+
+        const float getEnergyProduction() const;
+
+        const float getEnergyNeeded() const;
+
         const System& getSystem() const;
 
         const float& getDiameter() const noexcept;

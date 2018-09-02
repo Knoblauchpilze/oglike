@@ -65,10 +65,66 @@ namespace ogame {
                                                  const float& hoursDuration,
                                                  const unsigned& universeSpeed) const
     {
+      // Retrieve mining constants.
       const Building::Type mineType = BuildingFactory::getMineTypeFromResource(resource);
       const Building& genericMineData = getBuildingData(mineType);
       const ResourceMine* mineData = genericMineData.asType<ResourceMine>();
-      return hoursDuration * (getBasicProductionForMine(mineType, universeSpeed) + mineData->getProduction(getMaxTemperature(), universeSpeed));
+
+      // Use it to compute the theoretical production per hour.
+      const float perHourProduction = getBasicProductionForMine(mineType, universeSpeed) + mineData->getProduction(getMaxTemperature(), universeSpeed);
+
+      // Compute the energy coefficient factor, i.e. how much of the energy is actually produced by the power sources of this planet.
+      const float energyProduction = getEnergyProduction();
+      const float energyConsumption = std::max(1.0f, getEnergyNeeded());
+      const float productionFactor = std::min(energyProduction / energyConsumption, 1.0f);
+
+      // Return the final production.
+      return productionFactor * hoursDuration * perHourProduction;
+    }
+
+    inline
+    const float Planet::getConsumptionForResource(const std::string& resource,
+                                                  const float& hoursDuration,
+                                                  const unsigned& universeSpeed) const
+    {
+      float perHourConsumption = 0.0f;
+
+      for (unsigned indexBuilding = 0u ; indexBuilding < m_buildings.size() ; ++indexBuilding) {
+        const PowerPlant* plant = m_buildings[indexBuilding]->asType<const PowerPlant>();
+        if (m_buildings[indexBuilding] != nullptr && plant != nullptr) {
+          perHourConsumption += plant->getConsumptionForResource(resource);
+        }
+      }
+
+      return hoursDuration * perHourConsumption;
+    }
+
+    inline
+    const float Planet::getEnergyProduction() const {
+      float energyProduced = 0.0f;
+      std::for_each(m_buildings.cbegin(), m_buildings.cend(),
+        [&energyProduced](const BuildingShPtr& building) {
+          const PowerPlant* genericPlant = building->asType<const PowerPlant>();
+          if (building != nullptr && genericPlant != nullptr) {
+            energyProduced += genericPlant->getEnergyProduction();
+          }
+        }
+      );
+      return energyProduced;
+    }
+
+    inline
+    const float Planet::getEnergyNeeded() const {
+      float energyNeeded = 0.0f;
+      std::for_each(m_buildings.cbegin(), m_buildings.cend(),
+        [&energyNeeded](const BuildingShPtr& building) {
+          const ResourceMine* genericMine = building->asType<const ResourceMine>();
+          if (building != nullptr && genericMine != nullptr) {
+            energyNeeded += genericMine->getEnergyUsed();
+          }
+        }
+      );
+      return energyNeeded;
     }
 
     inline
