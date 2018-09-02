@@ -38,6 +38,7 @@ set (SOURCES
   ResearchUpgradeAction.cpp
   ShipUpgradeAction.cpp
   DefenseUpgradeAction.cpp
+  PowerPlant.cpp
   )
 
 add_library (ogamelike_lib_core SHARED
