@@ -147,7 +147,7 @@ namespace ogame {
       addChild(armour,          7u, 3u, 1u, 1u);
     }
 
-    void ResearchView::populateWithData(const core::Planet& planet, const core::Account& account) {
+    void ResearchView::populateWithAccountData(const core::Account& account) {
       lock();
 
       // Update each information.
