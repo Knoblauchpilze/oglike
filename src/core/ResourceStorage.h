@@ -13,16 +13,14 @@ namespace ogame {
       public:
 
         ResourceStorage(const Resource& resource,
-                        const float& value,
+                        const float& initStorage,
                         const std::unordered_map<Resource, float>& initCost);
 
         virtual ~ResourceStorage();
 
         const std::string& getResourceName() const noexcept;
 
-        const float& getValue() const noexcept;
-
-        void decreaseValue(const float& amount);
+        const float getStorage() const noexcept;
 
       private:
 
@@ -33,7 +31,7 @@ namespace ogame {
       private:
 
         Resource m_resource;
-        float m_value;
+        float m_basicStorage;
     };
 
     using ResourceStorageShPtr = std::shared_ptr<ResourceStorage>;
