@@ -26,6 +26,7 @@ namespace ogame {
           std::to_string(m_value);
         throw BuildingException(errorMessage);
       }
+
       m_value -= amount;
     }
 

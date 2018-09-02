@@ -2,8 +2,6 @@
 #include "AbstractUpgradable.h"
 #include "UpgradableException.h"
 
-#include <iostream>
-
 namespace ogame {
   namespace core {
 

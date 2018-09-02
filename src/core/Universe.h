@@ -24,7 +24,7 @@ namespace ogame {
                  const unsigned& planetsCount,
                  const unsigned& minStartingPosition = 5u,
                  const unsigned& maxStartingPosition = 9u,
-                 const unsigned& speed = 2u);
+                 const unsigned& speed = 20u);
 
         virtual ~Universe();
 
