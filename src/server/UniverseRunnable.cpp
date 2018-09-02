@@ -95,12 +95,18 @@ namespace ogame {
           m_universe->getSpeed()
         );
 
-        if (increase > 0.0f) {
+        const float decrease = planet.getConsumptionForResource(
+          deposit->getResourceName(),
+          hoursDuration,
+          m_universe->getSpeed()
+        );
+
+        if (increase > 0.0f || decrease < 0.0f) {
           modifiedResources = true;
         }
 
         // Update the deposit stock.
-        deposit->increase(increase);
+        deposit->increase(increase + decrease);
       }
 
       // Notifyt modifications on this planet.
