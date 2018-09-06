@@ -10,21 +10,35 @@ namespace ogame {
   namespace gui {
 
     FleetView::FleetView(const std::string& name, player::GeneralDataModelShPtr model):
-      AbstractBuyingView(name,
-                         model,
-                         7u,
-                         5u,
-                         std::string("data/img/fleet_bg.bmp"))
+      view::GraphicContainer(name,
+                             view::utils::Area()),
+      player::GeneralActionListener(model.get())
     {
+      setBackgroundColor(SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE});
+
       createView();
 
-      connectDataModel(player::Action::ChangePlanet);
+      model->registerForAction(player::Action::ChangePlanet, this);
     }
 
     FleetView::~FleetView() {}
 
     void FleetView::createView() {
+      // Create the layout.
+      view::GridLayoutShPtr layout = std::make_shared<view::GridLayout>(7u, 5u, 0.0f);
+      if (layout == nullptr) {
+        throw GuiException(std::string("Could not allocate memory to create view ") + getName());
+      }
+
+      // Assign the layout.
+      setLayout(layout);
+
       // Create all elements.
+      PictureContainerShPtr image = ComponentFactory::createPicturePanel(
+        std::string("image_panel"),
+        std::string("data/img/fleet_bg.bmp")
+      );
+
       std::string level0 = std::to_string(0);
       LabelledPictureShPtr lightFighter = createLabelledPictureContainer(
         std::string("light_fighter"),
@@ -115,6 +129,8 @@ namespace ogame {
         throw GuiException(std::string("Could not allocate memory to create fleet view"));
       }
 
+      // Add the images panel to the layout.
+      addChild(image, 0u, 0u, 7u, 2u);
       addChild(lightFighter,   0u, 2u, 1u, 1u);
       addChild(heavyFighter,   1u, 2u, 1u, 1u);
       addChild(cruiser,        2u, 2u, 1u, 1u);

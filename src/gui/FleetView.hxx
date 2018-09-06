@@ -2,37 +2,24 @@
 #define FLEETVIEW_HXX
 
 #include "FleetView.h"
+#include "ComponentFactory.h"
+#include "FontFactory.h"
 
 namespace ogame {
   namespace gui {
 
     inline
-    void FleetView::populateActionData(const std::string& origin, ElementDescriptionPanel& action) const {
-      // We need to extract the type of ship from the input origin name.
+    void FleetView::onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) {
+      // Process this action.
       try {
-        const core::Ship::Type shipType = computeShipFromOriginNode(origin);
-
-        // Assign the corresponding image into the panel.
-        const std::string image = getPictureNameFromShip(shipType, false);
-        action.setImagePath(image);
-
-        // Now retrieve information about this ship using the active planet.
-        const player::GeneralDataModel& model = getDataModel();
-        const core::Account& account = model.getActiveAccount();
         const core::Planet& planet = model.getActivePlanet();
-        const core::Ship& ship = planet.getShipData(shipType);
-
-        // And update the corresponding element description.
-        action.populateInformationFromElement(ship, planet, account);
-      }
-      catch (const player::DataModelException& e) {
-        std::cerr << "[FLEET] Could not populate action data in " << getName() << " from origin " << origin << ":" << std::endl << e.what() << std::endl;
+        populateWithPlanetData(planet);
       }
       catch (const core::PlanetException& e) {
-        std::cerr << "[FLEET] Could not populate action data in " << getName() << " from origin " << origin << ":" << std::endl << e.what() << std::endl;
+        std::cerr << "[DEFENSE] Caught exception while setting up view " << getName() << ":" << std::endl << e.what() << std::endl;
       }
-      catch (const GuiException& e) {
-        std::cerr << "[FLEET] Could not populate action data in " << getName() << " from origin " << origin << ":" << std::endl << e.what() << std::endl;
+      catch (const player::DataModelException& e) {
+        std::cerr << "[DEFENSE] Caught exception while setting up view " << getName() << ":" << std::endl << e.what() << std::endl;
       }
     }
 
@@ -140,6 +127,24 @@ namespace ogame {
       }
 
       return path + image + extension;
+    }
+
+    inline
+    LabelledPictureShPtr FleetView::createLabelledPictureContainer(const std::string& name,
+                                                                   const std::string& picture,
+                                                                   const std::string& text)
+    {
+      return ComponentFactory::createLabelledPicturePanel(
+        name,
+        view::FontFactory::getInstance().createColoredFont(
+          std::string("data/fonts/upcfb.ttf"),
+          219, 140, 40, SDL_ALPHA_OPAQUE
+        ),
+        picture,
+        text,
+        LabelledPicture::Alignment::Above,
+        view::EventListener::Interaction::NoInteraction
+      );
     }
 
   }
