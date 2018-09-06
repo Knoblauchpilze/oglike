@@ -18,7 +18,7 @@ namespace ogame {
     }
 
     inline
-    const std::string ResourceStorage::generateNameFromResource(const Resource& resource) const noexcept {
+    const std::string ResourceStorage::generateNameFromResource(const Resource& resource) const {
       if (resource.getName() == std::string("metal")) {
         return std::string("Metal storage");
       }

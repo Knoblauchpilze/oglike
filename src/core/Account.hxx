@@ -14,7 +14,7 @@ namespace ogame {
     }
 
     inline
-    const std::string& Account::getPlayerName() const noexcept {
+    const std::string& Account::getPlayerName() const {
       if (m_community == nullptr) {
         throw AccountException(std::string("Could not get null community for player account ") + std::to_string(m_playerUuid));
       }
@@ -22,7 +22,7 @@ namespace ogame {
     }
 
     inline
-    const std::string& Account::getCommunityName() const noexcept {
+    const std::string& Account::getCommunityName() const {
       if (m_community == nullptr) {
         throw AccountException(std::string("Could not get null community for player account " + std::to_string(m_playerUuid)));
       }

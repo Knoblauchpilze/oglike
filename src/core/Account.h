@@ -30,11 +30,11 @@ namespace ogame {
 
         const unsigned& getPlayerUuid() const noexcept;
 
-        const std::string& getPlayerName() const noexcept;
+        const std::string& getPlayerName() const;
 
-        const std::string& getCommunityName() const noexcept;
+        const std::string& getCommunityName() const;
 
-        const std::string& getUniverseName() const noexcept;
+        const std::string& getUniverseName() const;
 
         CommunityShPtr getCommunity() const noexcept;
 
