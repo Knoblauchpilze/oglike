@@ -39,6 +39,8 @@ set (SOURCES
   ShipUpgradeAction.cpp
   DefenseUpgradeAction.cpp
   PowerPlant.cpp
+  Fleet.cpp
+  FleetException.cpp
   )
 
 add_library (ogamelike_lib_core SHARED
