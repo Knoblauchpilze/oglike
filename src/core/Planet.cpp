@@ -15,7 +15,7 @@ namespace ogame {
       m_ships(),
       m_defenses(),
       m_buildings(),
-      
+
       m_diameter(0.0f),
       m_fields(0u),
       m_minTemperature(0.0f),
@@ -23,7 +23,9 @@ namespace ogame {
 
       m_buildingUpgrades(),
       m_shipUpgrades(),
-      m_defenseUpgrades()
+      m_defenseUpgrades(),
+
+      m_fleets()
     {
       create();
     }
