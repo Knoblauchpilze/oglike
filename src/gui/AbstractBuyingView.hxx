@@ -25,10 +25,10 @@ namespace ogame {
         }
       }
       catch (const core::PlanetException& e) {
-        std::cerr << "[DEFENSE] Caught exception while setting up view " << getName() << ":" << std::endl << e.what() << std::endl;
+        std::cerr << "[BUYING] Caught exception while setting up view " << getName() << ":" << std::endl << e.what() << std::endl;
       }
       catch (const player::DataModelException& e) {
-        std::cerr << "[DEFENSE] Caught exception while setting up view " << getName() << ":" << std::endl << e.what() << std::endl;
+        std::cerr << "[BUYING] Caught exception while setting up view " << getName() << ":" << std::endl << e.what() << std::endl;
       }
     }
 
