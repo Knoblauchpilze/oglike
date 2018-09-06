@@ -30,7 +30,7 @@ namespace ogame {
 
       private:
 
-        const std::string generateNameFromResource(const Resource& resource) const noexcept;
+        const std::string generateNameFromResource(const Resource& resource) const;
 
         const Building::Type getTypeFromResource(const Resource& resource) const;
 

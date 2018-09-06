@@ -27,7 +27,7 @@ namespace ogame {
       return m_playerUuid == other.m_playerUuid && m_universe->getUuid() == other.m_universe->getUuid();
     }
 
-    const std::string& Account::getUniverseName() const noexcept {
+    const std::string& Account::getUniverseName() const {
       if (m_community == nullptr) {
         throw AccountException(std::string("Could not get null community for player account " + std::to_string(m_playerUuid)));
       }

@@ -30,7 +30,7 @@ namespace ogame {
     }
 
     inline
-    const std::string ResourceMine::generateNameFromResource(const Resource& resource) const noexcept {
+    const std::string ResourceMine::generateNameFromResource(const Resource& resource) const {
       if (resource.getName() == std::string("metal")) {
         return std::string("Metal mine");
       }
