@@ -19,7 +19,7 @@ namespace ogame {
 
         const unsigned& getUuid() const noexcept;
 
-        const std::string& getName() const noexcept;
+        const std::string& getName() const;
 
         core::CommunityShPtr getCommunity() const noexcept;
 
