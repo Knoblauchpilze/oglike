@@ -14,6 +14,7 @@
 #include "ResearchUpgradeAction.h"
 #include "ShipUpgradeAction.h"
 #include "DefenseUpgradeAction.h"
+#include "Fleet.h"
 
 namespace ogame {
   namespace core {
@@ -22,6 +23,8 @@ namespace ogame {
     class Account;
 
     class ShipUpgradeAction;
+
+    class Fleet;
 
     class Planet
     {
@@ -168,6 +171,8 @@ namespace ogame {
         std::vector<std::shared_ptr<BuildingUpgradeAction>> m_buildingUpgrades;
         std::vector<std::shared_ptr<ShipUpgradeAction>> m_shipUpgrades;
         std::vector<std::shared_ptr<DefenseUpgradeAction>> m_defenseUpgrades;
+
+        std::vector<std::shared_ptr<Fleet>> m_fleets;
     };
 
     using PlanetShPtr = std::shared_ptr<Planet>;
