@@ -3,14 +3,15 @@
 
 #include <memory>
 #include <SDL/SDL.h>
-#include "AbstractBuyingView.h"
-#include "Ship.h"
+#include "GraphicContainer.h"
 #include "DataModelImplementation.h"
+#include "LabelledPicture.h"
+#include "Ship.h"
 
 namespace ogame {
   namespace gui {
 
-    class FleetView: public AbstractBuyingView
+    class FleetView: public view::GraphicContainer, public player::GeneralActionListener
     {
       public:
 
@@ -18,21 +19,23 @@ namespace ogame {
 
         virtual ~FleetView();
 
-      protected:
-
-        void populateActionData(const std::string& origin, ElementDescriptionPanel& action) const override;
+        void onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) override;
 
       private:
 
         void createView();
 
-        void populateWithPlanetData(const core::Planet& planet) override;
+        void populateWithPlanetData(const core::Planet& planet);
 
         const std::string getShipCountFromType(const core::Ship::Type& type, const core::Planet& planet) const noexcept;
 
         const core::Ship::Type computeShipFromOriginNode(const std::string& origin) const noexcept;
 
         const std::string getPictureNameFromShip(const core::Ship::Type& type, const bool reduced = true) const noexcept;
+
+        LabelledPictureShPtr createLabelledPictureContainer(const std::string& name,
+                                                            const std::string& picture,
+                                                            const std::string& text);
 
       private:
 
