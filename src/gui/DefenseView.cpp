@@ -24,52 +24,52 @@ namespace ogame {
       std::string level0 = std::to_string(0);
       BackgroundedLabelShPtr missile = createBackgroundedLabelContainer(
         std::string("missile_launcher"),
-        getPictureNameFromDefense(core::Defense::Type::MissileLauncher),
+        core::Defense::getPictureNameFromDefense(core::Defense::Type::MissileLauncher),
         level0
       );
       BackgroundedLabelShPtr lightLaser = createBackgroundedLabelContainer(
         std::string("light_laser"),
-        getPictureNameFromDefense(core::Defense::Type::LightLaser),
+        core::Defense::getPictureNameFromDefense(core::Defense::Type::LightLaser),
         level0
       );
       BackgroundedLabelShPtr heavyLaser = createBackgroundedLabelContainer(
         std::string("heavy_laser"),
-        getPictureNameFromDefense(core::Defense::Type::HeavyLaser),
+        core::Defense::getPictureNameFromDefense(core::Defense::Type::HeavyLaser),
         level0
       );
       BackgroundedLabelShPtr gaussCannon = createBackgroundedLabelContainer(
         std::string("gauss_cannon"),
-        getPictureNameFromDefense(core::Defense::Type::GaussCannon),
+        core::Defense::getPictureNameFromDefense(core::Defense::Type::GaussCannon),
         level0
       );
       BackgroundedLabelShPtr ionCannon = createBackgroundedLabelContainer(
         std::string("ion_cannon"),
-        getPictureNameFromDefense(core::Defense::Type::IonCannon),
+        core::Defense::getPictureNameFromDefense(core::Defense::Type::IonCannon),
         level0
       );
       BackgroundedLabelShPtr plasmaTurret = createBackgroundedLabelContainer(
         std::string("plasma_turret"),
-        getPictureNameFromDefense(core::Defense::Type::PlasmaTurret),
+        core::Defense::getPictureNameFromDefense(core::Defense::Type::PlasmaTurret),
         level0
       );
       BackgroundedLabelShPtr smallShield = createBackgroundedLabelContainer(
         std::string("small_shield_dome"),
-        getPictureNameFromDefense(core::Defense::Type::SmallShieldDome),
+        core::Defense::getPictureNameFromDefense(core::Defense::Type::SmallShieldDome),
         level0
       );
       BackgroundedLabelShPtr largeShield = createBackgroundedLabelContainer(
         std::string("large_shield_dome"),
-        getPictureNameFromDefense(core::Defense::Type::LargeShieldDome),
+        core::Defense::getPictureNameFromDefense(core::Defense::Type::LargeShieldDome),
         level0
       );
       BackgroundedLabelShPtr abm = createBackgroundedLabelContainer(
         std::string("antiballistic_missile"),
-        getPictureNameFromDefense(core::Defense::Type::AntiballisticMissile),
+        core::Defense::getPictureNameFromDefense(core::Defense::Type::AntiballisticMissile),
         level0
       );
       BackgroundedLabelShPtr ipm = createBackgroundedLabelContainer(
         std::string("interplanetary_missile"),
-        getPictureNameFromDefense(core::Defense::Type::InterplanetaryMissile),
+        core::Defense::getPictureNameFromDefense(core::Defense::Type::InterplanetaryMissile),
         level0
       );
 

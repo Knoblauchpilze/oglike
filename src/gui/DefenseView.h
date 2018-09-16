@@ -32,8 +32,6 @@ namespace ogame {
 
         const core::Defense::Type computeDefenseFromOriginNode(const std::string& origin) const noexcept;
 
-        const std::string getPictureNameFromDefense(const core::Defense::Type& type, const bool reduced = true) const noexcept;
-
       private:
 
     };

@@ -36,7 +36,7 @@ namespace ogame {
           populatePanel(
             std::string("Buildings"),
             upgrade->getName(),
-            core::Building::getPictureNameFromBuilding(upgrade->getType(), false),
+            core::Building::getPictureNameFromBuilding(upgrade->getType()),
             upgrade->getDescription(),
             (
               upgrade->isFinished() ?
@@ -112,7 +112,7 @@ namespace ogame {
           populatePanel(
             std::string("Shipyard"),
             shipUpgrade->getName(),
-            core::Ship::getPictureNameFromShip(shipUpgrade->getType(), false),
+            core::Ship::getPictureNameFromShip(shipUpgrade->getType()),
             shipUpgrade->getDescription(),
             (
               shipUpgrade->isFinished() ?
@@ -125,7 +125,7 @@ namespace ogame {
           populatePanel(
             std::string("Shipyard"),
             defenseUpgrade->getName(),
-            getPictureNameFromDefense(defenseUpgrade->getType()),
+            core::Defense::getPictureNameFromDefense(defenseUpgrade->getType()),
             defenseUpgrade->getDescription(),
             (
               defenseUpgrade->isFinished() ?
@@ -378,7 +378,7 @@ namespace ogame {
           }
 
           for (unsigned index = (excludeFirst ? 1u : 0u) ; index < buildings.size() ; ++index) {
-            gallery->addImage(core::Building::getPictureNameFromBuilding(buildings[index]->getType(), false));
+            gallery->addImage(core::Building::getPictureNameFromBuilding(buildings[index]->getType()));
           }
         }
 
@@ -428,7 +428,7 @@ namespace ogame {
           }
 
           for (unsigned index = (excludeFirst ? 1u : 0u) ; index < ships.size() ; ++index) {
-            gallery->addImage(core::Ship::getPictureNameFromShip(ships[index]->getType(), false));
+            gallery->addImage(core::Ship::getPictureNameFromShip(ships[index]->getType()));
           }
         }
 
@@ -453,7 +453,7 @@ namespace ogame {
           }
 
           for (unsigned index = (excludeFirst ? 1u : 0u) ; index < defenses.size() ; ++index) {
-            gallery->addImage(getPictureNameFromDefense(defenses[index]->getType()));
+            gallery->addImage(core::Defense::getPictureNameFromDefense(defenses[index]->getType()));
           }
         }
 

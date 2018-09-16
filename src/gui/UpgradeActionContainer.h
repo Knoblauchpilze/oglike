@@ -49,8 +49,6 @@ namespace ogame {
 
         const std::string getPictureNameFromResearch(const core::Research::Type& type) const noexcept;
 
-        const std::string getPictureNameFromDefense(const core::Defense::Type& type) const noexcept;
-
         void populatePanel(const std::string& upgradeType,
                            const std::string& upgradeName,
                            const std::string& upgradePicture,
