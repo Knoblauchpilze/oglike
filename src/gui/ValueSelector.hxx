@@ -7,9 +7,9 @@ namespace ogame {
   namespace gui {
 
     inline
-    const unsigned ValueSelector::getActiveOption() {
+    std::string ValueSelector::getActiveOption() {
       lock();
-      const unsigned option = m_selectedOption;
+      std::string option = m_options[m_selectedOption];
       unlock();
       return option;
     }
