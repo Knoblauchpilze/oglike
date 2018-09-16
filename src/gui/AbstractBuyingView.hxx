@@ -102,6 +102,9 @@ namespace ogame {
           else {
             m_activeBuyingActionName = origin;
             selector->setActiveChild(std::string("buying_action"));
+
+            // We need to assign the unit count for this panel.
+            m_buyingAction->triggerUnitCount();
           }
         }
         catch (const GuiException& e) {
