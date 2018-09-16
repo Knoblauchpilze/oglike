@@ -24,47 +24,47 @@ namespace ogame {
       std::string level0 = std::to_string(0);
       BackgroundedLabelShPtr metal = createBackgroundedLabelContainer(
         std::string("metal_mine"),
-        getPictureNameFromBuilding(core::Building::Type::MetalMine),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::MetalMine),
         level0
       );
       BackgroundedLabelShPtr crystal = createBackgroundedLabelContainer(
         std::string("crystal_mine"),
-        getPictureNameFromBuilding(core::Building::Type::CrystalMine),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::CrystalMine),
         level0
       );
       BackgroundedLabelShPtr deut = createBackgroundedLabelContainer(
         std::string("deut_synthesizer"),
-        getPictureNameFromBuilding(core::Building::Type::DeuteriumMine),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::DeuteriumMine),
         level0
       );
       BackgroundedLabelShPtr solarPlant = createBackgroundedLabelContainer(
         std::string("solar_plant"),
-        getPictureNameFromBuilding(core::Building::Type::SolarPlant),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::SolarPlant),
         level0
       );
       BackgroundedLabelShPtr fusionPlant = createBackgroundedLabelContainer(
         std::string("fusion_plant"),
-        getPictureNameFromBuilding(core::Building::Type::FusionPlant),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::FusionPlant),
         level0
       );
       BackgroundedLabelShPtr solarSatellite = createBackgroundedLabelContainer(
         std::string("solar_satellite"),
-        getPictureNameFromBuilding(core::Building::Type::SolarPlant),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::SolarPlant),
         level0
       );
       BackgroundedLabelShPtr metalStorage = createBackgroundedLabelContainer(
         std::string("metal_storage"),
-        getPictureNameFromBuilding(core::Building::Type::MetalStorage),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::MetalStorage),
         level0
       );
       BackgroundedLabelShPtr crystalStorage = createBackgroundedLabelContainer(
         std::string("crystal_storage"),
-        getPictureNameFromBuilding(core::Building::Type::CrystalStorage),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::CrystalStorage),
         level0
       );
       BackgroundedLabelShPtr deutTank = createBackgroundedLabelContainer(
         std::string("deut_tank"),
-        getPictureNameFromBuilding(core::Building::Type::DeuteriumStorage),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::DeuteriumStorage),
         level0
       );
 

@@ -13,7 +13,7 @@ namespace ogame {
         const core::Building::Type buildingType = computeBuildingFromOriginNode(origin);
 
         // Assign the corresponding image into the panel.
-        const std::string image = getPictureNameFromBuilding(buildingType, false);
+        const std::string image = core::Building::getPictureNameFromBuilding(buildingType, false);
         action.setImagePath(image);
 
         // Now retrieve information about this building using the active planet.
@@ -67,43 +67,6 @@ namespace ogame {
       else {
         return core::Building::Type::SpaceDock;
       }
-    }
-
-    inline
-    const std::string FacilitiesView::getPictureNameFromBuilding(const core::Building::Type& type, const bool reduced) const noexcept {
-      const std::string path("data/img/");
-      std::string image;
-      const std::string extension(reduced ? "_small.bmp" : ".bmp");
-
-      switch (type) {
-        case core::Building::Type::RoboticsFactory:
-          image = std::string("robotics_factory");
-          break;
-        case core::Building::Type::Shipyard:
-          image = std::string("shipyard");
-          break;
-        case core::Building::Type::ResearchLab:
-          image = std::string("research_laboratory");
-          break;
-        case core::Building::Type::AllianceDepot:
-          image = std::string("alliance_depot");
-          break;
-        case core::Building::Type::MissileSilo:
-          image = std::string("missile_silo");
-          break;
-        case core::Building::Type::NaniteFactory:
-          image = std::string("nanite_factory");
-          break;
-        case core::Building::Type::Terraformer:
-          image = std::string("terraformer");
-          break;
-        case core::Building::Type::SpaceDock:
-        default:
-          image = std::string("space_dock");
-          break;
-      }
-
-      return path + image + extension;
     }
 
   }

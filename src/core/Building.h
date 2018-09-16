@@ -51,6 +51,9 @@ namespace ogame {
         template <typename ChildClass>
         const ChildClass* asType() const;
 
+        static
+        std::string getPictureNameFromBuilding(const core::Building::Type& type, const bool reduced = true) noexcept;
+
       protected:
 
         Building() = delete;

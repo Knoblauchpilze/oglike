@@ -32,8 +32,6 @@ namespace ogame {
 
         const core::Building::Type computeBuildingFromOriginNode(const std::string& origin) const noexcept;
 
-        const std::string getPictureNameFromBuilding(const core::Building::Type& type, const bool reduced = true) const noexcept;
-
       private:
 
     };

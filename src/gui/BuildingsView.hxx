@@ -13,7 +13,7 @@ namespace ogame {
         const core::Building::Type buildingType = computeBuildingFromOriginNode(origin);
 
         // Assign the corresponding image into the panel.
-        const std::string image = getPictureNameFromBuilding(buildingType, false);
+        const std::string image = core::Building::getPictureNameFromBuilding(buildingType, false);
         action.setImagePath(image);
 
         // Now retrieve information about this building using the active planet.
@@ -71,47 +71,6 @@ namespace ogame {
         // TODO: Update
         return core::Building::Type::SolarPlant;
       }
-    }
-
-    inline
-    const std::string BuildingsView::getPictureNameFromBuilding(const core::Building::Type& type, const bool reduced) const noexcept {
-      const std::string path("data/img/");
-      std::string image;
-      const std::string extension(reduced ? "_small.bmp" : ".bmp");
-
-      switch (type) {
-        case core::Building::Type::MetalMine:
-          image = std::string("metal_mine");
-          break;
-        case core::Building::Type::CrystalMine:
-          image = std::string("crystal_mine");
-          break;
-        case core::Building::Type::DeuteriumMine:
-          image = std::string("deuterium_synthesizer");
-          break;
-        case core::Building::Type::SolarPlant:
-          image = std::string("solar_plant");
-          break;
-        case core::Building::Type::FusionPlant:
-          image = std::string("fusion_plant");
-          break;
-        case core::Building::Type::MetalStorage:
-          image = std::string("metal_storage");
-          break;
-        case core::Building::Type::CrystalStorage:
-          image = std::string("crystal_storage");
-          break;
-        case core::Building::Type::DeuteriumStorage:
-          image = std::string("deuterium_tank");
-          break;
-        // TODO: Handle solar satellites.
-        // case core::Building::Type:::
-        default:
-          image = std::string("solar_satellite");
-          break;
-      }
-
-      return path + image + extension;
     }
 
   }

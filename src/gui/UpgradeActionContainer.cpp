@@ -36,7 +36,7 @@ namespace ogame {
           populatePanel(
             std::string("Buildings"),
             upgrade->getName(),
-            getPictureNameFromBuilding(upgrade->getType()),
+            core::Building::getPictureNameFromBuilding(upgrade->getType(), false),
             upgrade->getDescription(),
             (
               upgrade->isFinished() ?
@@ -378,7 +378,7 @@ namespace ogame {
           }
 
           for (unsigned index = (excludeFirst ? 1u : 0u) ; index < buildings.size() ; ++index) {
-            gallery->addImage(getPictureNameFromBuilding(buildings[index]->getType()));
+            gallery->addImage(core::Building::getPictureNameFromBuilding(buildings[index]->getType(), false));
           }
         }
 
