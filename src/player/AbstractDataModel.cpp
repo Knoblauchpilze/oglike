@@ -16,7 +16,7 @@ namespace ogame {
       m_building(core::Building::Type::MetalMine),
       m_ship(core::Ship::Type::LightFighter),
       m_defense(core::Defense::Type::MissileLauncher),
-      m_unitCount(0u)
+      m_unitCount(1u)
     {
       // Nothing to do.
     }
