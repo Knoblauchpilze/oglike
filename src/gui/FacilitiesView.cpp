@@ -24,41 +24,41 @@ namespace ogame {
       std::string level0 = std::to_string(0);
       BackgroundedLabelShPtr robotics = createBackgroundedLabelContainer(
         std::string("robotics_factory"),
-        getPictureNameFromBuilding(core::Building::Type::RoboticsFactory),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::RoboticsFactory),
         level0
       );
       BackgroundedLabelShPtr shipyard = createBackgroundedLabelContainer(
         std::string("shipyard"),
-        getPictureNameFromBuilding(core::Building::Type::Shipyard),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::Shipyard),
         level0);
       BackgroundedLabelShPtr research = createBackgroundedLabelContainer(
         std::string("research_lab"),
-        getPictureNameFromBuilding(core::Building::Type::ResearchLab),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::ResearchLab),
         level0
       );
       BackgroundedLabelShPtr allianceDepot = createBackgroundedLabelContainer(
         std::string("alliance_depot"),
-        getPictureNameFromBuilding(core::Building::Type::AllianceDepot),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::AllianceDepot),
         level0
       );
       BackgroundedLabelShPtr missileSilo = createBackgroundedLabelContainer(
         std::string("missile_silo"),
-        getPictureNameFromBuilding(core::Building::Type::MissileSilo),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::MissileSilo),
         level0
       );
       BackgroundedLabelShPtr naniteFactory = createBackgroundedLabelContainer(
         std::string("nanite_factory"),
-        getPictureNameFromBuilding(core::Building::Type::NaniteFactory),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::NaniteFactory),
         level0
       );
       BackgroundedLabelShPtr terraformer = createBackgroundedLabelContainer(
         std::string("terraformer"),
-        getPictureNameFromBuilding(core::Building::Type::Terraformer),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::Terraformer),
         level0
       );
       BackgroundedLabelShPtr spaceDock = createBackgroundedLabelContainer(
         std::string("space_dock"),
-        getPictureNameFromBuilding(core::Building::Type::SpaceDock),
+        core::Building::getPictureNameFromBuilding(core::Building::Type::SpaceDock),
         level0
       );
 

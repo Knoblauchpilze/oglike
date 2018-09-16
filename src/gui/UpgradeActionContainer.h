@@ -47,8 +47,6 @@ namespace ogame {
 
         const std::string computeDisplayTime(const float& seconds) const;
 
-        const std::string getPictureNameFromBuilding(const core::Building::Type& type) const noexcept;
-
         const std::string getPictureNameFromResearch(const core::Research::Type& type) const noexcept;
 
         const std::string getPictureNameFromDefense(const core::Defense::Type& type) const noexcept;
