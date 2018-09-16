@@ -144,6 +144,21 @@ namespace ogame {
           addToPhotoGallery(ships, hasShipUpgrade, true);
           addToPhotoGallery(defenses, !hasShipUpgrade, false);
         }
+        if (!hasMoreThanOneUpgrade) {
+          // Clear the gallery from previously added upgrades.
+          view::GraphicContainer* upgradeContainer = getChildFromCompleteList<view::GraphicContainer*>(std::string("update_container"));
+
+          if (checkChild(upgradeContainer, "Upgrade action container main container")) {
+            lock();
+            PhotoGallery* gallery = upgradeContainer->getChild<PhotoGallery*>(std::string("gallery"));
+            if (checkChild(gallery, "Upgrade action container photo gallery")) {
+              gallery->clear();
+            }
+
+            makeDeepDirty();
+            unlock();
+          }
+        }
       }
       catch (const core::PlanetException& e) {
         std::cerr << "[DURATION] Could not populate upgrade action container " << getName() << " with shipyard actions for planet " << planet.getName() << ":" << std::endl << e.what() << std::endl;

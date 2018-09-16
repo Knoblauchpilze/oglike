@@ -257,7 +257,6 @@ namespace ogame {
       return path + image + extension;
     }
 
-
     inline
     const std::string UpgradeActionContainer::getPictureNameFromDefense(const core::Defense::Type& type) const noexcept {
       const std::string path("data/img/");
