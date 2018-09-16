@@ -33,7 +33,7 @@ namespace ogame {
 
         void setActiveOption(const unsigned& index);
 
-        const unsigned getActiveOption();
+        std::string getActiveOption();
 
         void onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) override;
 
