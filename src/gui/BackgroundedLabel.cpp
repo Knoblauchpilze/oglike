@@ -10,40 +10,50 @@ namespace ogame {
                                          view::ColoredFontShPtr font,
                                          const std::string& picture,
                                          const std::string& text,
+                                         const SDL_Color& textBackgroundColor,
                                          const Alignment& alignment,
-                                         const EventListener::Interaction::Mask& mask):
-      view::GraphicContainer(name,
-                             view::utils::Area(),
-                             mask),
-      m_alignment(alignment)
+                                         const view::EventListener::Interaction::Mask& mask):
+      PictureContainer(name,
+                       picture,
+                       mask),
+      m_alignment(alignment),
+
+      m_textChanged(true),
+      m_text(text),
+
+      m_textBackgroundColor(textBackgroundColor),
+
+      m_font(font),
+
+      m_textSurface(nullptr)
     {
-      createView(font, picture, text);
+      // Nothing to do here.
     }
 
     BackgroundedLabel::~BackgroundedLabel() {}
 
-    void BackgroundedLabel::createView(view::ColoredFontShPtr font, const std::string& picture, const std::string& text) {
-      // Create the layout based on the alignment.
-      view::LinearLayoutShPtr layout = createLayoutFromAlignment(m_alignment);
-      setLayout(layout);
+    SDL_Surface* BackgroundedLabel::createContentPrivate() {
+      // Use the base PictureContainer class to create the background image.
+      SDL_Surface* croppedArea = PictureContainer::createContentPrivate();
 
-      // Create each container.
-      PictureContainerShPtr image = ComponentFactory::createPicturePanel(
-        std::string("picture_panel"),
-        picture
-      );
+      // Create the text to render.
+      createText();
 
-      LabelContainerShPtr label = ComponentFactory::createLabelPanel(
-        std::string("label_panel"),
-        text,
-        font
-      );
+      // Check whether some text should be displayed.
+      if (m_textSurface != nullptr) {
+        // Compute the blit position of the picture so that it respects the alignment.
+        SDL_Rect textBlitArea = computeBlitPosition(croppedArea->w, croppedArea->h);
 
-      if (image == nullptr || label == nullptr) {
-        throw GuiException(std::string("Could not create one or more component for container ") + getName());
+        // Perform the blit operation (i.e. stick the text onto the rendering area).
+        SDL_BlitSurface(m_textSurface, nullptr, croppedArea, &textBlitArea);
       }
 
-      addComponentFromLayout(image, label);
+      // Reset flags.
+      m_textChanged = false;
+
+      // This is the final image for this container.
+      return croppedArea;
     }
+
   }
 }
