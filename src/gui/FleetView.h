@@ -28,7 +28,7 @@ namespace ogame {
 
         void populateWithPlanetData(const core::Planet& planet);
 
-        const std::string getShipCountFromType(const core::Ship::Type& type, const core::Planet& planet) const noexcept;
+        unsigned getShipCountFromType(const core::Ship::Type& type, const core::Planet& planet) const noexcept;
 
         const core::Ship::Type computeShipFromOriginNode(const std::string& origin) const noexcept;
 

@@ -13,11 +13,10 @@ namespace ogame {
     FleetView::FleetView(const std::string& name, player::GeneralDataModelShPtr model):
       view::GraphicContainer(name,
                              view::utils::Area(),
-                             view::EventListener::Interaction::NoInteraction,
-                             false),
+                             view::EventListener::Interaction::NoInteraction),
       player::GeneralActionListener(model.get())
     {
-      // setBackgroundColor(SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE});
+      setBackgroundColor(SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE});
 
       createView();
 
@@ -188,15 +187,15 @@ namespace ogame {
         {std::string("deathstar"), core::Ship::Type::Deathstar},
 
         {std::string("recycler"), core::Ship::Type::Recycler},
-        {std::string("espionnage_probe"), core::Ship::Type::EspionageProbe},
+        {std::string("espionage_probe"), core::Ship::Type::EspionageProbe},
         {std::string("solar_satellite"), core::Ship::Type::SolarSatellite}
       };
 
       std::for_each(ships.cbegin(), ships.cend(),
         [this, &planet](const std::pair<std::string, core::Ship::Type>& ship) {
-          LabelledPicture* shipInfo = getChild<LabelledPicture*>(ship.first);
+          ShipSelectionPanel* shipInfo = getChild<ShipSelectionPanel*>(ship.first);
           if (checkChild(shipInfo, ship.first)) {
-            shipInfo->setLabel(getShipCountFromType(ship.second, planet));
+            shipInfo->setCount(getShipCountFromType(ship.second, planet));
           }
         }
       );
