@@ -23,6 +23,8 @@ namespace ogame {
 
         void setImagePath(const std::string& path);
 
+        void triggerUnitCount();
+
         template <typename Element>
         inline
         void populateInformationFromElement(const Element& element,

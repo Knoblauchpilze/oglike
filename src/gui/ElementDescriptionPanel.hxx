@@ -21,6 +21,19 @@ namespace ogame {
       unlock();
     }
 
+    inline
+    void ElementDescriptionPanel::triggerUnitCount() {
+      lock();
+
+      // Update each panel using the dedicated handler.
+      UpgradeInfo* upgradeInfo = getChild<UpgradeInfo*>(std::string("upgrade_info"));
+      if (checkChild(upgradeInfo, std::string("Element description upgrade info"))) {
+        upgradeInfo->triggerUnitCount();
+      }
+
+      unlock();
+    }
+
     template <typename Element>
     inline
     void ElementDescriptionPanel::populateInformationFromElement(const Element& element,
