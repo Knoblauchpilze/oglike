@@ -4,7 +4,7 @@
 #include <memory>
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
-#include "LabelledPicture.h"
+#include "BackgroundedLabel.h"
 #include "Ship.h"
 
 namespace ogame {
@@ -25,8 +25,8 @@ namespace ogame {
 
       private:
 
-        LabelledPictureShPtr createLabelledPictureContainer(const std::string& name,
-                                                            const std::string& picture);
+        BackgroundedLabelShPtr createBackgroundedLabelContainer(const std::string& name,
+                                                                const std::string& picture);
 
         const std::string getPictureNameFromShip(const core::Ship::Type& type, const bool reduced = true) const noexcept;
 

@@ -30,7 +30,7 @@ namespace ogame {
       // Assign the layout.
       setLayout(layout);
 
-      LabelledPictureShPtr shipPicture = createLabelledPictureContainer(
+      BackgroundedLabelShPtr shipPicture = createBackgroundedLabelContainer(
         std::string("image"),
         getPictureNameFromShip(type)
       );
