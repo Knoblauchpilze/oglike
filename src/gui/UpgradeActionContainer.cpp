@@ -69,7 +69,7 @@ namespace ogame {
           populatePanel(
             std::string("Research"),
             upgrade->getName(),
-            getPictureNameFromResearch(upgrade->getType()),
+            core::Research::getPictureNameFromResearch(upgrade->getType()),
             upgrade->getDescription(),
             (
               upgrade->isFinished() ?
@@ -403,7 +403,7 @@ namespace ogame {
           }
 
           for (unsigned index = (excludeFirst ? 1u : 0u) ; index < researches.size() ; ++index) {
-            gallery->addImage(getPictureNameFromResearch(researches[index]->getType()));
+            gallery->addImage(core::Research::getPictureNameFromResearch(researches[index]->getType()));
           }
         }
 

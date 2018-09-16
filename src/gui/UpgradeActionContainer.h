@@ -47,8 +47,6 @@ namespace ogame {
 
         const std::string computeDisplayTime(const float& seconds) const;
 
-        const std::string getPictureNameFromResearch(const core::Research::Type& type) const noexcept;
-
         void populatePanel(const std::string& upgradeType,
                            const std::string& upgradeName,
                            const std::string& upgradePicture,
