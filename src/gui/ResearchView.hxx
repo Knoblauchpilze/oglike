@@ -16,7 +16,7 @@ namespace ogame {
         const core::Research::Type researchType = computeResearchFromOriginNode(origin);
 
         // Assign the corresponding image into the panel.
-        const std::string image = getPictureNameFromResearch(researchType, false);
+        const std::string image = core::Research::getPictureNameFromResearch(researchType, false);
         action.setImagePath(image);
 
         // Now retrieve information about this research using the active account.
@@ -94,67 +94,6 @@ namespace ogame {
       else {
         return core::Research::Type::Energy;
       }
-    }
-
-    inline
-    const std::string ResearchView::getPictureNameFromResearch(const core::Research::Type& type, const bool reduced) const noexcept {
-      const std::string path("data/img/");
-      std::string image;
-      const std::string extension(reduced ? "_tech_small.bmp" : "_tech.bmp");
-
-      switch (type) {
-        case core::Research::Type::Laser:
-          image = std::string("laser");
-          break;
-        case core::Research::Type::Ion:
-          image = std::string("ions");
-          break;
-        case core::Research::Type::Hyperspace:
-          image = std::string("hyperspace");
-          break;
-        case core::Research::Type::Plasma:
-          image = std::string("plasma");
-          break;
-        case core::Research::Type::CombustionDrive:
-          image = std::string("combustion_drive");
-          break;
-        case core::Research::Type::ImpulseDrive:
-          image = std::string("impulse_drive");
-          break;
-        case core::Research::Type::HyperspaceDrive:
-          image = std::string("hyperspace_drive");
-          break;
-        case core::Research::Type::Espionage:
-          image = std::string("espionage");
-          break;
-        case core::Research::Type::Computer:
-          image = std::string("computer");
-          break;
-        case core::Research::Type::Astrophysics:
-          image = std::string("astrophysics");
-          break;
-        case core::Research::Type::IRN:
-          image = std::string("intergalactic_research_network");
-          break;
-        case core::Research::Type::Graviton:
-          image = std::string("graviton");
-          break;
-        case core::Research::Type::Weapon:
-          image = std::string("weapon");
-          break;
-        case core::Research::Type::Shielding:
-          image = std::string("shielding");
-          break;
-        case core::Research::Type::Armour:
-          image = std::string("armour");
-          break;
-        case core::Research::Type::Energy:
-        default:
-          image = std::string("energy");
-          break;
-      }
-
-      return path + image + extension;
     }
 
   }

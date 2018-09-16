@@ -45,6 +45,9 @@ namespace ogame {
         const float getUpgradeTime(const unsigned& universeSpeed,
                                    const unsigned& laboratoryLevel) const;
 
+        static
+        std::string getPictureNameFromResearch(const core::Research::Type& type, const bool reduced = true) noexcept;
+
       private:
 
         const std::string getNameFromType(const Type& type) const noexcept;
