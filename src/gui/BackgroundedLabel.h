@@ -4,51 +4,66 @@
 #include <memory>
 #include <string>
 #include <SDL/SDL.h>
-#include "GraphicContainer.h"
+
 #include "ColoredFont.h"
-#include "LinearLayout.h"
 #include "PictureContainer.h"
-#include "LabelContainer.h"
 
 namespace ogame {
   namespace gui {
 
-    class BackgroundedLabel: public view::GraphicContainer
+    class BackgroundedLabel: public PictureContainer
     {
       public:
 
-        // Describe the position of the picture relatively to the label.
+        // Describe the position of the label above the picture.
         enum class Alignment {
-          Left,
-          Right,
-          Above,
-          Below
+          BottomLeft,
+          BottomRight,
+          TopLeft,
+          TopRight
         };
 
         BackgroundedLabel(const std::string& name,
                           view::ColoredFontShPtr font,
                           const std::string& picture,
                           const std::string& text = std::string(),
-                          const Alignment& alignment = Alignment::Below,
-                          const EventListener::Interaction::Mask& mask = EventListener::Interaction::NoInteraction);
+                          const SDL_Color& textBackgroundColor = SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE},
+                          const Alignment& alignment = Alignment::BottomRight,
+                          const view::EventListener::Interaction::Mask& mask = view::EventListener::Interaction::NoInteraction);
 
         virtual ~BackgroundedLabel();
 
-        void setLabel(const std::string& text);
+        void setText(const std::string& text);
+
+      protected:
+
+        SDL_Surface* createContentPrivate() override;
+
+        void clearContentPrivate(SDL_Surface* render) override;
 
       private:
 
-        void createView(view::ColoredFontShPtr font, const std::string& picture, const std::string& text);
+        void clearText();
 
-        view::LinearLayoutShPtr createLayoutFromAlignment(const Alignment& alignment,
-                                                          const float& margin = 0.0f,
-                                                          const float& componentMargin = 0.0f) const;
+        // We assume that the font is loaded before entering this method.
+        void createText();
 
-        void addComponentFromLayout(PictureContainerShPtr picture, LabelContainerShPtr label);
+        SDL_Surface* createTextFromFont(const std::string& text, view::ColoredFontShPtr font);
+
+        SDL_Rect computeBlitPosition(const unsigned& displayWidth, const unsigned& displayHeight) const noexcept;
 
       private:
 
         Alignment m_alignment;
+
+        bool m_textChanged;
+        std::string m_text;
+
+        SDL_Color m_textBackgroundColor;
+
+        view::ColoredFontShPtr m_font;
+
+        SDL_Surface* m_textSurface;
 
     };
 
