@@ -5,7 +5,7 @@
 #include <SDL/SDL.h>
 #include "GraphicContainer.h"
 #include "DataModelImplementation.h"
-#include "LabelledPicture.h"
+#include "BackgroundedLabel.h"
 #include "GraphicContainerListener.h"
 #include "ElementDescriptionPanel.h"
 
@@ -33,10 +33,10 @@ namespace ogame {
 
         void connectDataModel(const player::Action& action) noexcept;
 
-        LabelledPictureShPtr createLabelledPictureContainer(const std::string& name,
-                                                            const std::string& picture,
-                                                            const std::string& text,
-                                                            const bool registerForInteraction = true);
+        BackgroundedLabelShPtr createBackgroundedLabelContainer(const std::string& name,
+                                                                const std::string& picture,
+                                                                const std::string& text,
+                                                                const bool registerForInteraction = true);
 
         virtual void populateWithPlanetData(const core::Planet& planet);
 
