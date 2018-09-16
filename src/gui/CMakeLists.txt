@@ -47,6 +47,7 @@ set (SOURCES
   UpgradeActionContainer.cpp
   PhotoGallery.cpp
   ActionProviderLabelStateContainer.cpp
+  ShipSelectionPanel.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
