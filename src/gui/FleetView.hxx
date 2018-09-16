@@ -24,8 +24,8 @@ namespace ogame {
     }
 
     inline
-    const std::string FleetView::getShipCountFromType(const core::Ship::Type& type, const core::Planet& planet) const noexcept {
-      return std::to_string(planet.getShipCount(type));
+    unsigned FleetView::getShipCountFromType(const core::Ship::Type& type, const core::Planet& planet) const noexcept {
+      return planet.getShipCount(type);
     }
 
     inline
