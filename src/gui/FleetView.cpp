@@ -5,6 +5,7 @@
 #include "PictureContainer.h"
 #include "ComponentFactory.h"
 #include "LabelledPicture.h"
+#include "SwitchPictureContainer.h"
 
 namespace ogame {
   namespace gui {
@@ -41,76 +42,86 @@ namespace ogame {
         std::string("data/img/fleet_bg.bmp")
       );
 
-      std::string level0 = std::to_string(0);
-      LabelledPictureShPtr lightFighter = createLabelledPictureContainer(
+      std::string noShip = std::to_string(0);
+      ShipSelectionPanelShPtr lightFighter = std::make_shared<ShipSelectionPanel>(
         std::string("light_fighter"),
-        getPictureNameFromShip(core::Ship::Type::LightFighter),
-        level0
+        core::Ship::Type::LightFighter
       );
-      LabelledPictureShPtr heavyFighter = createLabelledPictureContainer(
+      ShipSelectionPanelShPtr heavyFighter = std::make_shared<ShipSelectionPanel>(
         std::string("heavy_fighter"),
-        getPictureNameFromShip(core::Ship::Type::HeavyFighter),
-        level0
+        core::Ship::Type::HeavyFighter
       );
-      LabelledPictureShPtr cruiser = createLabelledPictureContainer(
+      ShipSelectionPanelShPtr cruiser = std::make_shared<ShipSelectionPanel>(
         std::string("cruiser"),
-        getPictureNameFromShip(core::Ship::Type::Cruiser),
-        level0
+        core::Ship::Type::Cruiser
       );
-      LabelledPictureShPtr battleship = createLabelledPictureContainer(
+      ShipSelectionPanelShPtr battleship = std::make_shared<ShipSelectionPanel>(
         std::string("battleship"),
-        getPictureNameFromShip(core::Ship::Type::Battleship),
-        level0
+        core::Ship::Type::Battleship
       );
-      LabelledPictureShPtr smallCargo = createLabelledPictureContainer(
+      ShipSelectionPanelShPtr smallCargo = std::make_shared<ShipSelectionPanel>(
         std::string("small_cargo"),
-        getPictureNameFromShip(core::Ship::Type::SmallCargo),
-        level0
+        core::Ship::Type::SmallCargo
       );
-      LabelledPictureShPtr largeCargo = createLabelledPictureContainer(
+      ShipSelectionPanelShPtr largeCargo = std::make_shared<ShipSelectionPanel>(
         std::string("large_cargo"),
-        getPictureNameFromShip(core::Ship::Type::LargeCargo),
-        level0
+        core::Ship::Type::LargeCargo
       );
-      LabelledPictureShPtr colonyShip = createLabelledPictureContainer(
+      ShipSelectionPanelShPtr colonyShip = std::make_shared<ShipSelectionPanel>(
         std::string("colony_ship"),
-        getPictureNameFromShip(core::Ship::Type::ColonyShip),
-        level0
+        core::Ship::Type::ColonyShip
       );
-      LabelledPictureShPtr battlecruiser = createLabelledPictureContainer(
+      ShipSelectionPanelShPtr battlecruiser = std::make_shared<ShipSelectionPanel>(
         std::string("battlecruiser"),
-        getPictureNameFromShip(core::Ship::Type::Battlecruiser),
-        level0
+        core::Ship::Type::Battlecruiser
       );
-      LabelledPictureShPtr bomber = createLabelledPictureContainer(
+      ShipSelectionPanelShPtr bomber = std::make_shared<ShipSelectionPanel>(
         std::string("bomber"),
-        getPictureNameFromShip(core::Ship::Type::Bomber),
-        level0
+        core::Ship::Type::Bomber
       );
-      LabelledPictureShPtr destroyer = createLabelledPictureContainer(
+      ShipSelectionPanelShPtr destroyer = std::make_shared<ShipSelectionPanel>(
         std::string("destroyer"),
-        getPictureNameFromShip(core::Ship::Type::Destroyer),
-        level0
+        core::Ship::Type::Destroyer
       );
-      LabelledPictureShPtr deathstar = createLabelledPictureContainer(
+      ShipSelectionPanelShPtr deathstar = std::make_shared<ShipSelectionPanel>(
         std::string("deathstar"),
-        getPictureNameFromShip(core::Ship::Type::Deathstar),
-        level0
+        core::Ship::Type::Deathstar
       );
-      LabelledPictureShPtr recycler = createLabelledPictureContainer(
+      ShipSelectionPanelShPtr recycler = std::make_shared<ShipSelectionPanel>(
         std::string("recycler"),
-        getPictureNameFromShip(core::Ship::Type::Recycler),
-        level0
+        core::Ship::Type::Recycler
       );
-      LabelledPictureShPtr espionageProbe = createLabelledPictureContainer(
+      ShipSelectionPanelShPtr espionageProbe = std::make_shared<ShipSelectionPanel>(
         std::string("espionage_probe"),
-        getPictureNameFromShip(core::Ship::Type::EspionageProbe),
-        level0
+        core::Ship::Type::EspionageProbe
       );
-      LabelledPictureShPtr solarSatellite = createLabelledPictureContainer(
+      ShipSelectionPanelShPtr solarSatellite = std::make_shared<ShipSelectionPanel>(
         std::string("solar_satellite"),
-        getPictureNameFromShip(core::Ship::Type::SolarSatellite),
-        level0
+        core::Ship::Type::SolarSatellite
+      );
+
+      PictureContainerShPtr allShipsIn = ComponentFactory::createPicturePanel(
+        std::string("all_ships_in"),
+        std::string("data/img/all_in.bmp")
+      );
+
+      PictureContainerShPtr allShipsOut = ComponentFactory::createPicturePanel(
+        std::string("all_ships_out"),
+        std::string("data/img/all_out.bmp")
+      );
+
+      SwitchPictureContainerShPtr previousStep = ComponentFactory::createSwitchPicturePanel(
+        std::string("previous_step"),
+        std::string("data/img/action_return.bmp"),
+        std::string("data/img/action_invalid.bmp"),
+        view::EventListener::Interaction::MouseButtonPressed
+      );
+
+      SwitchPictureContainerShPtr nextStep = ComponentFactory::createSwitchPicturePanel(
+        std::string("next_step"),
+        std::string("data/img/action_valid.bmp"),
+        std::string("data/img/action_invalid.bmp"),
+        view::EventListener::Interaction::MouseButtonPressed
       );
 
       if (lightFighter == nullptr ||
@@ -126,7 +137,11 @@ namespace ogame {
           deathstar == nullptr ||
           recycler == nullptr ||
           espionageProbe == nullptr ||
-          solarSatellite == nullptr)
+          solarSatellite == nullptr ||
+          allShipsIn == nullptr ||
+          allShipsOut == nullptr ||
+          previousStep == nullptr ||
+          nextStep == nullptr)
       {
         throw GuiException(std::string("Could not allocate memory to create fleet view"));
       }
@@ -147,6 +162,10 @@ namespace ogame {
       addChild(recycler,       4u, 3u, 1u, 1u);
       addChild(espionageProbe, 5u, 3u, 1u, 1u);
       addChild(solarSatellite, 6u, 3u, 1u, 1u);
+      addChild(allShipsIn,     0u, 4u, 1u, 1u);
+      addChild(allShipsOut,    1u, 4u, 1u, 1u);
+      addChild(previousStep,   3u, 4u, 2u, 1u);
+      addChild(nextStep,       5u, 4u, 2u, 1u);
     }
 
     void FleetView::populateWithPlanetData(const core::Planet& planet) {

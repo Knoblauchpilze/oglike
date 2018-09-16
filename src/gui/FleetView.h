@@ -7,6 +7,7 @@
 #include "DataModelImplementation.h"
 #include "LabelledPicture.h"
 #include "Ship.h"
+#include "ShipSelectionPanel.h"
 
 namespace ogame {
   namespace gui {
@@ -30,12 +31,6 @@ namespace ogame {
         const std::string getShipCountFromType(const core::Ship::Type& type, const core::Planet& planet) const noexcept;
 
         const core::Ship::Type computeShipFromOriginNode(const std::string& origin) const noexcept;
-
-        const std::string getPictureNameFromShip(const core::Ship::Type& type, const bool reduced = true) const noexcept;
-
-        LabelledPictureShPtr createLabelledPictureContainer(const std::string& name,
-                                                            const std::string& picture,
-                                                            const std::string& text);
 
       private:
 
