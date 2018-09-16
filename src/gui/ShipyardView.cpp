@@ -147,7 +147,7 @@ namespace ogame {
         {std::string("deathstar"), core::Ship::Type::Deathstar},
 
         {std::string("recycler"), core::Ship::Type::Recycler},
-        {std::string("espionnage_probe"), core::Ship::Type::EspionageProbe},
+        {std::string("espionage_probe"), core::Ship::Type::EspionageProbe},
         {std::string("solar_satellite"), core::Ship::Type::SolarSatellite}
       };
 
