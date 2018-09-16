@@ -1,10 +1,6 @@
 
 #include "FacilitiesView.h"
-#include "GridLayout.h"
 #include "GuiException.h"
-#include "PictureContainer.h"
-#include "ComponentFactory.h"
-#include "LabelledPicture.h"
 
 namespace ogame {
   namespace gui {
@@ -26,41 +22,41 @@ namespace ogame {
     void FacilitiesView::createView() {
       // Create all elements.
       std::string level0 = std::to_string(0);
-      LabelledPictureShPtr robotics = createLabelledPictureContainer(
+      BackgroundedLabelShPtr robotics = createBackgroundedLabelContainer(
         std::string("robotics_factory"),
         getPictureNameFromBuilding(core::Building::Type::RoboticsFactory),
         level0
       );
-      LabelledPictureShPtr shipyard = createLabelledPictureContainer(
+      BackgroundedLabelShPtr shipyard = createBackgroundedLabelContainer(
         std::string("shipyard"),
         getPictureNameFromBuilding(core::Building::Type::Shipyard),
         level0);
-      LabelledPictureShPtr research = createLabelledPictureContainer(
+      BackgroundedLabelShPtr research = createBackgroundedLabelContainer(
         std::string("research_lab"),
         getPictureNameFromBuilding(core::Building::Type::ResearchLab),
         level0
       );
-      LabelledPictureShPtr allianceDepot = createLabelledPictureContainer(
+      BackgroundedLabelShPtr allianceDepot = createBackgroundedLabelContainer(
         std::string("alliance_depot"),
         getPictureNameFromBuilding(core::Building::Type::AllianceDepot),
         level0
       );
-      LabelledPictureShPtr missileSilo = createLabelledPictureContainer(
+      BackgroundedLabelShPtr missileSilo = createBackgroundedLabelContainer(
         std::string("missile_silo"),
         getPictureNameFromBuilding(core::Building::Type::MissileSilo),
         level0
       );
-      LabelledPictureShPtr naniteFactory = createLabelledPictureContainer(
+      BackgroundedLabelShPtr naniteFactory = createBackgroundedLabelContainer(
         std::string("nanite_factory"),
         getPictureNameFromBuilding(core::Building::Type::NaniteFactory),
         level0
       );
-      LabelledPictureShPtr terraformer = createLabelledPictureContainer(
+      BackgroundedLabelShPtr terraformer = createBackgroundedLabelContainer(
         std::string("terraformer"),
         getPictureNameFromBuilding(core::Building::Type::Terraformer),
         level0
       );
-      LabelledPictureShPtr spaceDock = createLabelledPictureContainer(
+      BackgroundedLabelShPtr spaceDock = createBackgroundedLabelContainer(
         std::string("space_dock"),
         getPictureNameFromBuilding(core::Building::Type::SpaceDock),
         level0
@@ -107,9 +103,9 @@ namespace ogame {
 
       std::for_each(buildings.cbegin(), buildings.cend(),
         [this, &planet](const std::pair<std::string, core::Building::Type>& building) {
-          LabelledPicture* buildingInfo = getChild<LabelledPicture*>(building.first);
+          BackgroundedLabel* buildingInfo = getChild<BackgroundedLabel*>(building.first);
           if (checkChild(buildingInfo, building.first)) {
-            buildingInfo->setLabel(getDisplayForBuilding(building.second, planet));
+            buildingInfo->setText(getDisplayForBuilding(building.second, planet));
           }
         }
       );
