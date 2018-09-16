@@ -100,44 +100,28 @@ namespace ogame {
       lock();
 
       // Update each information.
-      LabelledPicture* metal = getChild<LabelledPicture*>(std::string("metal_mine"));
-      if (checkChild(metal, "Planet metal mine")) {
-        metal->setLabel(getDisplayForBuilding(core::Building::Type::MetalMine, planet));
-      }
-      LabelledPicture* crystal = getChild<LabelledPicture*>(std::string("crystal_mine"));
-      if (checkChild(crystal, "Planet crystal mine")) {
-        crystal->setLabel(getDisplayForBuilding(core::Building::Type::CrystalMine, planet));
-      }
-      LabelledPicture* deut = getChild<LabelledPicture*>(std::string("deut_synthesizer"));
-      if (checkChild(deut, "Planet deuterium synthesizer")) {
-        deut->setLabel(getDisplayForBuilding(core::Building::Type::DeuteriumMine, planet));
-      }
+      std::vector<std::pair<std::string, core::Building::Type>> buildings = {
+        {std::string("metal_mine"), core::Building::Type::MetalMine},
+        {std::string("crystal_mine"), core::Building::Type::CrystalMine},
+        {std::string("deut_synthesizer"), core::Building::Type::DeuteriumMine},
 
-      LabelledPicture* solarPlant = getChild<LabelledPicture*>(std::string("solar_plant"));
-      if (checkChild(solarPlant, "Planet solar plant")) {
-        solarPlant->setLabel(getDisplayForBuilding(core::Building::Type::SolarPlant, planet));
-      }
-      LabelledPicture* fusionPlant = getChild<LabelledPicture*>(std::string("fusion_plant"));
-      if (checkChild(fusionPlant, "Planet fusion plant")) {
-        fusionPlant->setLabel(getDisplayForBuilding(core::Building::Type::FusionPlant, planet));
-      }
-      LabelledPicture* solarSatellite = getChild<LabelledPicture*>(std::string("solar_satellite"));
-      if (checkChild(solarSatellite, "Planet solar satellite")) {
-        solarSatellite->setLabel(getDisplayForBuilding(core::Building::Type::SolarPlant, planet));
-      }
+        {std::string("solar_plant"), core::Building::Type::SolarPlant},
+        {std::string("fusion_plant"), core::Building::Type::FusionPlant},
+        {std::string("solar_satellite"), core::Building::Type::SolarPlant},
 
-      LabelledPicture* metalStorage = getChild<LabelledPicture*>(std::string("metal_storage"));
-      if (checkChild(metalStorage, "Planet metal storage")) {
-        metalStorage->setLabel(getDisplayForBuilding(core::Building::Type::MetalStorage, planet));
-      }
-      LabelledPicture* crystalStorage = getChild<LabelledPicture*>(std::string("crystal_storage"));
-      if (checkChild(crystalStorage, "Planet crystal storage")) {
-        crystalStorage->setLabel(getDisplayForBuilding(core::Building::Type::CrystalStorage, planet));
-      }
-      LabelledPicture* deutTank = getChild<LabelledPicture*>(std::string("deut_tank"));
-      if (checkChild(deutTank, "Planet deuterium tank")) {
-        deutTank->setLabel(getDisplayForBuilding(core::Building::Type::DeuteriumStorage, planet));
-      }
+        {std::string("metal_storage"), core::Building::Type::MetalStorage},
+        {std::string("crystal_storage"), core::Building::Type::CrystalStorage},
+        {std::string("deut_tank"), core::Building::Type::DeuteriumStorage}
+      };
+
+      std::for_each(buildings.cbegin(), buildings.cend(),
+        [this, &planet](const std::pair<std::string, core::Building::Type>& building) {
+          LabelledPicture* buildingInfo = getChild<LabelledPicture*>(building.first);
+          if (checkChild(buildingInfo, building.first)) {
+            buildingInfo->setLabel(getDisplayForBuilding(building.second, planet));
+          }
+        }
+      );
 
       makeDeepDirty();
       unlock();

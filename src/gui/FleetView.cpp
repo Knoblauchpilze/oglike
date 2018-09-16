@@ -11,10 +11,12 @@ namespace ogame {
 
     FleetView::FleetView(const std::string& name, player::GeneralDataModelShPtr model):
       view::GraphicContainer(name,
-                             view::utils::Area()),
+                             view::utils::Area(),
+                             view::EventListener::Interaction::NoInteraction,
+                             false),
       player::GeneralActionListener(model.get())
     {
-      setBackgroundColor(SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE});
+      // setBackgroundColor(SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE});
 
       createView();
 
@@ -151,65 +153,34 @@ namespace ogame {
       lock();
 
       // Update each information.
-      LabelledPicture* lightFighter = getChild<LabelledPicture*>(std::string("light_fighter"));
-      if (checkChild(lightFighter, "Planet light fighter")) {
-        lightFighter->setLabel(getShipCountFromType(core::Ship::Type::LightFighter, planet));
-      }
-      LabelledPicture* heavyFighter = getChild<LabelledPicture*>(std::string("heavy_fighter"));
-      if (checkChild(heavyFighter, "Planet heavy fighter")) {
-        heavyFighter->setLabel(getShipCountFromType(core::Ship::Type::HeavyFighter, planet));
-      }
-      LabelledPicture* cruiser = getChild<LabelledPicture*>(std::string("cruiser"));
-      if (checkChild(cruiser, "Planet cruiser")) {
-        cruiser->setLabel(getShipCountFromType(core::Ship::Type::Cruiser, planet));
-      }
-      LabelledPicture* battleship = getChild<LabelledPicture*>(std::string("battleship"));
-      if (checkChild(battleship, "Planet battleship")) {
-        battleship->setLabel(getShipCountFromType(core::Ship::Type::Battleship, planet));
-      }
+      std::vector<std::pair<std::string, core::Ship::Type>> ships = {
+        {std::string("light_fighter"), core::Ship::Type::LightFighter},
+        {std::string("heavy_fighter"), core::Ship::Type::HeavyFighter},
+        {std::string("cruiser"), core::Ship::Type::Cruiser},
+        {std::string("battleship"), core::Ship::Type::Battleship},
 
-      LabelledPicture* smallCargo = getChild<LabelledPicture*>(std::string("small_cargo"));
-      if (checkChild(smallCargo, "Planet small cargo")) {
-        smallCargo->setLabel(getShipCountFromType(core::Ship::Type::SmallCargo, planet));
-      }
-      LabelledPicture* largeCargo = getChild<LabelledPicture*>(std::string("large_cargo"));
-      if (checkChild(largeCargo, "Planet large cargo")) {
-        largeCargo->setLabel(getShipCountFromType(core::Ship::Type::LargeCargo, planet));
-      }
-      LabelledPicture* colonyShip = getChild<LabelledPicture*>(std::string("colony_ship"));
-      if (checkChild(colonyShip, "Planet colony ship")) {
-        colonyShip->setLabel(getShipCountFromType(core::Ship::Type::ColonyShip, planet));
-      }
+        {std::string("small_cargo"), core::Ship::Type::SmallCargo},
+        {std::string("large_cargo"), core::Ship::Type::LargeCargo},
+        {std::string("colony_ship"), core::Ship::Type::ColonyShip},
 
-      LabelledPicture* battlecruiser = getChild<LabelledPicture*>(std::string("battlecruiser"));
-      if (checkChild(battlecruiser, "Planet battlecruiser")) {
-        battlecruiser->setLabel(getShipCountFromType(core::Ship::Type::Battlecruiser, planet));
-      }
-      LabelledPicture* bomber = getChild<LabelledPicture*>(std::string("bomber"));
-      if (checkChild(bomber, "Planet bomber")) {
-        bomber->setLabel(getShipCountFromType(core::Ship::Type::Bomber, planet));
-      }
-      LabelledPicture* destroyer = getChild<LabelledPicture*>(std::string("destroyer"));
-      if (checkChild(destroyer, "Planet destoyer")) {
-        destroyer->setLabel(getShipCountFromType(core::Ship::Type::Destroyer, planet));
-      }
-      LabelledPicture* deathstar = getChild<LabelledPicture*>(std::string("deathstar"));
-      if (checkChild(deathstar, "Planet deathstar")) {
-        deathstar->setLabel(getShipCountFromType(core::Ship::Type::Deathstar, planet));
-      }
+        {std::string("battlecruiser"), core::Ship::Type::Battlecruiser},
+        {std::string("bomber"), core::Ship::Type::Bomber},
+        {std::string("destroyer"), core::Ship::Type::Destroyer},
+        {std::string("deathstar"), core::Ship::Type::Deathstar},
 
-      LabelledPicture* recycler = getChild<LabelledPicture*>(std::string("recycler"));
-      if (checkChild(recycler, "Planet recycler")) {
-        recycler->setLabel(getShipCountFromType(core::Ship::Type::Recycler, planet));
-      }
-      LabelledPicture* espionageProbe = getChild<LabelledPicture*>(std::string("espionage_probe"));
-      if (checkChild(espionageProbe, "Planet espionage probe")) {
-        espionageProbe->setLabel(getShipCountFromType(core::Ship::Type::EspionageProbe, planet));
-      }
-      LabelledPicture* satellite = getChild<LabelledPicture*>(std::string("solar_satellite"));
-      if (checkChild(satellite, "Planet solar satellite")) {
-        satellite->setLabel(getShipCountFromType(core::Ship::Type::SolarSatellite, planet));
-      }
+        {std::string("recycler"), core::Ship::Type::Recycler},
+        {std::string("espionnage_probe"), core::Ship::Type::EspionageProbe},
+        {std::string("solar_satellite"), core::Ship::Type::SolarSatellite}
+      };
+
+      std::for_each(ships.cbegin(), ships.cend(),
+        [this, &planet](const std::pair<std::string, core::Ship::Type>& ship) {
+          LabelledPicture* shipInfo = getChild<LabelledPicture*>(ship.first);
+          if (checkChild(shipInfo, ship.first)) {
+            shipInfo->setLabel(getShipCountFromType(ship.second, planet));
+          }
+        }
+      );
 
       makeDeepDirty();
       unlock();

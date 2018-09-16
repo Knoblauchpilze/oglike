@@ -6,7 +6,7 @@ namespace ogame {
 
     Ship::Ship(const Type& type,
                const std::unordered_map<Resource, float>& cost):
-      FixedCostUnit(getNameFromType(type), cost),
+      FixedCostUnit(Ship::getNameFromType(type), cost),
       m_type(type)
     {
       // Nothing to do here.

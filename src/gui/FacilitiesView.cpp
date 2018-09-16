@@ -92,40 +92,27 @@ namespace ogame {
       lock();
 
       // Update each information.
-      LabelledPicture* robotics = getChild<LabelledPicture*>(std::string("robotics_factory"));
-      if (checkChild(robotics, "Planet robotics factory")) {
-        robotics->setLabel(getDisplayForBuilding(core::Building::Type::RoboticsFactory, planet));
-      }
-      LabelledPicture* shipyard = getChild<LabelledPicture*>(std::string("shipyard"));
-      if (checkChild(shipyard, "Planet shipyard")) {
-        shipyard->setLabel(getDisplayForBuilding(core::Building::Type::Shipyard, planet));
-      }
-      LabelledPicture* research = getChild<LabelledPicture*>(std::string("research_lab"));
-      if (checkChild(research, "Planet research laboratory")) {
-        research->setLabel(getDisplayForBuilding(core::Building::Type::ResearchLab, planet));
-      }
+      std::vector<std::pair<std::string, core::Building::Type>> buildings = {
+        {std::string("robotics_factory"), core::Building::Type::RoboticsFactory},
+        {std::string("shipyard"), core::Building::Type::Shipyard},
+        {std::string("research_lab"), core::Building::Type::ResearchLab},
 
-      LabelledPicture* allianceDepot = getChild<LabelledPicture*>(std::string("alliance_depot"));
-      if (checkChild(allianceDepot, "Planet alliance depot")) {
-        allianceDepot->setLabel(getDisplayForBuilding(core::Building::Type::AllianceDepot, planet));
-      }
-      LabelledPicture* missileSilo = getChild<LabelledPicture*>(std::string("missile_silo"));
-      if (checkChild(missileSilo, "Planet missile silo")) {
-        missileSilo->setLabel(getDisplayForBuilding(core::Building::Type::MissileSilo, planet));
-      }
-      LabelledPicture* naniteFactory = getChild<LabelledPicture*>(std::string("nanite_factory"));
-      if (checkChild(naniteFactory, "Planet nanite factory")) {
-        naniteFactory->setLabel(getDisplayForBuilding(core::Building::Type::NaniteFactory, planet));
-      }
+        {std::string("alliance_depot"), core::Building::Type::AllianceDepot},
+        {std::string("missile_silo"), core::Building::Type::MissileSilo},
+        {std::string("nanite_factory"), core::Building::Type::NaniteFactory},
 
-      LabelledPicture* terraformer = getChild<LabelledPicture*>(std::string("terraformer"));
-      if (checkChild(terraformer, "Planet terraformer")) {
-        terraformer->setLabel(getDisplayForBuilding(core::Building::Type::Terraformer, planet));
-      }
-      LabelledPicture* spaceDock = getChild<LabelledPicture*>(std::string("space_dock"));
-      if (checkChild(spaceDock, "Planet space dock")) {
-        spaceDock->setLabel(getDisplayForBuilding(core::Building::Type::SpaceDock, planet));
-      }
+        {std::string("terraformer"), core::Building::Type::Terraformer},
+        {std::string("space_dock"), core::Building::Type::SpaceDock}
+      };
+
+      std::for_each(buildings.cbegin(), buildings.cend(),
+        [this, &planet](const std::pair<std::string, core::Building::Type>& building) {
+          LabelledPicture* buildingInfo = getChild<LabelledPicture*>(building.first);
+          if (checkChild(buildingInfo, building.first)) {
+            buildingInfo->setLabel(getDisplayForBuilding(building.second, planet));
+          }
+        }
+      );
 
       makeDeepDirty();
       unlock();
