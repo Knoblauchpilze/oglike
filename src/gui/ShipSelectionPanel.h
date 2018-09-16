@@ -19,6 +19,8 @@ namespace ogame {
 
         virtual ~ShipSelectionPanel();
 
+        void setCount(const unsigned& count);
+
       private:
 
         void createView(const core::Ship::Type& type);

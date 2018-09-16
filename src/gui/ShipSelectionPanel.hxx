@@ -9,6 +9,19 @@ namespace ogame {
   namespace gui {
 
     inline
+    void ShipSelectionPanel::setCount(const unsigned& count) {
+      lock();
+
+      BackgroundedLabel* label = getChild<BackgroundedLabel*>(std::string("image"));
+      if (checkChild(label, std::string("Label panel"))) {
+        label->setText(std::to_string(count));
+      }
+
+      makeDeepDirty();
+      unlock();
+    }
+
+    inline
     BackgroundedLabelShPtr ShipSelectionPanel::createBackgroundedLabelContainer(const std::string& name,
                                                                                 const std::string& picture)
     {
