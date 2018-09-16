@@ -51,13 +51,13 @@ namespace ogame {
     }
 
     inline
-    LabelledPictureShPtr AbstractBuyingView::createLabelledPictureContainer(const std::string& name,
-                                                                            const std::string& picture,
-                                                                            const std::string& text,
-                                                                            const bool registerForInteraction)
+    BackgroundedLabelShPtr AbstractBuyingView::createBackgroundedLabelContainer(const std::string& name,
+                                                                                const std::string& picture,
+                                                                                const std::string& text,
+                                                                                const bool registerForInteraction)
     {
       // Create the component.
-      LabelledPictureShPtr label = ComponentFactory::createLabelledPicturePanel(
+      BackgroundedLabelShPtr label = ComponentFactory::createBackgroundedLabelPanel(
         name,
         view::FontFactory::getInstance().createColoredFont(
           std::string("data/fonts/upcfb.ttf"),
@@ -65,7 +65,8 @@ namespace ogame {
         ),
         picture,
         text,
-        LabelledPicture::Alignment::Above,
+        SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE},
+        BackgroundedLabel::Alignment::BottomRight,
         (registerForInteraction ? view::EventListener::Interaction::MouseButtonReleased : view::EventListener::Interaction::NoInteraction)
       );
 
