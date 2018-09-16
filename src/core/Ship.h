@@ -37,9 +37,11 @@ namespace ogame {
 
         const Type& getType() const noexcept;
 
-      private:
+        static
+        std::string getNameFromType(const Type& type) noexcept;
 
-        const std::string getNameFromType(const Type& type) const noexcept;
+        static
+        Type getTypeFromName(const std::string& name) noexcept;
 
       private:
 

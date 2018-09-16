@@ -151,73 +151,36 @@ namespace ogame {
       lock();
 
       // Update each information.
-      LabelledPicture* energy = getChild<LabelledPicture*>(std::string("energy_tech"));
-      if (checkChild(energy, "Planet energey technology")) {
-        energy->setLabel(getDisplayForTech(core::Research::Type::Energy, account));
-      }
-      LabelledPicture* laser = getChild<LabelledPicture*>(std::string("laser_tech"));
-      if (checkChild(laser, "Planet laser technology")) {
-        laser->setLabel(getDisplayForTech(core::Research::Type::Laser, account));
-      }
-      LabelledPicture* ions = getChild<LabelledPicture*>(std::string("ions_tech"));
-      if (checkChild(ions, "Planet ions technology")) {
-        ions->setLabel(getDisplayForTech(core::Research::Type::Ion, account));
-      }
-      LabelledPicture* hyperspace = getChild<LabelledPicture*>(std::string("hyperspace_tech"));
-      if (checkChild(hyperspace, "Planet hyperspace technology")) {
-        hyperspace->setLabel(getDisplayForTech(core::Research::Type::Hyperspace, account));
-      }
-      LabelledPicture* plasma = getChild<LabelledPicture*>(std::string("plasma_tech"));
-      if (checkChild(plasma, "Planet plasma technology")) {
-        plasma->setLabel(getDisplayForTech(core::Research::Type::Plasma, account));
-      }
+      std::vector<std::pair<std::string, core::Research::Type>> researches = {
+        {std::string("energy_tech"), core::Research::Type::Energy},
+        {std::string("laser_tech"), core::Research::Type::Laser},
+        {std::string("ions_tech"), core::Research::Type::Ion},
+        {std::string("hyperspace_tech"), core::Research::Type::Hyperspace},
+        {std::string("plasma_tech"), core::Research::Type::Plasma},
 
-      LabelledPicture* combustionDrive = getChild<LabelledPicture*>(std::string("combustion_drive_tech"));
-      if (checkChild(combustionDrive, "Planet combustion drive technology")) {
-        combustionDrive->setLabel(getDisplayForTech(core::Research::Type::CombustionDrive, account));
-      }
-      LabelledPicture* impulseDrive = getChild<LabelledPicture*>(std::string("impulse_drive_tech"));
-      if (checkChild(impulseDrive, "Planet impulse drive technology")) {
-        impulseDrive->setLabel(getDisplayForTech(core::Research::Type::ImpulseDrive, account));
-      }
-      LabelledPicture* hyperspaceDrive = getChild<LabelledPicture*>(std::string("hyperspace_drive_tech"));
-      if (checkChild(hyperspaceDrive, "Planet hyperspace drive technology")) {
-        hyperspaceDrive->setLabel(getDisplayForTech(core::Research::Type::HyperspaceDrive, account));
-      }
+        {std::string("combustion_drive_tech"), core::Research::Type::CombustionDrive},
+        {std::string("impulse_drive_tech"), core::Research::Type::ImpulseDrive},
+        {std::string("hyperspace_drive_tech"), core::Research::Type::HyperspaceDrive},
 
-      LabelledPicture* espionage = getChild<LabelledPicture*>(std::string("espionage_tech"));
-      if (checkChild(espionage, "Planet space technology")) {
-        espionage->setLabel(getDisplayForTech(core::Research::Type::Espionage, account));
-      }
-      LabelledPicture* computer = getChild<LabelledPicture*>(std::string("computer_tech"));
-      if (checkChild(computer, "Planet computer technology")) {
-        computer->setLabel(getDisplayForTech(core::Research::Type::Computer, account));
-      }
-      LabelledPicture* astrophysics = getChild<LabelledPicture*>(std::string("astrophysics_tech"));
-      if (checkChild(astrophysics, "Planet space technology")) {
-        astrophysics->setLabel(getDisplayForTech(core::Research::Type::Astrophysics, account));
-      }
-      LabelledPicture* irn = getChild<LabelledPicture*>(std::string("irn_tech"));
-      if (checkChild(irn, "Planet intergalactic research network technology")) {
-        irn->setLabel(getDisplayForTech(core::Research::Type::IRN, account));
-      }
-      LabelledPicture* graviton = getChild<LabelledPicture*>(std::string("graviton_tech"));
-      if (checkChild(graviton, "Planet graviton technology")) {
-        graviton->setLabel(getDisplayForTech(core::Research::Type::Graviton, account));
-      }
+        {std::string("espionage_tech"), core::Research::Type::Espionage},
+        {std::string("computer_tech"), core::Research::Type::Computer},
+        {std::string("astrophysics_tech"), core::Research::Type::Astrophysics},
+        {std::string("irn_tech"), core::Research::Type::IRN},
+        {std::string("graviton_tech"), core::Research::Type::Graviton},
 
-      LabelledPicture* weapon = getChild<LabelledPicture*>(std::string("weapon_tech"));
-      if (checkChild(weapon, "Planet weapon technology")) {
-        weapon->setLabel(getDisplayForTech(core::Research::Type::Weapon, account));
-      }
-      LabelledPicture* shielding = getChild<LabelledPicture*>(std::string("shielding_tech"));
-      if (checkChild(shielding, "Planet shielding technology")) {
-        shielding->setLabel(getDisplayForTech(core::Research::Type::Shielding, account));
-      }
-      LabelledPicture* armour = getChild<LabelledPicture*>(std::string("armour_tech"));
-      if (checkChild(armour, "Planet armour technology")) {
-        armour->setLabel(getDisplayForTech(core::Research::Type::Armour, account));
-      }
+        {std::string("weapon_tech"), core::Research::Type::Weapon},
+        {std::string("shielding_tech"), core::Research::Type::Shielding},
+        {std::string("armour_tech"), core::Research::Type::Armour}
+      };
+
+      std::for_each(researches.cbegin(), researches.cend(),
+        [this, &account](const std::pair<std::string, core::Research::Type>& research) {
+          LabelledPicture* researchInfo = getChild<LabelledPicture*>(research.first);
+          if (checkChild(researchInfo, research.first)) {
+            researchInfo->setLabel(getDisplayForTech(research.second, account));
+          }
+        }
+      );
 
       makeDeepDirty();
       unlock();

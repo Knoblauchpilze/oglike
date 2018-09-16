@@ -12,7 +12,7 @@ namespace ogame {
     }
 
     inline
-    const std::string Ship::getNameFromType(const Type& type) const noexcept {
+    std::string Ship::getNameFromType(const Type& type) noexcept {
       std::string name = "Default ship name";
 
       switch (type) {
@@ -62,6 +62,52 @@ namespace ogame {
       }
 
       return name;
+    }
+
+    inline
+    Ship::Type Ship::getTypeFromName(const std::string& name) noexcept {
+      if (name =="light_fighter") {
+        return Type::LightFighter;
+      }
+      else if (name =="heavy_fighter") {
+        return Type::HeavyFighter;
+      }
+      else if (name =="cruiser") {
+        return Type::Cruiser;
+      }
+      else if (name =="battleship") {
+        return Type::Battleship;
+      }
+      else if (name =="battlecruiser") {
+        return Type::Battlecruiser;
+      }
+      else if (name =="bomber") {
+        return Type::Bomber;
+      }
+      else if (name =="destroyer") {
+        return Type::Destroyer;
+      }
+      else if (name =="deathstar") {
+        return Type::Deathstar;
+      }
+      else if (name =="small_cargo") {
+        return Type::SmallCargo;
+      }
+      else if (name =="large_cargo") {
+        return Type::LargeCargo;
+      }
+      else if (name =="colony_ship") {
+        return Type::ColonyShip;
+      }
+      else if (name =="recycler") {
+        return Type::Recycler;
+      }
+      else if (name =="espionage_probe") {
+        return Type::EspionageProbe;
+      }
+      else {
+        return Type::SolarSatellite;
+      }
     }
 
   }
