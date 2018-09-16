@@ -32,7 +32,7 @@ namespace ogame {
 
       BackgroundedLabelShPtr shipPicture = createBackgroundedLabelContainer(
         std::string("image"),
-        getPictureNameFromShip(type)
+        core::Ship::getPictureNameFromShip(type, true)
       );
 
       std::vector<std::string> options = { std::to_string(0) };

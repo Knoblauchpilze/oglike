@@ -24,72 +24,72 @@ namespace ogame {
       std::string level0 = std::to_string(0);
       BackgroundedLabelShPtr lightFighter = createBackgroundedLabelContainer(
         std::string("light_fighter"),
-        getPictureNameFromShip(core::Ship::Type::LightFighter),
+        core::Ship::getPictureNameFromShip(core::Ship::Type::LightFighter),
         level0
       );
       BackgroundedLabelShPtr heavyFighter = createBackgroundedLabelContainer(
         std::string("heavy_fighter"),
-        getPictureNameFromShip(core::Ship::Type::HeavyFighter),
+        core::Ship::getPictureNameFromShip(core::Ship::Type::HeavyFighter),
         level0
       );
       BackgroundedLabelShPtr cruiser = createBackgroundedLabelContainer(
         std::string("cruiser"),
-        getPictureNameFromShip(core::Ship::Type::Cruiser),
+        core::Ship::getPictureNameFromShip(core::Ship::Type::Cruiser),
         level0
       );
       BackgroundedLabelShPtr battleship = createBackgroundedLabelContainer(
         std::string("battleship"),
-        getPictureNameFromShip(core::Ship::Type::Battleship),
+        core::Ship::getPictureNameFromShip(core::Ship::Type::Battleship),
         level0
       );
       BackgroundedLabelShPtr smallCargo = createBackgroundedLabelContainer(
         std::string("small_cargo"),
-        getPictureNameFromShip(core::Ship::Type::SmallCargo),
+        core::Ship::getPictureNameFromShip(core::Ship::Type::SmallCargo),
         level0
       );
       BackgroundedLabelShPtr largeCargo = createBackgroundedLabelContainer(
         std::string("large_cargo"),
-        getPictureNameFromShip(core::Ship::Type::LargeCargo),
+        core::Ship::getPictureNameFromShip(core::Ship::Type::LargeCargo),
         level0
       );
       BackgroundedLabelShPtr colonyShip = createBackgroundedLabelContainer(
         std::string("colony_ship"),
-        getPictureNameFromShip(core::Ship::Type::ColonyShip),
+        core::Ship::getPictureNameFromShip(core::Ship::Type::ColonyShip),
         level0
       );
       BackgroundedLabelShPtr battlecruiser = createBackgroundedLabelContainer(
         std::string("battlecruiser"),
-        getPictureNameFromShip(core::Ship::Type::Battlecruiser),
+        core::Ship::getPictureNameFromShip(core::Ship::Type::Battlecruiser),
         level0
       );
       BackgroundedLabelShPtr bomber = createBackgroundedLabelContainer(
         std::string("bomber"),
-        getPictureNameFromShip(core::Ship::Type::Bomber),
+        core::Ship::getPictureNameFromShip(core::Ship::Type::Bomber),
         level0
       );
       BackgroundedLabelShPtr destroyer = createBackgroundedLabelContainer(
         std::string("destroyer"),
-        getPictureNameFromShip(core::Ship::Type::Destroyer),
+        core::Ship::getPictureNameFromShip(core::Ship::Type::Destroyer),
         level0
       );
       BackgroundedLabelShPtr deathstar = createBackgroundedLabelContainer(
         std::string("deathstar"),
-        getPictureNameFromShip(core::Ship::Type::Deathstar),
+        core::Ship::getPictureNameFromShip(core::Ship::Type::Deathstar),
         level0
       );
       BackgroundedLabelShPtr recycler = createBackgroundedLabelContainer(
         std::string("recycler"),
-        getPictureNameFromShip(core::Ship::Type::Recycler),
+        core::Ship::getPictureNameFromShip(core::Ship::Type::Recycler),
         level0
       );
       BackgroundedLabelShPtr espionageProbe = createBackgroundedLabelContainer(
         std::string("espionage_probe"),
-        getPictureNameFromShip(core::Ship::Type::EspionageProbe),
+        core::Ship::getPictureNameFromShip(core::Ship::Type::EspionageProbe),
         level0
       );
       BackgroundedLabelShPtr solarSatellite = createBackgroundedLabelContainer(
         std::string("solar_satellite"),
-        getPictureNameFromShip(core::Ship::Type::SolarSatellite),
+        core::Ship::getPictureNameFromShip(core::Ship::Type::SolarSatellite),
         level0
       );
 
