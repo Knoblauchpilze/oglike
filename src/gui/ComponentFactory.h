@@ -11,6 +11,7 @@
 #include "LabelledPicture.h"
 #include "ConditionalPictureContainer.h"
 #include "PhotoGallery.h"
+#include "BackgroundedLabel.h"
 
 namespace ogame {
   namespace gui {
@@ -86,6 +87,16 @@ namespace ogame {
                                    const std::string& text = std::string(),
                                    const LabelledPicture::Alignment& alignment = LabelledPicture::Alignment::Below,
                                    const view::EventListener::Interaction::Mask& mask = view::EventListener::Interaction::NoInteraction);
+
+        static
+        BackgroundedLabelShPtr
+        createBackgroundedLabelPanel(const std::string& name,
+                                     view::ColoredFontShPtr font,
+                                     const std::string& picture,
+                                     const std::string& text = std::string(),
+                                     const SDL_Color& textBackgroundColor = SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE},
+                                     const BackgroundedLabel::Alignment& alignment = BackgroundedLabel::Alignment::BottomRight,
+                                     const view::EventListener::Interaction::Mask& mask = view::EventListener::Interaction::NoInteraction);
 
         static
         PhotoGalleryShPtr

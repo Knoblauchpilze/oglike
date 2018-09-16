@@ -147,6 +147,27 @@ namespace ogame {
     }
 
     inline
+    BackgroundedLabelShPtr
+    ComponentFactory::createBackgroundedLabelPanel(const std::string& name,
+                                                   view::ColoredFontShPtr font,
+                                                   const std::string& picture,
+                                                   const std::string& text,
+                                                   const SDL_Color& textBackgroundColor,
+                                                   const BackgroundedLabel::Alignment& alignment,
+                                                   const view::EventListener::Interaction::Mask& mask)
+    {
+      return std::make_shared<BackgroundedLabel>(
+        name,
+        font,
+        picture,
+        text,
+        textBackgroundColor,
+        alignment,
+        mask
+      );
+    }
+
+    inline
     PhotoGalleryShPtr
     ComponentFactory::createPhotoGalleryPanel(const std::string& name,
                                               const unsigned& picturesCount,
