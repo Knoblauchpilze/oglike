@@ -1,10 +1,6 @@
 
 #include "ResearchView.h"
-#include "GridLayout.h"
 #include "GuiException.h"
-#include "PictureContainer.h"
-#include "ComponentFactory.h"
-#include "LabelledPicture.h"
 
 namespace ogame {
   namespace gui {
@@ -27,83 +23,83 @@ namespace ogame {
     void ResearchView::createView() {
       // Create all elements.
       std::string level0 = std::to_string(0);
-      LabelledPictureShPtr energy = createLabelledPictureContainer(
+      BackgroundedLabelShPtr energy = createBackgroundedLabelContainer(
         std::string("energy_tech"),
         getPictureNameFromResearch(core::Research::Type::Energy),
         level0
       );
-      LabelledPictureShPtr laser = createLabelledPictureContainer(
+      BackgroundedLabelShPtr laser = createBackgroundedLabelContainer(
         std::string("laser_tech"),
         getPictureNameFromResearch(core::Research::Type::Laser),
         level0
       );
-      LabelledPictureShPtr ions = createLabelledPictureContainer(
+      BackgroundedLabelShPtr ions = createBackgroundedLabelContainer(
         std::string("ions_tech"),
         getPictureNameFromResearch(core::Research::Type::Ion),
         level0
       );
-      LabelledPictureShPtr hyperspace = createLabelledPictureContainer(
+      BackgroundedLabelShPtr hyperspace = createBackgroundedLabelContainer(
         std::string("hyperspace_tech"),
         getPictureNameFromResearch(core::Research::Type::Hyperspace),
         level0
       );
-      LabelledPictureShPtr plasma = createLabelledPictureContainer(
+      BackgroundedLabelShPtr plasma = createBackgroundedLabelContainer(
         std::string("plasma_tech"),
         getPictureNameFromResearch(core::Research::Type::Plasma),
         level0
       );
-      LabelledPictureShPtr combustionDrive = createLabelledPictureContainer(
+      BackgroundedLabelShPtr combustionDrive = createBackgroundedLabelContainer(
         std::string("combustion_drive_tech"),
         getPictureNameFromResearch(core::Research::Type::CombustionDrive),
         level0
       );
-      LabelledPictureShPtr impulseDrive = createLabelledPictureContainer(
+      BackgroundedLabelShPtr impulseDrive = createBackgroundedLabelContainer(
         std::string("impulse_drive_tech"),
         getPictureNameFromResearch(core::Research::Type::ImpulseDrive),
         level0
       );
-      LabelledPictureShPtr hyperspaceDrive = createLabelledPictureContainer(
+      BackgroundedLabelShPtr hyperspaceDrive = createBackgroundedLabelContainer(
         std::string("hyperspace_drive_tech"),
         getPictureNameFromResearch(core::Research::Type::HyperspaceDrive),
         level0
       );
-      LabelledPictureShPtr espionage = createLabelledPictureContainer(
+      BackgroundedLabelShPtr espionage = createBackgroundedLabelContainer(
         std::string("espionage_tech"),
         getPictureNameFromResearch(core::Research::Type::Espionage),
         level0
       );
-      LabelledPictureShPtr computer = createLabelledPictureContainer(
+      BackgroundedLabelShPtr computer = createBackgroundedLabelContainer(
         std::string("computer_tech"),
         getPictureNameFromResearch(core::Research::Type::Computer),
         level0
       );
-      LabelledPictureShPtr astrophysics = createLabelledPictureContainer(
+      BackgroundedLabelShPtr astrophysics = createBackgroundedLabelContainer(
         std::string("astrophysics_tech"),
         getPictureNameFromResearch(core::Research::Type::Astrophysics),
         level0
       );
-      LabelledPictureShPtr irn = createLabelledPictureContainer(
+      BackgroundedLabelShPtr irn = createBackgroundedLabelContainer(
         std::string("irn_tech"),
         getPictureNameFromResearch(core::Research::Type::IRN),
         level0
       );
-      LabelledPictureShPtr graviton = createLabelledPictureContainer(
+      BackgroundedLabelShPtr graviton = createBackgroundedLabelContainer(
         std::string("graviton_tech"),
         getPictureNameFromResearch(core::Research::Type::Graviton),
         level0
       );
-      LabelledPictureShPtr weapon =
-      createLabelledPictureContainer(
+      BackgroundedLabelShPtr weapon =
+      createBackgroundedLabelContainer(
         std::string("weapon_tech"),
         getPictureNameFromResearch(core::Research::Type::Weapon),
         level0
       );
-      LabelledPictureShPtr shielding = createLabelledPictureContainer(
+      BackgroundedLabelShPtr shielding = createBackgroundedLabelContainer(
         std::string("shielding_tech"),
         getPictureNameFromResearch(core::Research::Type::Shielding),
         level0
       );
-      LabelledPictureShPtr armour = createLabelledPictureContainer(
+      BackgroundedLabelShPtr armour = createBackgroundedLabelContainer(
         std::string("armour_tech"),
         getPictureNameFromResearch(core::Research::Type::Armour),
         level0
@@ -175,9 +171,9 @@ namespace ogame {
 
       std::for_each(researches.cbegin(), researches.cend(),
         [this, &account](const std::pair<std::string, core::Research::Type>& research) {
-          LabelledPicture* researchInfo = getChild<LabelledPicture*>(research.first);
+          BackgroundedLabel* researchInfo = getChild<BackgroundedLabel*>(research.first);
           if (checkChild(researchInfo, research.first)) {
-            researchInfo->setLabel(getDisplayForTech(research.second, account));
+            researchInfo->setText(getDisplayForTech(research.second, account));
           }
         }
       );

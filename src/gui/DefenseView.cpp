@@ -1,10 +1,6 @@
 
 #include "DefenseView.h"
-#include "GridLayout.h"
 #include "GuiException.h"
-#include "PictureContainer.h"
-#include "ComponentFactory.h"
-#include "LabelledPicture.h"
 
 namespace ogame {
   namespace gui {
@@ -26,52 +22,52 @@ namespace ogame {
     void DefenseView::createView() {
       // Create all elements.
       std::string level0 = std::to_string(0);
-      LabelledPictureShPtr missile = createLabelledPictureContainer(
+      BackgroundedLabelShPtr missile = createBackgroundedLabelContainer(
         std::string("missile_launcher"),
         getPictureNameFromDefense(core::Defense::Type::MissileLauncher),
         level0
       );
-      LabelledPictureShPtr lightLaser = createLabelledPictureContainer(
+      BackgroundedLabelShPtr lightLaser = createBackgroundedLabelContainer(
         std::string("light_laser"),
         getPictureNameFromDefense(core::Defense::Type::LightLaser),
         level0
       );
-      LabelledPictureShPtr heavyLaser = createLabelledPictureContainer(
+      BackgroundedLabelShPtr heavyLaser = createBackgroundedLabelContainer(
         std::string("heavy_laser"),
         getPictureNameFromDefense(core::Defense::Type::HeavyLaser),
         level0
       );
-      LabelledPictureShPtr gaussCannon = createLabelledPictureContainer(
+      BackgroundedLabelShPtr gaussCannon = createBackgroundedLabelContainer(
         std::string("gauss_cannon"),
         getPictureNameFromDefense(core::Defense::Type::GaussCannon),
         level0
       );
-      LabelledPictureShPtr ionCannon = createLabelledPictureContainer(
+      BackgroundedLabelShPtr ionCannon = createBackgroundedLabelContainer(
         std::string("ion_cannon"),
         getPictureNameFromDefense(core::Defense::Type::IonCannon),
         level0
       );
-      LabelledPictureShPtr plasmaTurret = createLabelledPictureContainer(
+      BackgroundedLabelShPtr plasmaTurret = createBackgroundedLabelContainer(
         std::string("plasma_turret"),
         getPictureNameFromDefense(core::Defense::Type::PlasmaTurret),
         level0
       );
-      LabelledPictureShPtr smallShield = createLabelledPictureContainer(
+      BackgroundedLabelShPtr smallShield = createBackgroundedLabelContainer(
         std::string("small_shield_dome"),
         getPictureNameFromDefense(core::Defense::Type::SmallShieldDome),
         level0
       );
-      LabelledPictureShPtr largeShield = createLabelledPictureContainer(
+      BackgroundedLabelShPtr largeShield = createBackgroundedLabelContainer(
         std::string("large_shield_dome"),
         getPictureNameFromDefense(core::Defense::Type::LargeShieldDome),
         level0
       );
-      LabelledPictureShPtr abm = createLabelledPictureContainer(
+      BackgroundedLabelShPtr abm = createBackgroundedLabelContainer(
         std::string("antiballistic_missile"),
         getPictureNameFromDefense(core::Defense::Type::AntiballisticMissile),
         level0
       );
-      LabelledPictureShPtr ipm = createLabelledPictureContainer(
+      BackgroundedLabelShPtr ipm = createBackgroundedLabelContainer(
         std::string("interplanetary_missile"),
         getPictureNameFromDefense(core::Defense::Type::InterplanetaryMissile),
         level0
@@ -125,9 +121,9 @@ namespace ogame {
 
       std::for_each(defenses.cbegin(), defenses.cend(),
         [this, &planet](const std::pair<std::string, core::Defense::Type>& defense) {
-          LabelledPicture* defenseInfo = getChild<LabelledPicture*>(defense.first);
+          BackgroundedLabel* defenseInfo = getChild<BackgroundedLabel*>(defense.first);
           if (checkChild(defenseInfo, defense.first)) {
-            defenseInfo->setLabel(getDefenseCountFromType(defense.second, planet));
+            defenseInfo->setText(getDefenseCountFromType(defense.second, planet));
           }
         }
       );

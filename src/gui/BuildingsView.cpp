@@ -1,10 +1,6 @@
 
 #include "BuildingsView.h"
-#include "GridLayout.h"
 #include "GuiException.h"
-#include "PictureContainer.h"
-#include "ComponentFactory.h"
-#include "LabelledPicture.h"
 
 namespace ogame {
   namespace gui {
@@ -26,47 +22,47 @@ namespace ogame {
     void BuildingsView::createView() {
       // Create all elements.
       std::string level0 = std::to_string(0);
-      LabelledPictureShPtr metal = createLabelledPictureContainer(
+      BackgroundedLabelShPtr metal = createBackgroundedLabelContainer(
         std::string("metal_mine"),
         getPictureNameFromBuilding(core::Building::Type::MetalMine),
         level0
       );
-      LabelledPictureShPtr crystal = createLabelledPictureContainer(
+      BackgroundedLabelShPtr crystal = createBackgroundedLabelContainer(
         std::string("crystal_mine"),
         getPictureNameFromBuilding(core::Building::Type::CrystalMine),
         level0
       );
-      LabelledPictureShPtr deut = createLabelledPictureContainer(
+      BackgroundedLabelShPtr deut = createBackgroundedLabelContainer(
         std::string("deut_synthesizer"),
         getPictureNameFromBuilding(core::Building::Type::DeuteriumMine),
         level0
       );
-      LabelledPictureShPtr solarPlant = createLabelledPictureContainer(
+      BackgroundedLabelShPtr solarPlant = createBackgroundedLabelContainer(
         std::string("solar_plant"),
         getPictureNameFromBuilding(core::Building::Type::SolarPlant),
         level0
       );
-      LabelledPictureShPtr fusionPlant = createLabelledPictureContainer(
+      BackgroundedLabelShPtr fusionPlant = createBackgroundedLabelContainer(
         std::string("fusion_plant"),
         getPictureNameFromBuilding(core::Building::Type::FusionPlant),
         level0
       );
-      LabelledPictureShPtr solarSatellite = createLabelledPictureContainer(
+      BackgroundedLabelShPtr solarSatellite = createBackgroundedLabelContainer(
         std::string("solar_satellite"),
         getPictureNameFromBuilding(core::Building::Type::SolarPlant),
         level0
       );
-      LabelledPictureShPtr metalStorage = createLabelledPictureContainer(
+      BackgroundedLabelShPtr metalStorage = createBackgroundedLabelContainer(
         std::string("metal_storage"),
         getPictureNameFromBuilding(core::Building::Type::MetalStorage),
         level0
       );
-      LabelledPictureShPtr crystalStorage = createLabelledPictureContainer(
+      BackgroundedLabelShPtr crystalStorage = createBackgroundedLabelContainer(
         std::string("crystal_storage"),
         getPictureNameFromBuilding(core::Building::Type::CrystalStorage),
         level0
       );
-      LabelledPictureShPtr deutTank = createLabelledPictureContainer(
+      BackgroundedLabelShPtr deutTank = createBackgroundedLabelContainer(
         std::string("deut_tank"),
         getPictureNameFromBuilding(core::Building::Type::DeuteriumStorage),
         level0
@@ -116,9 +112,9 @@ namespace ogame {
 
       std::for_each(buildings.cbegin(), buildings.cend(),
         [this, &planet](const std::pair<std::string, core::Building::Type>& building) {
-          LabelledPicture* buildingInfo = getChild<LabelledPicture*>(building.first);
+          BackgroundedLabel* buildingInfo = getChild<BackgroundedLabel*>(building.first);
           if (checkChild(buildingInfo, building.first)) {
-            buildingInfo->setLabel(getDisplayForBuilding(building.second, planet));
+            buildingInfo->setText(getDisplayForBuilding(building.second, planet));
           }
         }
       );
