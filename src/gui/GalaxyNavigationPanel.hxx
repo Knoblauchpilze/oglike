@@ -30,14 +30,14 @@ namespace ogame {
         // Retrieve the value from the galaxy selector
         ValueSelector* galaxySelector = getChild<ValueSelector*>(std::string("galaxy_selector"));
         if (checkChild(galaxySelector, std::string("Galaxy selector"))) {
-          setActiveGalaxyCoordinate(galaxySelector->getActiveOption());
+          setActiveGalaxyCoordinate(std::stoi(galaxySelector->getActiveOption()) - 1);
         }
       }
       else if (origin == std::string("system_selector")) {
         // Retrieve the value from the galaxy selector
         ValueSelector* systemSelector = getChild<ValueSelector*>(std::string("system_selector"));
         if (checkChild(systemSelector, std::string("System selector"))) {
-          setActiveSystemCoordinate(systemSelector->getActiveOption());
+          setActiveSystemCoordinate(std::stoi(systemSelector->getActiveOption()) - 1);
         }
       }
       else {
