@@ -24,7 +24,7 @@ namespace ogame {
         // Retrieve the value from the galaxy selector
         ValueSelector* unitCount = getChild<ValueSelector*>(std::string("unit_number"));
         if (checkChild(unitCount, std::string("Upgrade info unit count"))) {
-          setUnitCount(unitCount->getActiveOption());
+          setUnitCount(std::stoi(unitCount->getActiveOption()));
         }
       }
       else {
