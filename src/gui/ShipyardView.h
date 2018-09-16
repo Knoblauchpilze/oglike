@@ -32,8 +32,6 @@ namespace ogame {
 
         const core::Ship::Type computeShipFromOriginNode(const std::string& origin) const noexcept;
 
-        const std::string getPictureNameFromShip(const core::Ship::Type& type, const bool reduced = true) const noexcept;
-
       private:
 
     };

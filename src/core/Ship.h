@@ -43,6 +43,9 @@ namespace ogame {
         static
         Type getTypeFromName(const std::string& name) noexcept;
 
+        static
+        std::string getPictureNameFromShip(const core::Ship::Type& type, const bool reduced = true) noexcept;
+
       private:
 
         Type m_type;

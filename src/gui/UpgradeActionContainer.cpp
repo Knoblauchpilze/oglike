@@ -112,7 +112,7 @@ namespace ogame {
           populatePanel(
             std::string("Shipyard"),
             shipUpgrade->getName(),
-            getPictureNameFromShip(shipUpgrade->getType()),
+            core::Ship::getPictureNameFromShip(shipUpgrade->getType(), false),
             shipUpgrade->getDescription(),
             (
               shipUpgrade->isFinished() ?
@@ -428,7 +428,7 @@ namespace ogame {
           }
 
           for (unsigned index = (excludeFirst ? 1u : 0u) ; index < ships.size() ; ++index) {
-            gallery->addImage(getPictureNameFromShip(ships[index]->getType()));
+            gallery->addImage(core::Ship::getPictureNameFromShip(ships[index]->getType(), false));
           }
         }
 

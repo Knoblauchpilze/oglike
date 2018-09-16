@@ -30,8 +30,6 @@ namespace ogame {
         BackgroundedLabelShPtr createBackgroundedLabelContainer(const std::string& name,
                                                                 const std::string& picture);
 
-        const std::string getPictureNameFromShip(const core::Ship::Type& type, const bool reduced = true) const noexcept;
-
     };
 
     using ShipSelectionPanelShPtr = std::shared_ptr<ShipSelectionPanel>;
