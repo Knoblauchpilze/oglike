@@ -23,6 +23,8 @@ namespace ogame {
 
         virtual ~UpgradeInfo();
 
+        void triggerUnitCount();
+
         void onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) override;
 
         void onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) override;

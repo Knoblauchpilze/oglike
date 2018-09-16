@@ -15,17 +15,22 @@ namespace ogame {
   namespace gui {
 
     inline
+    void UpgradeInfo::triggerUnitCount() {
+      // Retrieve the value from the selector
+      ValueSelector* unitCount = getChild<ValueSelector*>(std::string("unit_number"));
+      if (checkChild(unitCount, std::string("Upgrade info unit count"))) {
+        setUnitCount(std::stoi(unitCount->getActiveOption()));
+      }
+    }
+
+    inline
     void UpgradeInfo::onActionTriggered(const player::GeneralDataModel& model, const player::Action& action) {}
 
     inline
     void UpgradeInfo::onInteractionPerformed(const std::string& origin, const view::EventListener::Interaction::Mask& mask) {
       // Determine the origin of the event (either galaxy or system selector) and update the corresponding value in the data model.
       if (origin == std::string("unit_number")) {
-        // Retrieve the value from the galaxy selector
-        ValueSelector* unitCount = getChild<ValueSelector*>(std::string("unit_number"));
-        if (checkChild(unitCount, std::string("Upgrade info unit count"))) {
-          setUnitCount(std::stoi(unitCount->getActiveOption()));
-        }
+        triggerUnitCount();
       }
       else {
         std::cerr << "[NAVIGATION] Caught interaction in " << getName() << " from unknown origin " << origin << std::endl;
