@@ -48,6 +48,7 @@ set (SOURCES
   PhotoGallery.cpp
   ActionProviderLabelStateContainer.cpp
   ShipSelectionPanel.cpp
+  BackgroundedLabel.cpp
   )
 
 add_library (ogamelike_lib_gui SHARED
