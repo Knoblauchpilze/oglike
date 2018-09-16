@@ -9,10 +9,10 @@ namespace ogame {
   namespace gui {
 
     inline
-    LabelledPictureShPtr ShipSelectionPanel::createLabelledPictureContainer(const std::string& name,
-                                                                            const std::string& picture)
+    BackgroundedLabelShPtr ShipSelectionPanel::createBackgroundedLabelContainer(const std::string& name,
+                                                                                const std::string& picture)
     {
-      return ComponentFactory::createLabelledPicturePanel(
+      return ComponentFactory::createBackgroundedLabelPanel(
         name,
         view::FontFactory::getInstance().createColoredFont(
           std::string("data/fonts/upcfb.ttf"),
@@ -20,8 +20,8 @@ namespace ogame {
         ),
         picture,
         std::to_string(0),
-        LabelledPicture::Alignment::Above,
-        view::EventListener::Interaction::NoInteraction
+        SDL_Color{14, 57, 83, SDL_ALPHA_OPAQUE},
+        BackgroundedLabel::Alignment::BottomRight
       );
     }
 
