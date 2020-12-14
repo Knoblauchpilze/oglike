@@ -17,7 +17,7 @@ add_library (ogamelike_lib_server SHARED
   ${SOURCES}
   )
 
-set(SERVER_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" PARENT_SCOPE)
+set (SERVER_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" PARENT_SCOPE)
 
 target_link_libraries(ogamelike_lib_server
   ogamelike_lib_core

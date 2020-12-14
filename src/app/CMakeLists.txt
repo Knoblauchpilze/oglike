@@ -14,7 +14,7 @@ add_library (ogamelike_lib_app SHARED
   ${SOURCES}
   )
 
-set(APP_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" PARENT_SCOPE)
+set (APP_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}" PARENT_SCOPE)
 
 target_include_directories (ogamelike_lib_app PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
