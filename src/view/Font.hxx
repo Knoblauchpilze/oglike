@@ -68,7 +68,7 @@ namespace ogame {
         m_font = nullptr;
       }
     }
-    
+
     inline
     void Font::initializeTTFLib() {
       // Initialize the ttf lib.

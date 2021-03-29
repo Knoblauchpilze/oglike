@@ -21,10 +21,10 @@ namespace ogame {
                                    policy),
       m_textChanged(true),
       m_text(text),
-      
+
       m_fontChanged(true),
       m_font(font),
-      
+
       m_hFontChanged(true),
       m_hFont(highlightFont),
 

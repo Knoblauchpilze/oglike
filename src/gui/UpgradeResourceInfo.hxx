@@ -154,14 +154,14 @@ namespace ogame {
 
       unlock();
     }
-    
+
     template <>
     inline
     void UpgradeResourceInfo::populateInformationFromElement(const core::Ship& element, const core::Planet& planet) {
       setActiveShip(element.getType());
       populateInformationFromElement<core::FixedCostUnit>(element, planet);
     }
-    
+
     template <>
     inline
     void UpgradeResourceInfo::populateInformationFromElement(const core::Defense& element, const core::Planet& planet) {

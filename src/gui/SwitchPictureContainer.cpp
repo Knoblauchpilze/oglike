@@ -22,7 +22,7 @@ namespace ogame {
 
       loadPictures();
     }
-        
+
     SwitchPictureContainer::~SwitchPictureContainer() {
       if (m_onPicture != nullptr) {
         SDL_FreeSurface(m_onPicture);

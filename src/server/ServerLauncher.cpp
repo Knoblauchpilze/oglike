@@ -33,7 +33,7 @@ namespace ogame {
       m_locker.lock();
       m_state = State::Running;
       m_locker.unlock();
-      
+
       std::cout << "[LAUNCHER] Starting environment simulation..." << std::endl;
 
       // Run simulation steps

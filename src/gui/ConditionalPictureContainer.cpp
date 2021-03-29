@@ -20,7 +20,7 @@ namespace ogame {
 
       loadPicture();
     }
-        
+
     ConditionalPictureContainer::~ConditionalPictureContainer() {
       if (m_picture != nullptr) {
         SDL_FreeSurface(m_picture);

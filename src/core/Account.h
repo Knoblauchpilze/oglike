@@ -41,7 +41,7 @@ namespace ogame {
         const float getAntimatterQuantity() const noexcept;
 
         const unsigned& getAvailablePlanetsSlots() const noexcept;
-        
+
         const unsigned& getOccupiedPlanetsSlots() const noexcept;
 
         void incrementAvailablePlanetsSlots() noexcept;
@@ -86,7 +86,7 @@ namespace ogame {
         unsigned m_playerUuid;
         std::shared_ptr<Universe> m_universe;
         float m_antimatter;
-        
+
         unsigned m_availablePlanetsSlots;
         unsigned m_occupiedPlanetsSlots;
         std::vector<Planet*> m_planets;

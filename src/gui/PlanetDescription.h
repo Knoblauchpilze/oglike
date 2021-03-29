@@ -31,7 +31,7 @@ namespace ogame {
         void populateWithPlanetData(const core::Planet& planet);
 
         LabelContainerShPtr createInfoLabelPanel(const std::string& name, const std::string& text) const;
-        
+
         LabelContainerShPtr createValueLabelPanel(const std::string& name, const std::string& text) const;
 
         LabelContainerShPtr createLabelPanel(const std::string& name,

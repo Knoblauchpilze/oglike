@@ -44,7 +44,7 @@ namespace ogame {
         );
       }
       m_selectedOption = index;
-      
+
       LabelContainer* label = getChild<LabelContainer*>(std::string("current_value"));
       if (checkChild(label, std::string("Selector label"))) {
         label->setText(m_options[m_selectedOption]);

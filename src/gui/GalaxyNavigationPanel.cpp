@@ -32,7 +32,7 @@ namespace ogame {
 
     void GalaxyNavigationPanel::populateWithSystemData(const core::System& system) {
       lock();
-      
+
       ValueSelector* galaxySelector = getChild<ValueSelector*>(std::string("galaxy_selector"));
       if (checkChild(galaxySelector, std::string("Galaxy selector"))) {
         try {
@@ -65,7 +65,7 @@ namespace ogame {
 
     void GalaxyNavigationPanel::populateWithPlanetData(const core::Planet& planet) {
       lock();
-      
+
       GalaxyPlayerData* playerData = getChild<GalaxyPlayerData*>(std::string("player_data"));
       if (checkChild(playerData, std::string("Player data"))) {
         playerData->populateWithPlanetData(planet);
