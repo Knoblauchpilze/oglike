@@ -19,7 +19,7 @@ namespace ogame {
 
       m_textChanged(true),
       m_text(text),
-      
+
       m_fontChanged(true),
       m_font(font),
 

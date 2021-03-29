@@ -16,7 +16,7 @@ namespace ogame {
       public:
 
         PlanetActionList(const std::string& name);
-        
+
         virtual ~PlanetActionList();
 
         void updateStatus(const core::Planet& planet);

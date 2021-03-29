@@ -26,25 +26,25 @@ namespace ogame {
 
     void GalaxyPlayerData::populateWithPlanetData(const core::Planet& planet) {
       lock();
-      
+
       LabelContainer* spyProbes = getChild<LabelContainer*>(std::string("spy_probes"));
       if (checkChild(spyProbes, std::string("Spy probes"))) {
         const unsigned probesCount = planet.getShipCount(core::Ship::Type::EspionageProbe);
         spyProbes->setText(std::to_string(probesCount) + " spy probe" + (probesCount > 1 ? "s" : ""));
       }
-      
+
       LabelContainer* recyclers = getChild<LabelContainer*>(std::string("recyclers"));
       if (checkChild(recyclers, std::string("Recyclers"))) {
         const unsigned recyclersCount = planet.getShipCount(core::Ship::Type::Recycler);
         recyclers->setText(std::to_string(recyclersCount) + " recycler" + (recyclersCount > 1 ? "s" : ""));
       }
-      
+
       LabelContainer* mips = getChild<LabelContainer*>(std::string("interplanetary_missiles"));
       if (checkChild(mips, std::string("Interplanetary missiles"))) {
         // TODO: Update interplanetary missiles.
         mips->setText(std::to_string(0) + " interplanetary missile" + (false ? "s" : ""));
       }
-      
+
       LabelContainer* slots = getChild<LabelContainer*>(std::string("used_slots"));
       if (checkChild(slots, std::string("Used slots"))) {
         // TODO: Update used slots

@@ -216,7 +216,7 @@ namespace ogame {
         resources[name] = quantity;
       }
     }
-    
+
   }
 }
 

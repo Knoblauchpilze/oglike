@@ -15,13 +15,13 @@ namespace ogame {
       public:
 
         OgameAbstractView(const std::string& title, const std::string& icon, const unsigned& width, const unsigned& height);
-        
+
         virtual ~OgameAbstractView();
 
         void addListener(EventListener* listener);
 
         void addDrawable(Drawable* drawable);
-      
+
         virtual void run();
 
       protected:

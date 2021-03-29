@@ -17,7 +17,7 @@ namespace ogame {
                                const std::string& onPicture,
                                const std::string& offPicture,
                                const view::EventListener::Interaction::Mask& mask = view::EventListener::Interaction::NoInteraction);
-        
+
         virtual ~SwitchPictureContainer();
 
         void updateStatus(bool status);

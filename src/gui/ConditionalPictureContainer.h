@@ -17,7 +17,7 @@ namespace ogame {
                          const std::string& picture,
                          const view::EventListener::Interaction::Mask& mask = view::EventListener::Interaction::NoInteraction,
                          const bool active = true);
-        
+
         virtual ~ConditionalPictureContainer();
 
         const bool getStatus();

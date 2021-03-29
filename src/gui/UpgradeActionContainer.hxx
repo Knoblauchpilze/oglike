@@ -40,7 +40,7 @@ namespace ogame {
         picturesCount
       );
     }
-    
+
     inline
     const std::string UpgradeActionContainer::computeDisplayTime(const float& seconds) const {
       // Compute values up to a year.

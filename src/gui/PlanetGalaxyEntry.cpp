@@ -83,11 +83,11 @@ namespace ogame {
                                                     128, 0, 0
                                                   ));
 
-      SwitchPictureContainerShPtr wreckField = createSwitchPicture(std::string("Planet wreck field"), 
+      SwitchPictureContainerShPtr wreckField = createSwitchPicture(std::string("Planet wreck field"),
                                                                    std::string("data/img/wreckfield.bmp"),
                                                                    std::string("data/img/wreckfield_none.bmp"));
 
-      SwitchPictureContainerShPtr moon = createSwitchPicture(std::string("Planet moon"), 
+      SwitchPictureContainerShPtr moon = createSwitchPicture(std::string("Planet moon"),
                                                              std::string("data/img/moon.bmp"),
                                                              std::string("data/img/moon_none.bmp"));
 

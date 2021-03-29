@@ -61,7 +61,7 @@ namespace ogame {
     SDL_Rect LabelContainer::computeBlitPosition(const unsigned& displayWidth, const unsigned& displayHeight) const noexcept {
       SDL_Rect textBlitArea;
       const float margin = 2.0f;
-      
+
       if (m_alignment == Alignment::Left) {
        textBlitArea = SDL_Rect{
           static_cast<Sint16>(margin),

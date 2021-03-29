@@ -15,7 +15,7 @@ namespace ogame {
       public:
 
         PlanetIconDisplay(const unsigned& count, const std::string& name);
-        
+
         virtual ~PlanetIconDisplay();
 
         void populateWithPlanetData(const core::Planet& planet);

@@ -34,7 +34,7 @@ namespace ogame {
     inline
     void ServerLauncher::resume() {
       std::lock_guard<std::mutex> guard(m_locker);
-      
+
       if (m_state == State::Paused) {
         m_state = State::ResumeRequested;
       }

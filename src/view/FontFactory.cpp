@@ -12,7 +12,6 @@ namespace ogame {
 
     FontFactory::~FontFactory() {}
 
-    
     FontFactory& FontFactory::getInstance() {
       static FontFactory instance;
       return instance;
